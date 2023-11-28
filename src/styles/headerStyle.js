@@ -26,7 +26,8 @@ export const LogoWrapper = styled.div`
     font-family : "BMHANNAPROOTF";
     border : none;
     cursor : pointer;
-    background-color : #ffffff;
+    background-color : ${props => props.theme.colors.colorBg};
+    color : ${props => props.theme.colors.colorMain};
   }
 `
 export const MenuWrapper = styled.div`
@@ -41,7 +42,8 @@ export const MenuWrapper = styled.div`
     letter-spacing : 0.2rem;
     cursor : pointer;
     margin : 0 3rem;
-    background-color : #ffffff;
+    background-color : ${props => props.theme.colors.colorBg};
+    color : ${props => props.theme.colors.colorMain};
     
     &.login {
       margin : 0 4rem 0 1rem;
@@ -50,7 +52,7 @@ export const MenuWrapper = styled.div`
       font-size : 1.5rem;
       letter-spacing : 0.1em;
       border-radius : 2rem;
-      border : 0.1rem solid #000000;
+      border : 0.1rem solid ${props => props.theme.colors.colorMain};;
     }
   }
 `

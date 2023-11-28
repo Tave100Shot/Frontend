@@ -2,7 +2,7 @@ import * as h from "../../styles/headerStyle"
 import mainLogo from '../../assets/imgs/100shot_icon.png'
 import { useNavigate } from "react-router-dom"
 
-const Header = () => {
+const Header = ({click}) => {
   const navigate = useNavigate();
 
   const moveToSolution = () => {
@@ -22,7 +22,7 @@ const Header = () => {
     <h.HeaderWrapper>
       <h.LogoWrapper className="logo">
         <img src={mainLogo}/>
-        <button>백발백준</button>
+        <button onClick={click}>백발백준</button>
       </h.LogoWrapper>
       <h.MenuWrapper className="menu">
         <button onClick={moveToSolution}>SOLUTION</button>

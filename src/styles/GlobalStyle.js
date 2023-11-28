@@ -59,10 +59,8 @@ body {
   min-width : 320px;
 	display: flex;
   margin : auto;
-	justify-content: center;
-	align-items: center;
-	flex-direction: column;
-  background : #ffffff;
+  background : ${props => props.theme.colors.colorBg};
+  color : ${props => props.theme.colors.colorMain};
   list-style : none;
   height : 100vh;
 }

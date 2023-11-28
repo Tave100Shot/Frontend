@@ -1,8 +1,8 @@
 import Header from "../../components/common/Header";
 
-const MainPage = () => {
+const MainPage = ({click}) => {
   return (
-    <Header/>
+    <Header click={click}/>
   )
 }
 

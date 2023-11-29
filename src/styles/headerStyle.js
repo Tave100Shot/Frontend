@@ -45,6 +45,10 @@ export const MenuWrapper = styled.div`
     background-color : ${props => props.theme.colors.colorBg};
     color : ${props => props.theme.colors.colorMain};
     
+    &:hover {
+      color : ${props => props.theme.colors.colorAccent};
+    }
+
     &.login {
       margin : 0 4rem 0 1rem;
       width : 9.5rem;
@@ -52,19 +56,12 @@ export const MenuWrapper = styled.div`
       font-size : 1.5rem;
       letter-spacing : 0.1em;
       border-radius : 2rem;
-      border : 0.1rem solid ${props => props.theme.colors.colorMain};;
+      border : 0.1rem solid ${props => props.theme.colors.colorMain};
+      &:hover {
+        background-color: ${props => props.theme.colors.colorAccent};
+        color: ${props => props.theme.colors.colorBg};
+        border : 0.1rem solid ${props => props.theme.colors.colorAccent};
+      }
     }
   }
-`
-
-
-export const LoginButton = styled.button`
-  width : 9.5rem;
-  height : 3rem;
-  font-size : 1.5rem;
-  font-family : "Poppins_SemiBold";
-  letter-spacing : 0.1em;
-  border-radius : 2rem;
-  border : 0.1rem solid #000000;
-  cursor : pointer;
 `

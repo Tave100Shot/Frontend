@@ -1,8 +1,13 @@
 import Header from "../../components/common/Header";
+import TaveAnimation from "../../components/main/tave_animation";
 
 const MainPage = ({click}) => {
   return (
-    <Header click={click}/>
+    <div>
+      <Header click={click}/>
+      <TaveAnimation/>
+    </div>
+  
   )
 }
 

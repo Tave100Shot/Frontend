@@ -49,20 +49,40 @@ const GlobalStyle = createGlobalStyle`
   box-sizing : border-box;
 
 }
-
-html {
-  font-size : 62.5% // 1rem = 10px
+@media (min-width: 1180px) {
+  html {
+    font-size : 62.5% // 1rem = 10px
+  }
 }
+@media (min-width: 1050px) and (max-width: 1180px) {
+  html {
+    font-size : 58.5% // 1rem =  7.25px
+  }
+}
+@media (min-width: 920px) and (max-width: 1050px) {
+  html {
+    font-size : 50.5% 
+  }
+}
+@media (min-width: 840px) and (max-width: 920px) {
+  html {
+    font-size : 45.5% 
+  }
+}
+@media (min-width: 740px) and (max-width: 840px) {
+  html {
+    font-size : 40.5% 
+  }
+}
+
 
 body {
   font-family : 'Poppins_Regular';
-  min-width : 320px;
+  min-width : 740px;
 	display: flex;
   margin : auto;
-	justify-content: center;
-	align-items: center;
-	flex-direction: column;
-  background : #ffffff;
+  background : ${props => props.theme.colors.colorBg};
+  color : ${props => props.theme.colors.colorMain};
   list-style : none;
   height : 100vh;
 }

@@ -41,7 +41,7 @@ export const TaveAnimationWrapper = styled.div`
     
     clip-path: polygon(0 50%, 100% 50%, 100% 50%, 0 50%);
     transform-origin: center;
-    transition: all cubic-bezier(.1,.5,.5,1) 0.4s;
+    transition: all cubic-bezier(.1,.5,.5,1) 0.7s;
     
     display: flex;
     flex-direction: column;

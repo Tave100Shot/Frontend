@@ -7,7 +7,7 @@ const MainPage = ({click}) => {
 
   return (
     <div>
-      <Header click={click}/>
+      <Header click={click} />
       <TaveAnimation/>
       <w.ButtonWrapper>
         <MainButton text={'GET SOLUTION'} navigatePage={'/solution'}/>

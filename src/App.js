@@ -1,4 +1,4 @@
-import { BrowserRouter, Route, Routes } from "react-router-dom";
+import { BrowserRouter, Route, Routes, useNavigate } from "react-router-dom";
 import GlobalStyle from "./styles/GlobalStyle";
 import MainPage from './pages/main/MainPage'
 import SearchPage from './pages/solution/SearchPage'
@@ -15,18 +15,17 @@ function App() {
 
   const toggleTheme = () => 
   {setThemeMode(themeMode === 'lightTheme' ? 'darkTheme' : 'lightTheme');
-//   console.log(theme); // theme.js에서 해당 themeMode props 가져옴
-//   console.log(themeMode);
-}
-
+  //   console.log(theme); // theme.js에서 해당 themeMode props 가져옴
+  //   console.log(themeMode);
+  }
 
   return (
-    <BrowserRouter>
+    <BrowserRouter> 
       <ThemeProvider theme={theme}> 
         <GlobalStyle/>
         <Routes>
           <Route path='/' element={<MainPage click={toggleTheme}/>}/>
-          <Route path='/solution' element={<SearchPage/>}/>
+          <Route path='/solution' element={<SearchPage />}/>
           <Route path='/recommend' element={<RecommendPage/>}/>
           <Route path='/community' element={<CommunityPage/>}/>
           <Route path='/compile' element={<CompilingPage/>}/>

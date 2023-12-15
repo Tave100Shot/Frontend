@@ -7,7 +7,7 @@ const Header = ({click}) => {
   const location = useLocation();
 
   const moveToSolution = () => {
-    navigate('/solution');
+    navigate('/search-solution');
   }
   const moveToRecommend = () => {
     navigate('/recommend');
@@ -28,7 +28,7 @@ const Header = ({click}) => {
       <h.MenuWrapper className="menu">
         <button 
           onClick={moveToSolution} 
-          className={location.pathname === "/solution" ? "active" : ""}
+          className={location.pathname === "/search-solution" ? "active" : ""}
         >SOLUTION</button>
         <button 
           onClick={moveToRecommend} 

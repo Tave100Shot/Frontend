@@ -5,11 +5,11 @@ export const TaveAnimationWrapper = styled.div`
   flex-direction: column;
   justify-content: center;
   align-items: flex-start;
-  height: 45rem;
-  margin : 5rem 0;
+  height: 40rem;
+  margin : 5rem 0 3rem 0;
 
   .text {
-    font-size: 11rem;
+    font-size: 9.5rem;
     height : 15rem;
     letter-spacing: -.01em;
     line-height: 100%;
@@ -38,7 +38,7 @@ export const TaveAnimationWrapper = styled.div`
     height: 100%;
     background-color: ${props => props.theme.colors.colorAccent};
     color: ${props => props.theme.colors.colorOpposite};
-    font-size: 11rem;
+    font-size: 9.5rem;
     border : none;
     cursor : pointer;
     

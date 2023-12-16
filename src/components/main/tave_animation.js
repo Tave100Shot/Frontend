@@ -4,7 +4,7 @@ import * as t from "../../styles/tave_animationStyle"
 const TaveAnimation = () => {
   const navigate = useNavigate();
   const moveToSolution = () => {
-    navigate('/solution')
+    navigate('/search-solution')
   }
   const moveToRecommend = () => {
     navigate('/recommend')

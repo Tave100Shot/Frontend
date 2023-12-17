@@ -5,7 +5,9 @@ export const lightTheme = {
     colorAccent: '#91d1fa',
     colorAccentHover : 'rgba(145, 209, 250, 0.5)',
     colorOpposite: '#ffffff',
-    colorShadow : 'rgba(0,0,0,0.2)'
+    colorShadow : 'rgba(0,0,0,0.2)',
+    colorRecommendMe : '#213839',
+    colorRecommendRank : '#E3B059'
 
   }
 };
@@ -16,7 +18,9 @@ export const darkTheme = {
     colorMain: '#ffffff',
     colorAccent: '#B6FA91',
     colorOpposite: '#000000',
-    colorShadow : 'rgba(182,250,145,0.4)'
+    colorShadow : 'rgba(182,250,145,0.4)',
+    colorRecommendMe : '#213839',
+    colorRecommendRank : '#E3B059'
   }
 };
 

@@ -63,5 +63,8 @@ export const MenuWrapper = styled.div`
         border : 0.1rem solid ${props => props.theme.colors.colorAccent};
       }
     }
+    &.active {
+      color: ${(props) => props.theme.colors.colorAccent};
+    }
   }
 `

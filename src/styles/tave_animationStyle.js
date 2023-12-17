@@ -5,11 +5,11 @@ export const TaveAnimationWrapper = styled.div`
   flex-direction: column;
   justify-content: center;
   align-items: flex-start;
-  height: 45rem;
-  margin : 5rem 0;
+  height: 40rem;
+  margin : 5rem 0 3rem 0;
 
   .text {
-    font-size: 11rem;
+    font-size: 9.5rem;
     height : 15rem;
     letter-spacing: -.01em;
     line-height: 100%;
@@ -31,13 +31,16 @@ export const TaveAnimationWrapper = styled.div`
     position: relative;
   }
 
-  span {
+  button {
     position: absolute;
     left : 0;
     padding : 0 0 0 8rem;
     height: 100%;
     background-color: ${props => props.theme.colors.colorAccent};
     color: ${props => props.theme.colors.colorOpposite};
+    font-size: 9.5rem;
+    border : none;
+    cursor : pointer;
     
     clip-path: polygon(0 50%, 100% 50%, 100% 50%, 0 50%);
     transform-origin: center;
@@ -48,22 +51,22 @@ export const TaveAnimationWrapper = styled.div`
     justify-content: center;
   }
   .text1 {
-    span {
+    button {
       width: 55%;
     }
   }
   .text2 {
-    span {
+    button {
       width: 75%;
     }
   }
   .text3 {
-    span {
+    button {
       width: 95%;
     }
   }
   
-  .text:hover > span {
+  .text:hover > button {
     clip-path: polygon(0 0, 100% 0, 100% 100%, 0% 100%);
   }
 

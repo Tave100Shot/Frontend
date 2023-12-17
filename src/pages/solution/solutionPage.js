@@ -1,9 +1,10 @@
 import { useNavigate } from "react-router-dom";
 import Header from "../../components/common/Header";
-import SolutionText from "../../components/solution/solution_text";
 import SearchBar from "../../components/solution/search_bar";
+import * as s from "../../styles/solutionStyle";
 
-const SearchPage = () => {
+
+const SolutionPage = () => {
   const navigate = useNavigate();
 
   const moveToMain = () => {
@@ -13,10 +14,12 @@ const SearchPage = () => {
   return (
     <div>
       <Header click={moveToMain}/>
-      <SolutionText/>
-      <SearchBar />
+      <SearchBar/>
+      <s.SolutionContainer>
+        <hr/>
+      </s.SolutionContainer>
     </div>
   )
 }
 
-export default SearchPage;
+export default SolutionPage;

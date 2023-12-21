@@ -1,6 +1,4 @@
 import { useNavigate } from "react-router-dom";
-import Sky from "../../assets/imgs/recommend_sky.jpg"
-import Sunset from "../../assets/imgs/recommend_sunset.jpg"
 import * as r from "../../styles/RecommendMainStyle";
 
 const RecommendPage = () => {

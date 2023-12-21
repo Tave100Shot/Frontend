@@ -1,5 +1,6 @@
 import { useNavigate } from "react-router-dom";
 import Header from "../../components/common/Header";
+import UserProfile from "../../components/recommend/user_profile";
 
 const RecommendRank = () => {
   const navigate = useNavigate();
@@ -10,7 +11,8 @@ const RecommendRank = () => {
 
   return (
     <div>
-      <Header />
+      <Header click={moveToMain}/>
+      <UserProfile />
     </div>
   )
 }

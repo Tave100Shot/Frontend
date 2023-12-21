@@ -1,6 +1,7 @@
 import { useNavigate } from "react-router-dom";
 import Header from "../../components/common/Header";
 import UserProfile from "../../components/recommend/user_profile";
+import RecommendByMe from "../../components/recommend/recommend_me";
 
 
 const RecommendMe = () => {
@@ -14,6 +15,7 @@ const RecommendMe = () => {
     <div>
       <Header click={moveToMain}/>
       <UserProfile />
+      <RecommendByMe />
     </div>
   )
 }

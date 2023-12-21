@@ -12,6 +12,9 @@ export const lightTheme = {
 
     profileRank : '#213839',
     profileRival : '#E3B059',
+    resetMe : '#213839',
+
+
     // 티어 별 색
     bronze : '#AD5700',
     silver : '#8688A1',
@@ -36,6 +39,7 @@ export const darkTheme = {
 
     profileRank : '#B6FA91',
     profileRival : '#E3B059',
+
     // 티어 별 색
     bronze : '#AD5700',
     silver : '#8688A1',

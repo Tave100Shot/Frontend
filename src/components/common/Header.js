@@ -32,7 +32,7 @@ const Header = ({click}) => {
         >SOLUTION</button>
         <button 
           onClick={moveToRecommend} 
-          className={location.pathname === "/recommend" ? "active" : ""}
+          className={location.pathname === "/recommend-me" || location.pathname === "/recommend-rank" ? "active" : "" }
         >RECOMMEND</button>
         <button 
           onClick={moveToCompile} 

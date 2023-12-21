@@ -9,6 +9,8 @@ import { ThemeProvider } from "styled-components";
 import { useState } from "react";
 import { darkTheme, lightTheme } from "./styles/theme";
 import SolutionPage from "./pages/solution/solutionPage";
+import RecommendMe from "./pages/recommend/RecommendMePage";
+import RecommendRank from "./pages/recommend/RecommendRankPage";
 
 function App() {
   const [themeMode, setThemeMode] = useState('lightTheme');
@@ -29,6 +31,8 @@ function App() {
           <Route path='/search-solution' element={<SearchPage />}/>
           <Route path='/result-solution' element={<SolutionPage />}/>
           <Route path='/recommend' element={<RecommendPage/>}/>
+          <Route path='/recommend-me' element={<RecommendMe/>}/>
+          <Route path='/recommend-rank' element={<RecommendRank />}/>
           <Route path='/community' element={<CommunityPage/>}/>
           <Route path='/compile' element={<CompilingPage/>}/>
         </Routes>

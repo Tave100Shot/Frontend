@@ -1,6 +1,13 @@
-import { Header, MainContainer, FirstContainer, GridContainer, LevelBox, Typography, LevelTypography, Description, HorizontalLine, EnterButton, Footer } from '../../styles/CommunityStyle';
+import { Header, MainContainer, FirstContainer, GridContainer, LevelBox, Typography, LevelTypography, Description, HorizontalLine, EnterButton, Footer, TypographyDcp,LockedButton  } from '../../styles/CommunityStyle';
+import {useNavigate} from 'react-router-dom';
 
 const CommunityPage = () => {
+  const navigate  = useNavigate();
+  const handleEnterClick = (level) => {
+    navigate(`/community/${level.toLowerCase()}`);
+    //toLowerCase: JavaScript의 문자열 메서드, 문자열의 모든 문자 -> 소문자로 변환
+  };
+
   return (
     <>
       <Header>HEADER</Header>
@@ -8,33 +15,36 @@ const CommunityPage = () => {
         <FirstContainer>
           <Typography>COMMUNITY</Typography>
           <HorizontalLine></HorizontalLine>
-          <p>본인 레벨 이하에만 입장 가능</p>
+          <TypographyDcp>모든 레벨 입장 가능하지만 본인 레벨 이하 채널에서만 작성 가능합니다.</TypographyDcp>
           <GridContainer>
             <LevelBox>
-              <LevelTypography>BRONZE</LevelTypography>
+              <LevelTypography>BRONZE & SILVER</LevelTypography>
               <Description>
-              설명 어쩌구 저쩌구~~ 이 단계는 어떤 회원한테 적합하고 설명을 써놓고~~~어떤 문제들이 있는지~only for bronze 12324890675379845~!#@~@#~!#%#$%
+                브론즈, 실버 회원들의 채널방
               </Description>
-              <EnterButton>ENTER</EnterButton>
+              <EnterButton onClick={() => handleEnterClick('BRONZE')}>ENTER</EnterButton>
             </LevelBox>
-            <LevelBox>
-              <LevelTypography>SILVER</LevelTypography>
-              <Description>
-              설명 어쩌구 저쩌구~~ 이 단계는 어떤 회원한테 적합하고 설명을 써놓고~~~어떤 문제들이 있는지~only for bronze 12324890675379845~!#@~@#~!#%#$%
-              </Description>
-              <EnterButton>ENTER</EnterButton></LevelBox>
             <LevelBox>
               <LevelTypography>GOLD</LevelTypography>
               <Description>
-              설명 어쩌구 저쩌구~~ 이 단계는 어떤 회원한테 적합하고 설명을 써놓고~~~어떤 문제들이 있는지~only for bronze 12324890675379845~!#@~@#~!#%#$%
+              골드 회원들의 채널방
               </Description>
-              <EnterButton>ENTER</EnterButton></LevelBox>
+              <EnterButton onClick={() => handleEnterClick('GOLD')}>ENTER</EnterButton>
+              </LevelBox>
             <LevelBox>
               <LevelTypography>PLATINUM</LevelTypography>
               <Description>
-              설명 어쩌구 저쩌구~~ 이 단계는 어떤 회원한테 적합하고 설명을 써놓고~~~어떤 문제들이 있는지~only for bronze 12324890675379845~!#@~@#~!#%#$%
+              플래티넘 회원들의 채널방
               </Description>
-              <EnterButton>LOCKED</EnterButton></LevelBox>
+              <EnterButton onClick={() => handleEnterClick('PLATINUM')}>ENTER</EnterButton>
+              </LevelBox>
+            <LevelBox>
+              <LevelTypography>DIAMOND ~</LevelTypography>
+              <Description>
+              다이아, 루비, 마스터 회원들의 채널방
+              </Description>
+              <EnterButton onClick={() => handleEnterClick('DIAMOND')}>ENTER</EnterButton>
+              </LevelBox>
           </GridContainer>
         </FirstContainer>
       </MainContainer>

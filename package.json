@@ -18,7 +18,7 @@
     "styled-components": "^6.1.1",
     "web-vitals": "^2.1.4"
   },
-  "proxy": "54.180.163.188:8080",
+  "proxy": "http://54.180.163.188:8080",
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",

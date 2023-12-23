@@ -29,7 +29,6 @@ function App() {
   }
 
   return (
-<<<<<<< Updated upstream
     <BrowserRouter> 
       <ThemeProvider theme={theme}> 
         <GlobalStyle/>
@@ -44,26 +43,8 @@ function App() {
           <Route path='/compile' element={<CompilingPage/>}/>
         </Routes>
       </ThemeProvider>
-=======
-    <BrowserRouter>
-      <GlobalStyle/>
-      <Routes>
-        <Route path='/' element={<MainPage/>}/>
-        <Route path='/solution' element={<SearchPage/>}/>
-        <Route path='/recommend' element={<RecommendPage/>}/>
-        <Route path='/community' element={<CommunityPage/>}/>
-        <Route path='/community/bronze' element={<BronzePage/>}/>
-        <Route path='/community/gold' element={<GoldPage/>}/>
-        <Route path='/community/platinum' element={<PlatinumPage/>}/>
-        <Route path='/community/diamond' element={<DiamondPage/>}/>
-        <Route path='/community/write' element={<WritePage/>}/>
-        <Route path='/community/post' element={<PostPage/>}/>
-        <Route path='/compile' element={<CompilingPage/>}/>
-      </Routes>
->>>>>>> Stashed changes
     </BrowserRouter>
-
-  );
+  )
 }
 
 export default App;

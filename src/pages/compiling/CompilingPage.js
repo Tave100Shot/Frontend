@@ -99,15 +99,7 @@ const ConsoleContainer = styled.div`
 `;
 
 const CompilingPage = () => {
-  const [message, setMessage] = useState("");
 
-    useEffect(() => {
-      fetch('/test/hello')
-          .then(response => response.text())
-          .then(message => {
-              setMessage(message);
-          });
-    },[])
 
 /*   const numbers = Array.from({ length: 17 }, (_, index) => index + 1); */
   return (
@@ -115,12 +107,6 @@ const CompilingPage = () => {
       <Header>HEADER</Header>
       <MainContainer>
         <CompileContainer>
-{/*         <div>
-        {numbers.map((number) => (
-          <div key={number}>{number}</div>
-        ))}
-      </div> */}
-      <h1>{message}</h1>
           <div>1</div><input type="text" placeholder="team_member = input(“팀원 이름을 입력하시오 : “)"/>
           <input type="text" placeholder="print(f”안녕하세요 {team_member}님 백발백준 사이트입니다”)" />
           <input type="text" />

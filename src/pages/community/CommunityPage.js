@@ -1,9 +1,6 @@
-<<<<<<< Updated upstream
-=======
 import { Header, MainContainer, FirstContainer, GridContainer, LevelBox, Typography, LevelTypography, Description, HorizontalLine, EnterButton, Footer, TypographyDcp,LockedButton  } from '../../styles/CommunityStyle';
 import {useNavigate} from 'react-router-dom';
 
->>>>>>> Stashed changes
 const CommunityPage = () => {
   const navigate  = useNavigate();
   const handleEnterClick = (level) => {
@@ -12,11 +9,6 @@ const CommunityPage = () => {
   };
 
   return (
-<<<<<<< Updated upstream
-    <div>
-      티어 별 커뮤니티 페이지
-    </div>
-=======
     <>
       <Header>HEADER</Header>
       <MainContainer>
@@ -60,7 +52,6 @@ const CommunityPage = () => {
         <p>FOOTER</p>
       </Footer>
     </>
->>>>>>> Stashed changes
   )
 }
 

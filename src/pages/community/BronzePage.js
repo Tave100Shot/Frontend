@@ -1,7 +1,4 @@
-import {
-  Header, MainContainer, FirstContainer, GridContainer, LevelBox, Typography,
-  LevelTypography, Description, HorizontalLine, EnterButton, Footer
-} from "../../styles/CommunityStyle"
+import {Header, MainContainer, FirstContainer, GridContainer, LevelBox, Typography,LevelTypography, Description, HorizontalLine, EnterButton, Footer} from "../../styles/CommunityStyle"
 import styled from "styled-components";
 import { useNavigate } from "react-router-dom";
 

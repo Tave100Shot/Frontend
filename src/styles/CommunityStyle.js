@@ -31,12 +31,13 @@ export const MainContainer = styled.div`
     margin: 0 auto;
 
     @media screen and (max-width: 500px) {
-    flex-direction: column;
+      flex-direction: column;
     }
 `;
 
 export const FirstContainer = styled.div`
   width: 100%;
+
   min-height: 70vh;
   margin: 0 auto;
   flex-shrink: 0;
@@ -69,7 +70,6 @@ export const LevelBox = styled.div`
   justify-content: center; /* 가로 중앙 정렬 */
   align-items: center;
   
-
 `;
 
 export const Typography = styled.div`
@@ -148,4 +148,3 @@ export const Footer = styled.footer`
   left: 0;
   right: 0;
 `;
-

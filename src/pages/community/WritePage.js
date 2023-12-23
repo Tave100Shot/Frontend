@@ -1,4 +1,4 @@
-import {Header, Typography,HorizontalLine, Footer} from "../../styles/CommunityStyle"
+import { Header, Typography,HorizontalLine, Footer } from "../../styles/CommunityStyle"
 import styled from "styled-components";
 import React, {useState} from "react";
 

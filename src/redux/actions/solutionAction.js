@@ -5,3 +5,11 @@ export const SetSearch = (content) => {
     content
   }
 }
+
+// 문제 해답 데이터 저장 Action 
+export const SetSolution = (content) => {
+  return {
+    type : 'SET_SOLUTION',
+    content
+  }
+}

@@ -2,6 +2,9 @@
 export const INITIAL_STATE = {
   solutionQuestion : [
     
+  ],
+  solutionList : [
+
   ]
 };
 
@@ -11,6 +14,12 @@ export const Reducer = (state = INITIAL_STATE, action) => {
       return {
         ...state,
         solutionQuestion: action.content
+      };
+
+    case 'SET_SOLUTION': 
+      return {
+        ...state,
+        solutionList: action.content
       };
     
     default: 

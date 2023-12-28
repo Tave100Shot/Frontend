@@ -10,6 +10,9 @@ export const INITIAL_STATE = {
 
 export const Reducer = (state = INITIAL_STATE, action) => {
   switch(action.type) {
+    // Main
+
+    // Solution 
     case 'SET_SEARCH': 
       return {
         ...state,
@@ -21,7 +24,13 @@ export const Reducer = (state = INITIAL_STATE, action) => {
         ...state,
         solutionList: action.content
       };
-    
+
+    // Recommend 
+
+    // Community
+
+    // Compiling 
+
     default: 
       return state;
   }

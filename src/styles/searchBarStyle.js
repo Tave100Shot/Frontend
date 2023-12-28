@@ -81,6 +81,7 @@ export const SelectBox = styled.div`
   }
 
   label {
+    margin : 0 2rem 0 1rem;
     font-size : 1.5rem;
     margin-left: 0.3rem;
     text-align: center;
@@ -88,6 +89,7 @@ export const SelectBox = styled.div`
 
   ul {
     position: absolute;
+    z-index : 1;
     list-style: none;
     top: 5.5rem;
     left: -0.3rem;

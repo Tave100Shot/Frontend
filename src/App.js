@@ -4,6 +4,12 @@ import MainPage from './pages/main/MainPage'
 import SearchPage from './pages/solution/SearchPage'
 import RecommendPage from './pages/recommend/RecommendPage'
 import CommunityPage from './pages/community/CommunityPage'
+import BronzePage from './pages/community/BronzePage'
+import DiamondPage from './pages/community/DiamondPage'
+import GoldPage from './pages/community/GoldPage'
+import PlatinumPage from './pages/community/PlatinumPage'
+import WritePage from './pages/community/WritePage'
+import PostPage from './pages/community/PostPage'
 import CompilingPage from './pages/compiling/CompilingPage'
 import { ThemeProvider } from "styled-components";
 import { useState } from "react";
@@ -38,8 +44,7 @@ function App() {
         </Routes>
       </ThemeProvider>
     </BrowserRouter>
-
-  );
+  )
 }
 
 export default App;

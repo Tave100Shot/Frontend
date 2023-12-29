@@ -2,18 +2,22 @@ import * as s from "../../styles/searchBarStyle";
 import search_black from '../../assets/imgs/search_black.png'
 import search_white from '../../assets/imgs/search_white.png'
 import { useState } from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { SetSearch, SetSolution } from "../../redux/actions/solutionAction";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
+
 const SearchBar = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
+
+  let themeMode = useSelector( (state)=>{ return state.theme } );
 
   const [questionNumber, setQuestionNumber] = useState("");
   const [currentValue, setCurrentValue] = useState("LANGUAGE");
   const [solutionArray, setSolutionArray] = useState([]);
   const [showOptions, setShowOptions] = useState(false);
+  
 
   const handleOnChangeSelectValue = (e) => {
     const { innerText } = e.target;
@@ -60,11 +64,13 @@ const SearchBar = () => {
     });
 
   };
-
   return (
     <s.SearchBarContainer action="/result-solution" method="">
         <s.SearchInputBox>
-          <img src={search_white} alt="돋보기 그림"/>
+          {themeMode == 'lightTheme' ? 
+            <img src={search_white} alt="돋보기 그림"/> : 
+            <img src={search_black} alt="돋보기 그림"/>
+          }
           <input 
             type="text"
             value={questionNumber}

@@ -31,6 +31,7 @@ export const darkTheme = {
     colorBg: '#000000',
     colorMain: '#ffffff',
     colorAccent: '#B6FA91',
+    colorAccentHover : 'rgba(182, 250, 145, 0.5)',
     colorOpposite: '#000000',
     colorShadow : 'rgba(182,250,145,0.4)',
     colorRecommendMe : '#213839',
@@ -39,6 +40,7 @@ export const darkTheme = {
 
     profileRank : '#B6FA91',
     profileRival : '#E3B059',
+    resetMe : '#213839',
 
     // 티어 별 색
     bronze : '#AD5700',

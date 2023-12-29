@@ -17,15 +17,19 @@ import { darkTheme, lightTheme } from "./styles/theme";
 import SolutionPage from "./pages/solution/solutionPage";
 import RecommendMe from "./pages/recommend/RecommendMePage";
 import RecommendRank from "./pages/recommend/RecommendRankPage";
+import { useDispatch } from "react-redux";
+import { SetTheme } from "./redux/actions/solutionAction";
 
 function App() {
+  const dispatch = useDispatch();
   const [themeMode, setThemeMode] = useState('lightTheme');
+  const [toggleMode, setToggleMode] = useState('');
   const theme = themeMode === 'lightTheme' ? lightTheme : darkTheme;
 
-  const toggleTheme = () => 
-  {setThemeMode(themeMode === 'lightTheme' ? 'darkTheme' : 'lightTheme');
-  //   console.log(theme); // theme.js에서 해당 themeMode props 가져옴
-  //   console.log(themeMode);
+  const toggleTheme = () => {
+    setThemeMode(themeMode === 'lightTheme' ? 'darkTheme' : 'lightTheme');
+    setToggleMode(themeMode === 'lightTheme' ? 'lightTheme' : 'darkTheme' )
+    dispatch(SetTheme(toggleMode));
   }
 
   return (
@@ -34,8 +38,8 @@ function App() {
         <GlobalStyle/>
         <Routes>
           <Route path='/' element={<MainPage click={toggleTheme}/>}/>
-          <Route path='/search-solution' element={<SearchPage />}/>
-          <Route path='/result-solution' element={<SolutionPage />}/>
+          <Route path='/search-solution' element={<SearchPage />} />
+          <Route path='/result-solution' element={<SolutionPage />} />
           <Route path='/recommend' element={<RecommendPage/>}/>
           <Route path='/recommend-me' element={<RecommendMe/>}/>
           <Route path='/recommend-rank' element={<RecommendRank />}/>

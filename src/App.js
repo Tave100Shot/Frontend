@@ -12,7 +12,7 @@ import WritePage from './pages/community/WritePage'
 import PostPage from './pages/community/PostPage'
 import CompilingPage from './pages/compiling/CompilingPage'
 import { ThemeProvider } from "styled-components";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { darkTheme, lightTheme } from "./styles/theme";
 import SolutionPage from "./pages/solution/solutionPage";
 import RecommendMe from "./pages/recommend/RecommendMePage";
@@ -22,13 +22,14 @@ import { SetTheme } from "./redux/actions/solutionAction";
 
 function App() {
   const dispatch = useDispatch();
-  const [themeMode, setThemeMode] = useState('lightTheme');
-  const [toggleMode, setToggleMode] = useState('');
+  const [themeMode, setThemeMode] = useState('');
+  const [toggleMode, setToggleMode] = useState('lightTheme');
   const theme = themeMode === 'lightTheme' ? lightTheme : darkTheme;
 
   const toggleTheme = () => {
     setThemeMode(themeMode === 'lightTheme' ? 'darkTheme' : 'lightTheme');
     setToggleMode(themeMode === 'lightTheme' ? 'lightTheme' : 'darkTheme' )
+    console.log(toggleMode)
     dispatch(SetTheme(toggleMode));
   }
 

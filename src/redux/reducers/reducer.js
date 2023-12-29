@@ -1,6 +1,6 @@
 // 초기 State 값
 export const INITIAL_STATE = {
-  theme : '',
+  theme : 'lightTheme',
   solutionQuestion : [
     
   ],

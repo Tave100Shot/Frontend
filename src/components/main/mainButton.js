@@ -4,7 +4,7 @@ import unLockIcon from '../../assets/imgs/unLock_icon.png'
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 
-const MainButton = ({text, navigatePage}) => {
+const MainButton = ({text, navigatePage, lockImg}) => {
   const navigate = useNavigate()
 
   const movePage = () => {
@@ -12,10 +12,18 @@ const MainButton = ({text, navigatePage}) => {
   }
 
   return (
-      <b.MainButton onClick={movePage}>
-        <img src={lockIcon}/>
-        {text}
-      </b.MainButton>
+       (lockImg === 'none') ? 
+        <b.MainButton onClick={movePage}>
+          {text}
+        </b.MainButton>
+        : 
+        <b.MainButton onClick={movePage}>
+          {lockImg === 'locked' ?
+            <img src={lockIcon}/> :
+            <img src={unLockIcon}/>
+          }
+          {text}
+        </b.MainButton>
   )
 }
 

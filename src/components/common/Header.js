@@ -21,13 +21,13 @@ const Header = ({click}) => {
     navigate('/community');
   }
 
-  const gitHubUrl = 'http://54.180.163.188:8080/oauth/authorize/github';
+
   const onClickGitlogin = () => {
     axios({
       method: 'GET',
-      url: 'http://54.180.163.188:8080/oauth/authorize/github'
+      url: 'http://43.200.95.44:8080/login/github'
     }).then(response => console.log(response))
-    .then(window.location.href = "http://54.180.163.188:8080/login/oauth/authorize/github")
+    .then(window.location.href = "http://43.200.95.44:8080/login")
   };
 
   return (
@@ -53,7 +53,8 @@ const Header = ({click}) => {
           onClick={moveToCommunity} 
           className={location.pathname === "/community" ? "active" : ""}
         >COMMUNITY</button>
-        <button className="login" onClick={onClickGitlogin}>LOGIN</button>
+        {/* <button className="login" onClick={onClickGitlogin}>LOGIN</button> */}
+        <a className="login" href="http://43.200.95.44:8080/login/github">LOGIN</a>
       </h.MenuWrapper>
     </h.HeaderWrapper>
   )

@@ -48,23 +48,31 @@ export const MenuWrapper = styled.div`
     &:hover {
       color : ${props => props.theme.colors.colorAccent};
     }
-
-    &.login {
-      margin : 0 4rem 0 1rem;
-      width : 9.5rem;
-      height : 3rem;
-      font-size : 1.5rem;
-      letter-spacing : 0.1em;
-      border-radius : 2rem;
-      border : 0.1rem solid ${props => props.theme.colors.colorMain};
-      &:hover {
-        background-color: ${props => props.theme.colors.colorAccent};
-        color: ${props => props.theme.colors.colorBg};
-        border : 0.1rem solid ${props => props.theme.colors.colorAccent};
-      }
-    }
     &.active {
       color: ${(props) => props.theme.colors.colorAccent};
+    }
+  }
+
+  a {
+    margin : 0 4rem 0 1rem;
+    font-size : 1.5rem;
+    font-family : "Poppins_SemiBold";
+    letter-spacing : 0.1em;
+    border-radius : 2rem;
+    border : 0.1rem solid ${props => props.theme.colors.colorMain};
+    color : ${props => props.theme.colors.colorMain};
+    padding : 0.2rem 2rem;
+    text-decoration-line: none;
+    &:hover {
+      background-color: ${props => props.theme.colors.colorAccent};
+      color: ${props => props.theme.colors.colorBg};
+      border : 0.1rem solid ${props => props.theme.colors.colorAccent};
+    }
+    &:visited {
+      color : ${props => props.theme.colors.colorMain};
+      &:hover {
+        color: ${props => props.theme.colors.colorBg};
+      }
     }
   }
 `

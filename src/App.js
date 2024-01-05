@@ -17,8 +17,10 @@ import { darkTheme, lightTheme } from "./styles/theme";
 import SolutionPage from "./pages/solution/solutionPage";
 import RecommendMe from "./pages/recommend/RecommendMePage";
 import RecommendRank from "./pages/recommend/RecommendRankPage";
+import Modal from 'react-modal';
 
 function App() {
+  Modal.setAppElement('#root')
   const [themeMode, setThemeMode] = useState('lightTheme');
   const theme = themeMode === 'lightTheme' ? lightTheme : darkTheme;
 

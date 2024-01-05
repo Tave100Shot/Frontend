@@ -1,12 +1,18 @@
 import * as h from "../../styles/headerStyle"
 import mainLogo from '../../assets/imgs/100shot_icon.png'
 import { useLocation, useNavigate } from "react-router-dom"
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import axios from "axios";
+import { useDispatch } from "react-redux";
+import { SetModal } from "../../redux/actions/mainAction";
 
-const Header = ({click}) => {
+const Header = ({click, authSecond}) => {
   const navigate = useNavigate();
   const location = useLocation();
+  const dispatch = useDispatch();
+
+  const [accessToken, setAccessToken] = useState("");
+  const [loginStat, setLoginStat] = useState(false);
 
   const moveToSolution = () => {
     navigate('/search-solution');
@@ -21,14 +27,31 @@ const Header = ({click}) => {
     navigate('/community');
   }
 
+  const githubLogin = () => {
+    const loginUrl = "http://43.200.95.44:8080/login/github";
+    const newWindow = window.open(loginUrl, "_blank");
 
-  const onClickGitlogin = () => {
-    axios({
-      method: 'GET',
-      url: 'http://43.200.95.44:8080/login/github'
-    }).then(response => console.log(response))
-    .then(window.location.href = "http://43.200.95.44:8080/login")
-  };
+    // 새 창이 닫힐 때 accessToken을 받는 처리
+    const receiveMessage = (event) => {
+      if (event.origin === "http://43.200.95.44:8080") {
+        const receivedToken = event.data.accessToken;
+        setAccessToken(receivedToken);
+        window.removeEventListener("message", receiveMessage); // 메시지 이벤트 리스너 제거
+        newWindow.close(); // 새 창 닫기
+      }
+    };
+
+    window.addEventListener("message", receiveMessage);
+  }
+  // console.log(accessToken);
+
+  const githubLogout = () => {
+    navigate('/');
+  }
+
+  const openModal = () => {
+    dispatch(SetModal(true)); 
+  }
 
   return (
     <h.HeaderWrapper>
@@ -41,20 +64,40 @@ const Header = ({click}) => {
           onClick={moveToSolution} 
           className={location.pathname === "/search-solution" || location.pathname === "/result-solution" ? "active" : "" }
         >SOLUTION</button>
-        <button 
-          onClick={moveToRecommend} 
-          className={location.pathname === "/recommend-me" || location.pathname === "/recommend-rank" ? "active" : "" }
-        >RECOMMEND</button>
+        {
+          !authSecond ? 
+            <button 
+              onClick={openModal} 
+              className={location.pathname === "/recommend-me" || location.pathname === "/recommend-rank" ? "active" : "" }
+            >RECOMMEND</button>
+          : 
+            <button 
+              onClick={moveToRecommend} 
+              className={location.pathname === "/recommend-me" || location.pathname === "/recommend-rank" ? "active" : "" }
+            >RECOMMEND</button>
+        }
         <button 
           onClick={moveToCompile} 
           className={location.pathname === "/compile" ? "active" : ""}
         >COMPILING</button>
-        <button 
-          onClick={moveToCommunity} 
-          className={location.pathname === "/community" ? "active" : ""}
-        >COMMUNITY</button>
-        {/* <button className="login" onClick={onClickGitlogin}>LOGIN</button> */}
-        <a className="login" href="http://43.200.95.44:8080/login/github">LOGIN</a>
+        {
+          !authSecond ? 
+            <button 
+              onClick={openModal} 
+              className={location.pathname === "/community" ? "active" : ""}
+            >COMMUNITY</button>
+          : 
+            <button 
+              onClick={moveToCommunity} 
+              className={location.pathname === "/community" ? "active" : ""}
+            >COMMUNITY</button>
+        }
+        {
+          !loginStat ? 
+            <button className="login" onClick={githubLogin}>LOGIN</button> : 
+            <button className="login" onClick={githubLogout}>LOGOUT</button>
+        }
+
       </h.MenuWrapper>
     </h.HeaderWrapper>
   )

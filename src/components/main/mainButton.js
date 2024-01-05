@@ -3,12 +3,19 @@ import lockIcon from '../../assets/imgs/lock_icon.png'
 import unLockIcon from '../../assets/imgs/unLock_icon.png'
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { SetModal } from "../../redux/actions/mainAction";
+import { useDispatch } from "react-redux";
 
 const MainButton = ({text, navigatePage, lockImg}) => {
-  const navigate = useNavigate()
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
 
   const movePage = () => {
-    navigate(navigatePage);
+    if (lockImg === 'locked') {
+      dispatch(SetModal(true)); 
+    } else {
+      navigate(navigatePage);
+    }
   }
 
   return (

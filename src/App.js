@@ -22,16 +22,20 @@ import { SetTheme } from "./redux/actions/solutionAction";
 
 function App() {
   const dispatch = useDispatch();
-  const [themeMode, setThemeMode] = useState('');
-  const [toggleMode, setToggleMode] = useState('lightTheme');
+  const [themeMode, setThemeMode] = useState('lightTheme');
   const theme = themeMode === 'lightTheme' ? lightTheme : darkTheme;
 
   const toggleTheme = () => {
     setThemeMode(themeMode === 'lightTheme' ? 'darkTheme' : 'lightTheme');
-    setToggleMode(themeMode === 'lightTheme' ? 'lightTheme' : 'darkTheme' )
-    console.log(toggleMode)
-    dispatch(SetTheme(toggleMode));
+    // setToggleMode(themeMode === 'lightTheme' ? 'lightTheme' : 'darkTheme' )
+    // dispatch(SetTheme(toggleMode));
+    // console.log(toggleMode)
   }
+
+  useEffect(() => {
+    dispatch(SetTheme(themeMode));
+    // console.log(themeMode)
+  }, [theme]);
 
   return (
     <BrowserRouter> 

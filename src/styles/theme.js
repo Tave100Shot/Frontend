@@ -14,6 +14,8 @@ export const lightTheme = {
     profileRival : '#E3B059',
     resetMe : '#213839',
 
+    blogPlatform : '#868686',
+    solutionItemLine : '#DEDEDE',
 
     // 티어 별 색
     bronze : '#AD5700',
@@ -41,6 +43,10 @@ export const darkTheme = {
     profileRank : '#B6FA91',
     profileRival : '#E3B059',
     resetMe : '#213839',
+
+    blogPlatform : '#CECDCD',
+    solutionItemLine : '#595959',
+
 
     // 티어 별 색
     bronze : '#AD5700',

@@ -11,21 +11,21 @@ const SolutionPage = () => {
   const navigate = useNavigate();
   let solutionQuestion = useSelector( (state)=>{ return state.solutionQuestion } );
   let solutionArray = useSelector( (state)=>{ return state.solutionList } );
-  const [SolutionNumber] = useState(solutionQuestion.number);
-  const [SolutionLanguage] = useState(solutionQuestion.language);
+  const [SolutionNumber, setSolutionNumber] = useState('');
+  const [SolutionLanguage, setSolutionLanguage] = useState('');
   
 
   const moveToMain = () => {
     navigate('/');
   }
+  const SetSolution = () => {
+    setSolutionNumber(solutionQuestion.number)
+    setSolutionLanguage(solutionQuestion.language)
+  }
 
   useEffect(() => {
-    console.log("SolutionNumber 변경:", SolutionNumber);
-  }, [SolutionNumber]);
-
-  useEffect(() => {
-    console.log("SolutionLanguage 변경:", SolutionLanguage);
-  }, [SolutionLanguage]);
+    SetSolution()
+  }, [solutionQuestion]);
 
   return (
     <div>

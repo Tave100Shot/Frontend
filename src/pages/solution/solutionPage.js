@@ -5,6 +5,7 @@ import * as s from "../../styles/solutionStyle";
 import { useSelector } from "react-redux";
 import { useEffect, useState } from "react";
 import SolutionItem from "../../components/solution/solutionItem";
+import { GrPowerReset } from "react-icons/gr";
 
 
 const SolutionPage = () => {
@@ -33,7 +34,10 @@ const SolutionPage = () => {
       <SearchBar/>
       <s.SolutionContainer>
         <hr/>
-        <h3>BAEKJOON {SolutionNumber} RESULT WITH {SolutionLanguage}</h3>
+        <s.SolutionInfo>
+          <h3>BAEKJOON {SolutionNumber} RESULT WITH {SolutionLanguage}</h3>
+          <s.ResetSolution />
+        </s.SolutionInfo>
       </s.SolutionContainer>
       <s.SolutionItemContainer>
         {solutionArray

@@ -1,11 +1,10 @@
+import { GrPowerReset } from "react-icons/gr";
 import styled from "styled-components";
 
 export const SolutionContainer = styled.div`
   display : flex;
-  position: relative;
   flex-direction : column;
   align-items : center;
-
   hr{
     width : 80vw;
     height : 0.15rem;
@@ -13,12 +12,27 @@ export const SolutionContainer = styled.div`
     border : none;
   }
 
+  `
+  export const SolutionInfo = styled.div`
+  position : relative;
+  height : 9rem;
+  width : 100vw;
+  display : flex;
+  justify-content : center;
+  align-items : center;
   h3 {
-    margin : 3rem 0 2rem 0;
     font-size : 2.5rem;
     color : ${props => props.theme.colors.colorAccent};
   }
 `
+export const ResetSolution = styled(GrPowerReset)`
+  position : absolute;
+  color: ${props => props.theme.colors.colorAccent};
+  right : 20rem;
+  font-size: 2.4rem;
+  cursor : pointer
+
+`;
 
 export const SolutionItemContainer = styled.div`
   width : 85vw;

@@ -29,12 +29,16 @@ export const SolutionItemContainer = styled.div`
   grid-template-rows : repeat(2, 1fr);
   row-gap : 2rem;
   justify-items: center;
+  @media (min-width: 740px) and (max-width: 1341px) {
+    grid-template-columns : repeat(3, 1fr);
+    grid-template-rows : repeat(3, 1fr);  
+  }
 
 `
 export const SolutionItemBox = styled.div`
   width : 25rem;
   height : 15rem;
-  margin : 1rem 0;
+  margin : 1rem;
   background-color : ${props => props.theme.colors.colorBg};
   color : ${props => props.theme.colors.colorMains};
   border : 0.2rem solid ${props => props.theme.colors.colorAccent};
@@ -62,6 +66,7 @@ export const SolutionItemBox = styled.div`
     padding : 0 0.8rem;
   }
   .snippet {
+    font-size : 1.2rem;
     overflow: hidden;
     text-overflow: ellipsis;
     white-space: normal;
@@ -72,6 +77,9 @@ export const SolutionItemBox = styled.div`
     -webkit-line-clamp: 4 ;
     -webkit-box-orient: vertical;
     padding : 0 0.5rem;
+    @media (min-width: 740px) and (max-width: 1180px) {
+      -webkit-line-clamp: 3 ;
+    }
   }
 
   &:hover {

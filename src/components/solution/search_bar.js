@@ -41,6 +41,11 @@ const SearchBar = () => {
 
   const handleSearchSubmit = (event) => {
     event.preventDefault();
+    
+    if (isNaN(questionNumber) || currentValue === "" || questionNumber === "") {
+      alert("검색하고 싶은 문제의 정보를 모두 입력해주세요.");
+      return;
+    }
 
     const questionString = makeString(questionNumber, currentValue);
 
@@ -55,44 +60,44 @@ const SearchBar = () => {
     const apiUrl = `http://43.200.95.44:8080/api/v1/search?query=${encodeURIComponent(questionString)}`;
 
     axios.get(apiUrl)
-    .then(response => {
-      // console.log(response.data.result.dtos[0].items);
-      AddSolutionArray(response.data.result.dtos[0].items)
-    })
-    .catch(error => {
-      console.error(error);
-    });
+      .then(response => {
+        // console.log(response.data.result.dtos[0].items);
+        AddSolutionArray(response.data.result.dtos[0].items)
+      })
+      .catch(error => {
+        console.error(error);
+      });
+    }
 
-  };
   return (
-    <s.SearchBarContainer action="/result-solution" method="">
-        <s.SearchInputBox>
-          {themeMode == 'lightTheme' ? 
-            <img src={search_white} alt="돋보기 그림"/> : 
-            <img src={search_black} alt="돋보기 그림"/>
-          }
-          <input 
-            type="text"
-            value={questionNumber}
-            placeholder="Search your problem with number !" 
-            onChange={handleOnChangeInput}
-          ></input>
-        </s.SearchInputBox>
-        <s.SelectBox onClick={() => setShowOptions((prev) => !prev)} show={showOptions}>
-          <label>{currentValue}</label>
-          <ul >
-            <li onClick={handleOnChangeSelectValue}>PYTHON</li>
-            <li onClick={handleOnChangeSelectValue}>C</li>
-            <li onClick={handleOnChangeSelectValue}>C++</li>
-            <li onClick={handleOnChangeSelectValue}>C#</li>
-            <li onClick={handleOnChangeSelectValue}>JAVA</li>
-            <li onClick={handleOnChangeSelectValue}>JAVASCRIPT</li>
-            <li onClick={handleOnChangeSelectValue}>PHP</li>
-            <li onClick={handleOnChangeSelectValue}>RUBY</li>
-          </ul>
-        </s.SelectBox>
-        <button onClick={handleSearchSubmit}>SEARCH</button>
-    </s.SearchBarContainer>
+      <s.SearchBarContainer action="/result-solution" method="">
+          <s.SearchInputBox>
+            {themeMode == 'lightTheme' ? 
+              <img src={search_white} alt="돋보기 그림"/> : 
+              <img src={search_black} alt="돋보기 그림"/>
+            }
+            <input 
+              type="number"
+              value={questionNumber}
+              placeholder="Search your problem with number !" 
+              onChange={handleOnChangeInput}
+            ></input>
+          </s.SearchInputBox>
+          <s.SelectBox onClick={() => setShowOptions((prev) => !prev)} show={showOptions}>
+            <label>{currentValue}</label>
+            <ul >
+              <li onClick={handleOnChangeSelectValue}>PYTHON</li>
+              <li onClick={handleOnChangeSelectValue}>C</li>
+              <li onClick={handleOnChangeSelectValue}>C++</li>
+              <li onClick={handleOnChangeSelectValue}>C#</li>
+              <li onClick={handleOnChangeSelectValue}>JAVA</li>
+              <li onClick={handleOnChangeSelectValue}>JAVASCRIPT</li>
+              <li onClick={handleOnChangeSelectValue}>PHP</li>
+              <li onClick={handleOnChangeSelectValue}>RUBY</li>
+            </ul>
+          </s.SelectBox>
+          <button onClick={handleSearchSubmit}>SEARCH</button>
+      </s.SearchBarContainer>
   )
 }
 

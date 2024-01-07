@@ -54,6 +54,11 @@ export const SearchInputBox = styled.div`
     font-family : Poppins_Light;
     font-size : 1.3rem;
   }
+  input[type="number"]::-webkit-outer-spin-button,
+  input[type="number"]::-webkit-inner-spin-button {
+      -webkit-appearance: none;
+      margin: 0;
+  }
 
 `
 export const SelectBox = styled.div`

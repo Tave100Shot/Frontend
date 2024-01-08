@@ -37,6 +37,7 @@ const MainPage = ({click}) => {
   // Modal 관련 변수
   let modalState = useSelector( (state)=>{ return state.modalState } );
 
+
   const closeModal = () => {
     dispatch(SetModal(false))
   };

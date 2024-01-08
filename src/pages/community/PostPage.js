@@ -1,45 +1,86 @@
-import { Header, Typography, HorizontalLine, Footer } from "../../styles/CommunityStyle"
+import { FirstContainer, MainContainer, Typography, HorizontalLine } from '../../styles/CommunityStyle';
+import Header from "../../components/common/Header";
 import styled from "styled-components";
+import { useNavigate } from "react-router-dom";
 import {useState} from 'react';  
+import { FiThumbsDown } from "react-icons/fi";
+import { LuPencil } from "react-icons/lu";
+import { FiTrash } from "react-icons/fi";
+import { FiUsers } from "react-icons/fi";
+import { FiMessageCircle } from "react-icons/fi";
 
-  const MainContainer = styled.div`
-      display: flex;
-      flex-wrap: wrap;
-      justify-content: space-between;
-      padding-left: 8rem;
-      padding-right: 8rem;
-      width: 100vw;
-      //background-color: #E6FADE;
-      margin: 0 auto;
-  
-      @media screen and (max-width: 500px) {
-      flex-direction: column;
-      }
-  `;
-  
-  const FirstContainer = styled.div`
-    width: 100%;
-    min-height: 70vh;
-    margin: 0 auto;
-    flex-shrink: 0;
-    background-color: #fff;
-  `;
-  
   const BulletinBox = styled.div`
   max-width: 100%;
-  height: 25em;
+  height: 20em;
   flex-shrink: 0;
   border-radius: 1rem;
   border: 0.3rem solid #91D1FA;
   margin-top: 1em;
   position: relative;
 `;
+const ReportIcon = styled(FiThumbsDown)`
+  margin : 1rem;
+  cursor : pointer;
+  font-size : 2.5rem;
+  color : #FA9DAD;
+`
+const EditIcon = styled(LuPencil)`
+  margin : 1rem;
+  cursor : pointer;
+  font-size : 2.5rem;
+  color : #91D1FA;
+`
+const DeleteIcon = styled(FiTrash)`
+  margin : 1rem;
+  cursor : pointer;
+  font-size : 2.5rem;
+  color : #91D1FA;
+`
+const ViewCommentContianer = styled.div`
+  position : absolute;
+  bottom : 0;
+  right : 0;
+  display : grid;
+  grid-template-columns : repeat(4, 1fr);
+  gap : 1rem;
+  algin-items : center;
+  }
+`
+const ViewIcon = styled(FiUsers)`
+  margin : 1rem 0 1rem 1rem;
+  font-size : 2rem;
+  color : #91D1FA;
+`
+
+const CommentIcon = styled(FiMessageCircle)`
+  margin : 1rem 0 1rem 1rem;
+  font-size : 2rem;
+  color : #91D1FA;
+`
+
+const ViewNum = styled.div`
+  font-size: 1rem;
+  font-weight: 600;
+  color : #91D1FA;
+  margin : 1.3rem 1rem 1rem 0;
+  text-align: center;
+  
+`
+const CommentNum = styled.div`
+  font-size: 1rem;
+  font-weight: 600;
+  color : #91D1FA;
+  margin : 1.3rem 1rem 1rem 0;
+  text-align: center;
+`
 
 const CommentWriteBox = styled.input`
 width: 100%;
-height: 3em;
+height: 4rem;
+color: #fff;
 flex-shrink: 0;
 border-radius: 1rem;
+outline: none;
 border: 0.3rem solid #91D1FA;
 background: #91D1FA;
 position: relative;
@@ -64,6 +105,39 @@ padding: 1rem;
   }
 `;
 
+const CommentViewBoxContainer = styled.div`
+  position: absolute;
+  display: grid;
+  top: 0;
+  right: 0;
+  grid-template-columns: repeat(3, 1fr);
+  margin-top: 1.5rem;
+  align-items: center;
+  justify-content: center;
+  //border: 3px solid #000;
+`
+
+const CommentViewWrite = styled.div`
+  cursor: pointer;
+  font-size: 1.2rem;
+  font-weight: 600;
+  color: #91D1FA;
+  margin: auto;
+`
+const CommentViewEdit = styled(LuPencil)`
+  cursor : pointer;
+  font-size : 2rem;
+  color : #91D1FA;
+  margin: auto;
+`
+
+const CommentViewDelete = styled(FiTrash)`
+  cursor: pointer;
+  font-size: 2rem;
+  color: #91D1FA;
+  margin: auto;
+`
+
 const ButtonWrapper = styled.div`
 display: flex;
 position: absolute;
@@ -71,22 +145,6 @@ flex-direction: row;
 top : 1rem;
 right: 1rem;
 gap : 1rem;
-`
-
-const ReportButton = styled.button`
-width: 4em;
-height: 2em;
-justify-content: center;
-align-items: center;
-gap: 1rem;
-background-color: #fff;
-border-radius : 10rem;
-border: 0.3rem solid #FA9DAD;
-color: #FA9DAD;
-font-family: 'Poppins';
-font-style: normal;
-font-weight: 500;
-line-height: normal;
 `
 
 const ModalOverlay = styled.div`
@@ -149,43 +207,13 @@ const ModalContent = styled.div`
       color: #91D1FA;
     }
   }
-
-  
 `;
-
-const ModifyButton = styled.button`
-width: 4em;
-height: 2em;
-justify-content: center;
-align-items: center;
-gap: 1rem;
-background-color: #fff;
-border-radius : 10rem;
-border: 0.3rem solid #91D1FA;
-color: #91D1FA;
-font-family: 'Poppins';
-font-style: normal;
-font-weight: 500;
-line-height: normal;
-`
-const DeleteButton = styled.button`
-width: 4em;
-height: 2em;
-justify-content: center;
-align-items: center;
-gap: 1rem;
-background-color: #fff;
-border-radius : 10rem;
-border: 0.3rem solid #91D1FA;
-color: #91D1FA;
-font-family: 'Poppins';
-font-style: normal;
-font-weight: 500;
-line-height: normal;
-`
-  
   
   const PostPage = () => {
+    const navigate = useNavigate();
+    const moveToMain = () => {
+      navigate('/');
+    }
     const [isModalOpen, setIsModalOpen] = useState(false);
 
     const openModal = () => {
@@ -197,24 +225,35 @@ line-height: normal;
     };
     
     return (
-      <>
-        <Header>HEADER</Header>
+      <div>
+      <Header click={moveToMain} />
         <MainContainer>
           <FirstContainer>
-            <Typography>BRONZE ROOM</Typography>
+            <Typography>BRONZE & SILVER</Typography>
             <HorizontalLine></HorizontalLine>
           <BulletinBox>
             <ButtonWrapper>
-            <ReportButton onClick={openModal}>신고</ReportButton>
-            <ModifyButton>수정</ModifyButton>
-            <DeleteButton>삭제</DeleteButton>
+            <ReportIcon onClick={openModal} />
+            <EditIcon />
+            <DeleteIcon />
             </ButtonWrapper>
+            <ViewCommentContianer>
+            <ViewIcon />
+            <ViewNum>45</ViewNum>
+            <CommentIcon />
+            <CommentNum>2</CommentNum>
+            </ViewCommentContianer>
           </BulletinBox>
           <CommentWriteBox placeholder="댓글 작성 후 ENTER"></CommentWriteBox>
-          <CommentViewBox></CommentViewBox>
+          <CommentViewBox>
+            <CommentViewBoxContainer>
+              <CommentViewWrite>댓글 달기</CommentViewWrite>
+              <CommentViewEdit />
+              <CommentViewDelete />
+            </CommentViewBoxContainer>
+          </CommentViewBox>
           </FirstContainer>
         </MainContainer>
-        <Footer>FOOTER</Footer>
         {isModalOpen && (
         <ModalOverlay>
           <ModalContent>
@@ -229,7 +268,7 @@ line-height: normal;
           </ModalContent>
         </ModalOverlay>
       )}
-      </>
+      </div>
     );
   };
   

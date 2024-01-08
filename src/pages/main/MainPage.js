@@ -14,7 +14,7 @@ const MainPage = ({click}) => {
   //   // .then(response => setMessage(response.data))
   //   axios({
   //     method: 'GET',
-  //     url: 'http://54.180.163.188:8080/test/hello'
+  //     url: 'http://43.200.95.44:8080/test/hello'
   //   }).then(response => setMessage(response.data));
     
 

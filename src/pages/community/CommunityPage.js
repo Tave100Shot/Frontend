@@ -1,16 +1,23 @@
-import { Header, MainContainer, FirstContainer, GridContainer, LevelBox, Typography, LevelTypography, Description, HorizontalLine, EnterButton, Footer, TypographyDcp,LockedButton  } from '../../styles/CommunityStyle';
+import { FirstContainer, MainContainer, GridContainer, LevelBox, Typography, LevelTypography, Description,
+  HorizontalLine, EnterButton, TypographyDcp,LockedButton  } from '../../styles/CommunityStyle';
+import Header from "../../components/common/Header";
 import {useNavigate} from 'react-router-dom';
 
 const CommunityPage = () => {
-  const navigate  = useNavigate();
+  const navigate = useNavigate();
+
+  const moveToMain = () => {
+    navigate('/');
+  }
+
   const handleEnterClick = (level) => {
     navigate(`/community/${level.toLowerCase()}`);
     //toLowerCase: JavaScript의 문자열 메서드, 문자열의 모든 문자 -> 소문자로 변환
   };
 
   return (
-    <>
-      <Header>HEADER</Header>
+    <div>
+      <Header click={moveToMain}/>
       <MainContainer>
         <FirstContainer>
           <Typography>COMMUNITY</Typography>
@@ -48,10 +55,7 @@ const CommunityPage = () => {
           </GridContainer>
         </FirstContainer>
       </MainContainer>
-      <Footer>
-        <p>FOOTER</p>
-      </Footer>
-    </>
+    </div>
   )
 }
 

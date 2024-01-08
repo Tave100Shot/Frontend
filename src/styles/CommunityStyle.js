@@ -19,19 +19,20 @@ export const TypographyDcp = styled.div`
   line-height: normal;
   padding : 1rem;
 `;
-
 export const MainContainer = styled.div`
     display: flex;
     flex-wrap: wrap;
     justify-content: space-between;
+    align-items: center;
     padding-left: 8rem;
     padding-right: 8rem;
     width: 100vw;
     //background-color: #E6FADE;
     margin: 0 auto;
+    margin-top: 50px;
 
     @media screen and (max-width: 500px) {
-      flex-direction: column;
+    flex-direction: column;
     }
 `;
 
@@ -59,17 +60,18 @@ export const GridContainer = styled.div`
 `;
 
 export const LevelBox = styled.div`
-  //max-width: 55wv;
-  height: 22rem;
+  max-width: 55wv;
+  height: 20rem;
   flex-shrink: 0;
   border-radius: 3rem;
-  border: 0.1rem solid #91D1FA;
-  background: rgba(145, 209, 250, 0.5);
+  background: rgba(145, 209, 250, 0.6);
   position: relative;
   display: flex;
   justify-content: center; /* 가로 중앙 정렬 */
   align-items: center;
-  
+  &:hover {
+    background : #91D1FA;
+  }
 `;
 
 export const Typography = styled.div`
@@ -92,7 +94,7 @@ export const LevelTypography = styled.div`
   position: absolute;
   top: 0;
   left: 0;
-  margin-top: 4rem;
+  margin-top: 3rem;
   margin-left: 5rem;
 `;
 
@@ -105,7 +107,7 @@ export const Description = styled.div`
   font-style: normal;
   line-height: normal;
   position: absolute;
-  top: 12rem;
+  top: 10rem;
   left: 5.1rem;
 `;
 

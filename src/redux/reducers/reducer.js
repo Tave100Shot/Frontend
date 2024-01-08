@@ -1,5 +1,7 @@
 // 초기 State 값
 export const INITIAL_STATE = {
+  modalState : false,
+  accessToken : '',
   solutionQuestion : [
     
   ],
@@ -11,7 +13,17 @@ export const INITIAL_STATE = {
 export const Reducer = (state = INITIAL_STATE, action) => {
   switch(action.type) {
     // Main
+    case 'SET_TOKEN' : 
+    return {
+      ...state,
+      accessToken: action.content
+    };
 
+    case 'SET_MODAL' : 
+      return {
+        ...state,
+        modalState: action.content
+      };
     // Solution 
     case 'SET_SEARCH': 
       return {

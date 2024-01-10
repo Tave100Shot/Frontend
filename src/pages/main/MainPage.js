@@ -20,7 +20,6 @@ const MainPage = ({click}) => {
   const [gitLoginId, setGitLoginId] = useState(null);
   const [profileImgUrl, setProfileImgUrl] = useState(null);
   const [accessToken, setAccessToken] = useState(null);
-  const [login, setLogin] = useState(false);    // 로그인 여부 변수
   const [authSecond, setSuthSecond] = useState(false);    // 2차 인증 여부
   
   useEffect(() => {
@@ -30,7 +29,9 @@ const MainPage = ({click}) => {
     setMemberId(searchParams.get('memberId'));
     setGitLoginId(searchParams.get('gitLoginId'));
     setProfileImgUrl(searchParams.get('profileImgUrl'));
-    dispatch(SetToken(searchParams.get('token')))
+    dispatch(SetToken(searchParams.get('token')));
+
+    localStorage.setItem('accessToken', searchParams.get('token'));
 
   }, [location]);
   
@@ -49,14 +50,14 @@ const MainPage = ({click}) => {
   return (
     <div>
       <Header click={click} authSecond={authSecond}/>
-      <TaveAnimation/>
+      <TaveAnimation authSecond={authSecond}/>
       <w.ButtonWrapper>
         <MainButton 
           text={'GET SOLUTION'} 
           navigatePage={'/search-solution'}
           lockImg={'none'}
         />
-        { !login ? 
+        { !authSecond ? 
           <MainButton 
             text={'GET RECOMMEND'} 
             navigatePage={''}

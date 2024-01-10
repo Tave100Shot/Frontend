@@ -27,7 +27,7 @@ const MainButton = ({text, navigatePage, lockImg}) => {
         <b.MainButton onClick={movePage}>
           {lockImg === 'locked' ?
             <img src={lockIcon}/> :
-            <img src={unLockIcon}/>
+            <></>
           }
           {text}
         </b.MainButton>

@@ -1,5 +1,5 @@
 import Modal from 'react-modal';
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import * as m from "../../styles/loginModalStyle"
 import { SetModal } from "../../redux/actions/mainAction";
 import { useEffect } from 'react';
@@ -9,17 +9,16 @@ import { useRef } from 'react';
 import step1 from '../../assets/imgs/1step_편집.png'
 import step2 from '../../assets/imgs/step2_편집.png'
 import step3 from '../../assets/imgs/step3_편집.png'
-import right_black from "../../assets/imgs/right_black.png"
-import right_white from "../../assets/imgs/right_white.png"
-import left_black from "../../assets/imgs/left_black.png"
-import left_white from "../../assets/imgs/left_white.png"
-import ModalItem from './modalItem';
-
 import "slick-carousel/slick/slick.css"; 
 import "slick-carousel/slick/slick-theme.css";
 import Slider from 'react-slick';
+import axios from 'axios';
 
 const AddAuthModal = ({isOpen, onRequestClose}) => {
+  let accessToken = useSelector( (state)=>{ return state.accessToken } );
+  // const storedToken = localStorage.getItem('accessToken');
+
+
   const customStyles = {
     overlay: {
         zIndex: 1000,
@@ -35,10 +34,10 @@ const AddAuthModal = ({isOpen, onRequestClose}) => {
         position: 'relative',
         border : 'none',
         borderRadius : '1.5rem',
-        overflow: 'hidden',
+        overflow:
+        'hidden',
     }
   };
-  const slider = useRef(null);
 
   const settings = {
     dots: true,
@@ -51,22 +50,37 @@ const AddAuthModal = ({isOpen, onRequestClose}) => {
     // prevArrow: <>  
   };
 
-  const nextBtn = () => {
-    slider.current.slickNext();
-  };
+  const setTier = () => {
+    console.log("내 토큰 : ", accessToken);
+    console.log("내 토큰 : ", `Bearer ${accessToken}`);
+    const apiUrl='/authorization';
 
-  const prevBtn = () => {
-    slider.current.slickPrev();
-  };
+    axios.get(apiUrl, {
+      headers : {
+        Authorization : `Bearer ${accessToken}`
+      }
+      })
+    .then(response => {
+      console.log(response.data);
+    })
+    .catch(error => {
+      console.error('API 요청 실패:', error);
+    });
 
-  const slickRef = useRef(null);
 
-  const images = [
-    { src: step1, title: 1 },
-    { src: step1, title: 2 },
-    { src: step1, title: 3 },
-    { src: step1, title: 4 },
-  ];
+  //   axios.get('http://43.200.95.44:8080/authorization', {
+  //     headers : {
+  //       Authorization : `Bearer ${accessToken}`
+  //     }
+  //   })
+  //   .then(response => {
+  //     console.log(response.data);
+  //   })
+  //   .catch(error => {
+  //     console.error('API 요청 실패:', error);
+  //   });
+  }
+
 
 
   return (
@@ -76,7 +90,7 @@ const AddAuthModal = ({isOpen, onRequestClose}) => {
       style={customStyles}
     >
       <m.ModalContainer className='modalContainer'>
-        <m.StyledSlider className='sliderContainer' {...settings} ref={slickRef}>
+        <m.StyledSlider className='sliderContainer' {...settings} >
           <m.Slide >
             <img src={step1} alt='backjoon'/>
             <m.SlideItemBox>
@@ -134,7 +148,7 @@ const AddAuthModal = ({isOpen, onRequestClose}) => {
                 <p>
                   하단의 <span>AUTHENTICATION 버튼</span>을 눌러 인증을 진행하세요.
                 </p>
-                <button>AUTHENTICATION</button>
+                <button onClick={setTier}>AUTHENTICATION</button>
               </m.SlideTextBox>
             </m.SlideItemBox>
           </m.Slide> 

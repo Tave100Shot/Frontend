@@ -12,23 +12,32 @@ import WritePage from './pages/community/WritePage';
 import PostPage from './pages/community/PostPage';
 import CompilingPage from './pages/compiling/CompilingPage';
 import { ThemeProvider } from "styled-components";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { darkTheme, lightTheme } from "./styles/theme";
 import SolutionPage from "./pages/solution/solutionPage";
 import RecommendMe from "./pages/recommend/RecommendMePage";
 import RecommendRank from "./pages/recommend/RecommendRankPage";
+import { useDispatch } from "react-redux";
+import { SetTheme } from "./redux/actions/solutionAction";
 import Modal from 'react-modal';
-
-
+    
 function App() {
-  Modal.setAppElement('#root')
+  Modal.setAppElement('#root');
+  const dispatch = useDispatch();
+  
   const [themeMode, setThemeMode] = useState('lightTheme');
   const theme = themeMode === 'lightTheme' ? lightTheme : darkTheme;
   const toggleTheme = () => 
   {setThemeMode(themeMode === 'lightTheme' ? 'darkTheme' : 'lightTheme');
-  //   console.log(theme); // theme.js에서 해당 themeMode props 가져옴
-  //   console.log(themeMode);
+    // setToggleMode(themeMode === 'lightTheme' ? 'lightTheme' : 'darkTheme' )
+    // dispatch(SetTheme(toggleMode));
+    // console.log(toggleMode)
   }
+
+  useEffect(() => {
+    dispatch(SetTheme(themeMode));
+    // console.log(themeMode)
+  }, [theme]);
 
   return (
     <BrowserRouter> 
@@ -36,8 +45,8 @@ function App() {
         <GlobalStyle/>
         <Routes>
           <Route path='/' element={<MainPage click={toggleTheme}/>}/>
-          <Route path='/search-solution' element={<SearchPage />}/>
-          <Route path='/result-solution' element={<SolutionPage />}/>
+          <Route path='/search-solution' element={<SearchPage />} />
+          <Route path='/result-solution' element={<SolutionPage />} />
           <Route path='/recommend' element={<RecommendPage/>}/>
           <Route path='/recommend-me' element={<RecommendMe/>}/>
           <Route path='/recommend-rank' element={<RecommendRank />}/>

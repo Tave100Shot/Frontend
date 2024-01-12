@@ -32,12 +32,6 @@ const SearchBar = () => {
     setQuestionNumber(e.target.value);
   };
 
-  const AddSolutionArray = (array) => { 
-    const slicedArray = array.slice(0, 8);
-    setSolutionArray(slicedArray);
-    dispatch(SetSolution(slicedArray));
-    // console.log(solutionArray);
-  }
 
   const handleSearchSubmit = (event) => {
     event.preventDefault();
@@ -52,17 +46,27 @@ const SearchBar = () => {
     const newQuestion = {
       number : questionNumber,
       language : currentValue,
-      questionString : makeString(questionNumber, currentValue)
+      questionString : makeString(questionNumber, currentValue),
+      solultionIndex: 1
     };
     dispatch(SetSearch(newQuestion));
     navigate('/result-solution');
 
-    const apiUrl = `http://43.200.95.44:8080/api/v1/search?query=${encodeURIComponent(questionString)}`;
+    const apiUrl = `http://43.200.95.44:8080/api/v1/search?query=${encodeURIComponent(questionString)}&start=${newQuestion.solultionIndex}`;
 
     axios.get(apiUrl)
       .then(response => {
-        // console.log(response.data.result.dtos[0].items);
-        AddSolutionArray(response.data.result.dtos[0].items)
+        // console.log(response.data.result.dtos[0].queries.request[0].startIndex);
+        const slicedArray = response.data.result.dtos[0].items.slice(0, 8);
+        setSolutionArray(slicedArray);
+        dispatch(SetSolution(slicedArray));
+        const totalResult = response.data.result.dtos[0].queries.request[0].totalResults;
+        const maxTotalResult = totalResult / 10 + 1
+        const  resultIndex = {
+          maxIndex : maxTotalResult
+        }
+        let totalQuestion = {...newQuestion, ...resultIndex}
+        dispatch(SetSearch(totalQuestion))
       })
       .catch(error => {
         console.error(error);

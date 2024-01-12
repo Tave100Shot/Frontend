@@ -80,19 +80,22 @@ export const SolutionItemBox = styled.div`
     padding : 0 0.8rem;
   }
   .snippet {
-    font-size : 1.2rem;
+    margin : 0.5rem 0 0 0;
+    font-size : 1.1rem;
     overflow: hidden;
     text-overflow: ellipsis;
     white-space: normal;
-    line-height: 1.5;
+    line-height: 1.8;
     text-align: left;
     word-wrap: break-word;
     display: -webkit-box;
-    -webkit-line-clamp: 4 ;
+    -webkit-line-clamp: 3 ;
     -webkit-box-orient: vertical;
+    font-family : "Poppins_Medium";
+    font-weight : bold;
     padding : 0 0.5rem;
     @media (min-width: 740px) and (max-width: 1180px) {
-      -webkit-line-clamp: 3 ;
+      -webkit-line-clamp: 2 ;
     }
   }
 

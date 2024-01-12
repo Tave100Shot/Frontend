@@ -1,29 +1,12 @@
-import { Header, Typography,HorizontalLine, Footer } from "../../styles/CommunityStyle"
 import styled from "styled-components";
-import React, {useState} from "react";
-
-const MainContainer = styled.div`
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: space-between;
-    padding-left: 8rem;
-    padding-right: 8rem;
-    width: 100vw;
-    //background-color: #E6FADE;
-    margin: 0 auto;
-
-    @media screen and (max-width: 500px) {
-    flex-direction: column;
-    }
-`;
-
-const FirstContainer = styled.div`
-  width: 100%;
-  min-height: 70vh;
-  margin: 0 auto;
-  flex-shrink: 0;
-  background-color: #fff;
-`;
+import { useNavigate } from "react-router-dom";
+import React, { useState, useRef } from "react";
+import {
+  FirstContainer, MainContainer, GridContainer, LevelBox, Typography, LevelTypography, Description,
+  HorizontalLine, EnterButton, TypographyDcp, LockedButton
+} from '../../styles/CommunityStyle';
+import Header from "../../components/common/Header";
+import axios from "axios";
 
 const WrapContainer = styled.div`
   display: flex;
@@ -48,11 +31,10 @@ const AuthorContainer = styled.div`
     border: 0.3rem solid #;
     align-items: center; 
 
-
   }
   & > input {
     width: 17em;
-    height: 4rem;
+    height: 5rem;
     border-radius: 1rem;
     border: 0.3rem solid #91D1FA;
     font-size: 1.5rem;
@@ -62,6 +44,8 @@ const AuthorContainer = styled.div`
     margin-right: 5em;
     padding: 1rem;
     position: relative;
+    outline: none;
+
   }
 `
 
@@ -79,9 +63,10 @@ const TitleContainer = styled.div`
     border: 0.3rem solid #;
 
   }
+
   & > input {
     width: 40rem;
-    height: 4rem;
+    height: 5rem;
     border-radius: 1rem;
     border: 0.3rem solid #91D1FA;
     background: #91D1FA;
@@ -90,6 +75,7 @@ const TitleContainer = styled.div`
     margin: 1.5rem;
     padding: 1rem;
     position: relative;
+    outline: none;
   }
   }
 `
@@ -109,14 +95,17 @@ const ContentContainer = styled.div`
   }
   & > textarea {
     font-size: 1.5rem;
+    font-family: 'Poppins';
     width: 80em;
-    height: 25rem;
+    height: 20rem;
     border-radius: 1rem;
     border: 0.3rem solid #91D1FA;
     color: #000;
     margin: 1.5rem;
     padding: 1rem;
     position: relative;
+    outline: none;
+    resize: none;
   }
 `
 
@@ -132,11 +121,10 @@ const FileContainer = styled.div`
     white-space: nowrap;
     border: 0.3rem solid #;
     width: 10rem;
-
   }
-  & > button {
+  & > label {
     width: 12em;
-    height: 4rem;
+    height: 5rem;
     flex-shrink: 0;
     border-radius: 1rem;
     border: 0.3rem solid #91D1FA;
@@ -146,21 +134,39 @@ const FileContainer = styled.div`
     padding: 1rem;
     position: relative;
     font-size: 1.5rem;
+    cursor: pointer;
+    text-align: center;
+  }
+  & > input {
+    display: none;
   }
 `
-
+const SelectedFileContainer = styled.div`
+  width: 10em;
+  height: 2rem;
+  margin: 1.5rem;
+  padding: 1rem;
+  border: 0.3rem solid #91D1FA;
+  border-radius: 1rem;
+  background: #fff;
+  color: #333;
+  font-family: 'Poppins';
+  font-size: 1.2rem;
+  text-align: center;
+  
+`;
 
 const ButtonContainer = styled.div`
     display: flex;
     gap : 1rem;
     position: fixed;
-    bottom: 10rem;
-    right: 4rem;
+    bottom: 4rem;
+    right: 8rem;
 `
 
 const CancelButton = styled.button`
-    width: 5em;
-    height: 3em;
+    width: 7rem;
+    height: 5rem;
     justify-content: center;
     align-items: center;
     gap: 1rem;
@@ -173,11 +179,12 @@ const CancelButton = styled.button`
     font-style: normal;
     font-weight: 500;
     line-height: normal;
+    cursor: pointer;
 `;
 
 const UploadButton = styled.button`
-    width: 6em;
-    height: 3em;
+    width: 8rem;
+    height: 5rem;
     justify-content: center;
     align-items: center;
     gap: 1rem;
@@ -190,83 +197,111 @@ const UploadButton = styled.button`
     font-style: normal;
     font-weight: 500;
     line-height: normal;
-`;
+    cursor: pointer;
 
-const SelectedFileContainer = styled.div`
-  margin-top: 1rem;
-  padding: 1rem;
-  border: 0.3rem solid #91D1FA;
-  background: #fff;
-  color: #333;
-  font-family: 'Poppins';
-  font-size: 1.2rem;
-
-  p {
-    margin: 0.5rem 0;
-  }
 `;
 
 const WritePage = () => {
+  const navigate = useNavigate();
+  const moveToMain = () => {
+    navigate('/');
+  }
+  const [title, setTitle] = useState("");
+  const [content, setContent] = useState("");
+  const [attachmentFile, setAttachmentFile] = useState(null);
+  const [selectedFileName, setSelectedFileName] = useState('');
+  const apiUrl = "http://43.200.95.44:8080/api/post";
 
-  const fileInput = React.useRef(null);
-  const [selectedFile, setSelectedFile] = useState(null);
-  const handleButtonClick = () => {
-    fileInput.current.click();
-  };
-  const handleChange = (e) => {
+  const titleChange = (e) => setTitle(e.target.value);
+  const contentChange = (e) => setContent(e.target.value);
+
+  const handleFileChange = (e) => {
     const file = e.target.files[0];
-    setSelectedFile(file);
-    console.log(file);
+    setAttachmentFile(file);
+    setSelectedFileName(file.name);
   };
+
+
+  const onSubmit = (e) => {
+    e.preventDefault();
+    const formData = new FormData();
+    formData.append('title', title);
+    formData.append('content', content);
+    formData.append('postTier', 'POST_BRONZE_SILVER');
+    if (attachmentFile) {
+      formData.append('attachmentFile', attachmentFile);
+    }
+    axios.post("http://43.200.95.44:8080/api/post", formData, {
+      headers: {
+        'Content-type': 'multipart/form-data',
+      }
+    })
+      .then(res => {
+        console.log(res);
+        console.log(res.data);
+      })
+      .catch(error => console.log(error))
+  }
+
 
   return (
-    <>
-      <Header>HEADER</Header>
+    <div>
+      <Header click={moveToMain} />
       <MainContainer>
         <FirstContainer>
-          <Typography>BRONZE ROOM</Typography>
+          <Typography>WRITE</Typography>
           <HorizontalLine></HorizontalLine>
-          <form>
-          <WrapContainer>
-            <AuthorContainer>
-              <div>글쓴이</div>
-              <input type="author" placeholder="Your ID" />
-            </AuthorContainer>
-            <TitleContainer>
-              <div>제목</div>
-              <input type="title" placeholder="Write Title" />
-            </TitleContainer>
-          </WrapContainer>
-          <ContentContainer>
-            <div>내용</div>
-            <textarea type="text" placeholder="Write Your Problems"></textarea>
-          </ContentContainer>
-          <FileContainer>
-            <div>파일 첨부</div>
-            <button onClick={handleButtonClick}>File Upload</button>
-            <input
-            type="file"
-            ref={fileInput}
-            onChange={handleChange}
-            style={{display:"none"}}
-            />
-            {selectedFile ? ( //다시확인
-          <SelectedFileContainer>
-            <p>선택된 파일: {selectedFile.name}</p>
-            <p>파일 크기: {selectedFile.size} bytes</p>
-          </SelectedFileContainer>
-        ) : null}
-          </FileContainer>
-          <ButtonContainer>
-          <CancelButton>취소</CancelButton>
-          <UploadButton>업로드</UploadButton>
-          </ButtonContainer>
+          <form encType="multipart/form-data">
+            <WrapContainer>
+              <AuthorContainer>
+                <div>글쓴이</div>
+                <input
+                  id="writer"
+                  type="text"
+                  placeholder="Your ID" />
+              </AuthorContainer>
+              <TitleContainer>
+                <div>제목</div>
+                <input
+                  id="title"
+                  type="text"
+                  value={title}
+                  onChange={titleChange}
+                  placeholder="Write Title" />
+              </TitleContainer>
+            </WrapContainer>
+            <ContentContainer>
+              <div>내용</div>
+              <textarea
+                id="content"
+                type="text"
+                value={content}
+                onChange={contentChange}
+                placeholder="Write Your Problems" />
+            </ContentContainer>
+            <FileContainer>
+              <div>파일 첨부</div>
+              <label htmlFor="attachmentFile">File Upload
+              </label>
+              <input id="attachmentFile" type="file" name="attachmentFile" accept="*" multiple onChange={handleFileChange} />
+            </FileContainer>
+            <FileContainer>
+              <div></div>
+            <SelectedFileContainer>
+                {selectedFileName && `${selectedFileName}`}
+              </SelectedFileContainer>
+            </FileContainer>
+            <ButtonContainer>
+              <CancelButton onClick={() => { navigate("/community/bronze") }}>취소</CancelButton>
+              <UploadButton onClick={onSubmit}>업로드</UploadButton>
+            </ButtonContainer>
           </form>
         </FirstContainer>
       </MainContainer>
-      <Footer>FOOTER</Footer>
-    </>
+    </div>
   );
 };
 
+
 export default WritePage;
+

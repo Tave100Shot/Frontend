@@ -53,7 +53,7 @@ const SearchBar = () => {
     navigate('/result-solution');
 
     const apiUrl = `http://43.200.95.44:8080/api/v1/search?query=${encodeURIComponent(questionString)}&start=${newQuestion.solultionIndex}`;
-
+    
     axios.get(apiUrl)
       .then(response => {
         // console.log(response.data.result.dtos[0].queries.request[0].startIndex);

@@ -2,6 +2,7 @@
 export const INITIAL_STATE = {
   modalState : false,
   accessToken : '',
+  twoFactorAuthStatus : false,
   solutionQuestion : [
     
   ],

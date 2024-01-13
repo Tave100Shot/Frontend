@@ -22,6 +22,7 @@ const MainPage = ({click}) => {
   const [accessToken, setAccessToken] = useState(null);
   const [authSecond, setSuthSecond] = useState(false);    // 2차 인증 여부
   
+  // 로그인 이후 params 받아오기
   useEffect(() => {
     const searchParams = new URLSearchParams(location.search);
 
@@ -35,6 +36,11 @@ const MainPage = ({click}) => {
 
   }, [location]);
   
+  // 2차 인증 여부에 따른 modal 띄우기
+  // useEffect(() => {
+
+  // }, [])
+
   // Modal 관련 변수
   let modalState = useSelector( (state)=>{ return state.modalState } );
 

@@ -50,6 +50,7 @@ const Header = ({click, authSecond}) => {
 
   const githubLogout = () => {
     dispatch(SetToken(''));
+    localStorage.removeItem('accessToken');
     navigate('/')
   };
   return (

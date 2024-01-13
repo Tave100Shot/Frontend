@@ -6,6 +6,7 @@ import { useEffect } from 'react';
 import { useState } from 'react';
 import { useRef } from 'react';
 
+import backjoonAuth from '../../assets/imgs/baekjoon_auth.png'
 import step1 from '../../assets/imgs/1step_편집.png'
 import step2 from '../../assets/imgs/step2_편집.png'
 import step3 from '../../assets/imgs/step3_편집.png'
@@ -15,8 +16,8 @@ import Slider from 'react-slick';
 import axios from 'axios';
 
 const AddAuthModal = ({isOpen, onRequestClose}) => {
-  let accessToken = useSelector( (state)=>{ return state.accessToken } );
-  // const storedToken = localStorage.getItem('accessToken');
+  // let accessToken = useSelector( (state)=>{ return state.accessToken } );
+  const storedToken = localStorage.getItem('accessToken');
 
 
   const customStyles = {
@@ -50,38 +51,23 @@ const AddAuthModal = ({isOpen, onRequestClose}) => {
     // prevArrow: <>  
   };
 
-  const setTier = () => {
-    console.log("내 토큰 : ", accessToken);
-    console.log("내 토큰 : ", `Bearer ${accessToken}`);
-    const apiUrl='/authorization';
 
-    axios.get(apiUrl, {
-      headers : {
-        Authorization : `Bearer ${accessToken}`
-      }
-      })
-    .then(response => {
+  const setTier = async () => {
+    // console.log("내 토큰 : ", storedToken);
+    // console.log("내 토큰 : ", `Bearer ${storedToken}`);
+    const apiUrl='http://43.200.95.44:8080/authorization';
+
+    try {
+      const response = await axios.get('/authorization', {
+        headers : {
+          Authorization : `Bearer ${storedToken}`
+        }
+      });
       console.log(response.data);
-    })
-    .catch(error => {
+    } catch (error) {
       console.error('API 요청 실패:', error);
-    });
-
-
-  //   axios.get('http://43.200.95.44:8080/authorization', {
-  //     headers : {
-  //       Authorization : `Bearer ${accessToken}`
-  //     }
-  //   })
-  //   .then(response => {
-  //     console.log(response.data);
-  //   })
-  //   .catch(error => {
-  //     console.error('API 요청 실패:', error);
-  //   });
+    }
   }
-
-
 
   return (
     <Modal 
@@ -92,7 +78,7 @@ const AddAuthModal = ({isOpen, onRequestClose}) => {
       <m.ModalContainer className='modalContainer'>
         <m.StyledSlider className='sliderContainer' {...settings} >
           <m.Slide >
-            <img src={step1} alt='backjoon'/>
+            <img src={backjoonAuth} alt='backjoon'/>
             <m.SlideItemBox>
               <m.SlideTextBox>
                 <h2>추가 인증</h2>

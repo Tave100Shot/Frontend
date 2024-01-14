@@ -1,7 +1,7 @@
 import Modal from 'react-modal';
 import { useDispatch, useSelector } from "react-redux";
 import * as m from "../../styles/loginModalStyle"
-import { SetModal } from "../../redux/actions/mainAction";
+import { SetModal, SetTwoFactorAuthStatus } from "../../redux/actions/mainAction";
 import { useEffect } from 'react';
 import { useState } from 'react';
 import { useRef } from 'react';
@@ -16,7 +16,7 @@ import Slider from 'react-slick';
 import axios from 'axios';
 
 const AddAuthModal = ({isOpen, onRequestClose}) => {
-  // let accessToken = useSelector( (state)=>{ return state.accessToken } );
+  const dispatch = useDispatch();
   const storedToken = localStorage.getItem('accessToken');
 
 
@@ -63,8 +63,20 @@ const AddAuthModal = ({isOpen, onRequestClose}) => {
           Authorization : `Bearer ${storedToken}`
         }
       });
-      console.log(response.data);
+
+      localStorage.setItem('gitLoginId', response.data.result.gitLoginId);
+      localStorage.setItem('bojName', response.data.result.bojName);
+      localStorage.setItem('bojTier', response.data.result.tier);
+
+      dispatch(SetTwoFactorAuthStatus(true));
+      alert("2차 인증이 완료되었습니다.");
+      dispatch(SetModal(false));
+
+      // console.log(response.data);
     } catch (error) {
+      if(storedToken) {
+        alert("로그인 이후 2차 인증을 진행해주세요");
+      }
       console.error('API 요청 실패:', error);
     }
   }

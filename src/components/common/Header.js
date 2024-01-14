@@ -2,19 +2,18 @@ import * as h from "../../styles/headerStyle"
 import mainLogo from '../../assets/imgs/100shot_icon.png'
 import { useLocation, useNavigate } from "react-router-dom"
 import { useEffect, useState } from "react";
-import axios from "axios";
 import { useDispatch, useSelector } from "react-redux";
 import { SetModal, SetToken } from "../../redux/actions/mainAction";
 
-const Header = ({click, authSecond}) => {
+const Header = ({click}) => {
   const navigate = useNavigate();
   const location = useLocation();
   const dispatch = useDispatch();
 
   const [loginStat, setLoginStat] = useState(false);
+  let secondAuthStatus = useSelector( (state)=>{ return state.twoFactorAuthStatus } );
 
-
-  let token = useSelector( (state)=>{ return state.accessToken } )
+  const accessToken = localStorage.getItem('accessToken');
 
   const moveToSolution = () => {
     navigate('/search-solution');
@@ -39,14 +38,13 @@ const Header = ({click, authSecond}) => {
   }
 
   useEffect(() => {
-    if (token) {
+    if (accessToken) {
       setLoginStat(true);
     }
     else {
       setLoginStat(false)
     }
-
-  }, [token]);
+  }, [accessToken]);
 
   const githubLogout = () => {
     dispatch(SetToken(''));
@@ -65,7 +63,7 @@ const Header = ({click, authSecond}) => {
           className={location.pathname === "/search-solution" || location.pathname === "/result-solution" ? "active" : "" }
         >SOLUTION</button>
         {
-          !authSecond ? 
+          !secondAuthStatus ? 
             <button 
               onClick={openModal} 
               className={location.pathname === "/recommend-me" || location.pathname === "/recommend-rank" ? "active" : "" }
@@ -81,7 +79,7 @@ const Header = ({click, authSecond}) => {
           className={location.pathname === "/compile" ? "active" : ""}
         >COMPILING</button>
         {
-          !authSecond ? 
+          !secondAuthStatus ? 
             <button 
               onClick={openModal} 
               className={location.pathname === "/community" ? "active" : ""}

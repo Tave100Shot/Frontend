@@ -25,6 +25,13 @@ export const Reducer = (state = INITIAL_STATE, action) => {
         ...state,
         modalState: action.content
       };
+      
+    case 'SET_SECONDAUTH' : 
+      return {
+        ...state,
+        twoFactorAuthStatus: action.content
+      };
+
     // Solution 
     case 'SET_SEARCH': 
       return {

@@ -61,7 +61,6 @@ const AddAuthModal = ({isOpen, onRequestClose}) => {
       const response = await axios.get('/authorization', {
         headers : {
           Authorization : `Bearer ${storedToken}`
-          // Authorization : `Bearer 1234`
         }
       });
 
@@ -76,10 +75,38 @@ const AddAuthModal = ({isOpen, onRequestClose}) => {
 
       // console.log(response.data);
     } catch (error) {
-      if(storedToken) {
+      if(storedToken === null) {
         alert("로그인 이후 2차 인증을 진행해주세요");
       }
-      console.error('API 요청 실패:', error);
+      const errorCode = error.response.data.errorCode;
+      console.log(errorCode);
+      if(errorCode === 'SOLVED_5001') {
+        alert("Solved API 서버에서 오류가 발생했습니다. 어느 시간이 지난 후 다시 시도해주세요.");
+      }
+      else if(errorCode === 'SOLVED_4001') {
+        alert("Solved.ac의 소개글의 아이디와 Github 아이디가 일치하지 않습니다. 점검 후 다시 시도해주세요.");
+      }
+      else if(errorCode === 'SOLVED_4041') {
+        alert("Solved.ac에서 해당 사용자를 찾을 수 없습니다.");
+      }
+      else if(errorCode === 'GITHUB_4000') {
+        alert("Solved.ac의 소개글과 Github 아이디가 일치하지 않습니다. 점검 후 다시 시도해주세요.");
+      }
+      else if(errorCode === 'GITHUB_4001') {
+        alert("Github 인증 Repository description과 백준 아이디가 일치하지 않습니다. 점검 후 다시 시도해주세요.");
+      }
+      else if(errorCode === 'GITHUB_4040') {
+        alert("Github 인증 Repository를 찾을 수 없습니다.");
+      }
+      else if(errorCode === 'GITHUB_4041') {
+        alert("Github 인증 Repository description을 찾을 수 없습니다.");
+      }
+      else if(errorCode === 'GITHUB_5000') {
+        alert("Github API 서버에서 오류가 발생했습니다. 어느 시간이 지난 후 다시 시도해주세요.");
+      }
+      else {
+        alert("2차 인증을 실패하였습니다.");
+      }
     }
   }
 

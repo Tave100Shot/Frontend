@@ -31,6 +31,7 @@ const MainPage = ({click}) => {
     if (searchParams.get('token') !== null) {
       dispatch(SetToken(searchParams.get('token')));
       localStorage.setItem('accessToken', searchParams.get('token'));
+      localStorage.setItem('profileImg', searchParams.get('profileImgUrl'));
     }
   
     const gitLoginId = localStorage.getItem('gitLoginId');

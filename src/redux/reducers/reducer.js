@@ -3,6 +3,7 @@ export const INITIAL_STATE = {
   theme : 'lightTheme',
   modalState : false,
   accessToken : '',
+  twoFactorAuthStatus : false,
   solutionQuestion : [
     
   ],
@@ -25,6 +26,13 @@ export const Reducer = (state = INITIAL_STATE, action) => {
         ...state,
         modalState: action.content
       };
+      
+    case 'SET_SECONDAUTH' : 
+      return {
+        ...state,
+        twoFactorAuthStatus: action.content
+      };
+
     // Solution 
     case 'SET_THEME': 
       return {

@@ -165,9 +165,9 @@ const AddAuthModal = ({isOpen, onRequestClose}) => {
                 <m.SlideTextBox>
                   <h2>3. 백준 소개글 수정</h2>
                   <p>
-                    백준 사이트에 로그인한 뒤, <span>상태 메세지</span>에 본인의 <span>Github 아이디</span>를 적어주세요.
+                    Solved.ac 사이트에 로그인한 뒤, <span>상태 메세지</span>에 본인의 <span>Github 아이디</span>를 적어주세요.
                     <br/>
-                    (Solved.ac의 소개글 X)
+                    (백준 프로필 소개글 X)
                   </p>
                 </m.SlideTextBox>
               </m.SlideItemBox>

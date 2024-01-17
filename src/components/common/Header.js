@@ -5,16 +5,15 @@ import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { SetModal, SetToken } from "../../redux/actions/mainAction";
 
-const Header = ({ click }) => {
+const Header = ({ click}) => {
   const navigate = useNavigate();
   const location = useLocation();
   const dispatch = useDispatch();
 
   const [loginStat, setLoginStat] = useState(false);
-  let secondAuthStatus = useSelector((state) => state.twoFactorAuthStatus);
 
   const accessToken = localStorage.getItem('accessToken');
-  const gitLoginId = localStorage.getItem('gitLoginId');
+  const secondAuthStatus = localStorage.getItem('secondAuthStatus');
 
   const moveToSolution = () => {
     navigate('/search-solution');

@@ -17,16 +17,21 @@ import { darkTheme, lightTheme } from "./styles/theme";
 import SolutionPage from "./pages/solution/solutionPage";
 import RecommendMe from "./pages/recommend/RecommendMePage";
 import RecommendRank from "./pages/recommend/RecommendRankPage";
+import { useDispatch } from "react-redux";
+import { SetTheme } from "./redux/actions/solutionAction";
 import Modal from 'react-modal';
 import MobilePage from "./pages/main/mobilePage";
 
 function App() {
   Modal.setAppElement('#root');
+  const dispatch = useDispatch();
+  
   const [themeMode, setThemeMode] = useState('lightTheme');
   const theme = themeMode === 'lightTheme' ? lightTheme : darkTheme;
-  const toggleTheme = () => {
+  const toggleTheme = () => 
+  {
     setThemeMode(themeMode === 'lightTheme' ? 'darkTheme' : 'lightTheme');
-  };
+  }
 
   const [isMobile, setIsMobile] = useState(window.innerWidth < 740); // 초기에 화면 크기에 따라 isMobile 상태를 설정합니다.
 
@@ -41,6 +46,11 @@ function App() {
       window.removeEventListener('resize', handleResize); // 컴포넌트가 unmount될 때 resize 이벤트 리스너를 제거합니다.
     };
   }, []);
+
+  useEffect(() => {
+    dispatch(SetTheme(themeMode));
+    // console.log(themeMode)
+  }, [theme]);
 
   return (
     <BrowserRouter> 

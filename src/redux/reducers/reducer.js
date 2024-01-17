@@ -1,5 +1,6 @@
 // 초기 State 값
 export const INITIAL_STATE = {
+  theme : 'lightTheme',
   modalState : false,
   accessToken : '',
   twoFactorAuthStatus : false,
@@ -33,6 +34,12 @@ export const Reducer = (state = INITIAL_STATE, action) => {
       };
 
     // Solution 
+    case 'SET_THEME': 
+      return {
+        ...state,
+        theme: action.content
+      };
+
     case 'SET_SEARCH': 
       return {
         ...state,

@@ -221,19 +221,27 @@ const WritePage = () => {
     setSelectedFileName(file.name);
   };
 
+  const storedToken = localStorage.getItem('accessToken')
 
   const onSubmit = (e) => {
     e.preventDefault();
+    
     const formData = new FormData();
+
     formData.append('title', title);
     formData.append('content', content);
-    formData.append('postTier', 'POST_BRONZE_SILVER');
-    if (attachmentFile) {
+    formData.append('postTier', 'BronzeSilver');
+    if(attachmentFile){
       formData.append('attachmentFile', attachmentFile);
-    }
-    axios.post("http://43.200.95.44:8080/api/post", formData, {
+    }  
+    formData.append('pageable', JSON.stringify({
+      page: 3,
+      size: 1,
+    }))
+    axios.post('/api/post', formData, {
       headers: {
         'Content-type': 'multipart/form-data',
+        Authorization: `Bearer ${storedToken}`,
       }
     })
       .then(res => {
@@ -287,7 +295,7 @@ const WritePage = () => {
             </FileContainer>
             <FileContainer>
               <div></div>
-            <SelectedFileContainer>
+              <SelectedFileContainer>
                 {selectedFileName && `${selectedFileName}`}
               </SelectedFileContainer>
             </FileContainer>

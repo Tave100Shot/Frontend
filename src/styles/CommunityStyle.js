@@ -61,7 +61,7 @@ export const GridContainer = styled.div`
 
 export const LevelBox = styled.div`
   max-width: 55wv;
-  height: 20rem;
+  height: 22rem;
   flex-shrink: 0;
   border-radius: 3rem;
   background: rgba(145, 209, 250, 0.6);

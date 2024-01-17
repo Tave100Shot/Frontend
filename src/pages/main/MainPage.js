@@ -32,6 +32,8 @@ const MainPage = ({click}) => {
     setProfileImgUrl(searchParams.get('profileImgUrl'));
     dispatch(SetToken(searchParams.get('token')))
 
+    localStorage.setItem('accessToken', searchParams.get('token'));
+
   }, [location]);
   
   // Modal 관련 변수

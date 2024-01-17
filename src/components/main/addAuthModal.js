@@ -61,12 +61,14 @@ const AddAuthModal = ({isOpen, onRequestClose}) => {
       const response = await axios.get('/authorization', {
         headers : {
           Authorization : `Bearer ${storedToken}`
+          // Authorization : `Bearer 1234`
         }
       });
 
       localStorage.setItem('gitLoginId', response.data.result.gitLoginId);
       localStorage.setItem('bojName', response.data.result.bojName);
       localStorage.setItem('bojTier', response.data.result.tier);
+      localStorage.setItem('secondAuthStatus', true);
 
       dispatch(SetTwoFactorAuthStatus(true));
       alert("2차 인증이 완료되었습니다.");

@@ -16,29 +16,38 @@ const MainPage = ({click}) => {
   const dispatch = useDispatch();
   
   // Login 관련 변수
-  const [authSecond, setSuthSecond] = useState(false);    // 2차 인증 여부
-  
-  let secondAuthStatus = useSelector( (state)=>{ return state.twoFactorAuthStatus } );
+  let secondAuthStatus = localStorage.getItem('secondAuthStatus');
   const gitLoginId = localStorage.getItem('gitLoginId');
+
+  // console.log("2차 인증 여부 : ", secondAuthStatus);
+  
+  // Modal 관련 변수
+  let modalState = useSelector( (state)=>{ return state.modalState } );
 
   
   // 로그인 이후 params 받아오기
   useEffect(() => {
     const searchParams = new URLSearchParams(location.search);
-    if(searchParams.get('token') !== null) {
+    if (searchParams.get('token') !== null) {
       dispatch(SetToken(searchParams.get('token')));
       localStorage.setItem('accessToken', searchParams.get('token'));
     }
-    if (gitLoginId !== null) {
-      dispatch(SetTwoFactorAuthStatus(true));
+  
+    const gitLoginId = localStorage.getItem('gitLoginId');
+    const accessToken = localStorage.getItem('accessToken');
+  
+    if (gitLoginId && accessToken) {
+      localStorage.setItem('secondAuthStatus', true);
+    } else {
+      localStorage.setItem('secondAuthStatus', false);
     }
-    else {
-      dispatch(SetTwoFactorAuthStatus(false));
+  
+    // 화면 전환
+    if (accessToken) {
+      navigate('/');
     }
-  }, [location]);
-
-  // Modal 관련 변수
-  let modalState = useSelector( (state)=>{ return state.modalState } );
+  }, []);
+  
 
 
   const closeModal = () => {
@@ -59,18 +68,19 @@ const MainPage = ({click}) => {
           navigatePage={'/search-solution'}
           lockImg={'none'}
         />
-        { !secondAuthStatus ? 
+        { secondAuthStatus === 'true' ? 
           <MainButton 
-            text={'GET RECOMMEND'} 
-            navigatePage={''}
-            lockImg={'locked'}
-          />
+          text={'GET RECOMMEND'} 
+          navigatePage={'/recommend'}
+          lockImg={'unlocked'}
+        />
         : 
-          <MainButton 
-            text={'GET RECOMMEND'} 
-            navigatePage={'/recommend'}
-            lockImg={'unlocked'}
-          />
+        <MainButton 
+          text={'GET RECOMMEND'} 
+          navigatePage={''}
+          lockImg={'locked'}
+        />
+        
         }
       </w.ButtonWrapper>
       <AddAuthModal isOpen={modalState} onRequestClose={closeModal} />

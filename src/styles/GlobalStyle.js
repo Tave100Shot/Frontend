@@ -90,7 +90,6 @@ body {
   color : ${props => props.theme.colors.colorMain};
   list-style : none;
   height : 100vh;
-  align-items: center;
   justify-content: center;
 }
 `;

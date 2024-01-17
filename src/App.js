@@ -63,57 +63,57 @@ function App() {
             <Route path='/result-solution' element={<SolutionPage />}/>
           )}
           {isMobile ? (
-            <Route path='/' element={<MobilePage />} />
+            <Route path='/recommend' element={<MobilePage />} />
           ) : (
             <Route path='/recommend' element={<RecommendPage/>}/>
             )}
           {isMobile ? (
-            <Route path='/' element={<MobilePage />} />
+            <Route path='/recommend-me' element={<MobilePage />} />
           ) : (
             <Route path='/recommend-me' element={<RecommendMe/>}/>
             )}
           {isMobile ? (
-            <Route path='/' element={<MobilePage />} />
+            <Route path='/recommend-rank' element={<MobilePage />} />
           ) : (
             <Route path='/recommend-rank' element={<RecommendRank />}/>
             )}
           {isMobile ? (
-            <Route path='/' element={<MobilePage />} />
+            <Route path='/compile' element={<MobilePage />} />
           ) : (
             <Route path='/compile' element={<CompilingPage/>}/>
             )}
           {isMobile ? (
-            <Route path='/' element={<MobilePage />} />
+            <Route path='/community' element={<MobilePage />} />
           ) : (
             <Route path='/community' element={<CommunityPage/>}/>
             )}
           {isMobile ? (
-            <Route path='/' element={<MobilePage />} />
+            <Route path='/community/bronze' element={<MobilePage />} />
           ) : (
             <Route path='/community/bronze' element={<BronzePage/>}/>
             )}
           {isMobile ? (
-            <Route path='/' element={<MobilePage />} />
+            <Route path='/community/gold' element={<MobilePage />} />
           ) : (
             <Route path='/community/gold' element={<GoldPage/>}/>
             )}
           {isMobile ? (
-            <Route path='/' element={<MobilePage />} />
+            <Route path='/community/platinum' element={<MobilePage />} />
           ) : (
             <Route path='/community/platinum' element={<PlatinumPage/>}/>
             )}
           {isMobile ? (
-            <Route path='/' element={<MobilePage />} />
+            <Route path='/community/diamond' element={<MobilePage />} />
           ) : (
             <Route path='/community/diamond' element={<DiamondPage/>}/>
             )}
           {isMobile ? (
-            <Route path='/' element={<MobilePage />} />
+            <Route path='/community/write' element={<MobilePage />} />
           ) : (
             <Route path='/community/write' element={<WritePage />}/>
             )}
           {isMobile ? (
-            <Route path='/' element={<MobilePage />} />
+            <Route path='/community/post' element={<MobilePage />} />
           ) : (
             <Route path='/community/post' element={<PostPage/>}/>
             )}

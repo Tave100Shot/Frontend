@@ -74,17 +74,24 @@ const GlobalStyle = createGlobalStyle`
     font-size : 40.5% 
   }
 }
+@media (max-width: 740px) {
+  html {
+    font-size : 62.5%;
+  }
+}
+
 
 
 body {
   font-family : 'Poppins_Regular';
-  min-width : 740px;
 	display: flex;
   margin : auto;
   background : ${props => props.theme.colors.colorBg};
   color : ${props => props.theme.colors.colorMain};
   list-style : none;
   height : 100vh;
+  align-items: center;
+  justify-content: center;
 }
 `;
 

@@ -9,7 +9,7 @@ import DiamondPage from './pages/community/DiamondPage';
 import GoldPage from './pages/community/GoldPage';
 import PlatinumPage from './pages/community/PlatinumPage';
 import WritePage from './pages/community/WritePage';
-import PostPage from './pages/community/PostPage';
+import PostDetailPage from "./pages/community/PostDetailPage";
 import CompilingPage from './pages/compiling/CompilingPage';
 import { ThemeProvider } from "styled-components";
 import { useState } from "react";
@@ -18,6 +18,7 @@ import SolutionPage from "./pages/solution/solutionPage";
 import RecommendMe from "./pages/recommend/RecommendMePage";
 import RecommendRank from "./pages/recommend/RecommendRankPage";
 import Modal from 'react-modal';
+import PostEditPage from "./pages/community/PostEditPage";
 
 
 function App() {
@@ -48,7 +49,8 @@ function App() {
           <Route path='/community/platinum' element={<PlatinumPage/>}/>
           <Route path='/community/diamond' element={<DiamondPage/>}/>
           <Route path='/community/write' element={<WritePage />}/>
-          <Route path='/community/post' element={<PostPage/>}/>
+          <Route path='/community/post/:postId' element={<PostDetailPage/>}/>
+          <Route path='/community/post/:postId/edit' element={<PostEditPage />} /> 
         </Routes>
       </ThemeProvider>
     </BrowserRouter>

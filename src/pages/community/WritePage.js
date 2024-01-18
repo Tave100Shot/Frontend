@@ -234,10 +234,10 @@ const WritePage = () => {
     if(attachmentFile){
       formData.append('attachmentFile', attachmentFile);
     }  
-    formData.append('pageable', JSON.stringify({
-      page: 3,
+/*     formData.append('pageable', JSON.stringify({
+      page: 0,
       size: 1,
-    }))
+    })) */
     axios.post('/api/post', formData, {
       headers: {
         'Content-type': 'multipart/form-data',

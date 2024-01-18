@@ -148,18 +148,18 @@ export const ViewCommentContianer = styled.div`
 `
 export const ViewIcon = styled(FiUsers)`
   margin : 1rem 0 1rem 1rem;
-  font-size : 2rem;
+  font-size : 3rem;
   color : #91D1FA;
 `
 
 export const CommentIcon = styled(FiMessageCircle)`
   margin : 1rem 0 1rem 1rem;
-  font-size : 2rem;
+  font-size : 3rem;
   color : #91D1FA;
 `
 
 export const ViewNum = styled.div`
-  font-size: 1rem;
+  font-size: 1.5rem;
   font-weight: 600;
   color : #91D1FA;
   margin : 1.3rem 1rem 1rem 0;
@@ -167,7 +167,7 @@ export const ViewNum = styled.div`
   
 `
 export const CommentNum = styled.div`
-  font-size: 1rem;
+  font-size: 1.5rem;
   font-weight: 600;
   color : #91D1FA;
   margin : 1.3rem 1rem 1rem 0;
@@ -256,6 +256,7 @@ display: flex;
 margin-right: 1.5em;
 font-size: 1em;
 color: #919191;
+
 `
 //프로필 묶기
 export const CommentProfile = styled.div`
@@ -273,12 +274,17 @@ margin-right: 0.5rem;
 
 export const ParentCommentView = styled.div`
   position: relative;
+  height: flex;
   border-radius: 1rem;
   border: 0.3rem solid #91D1FA;
   margin : 1.5rem;
-  flex: 1;
   padding: 1em;
   font-size: 1.5rem;
+  flex-direction: column;
+  ${props => (props.isChildComment ? 
+    `background-color: #91D1FA;
+    width: 80%;
+    margin-left: 2rem;`: '')}
 `
 
 export const CommentViewWrite = styled.div`
@@ -482,3 +488,5 @@ export const PostImage = styled.div`
   margin-top: 2em;
   margin-bottom: 2em;
 `;
+
+

@@ -13,13 +13,11 @@ const PostDetailPage = () => {
   const storedToken = localStorage.getItem('accessToken')
   const [isEditingComment, setIsEditingComment] = useState(null);
   const [inputValue, setInputValue] = useState('');
-
-  console.log(postId);
+  const [editedCommentContent, setEditedCommentContent] = useState('');
 
   useEffect(() => {
     const fetchPostDetails = async () => {
       try {
-        console.log("Fetching post details for postId:", postId);
         const response = await axios.get(`/api/post/${postId}`, {
           headers: {
             Authorization: `Bearer ${storedToken}`
@@ -76,16 +74,17 @@ const PostDetailPage = () => {
   const handleAddComment = async () => {
     try {
       const response = await axios.post(`/api/post/${postId}/comments`, {
-        comment: inputValue,
+        comment: 'inputValue',
         parentCommentId: null,
       },
         {
           headers: {
             Authorization: `Bearer ${storedToken}`,
+            'Content-Type': 'application/json',
           },
         }
       );
-      console.log('새댓:', response.data.comment);
+    console.log('새댓:', response.data);
 
       const updatedPostDetails = { ...postDetails };
       if (updatedPostDetails.postResponses && updatedPostDetails.postResponses[0]) {
@@ -113,19 +112,19 @@ const PostDetailPage = () => {
   };
 
   // 대댓글 생성
-  const handleAddChildComment = async () => {
+  const handleAddChildComment = async (parentCommentId) => {
     try {
       const response = await axios.post(`/api/post/${postId}/comments`, {
         comment: '대댓글 테슽 확인ㄴㄴㄴㄴㄴㄴㄴㄴㄴㄴ',
-        parentCommentId: 64,
+        parentCommentId: parentCommentId,
       },
         {
           headers: {
             Authorization: `Bearer ${storedToken}`,
+            'Content-Type': 'application/json',
           },
         }
       );
-      console.log('대댓:', response.data.comment);
 
       const updatedPostDetails = { ...postDetails };
       if (updatedPostDetails.postResponses && updatedPostDetails.postResponses[0]) {
@@ -144,39 +143,24 @@ const PostDetailPage = () => {
   };
 
   //댓글 수정
-  const handleApplyEdit = async (commentId, editedContent) => {
+  const handleApplyEdit = async (commentId) => {
     try {
+      if (editedCommentContent !== null && editedCommentContent !== undefined) {
       await axios.patch(`/api/post/comments/${commentId}`, {
-        content: editedContent,
+        comment: editedCommentContent,
       }, {
         headers: {
           Authorization: `Bearer ${storedToken}`,
+          'Content-Type': 'application/json',
         },
       });
+    }
 
-      // 업데이트된 댓글 정보 가져오기
-      const response = await axios.get(`/api/post/comments/${commentId}`, {
-        headers: {
-          Authorization: `Bearer ${storedToken}`
-        },
-      });
-
-      const updatedPostDetails = { ...postDetails };
-      if (updatedPostDetails.postResponses && updatedPostDetails.postResponses[0] && updatedPostDetails.postResponses[0].commentListResponse) {
-        const commentIndex = updatedPostDetails.postResponses[0].commentListResponse.commentResponses.findIndex(comment => comment.commentId === commentId);
-        if (commentIndex !== -1) {
-          // 기존 댓글 데이터 대신 업데이트된 댓글 데이터로 교체
-          updatedPostDetails.postResponses[0].commentListResponse.commentResponses[commentIndex] = response.data.result;
-          setPostDetails(updatedPostDetails);
-        }
-      }
-
-      setIsEditingComment(null);
+      setIsEditingComment(null); 
     } catch (error) {
       console.error('댓글 수정 오류:', error);
     }
   };
-
 
 
 
@@ -258,12 +242,12 @@ const PostDetailPage = () => {
           </c.CommentWriteBox>
           <c.CommentViewBox>
             {postDetails.commentListResponse && postDetails.commentListResponse.commentResponses.map((comment) => (
-              <c.ParentCommentView key={comment.commentId}>
+              <c.ParentCommentView key={comment.commentId} >
                 {!isEditingComment || isEditingComment !== comment.commentId ? (
                   <>
                   <c.ParentComment>
                   <c.CommentProfile>
-                  <c.CommentProfileId>
+                  <c.CommentProfileId >
                     <c.CommentProfileIcon />
                     <p>{comment.gitLoginId}</p>
                   </c.CommentProfileId>
@@ -275,23 +259,10 @@ const PostDetailPage = () => {
                   <>
                     <input
                       type="text"
-                      value={comment.content}
-                      onChange={(e) => {
-                        const updatedPostDetails = { ...postDetails };
-                        if (!updatedPostDetails.commentListResponse) {
-                          updatedPostDetails.commentListResponse = {
-                            commentResponses: [],
-                          };
-                        }
-                        const commentIndex = updatedPostDetails.postResponses[0].commentListResponse.commentResponses.findIndex(item => item.commentId === comment.commentId);
-                        if (commentIndex !== -1) {
-                          updatedPostDetails.postResponses[0].commentListResponse.commentResponses[commentIndex].content = e.target.value;
-                          setPostDetails(updatedPostDetails);
-                        }
-                      }}
-                    />
-                    <button onClick={() => handleApplyEdit(comment.commentId, comment.content)}>수정 적용</button>
-                    <button onClick={() => handleDeleteComment(comment.commentId)}>삭제</button>
+                      value={editedCommentContent}
+                      onChange={(e) => setEditedCommentContent(e.target.value)} // 수정된 내용을 state에 저장하도록 수정
+                      />
+                    <button onClick={() => handleApplyEdit(comment.commentId)}>수정 적용</button>
                   </>
                 )}
                 <c.CommentViewIconContainer>

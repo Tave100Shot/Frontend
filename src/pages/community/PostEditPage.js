@@ -206,7 +206,7 @@ const UploadButton = styled.button`
 const PostEditPage = ({ storedToken, onSuccess }) => {
 
     const { state } = useLocation();
-    const { postDetails } = state;
+    const { postDetails = {} } = state || {};
     const navigate = useNavigate();
     console.log('postDetails:', postDetails);
     const postId = postDetails.postId;
@@ -214,26 +214,30 @@ const PostEditPage = ({ storedToken, onSuccess }) => {
     const [newData, setNewData] = useState({
         title: postDetails.title,
         content: postDetails.content,
+        postTier: 'BronzeSilver',
         attachmentFile: postDetails.imageUrls,
     });
     const [selectedFileName, setSelectedFileName] = useState('');
     console.log(state.postDetails);
 
-    const handleEdit = async () => {
-        //event.preventDefault();
+    const handleEdit = async (event) => {
+        event.preventDefault();
         try {
             const formData = new FormData();
             formData.append('title', newData.title);
             formData.append('content', newData.content);
+            formData.append('postTier', newData.postTier);
 
-            const filesArray = Array.isArray(newData.attachmentFile)
-                ? newData.attachmentFile
-                : [newData.attachmentFile];
-
-            filesArray.forEach((file, index) => {
-                formData.append(`attachmentFile${index + 1}`, file);
-            });
-
+            if (newData.attachmentFile) {
+                const filesArray = Array.isArray(newData.attachmentFile)
+                  ? newData.attachmentFile
+                  : [newData.attachmentFile];
+          
+                filesArray.forEach((file, index) => {
+                  formData.append(`attachmentFile${index + 1}`, file);
+                });
+              }
+          
             await axios.patch(`/api/post/${postId}`, formData, {
                 headers: {
                     Authorization: `Bearer ${storedToken}`,
@@ -247,6 +251,8 @@ const PostEditPage = ({ storedToken, onSuccess }) => {
             console.error(error);
         }
     };
+    console.log(newData);
+
     const moveToMain = () => {
         navigate('/');
     }
@@ -300,7 +306,8 @@ const PostEditPage = ({ storedToken, onSuccess }) => {
                                 <input
                                     id="writer"
                                     type="text"
-                                    placeholder="Your ID" />
+                                    readOnly
+                                    value={postDetails.writer} />
                             </AuthorContainer>
                             <TitleContainer>
                                 <div>제목</div>

@@ -157,7 +157,7 @@ const PostDetailPage = () => {
         }, 
       });
 
-   const updatedPostDetails = { ...postDetails };
+/*    const updatedPostDetails = { ...postDetails };
     if (
       updatedPostDetails.postResponses &&
       updatedPostDetails.postResponses[0] &&
@@ -171,7 +171,7 @@ const PostDetailPage = () => {
           response.data.result;
         setPostDetails(updatedPostDetails);
         }
-      }
+      } */
 
       setIsEditingComment(null);
     } catch (error) {

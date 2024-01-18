@@ -203,13 +203,15 @@ const UploadButton = styled.button`
 
 `;
 
-const PostEditPage = ({ storedToken, onSuccess }) => {
+const PostEditPage = ({ onSuccess }) => {
 
     const { state } = useLocation();
     const { postDetails = {} } = state || {};
     const navigate = useNavigate();
     console.log('postDetails:', postDetails);
     const postId = postDetails.postId;
+    const storedToken = localStorage.getItem('accessToken')
+    
 
     const [newData, setNewData] = useState({
         title: postDetails.title,

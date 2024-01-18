@@ -66,7 +66,7 @@ const BronzePage = () => {
           },
           params: {
             postTier: "BronzeSilver",
-            page: 0,
+            page: 1,
           }
         });
         setPosts(response.data.result.postResponses);

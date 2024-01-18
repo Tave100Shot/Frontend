@@ -3,7 +3,6 @@ import { render } from "react-dom";
 import { useState } from "react";
 import Header from "../../components/common/Header";
 import * as s from "../../styles/searchBarStyle";
-import styled from "styled-components";
 import * as c from "../../styles/compilingStyle";
 import AceEditor from "react-ace";
 
@@ -35,13 +34,39 @@ const CompilingPage = () => {
     <div>
       <Header click={moveToMain}/>
       <c.MainContainer>
+        <c.QIOEContainer>
+          <c.QContainer>
+            문제 설명
+            <div>서기 2012년! 드디어 2년간 수많은 국민들을 기다리게 한 게임 ACM Craft (Association of Construction Manager Craft)가 발매되었다.
+이 게임은 지금까지 나온 게임들과는 다르게 ACM크래프트는 다이나믹한 게임 진행을 위해 건물을 짓는 순서가 정해져 있지 않다. 즉, 첫 번째 게임과 두 번째 게임이 건물을 짓는 순서가 다를 수도 있다. 매 게임시작 시 건물을 짓는 순서가 주어진다. 또한 모든 건물은 각각 건설을 시작하여 완성이 될 때까지 Delay가 존재한다.</div>
+            </c.QContainer>
+          <c.IContainer>
+            입력
+            <div>첫째 줄에는 테스트케이스의 개수 T가 주어진다. 각 테스트 케이스는 다음과 같이 주어진다. 첫째 줄에 건물의 개수 N과 건물간의 건설순서 규칙의 총 개수 K이 주어진다. (건물의 번호는 1번부터 N번까지 존재한다) 
+둘째 줄에는 각 건물당 건설에 걸리는 시간 D1, D2, ..., DN이 공백을 사이...</div>
+            </c.IContainer>
+          <c.OContainer>
+            출력
+            <div>첫째 줄에는 테스트케이스의 개수 T가 주어진다. 각 테스트 케이스는 다음과 같이 주어진다. 첫째 줄에 건물의 개수 N과 건물간의 건설순서 규칙의 총 개수 K이 주어진다. (건물의 번호는 1번부터 N번까지 존재한다) </div>
+            </c.OContainer>
+          <c.EContainer>
+            입출력 예시
+            <div>입출력 설명</div>
+            </c.EContainer>
+        </c.QIOEContainer>
         <c.CompileContainer>
+        <c.CodeEditor>
+          코드 입력
         <AceEditor
             mode="java"
-            theme="github"
+            theme="tomorrow"
             onChange={onChange}
             name="UNIQUE_ID_OF_DIV"
             editorProps={{ $blockScrolling: true }}
+            placeholder={`team_member = input(“팀원 이름을 입력하시오 : “)
+            \n print(f”안녕하세요 {team_member}님 백발백준 사이트입니다”)`}
+            fontSize={16}
+            style={{ width: '41em', height: '25em' }}
           />
           <c.ButtonContainer>
           <s.SelectBox onClick={() => setShowOptions((prev) => !prev)} show={showOptions}>
@@ -59,8 +84,11 @@ const CompilingPage = () => {
         </s.SelectBox>
           <c.RunButton>COMPILE & RUN</c.RunButton>
           </c.ButtonContainer>
+          </c.CodeEditor>
+          <c.ExecutionResult>
+            실행 결과
+          </c.ExecutionResult>
         </c.CompileContainer>
-        <c.ConsoleContainer>CONSOLE</c.ConsoleContainer>
       </c.MainContainer>
     </div>
   )

@@ -3,7 +3,7 @@ import * as r from "../../styles/RecommendMainStyle";
 import { useState } from "react";
 import axios from "axios";
 import { useDispatch } from "react-redux";
-import { SetByMeProblemList, SetUserRank, SetUserRight, SetUserRival, SetUserWrong } from "../../redux/actions/recommendAction";
+import { SetByMeProblemList} from "../../redux/actions/recommendAction";
 
 const RecommendPage = () => {
   const navigate = useNavigate();

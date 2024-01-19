@@ -70,6 +70,7 @@ export const ResetMeIcon = styled(GrPowerReset)`
   font-size: 2.4rem;
   float : right;
   margin : 0 5rem 0 0;
+  cursor : pointer;
 `;
 
 // 라이벌 기반 문제 추천
@@ -131,4 +132,5 @@ export const ResetRivalIcon = styled(GrPowerReset)`
   font-size: 2.4rem;
   float : right;
   margin : 0 5rem 0 0;
+  cursor : pointer;
 `;

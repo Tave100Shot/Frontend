@@ -1,7 +1,8 @@
 import * as r from "../../styles/recommendProblemStyle";
-import { GrPowerReset } from "react-icons/gr";
+import { useSelector } from "react-redux";
 
 const RecommendByMe = () => {
+  const byMeProblemList = useSelector( (state)=>{ return state.byMeProblemList } );
 
 
   return (
@@ -33,7 +34,7 @@ const RecommendByMe = () => {
           <p>1024</p>
         </r.ProblemMeBox>
       </r.ProblemContainer>
-      <r.ResetMeIcon/>
+      <r.ResetMeIcon />
     </div>
   )
 }

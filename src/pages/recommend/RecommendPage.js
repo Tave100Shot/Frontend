@@ -1,12 +1,17 @@
 import { useNavigate } from "react-router-dom";
 import * as r from "../../styles/RecommendMainStyle";
 import { useState } from "react";
+import axios from "axios";
+import { useDispatch } from "react-redux";
+import { SetByMeProblemList, SetUserRank, SetUserRight, SetUserRival, SetUserWrong } from "../../redux/actions/recommendAction";
 
 const RecommendPage = () => {
   const navigate = useNavigate();
+  const dispatch = useDispatch();
 
   const [recentProblem, setRecentProblem] = useState("");
-
+  
+  
   const handleOnChangeInput = (e) => {
     // console.log(e.target.value)
     setRecentProblem(e.target.value);
@@ -16,8 +21,27 @@ const RecommendPage = () => {
     navigate('/');
   }
   const moveToRecommendMe = () => {
+    const storedToken = localStorage.getItem('accessToken');
+
+    axios.get('/api/v1/recommend/rival', {
+      headers : {
+        Authorization : `Bearer ${storedToken}`
+      }
+    })
+      .then(response => {
+        localStorage.setItem('userRightNum', response.data.result.rightCnt);
+        localStorage.setItem('userWrongNum', response.data.result.wrongCnt);
+        localStorage.setItem('userRank', response.data.result.userRank);
+        localStorage.setItem('userRivalNum', response.data.result.rivalCnt);
+        dispatch(SetByMeProblemList(response.data.result.result));
+      })
+      .catch(error => {
+        console.error(error);
+      });
+
     navigate('/recommend-me');
   }
+
   const moveToRecommendLatest = () => {
     navigate('/recommend-latest');
   }

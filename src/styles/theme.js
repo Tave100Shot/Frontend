@@ -12,6 +12,8 @@ export const lightTheme = {
 
     profileRank : '#213839',
     profileRival : '#E3B059',
+    profileCorrect : '#00BB56',
+    profileWrong : '#EF6255',
     resetMe : '#213839',
 
     blogPlatform : '#868686',
@@ -25,6 +27,7 @@ export const lightTheme = {
     diamond : '#3EC2FE',
     ruby : '#F957AD',
     master : '#EDBBF8'
+
   }
 };
 
@@ -42,6 +45,8 @@ export const darkTheme = {
 
     profileRank : '#B6FA91',
     profileRival : '#E3B059',
+    profileCorrect : '#00BB56',
+    profileWrong : '#EF6255',
     resetMe : '#213839',
 
     blogPlatform : '#CECDCD',

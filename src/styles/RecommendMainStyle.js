@@ -233,6 +233,7 @@ export const UserProfileHeader = styled.div`
   display: flex;
   margin-bottom: 2.5rem;
 `
+
 export const UserProfileAccount = styled.div`
   display: flex;
   flex: 1;
@@ -250,10 +251,9 @@ export const UserProfileAccount = styled.div`
   
   p {
     margin-left: 3rem;
-    width: 10rem;
+    width: 8rem;
     border-radius: 5rem;
-    background-color : ${props => props.theme.colors.bronze};
-    color: #ffffff;
+    color: #000000;
     font-family: "Poppins_SemiBold";
     font-size: 1rem;
     letter-spacing : 0.1rem;
@@ -280,6 +280,17 @@ export const UserProfileStat = styled.div`
     border-right: none;
   }
   align-items : center;
+
+  .slash {
+    width: 1rem;
+    height: 5rem;
+    background: linear-gradient(
+      to bottom right,
+      #fff calc(50% - 1px),
+      #BEBEBE,
+      #fff calc(50% + 1px)
+    );
+  }
 `
 
 export const UserProfileIcon = styled.div`
@@ -308,6 +319,12 @@ export const UserProfileIcon = styled.div`
   &.profile--rival {
     color : ${props => props.theme.colors.profileRival};
   }
+  &.profile--correct {
+    color : ${props => props.theme.colors.profileCorrect};
+  }
+  &.profile--wrong {
+    color : ${props => props.theme.colors.profileWrong};
+  }
   `
   
   export const UserProfileKey = styled.div`
@@ -320,5 +337,11 @@ export const UserProfileIcon = styled.div`
   }
   &.profile--rival {
     color : ${props => props.theme.colors.profileRival};
+  }
+  &.profile--correct {
+    color : ${props => props.theme.colors.profileCorrect};
+  }
+  &.profile--wrong {
+    color : ${props => props.theme.colors.profileWrong};
   }
 `

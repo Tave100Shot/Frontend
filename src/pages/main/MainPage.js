@@ -7,7 +7,7 @@ import Modal from 'react-modal';
 import account_white from "../../assets/imgs/verified-account-white.png"
 import AddAuthModal from "../../components/main/addAuthModal";
 import { useHistory , useLocation, useNavigate } from "react-router-dom";
-import { SetModal, SetToken } from "../../redux/actions/mainAction";
+import { SetModal, SetToken, SetTwoFactorAuthStatus } from "../../redux/actions/mainAction";
 import { useDispatch, useSelector } from "react-redux";
 
 const MainPage = ({click}) => {
@@ -16,26 +16,39 @@ const MainPage = ({click}) => {
   const dispatch = useDispatch();
   
   // Login 관련 변수
-  const [memberId, setMemberId] = useState(null);
-  const [gitLoginId, setGitLoginId] = useState(null);
-  const [profileImgUrl, setProfileImgUrl] = useState(null);
-  const [accessToken, setAccessToken] = useState(null);
-  const [login, setLogin] = useState(false);    // 로그인 여부 변수
-  const [authSecond, setSuthSecond] = useState(false);    // 2차 인증 여부
-  
-  useEffect(() => {
-    const searchParams = new URLSearchParams(location.search);
+  let secondAuthStatus = localStorage.getItem('secondAuthStatus');
+  const gitLoginId = localStorage.getItem('gitLoginId');
 
-    setAccessToken(searchParams.get('token'));
-    setMemberId(searchParams.get('memberId'));
-    setGitLoginId(searchParams.get('gitLoginId'));
-    setProfileImgUrl(searchParams.get('profileImgUrl'));
-    dispatch(SetToken(searchParams.get('token')))
-
-  }, [location]);
+  // console.log("2차 인증 여부 : ", secondAuthStatus);
   
   // Modal 관련 변수
   let modalState = useSelector( (state)=>{ return state.modalState } );
+
+  
+  // 로그인 이후 params 받아오기
+  useEffect(() => {
+    const searchParams = new URLSearchParams(location.search);
+    if (searchParams.get('token') !== null) {
+      dispatch(SetToken(searchParams.get('token')));
+      localStorage.setItem('accessToken', searchParams.get('token'));
+      localStorage.setItem('profileImg', searchParams.get('profileImgUrl'));
+    }
+  
+    const gitLoginId = localStorage.getItem('gitLoginId');
+    const accessToken = localStorage.getItem('accessToken');
+  
+    if (gitLoginId && accessToken) {
+      localStorage.setItem('secondAuthStatus', true);
+    } else {
+      localStorage.setItem('secondAuthStatus', false);
+    }
+  
+    // 화면 전환
+    if (accessToken) {
+      navigate('/');
+    }
+  }, []);
+  
 
 
   const closeModal = () => {
@@ -48,26 +61,27 @@ const MainPage = ({click}) => {
 
   return (
     <div>
-      <Header click={click} authSecond={authSecond}/>
-      <TaveAnimation/>
+      <Header click={click} secondAuthStatus={secondAuthStatus}/>
+      <TaveAnimation secondAuthStatus={secondAuthStatus}/>
       <w.ButtonWrapper>
         <MainButton 
           text={'GET SOLUTION'} 
           navigatePage={'/search-solution'}
           lockImg={'none'}
         />
-        { !login ? 
+        { secondAuthStatus === 'true' ? 
           <MainButton 
-            text={'GET RECOMMEND'} 
-            navigatePage={''}
-            lockImg={'locked'}
-          />
+          text={'GET RECOMMEND'} 
+          navigatePage={'/recommend'}
+          lockImg={'unlocked'}
+        />
         : 
-          <MainButton 
-            text={'GET RECOMMEND'} 
-            navigatePage={'/recommend'}
-            lockImg={'unlocked'}
-          />
+        <MainButton 
+          text={'GET RECOMMEND'} 
+          navigatePage={''}
+          lockImg={'locked'}
+        />
+        
         }
       </w.ButtonWrapper>
       <AddAuthModal isOpen={modalState} onRequestClose={closeModal} />

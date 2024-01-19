@@ -13,48 +13,130 @@ import PostDetailPage from './pages/community/PostDetailPage';
 import PostEditPage from './pages/community/PostEditPage';
 import CompilingPage from './pages/compiling/CompilingPage';
 import { ThemeProvider } from "styled-components";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { darkTheme, lightTheme } from "./styles/theme";
 import SolutionPage from "./pages/solution/solutionPage";
 import RecommendMe from "./pages/recommend/RecommendMePage";
 import RecommendRank from "./pages/recommend/RecommendRankPage";
+import { useDispatch } from "react-redux";
+import { SetTheme } from "./redux/actions/solutionAction";
 import Modal from 'react-modal';
-
+import MobilePage from "./pages/main/mobilePage";
 
 function App() {
-  Modal.setAppElement('#root')
+  Modal.setAppElement('#root');
+  const dispatch = useDispatch();
+  
   const [themeMode, setThemeMode] = useState('lightTheme');
   const theme = themeMode === 'lightTheme' ? lightTheme : darkTheme;
   const toggleTheme = () => 
-  {setThemeMode(themeMode === 'lightTheme' ? 'darkTheme' : 'lightTheme');
-  //   console.log(theme); // theme.js에서 해당 themeMode props 가져옴
-  //   console.log(themeMode);
+  {
+    setThemeMode(themeMode === 'lightTheme' ? 'darkTheme' : 'lightTheme');
   }
+
+  const [isMobile, setIsMobile] = useState(window.innerWidth < 740); // 초기에 화면 크기에 따라 isMobile 상태를 설정합니다.
+
+  useEffect(() => {
+    const handleResize = () => {
+      setIsMobile(window.innerWidth < 740); // 화면 크기가 변경될 때마다 isMobile 상태를 업데이트합니다.
+    };
+
+    window.addEventListener('resize', handleResize); // resize 이벤트를 감지하여 handleResize 함수를 실행합니다.
+
+    return () => {
+      window.removeEventListener('resize', handleResize); // 컴포넌트가 unmount될 때 resize 이벤트 리스너를 제거합니다.
+    };
+  }, []);
+
+  useEffect(() => {
+    dispatch(SetTheme(themeMode));
+    // console.log(themeMode)
+  }, [theme]);
 
   return (
     <BrowserRouter> 
       <ThemeProvider theme={theme}> 
         <GlobalStyle/>
         <Routes>
-          <Route path='/' element={<MainPage click={toggleTheme}/>}/>
-          <Route path='/search-solution' element={<SearchPage />}/>
-          <Route path='/result-solution' element={<SolutionPage />}/>
-          <Route path='/recommend' element={<RecommendPage/>}/>
-          <Route path='/recommend-me' element={<RecommendMe/>}/>
-          <Route path='/recommend-rank' element={<RecommendRank />}/>
-          <Route path='/compile' element={<CompilingPage/>}/>
-          <Route path='/community' element={<CommunityPage/>}/>
-          <Route path='/community/bronze' element={<BronzePage/>}/>
-          <Route path='/community/gold' element={<GoldPage/>}/>
-          <Route path='/community/platinum' element={<PlatinumPage/>}/>
-          <Route path='/community/diamond' element={<DiamondPage/>}/>
-          <Route path='/community/write' element={<WritePage />}/>
-          <Route path='/community/post/:postId' element={<PostDetailPage />}/>
-          <Route path='/community/post/:postId/edit' element={<PostEditPage />}/>
+          {isMobile ? (
+            <Route path='/' element={<MobilePage />} />
+          ) : (
+            <Route path='/' element={<MainPage click={toggleTheme}/>} />
+          )}
+          {isMobile ? (
+            <Route path='/search-solution' element={<MobilePage />} />
+          ) : (
+            <Route path='/search-solution' element={<SearchPage />}/>
+          )}
+          {isMobile ? (
+            <Route path='/result-solution' element={<MobilePage />} />
+          ) : (
+            <Route path='/result-solution' element={<SolutionPage />}/>
+          )}
+          {isMobile ? (
+            <Route path='/recommend' element={<MobilePage />} />
+          ) : (
+            <Route path='/recommend' element={<RecommendPage/>}/>
+            )}
+          {isMobile ? (
+            <Route path='/recommend-me' element={<MobilePage />} />
+          ) : (
+            <Route path='/recommend-me' element={<RecommendMe/>}/>
+            )}
+          {isMobile ? (
+            <Route path='/recommend-rank' element={<MobilePage />} />
+          ) : (
+            <Route path='/recommend-rank' element={<RecommendRank />}/>
+            )}
+          {isMobile ? (
+            <Route path='/compile' element={<MobilePage />} />
+          ) : (
+            <Route path='/compile' element={<CompilingPage/>}/>
+            )}
+          {isMobile ? (
+            <Route path='/community' element={<MobilePage />} />
+          ) : (
+            <Route path='/community' element={<CommunityPage/>}/>
+            )}
+          {isMobile ? (
+            <Route path='/community/bronze' element={<MobilePage />} />
+          ) : (
+            <Route path='/community/bronze' element={<BronzePage/>}/>
+            )}
+          {isMobile ? (
+            <Route path='/community/gold' element={<MobilePage />} />
+          ) : (
+            <Route path='/community/gold' element={<GoldPage/>}/>
+            )}
+          {isMobile ? (
+            <Route path='/community/platinum' element={<MobilePage />} />
+          ) : (
+            <Route path='/community/platinum' element={<PlatinumPage/>}/>
+            )}
+          {isMobile ? (
+            <Route path='/community/diamond' element={<MobilePage />} />
+          ) : (
+            <Route path='/community/diamond' element={<DiamondPage/>}/>
+            )}
+          {isMobile ? (
+            <Route path='/community/write' element={<MobilePage />} />
+          ) : (
+            <Route path='/community/write' element={<WritePage />}/>
+            )}
+          {isMobile ? (
+            <Route path='/community/post/:postId' element={<MobilePage />} />
+          ) : (
+            <Route path='/community/post/:postId' element={<PostDetailPage/>}/>
+            )}
+          {isMobile ? (
+            <Route path='/community/post/:postId/edit' element={<MobilePage />} />
+          ) : (
+            <Route path='/community/post/:postId/edit' element={<PostEditPage/>}/>
+            )}
         </Routes>
       </ThemeProvider>
     </BrowserRouter>
-  )
+  );
 }
 
 export default App;

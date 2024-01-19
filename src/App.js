@@ -9,7 +9,8 @@ import DiamondPage from './pages/community/DiamondPage';
 import GoldPage from './pages/community/GoldPage';
 import PlatinumPage from './pages/community/PlatinumPage';
 import WritePage from './pages/community/WritePage';
-import PostPage from './pages/community/PostPage';
+import PostDetailPage from './pages/community/PostDetailPage';
+import PostEditPage from './pages/community/PostEditPage';
 import CompilingPage from './pages/compiling/CompilingPage';
 import { ThemeProvider } from "styled-components";
 import { useState, useEffect } from "react";
@@ -123,9 +124,14 @@ function App() {
             <Route path='/community/write' element={<WritePage />}/>
             )}
           {isMobile ? (
-            <Route path='/community/post' element={<MobilePage />} />
+            <Route path='/community/post/:postId' element={<MobilePage />} />
           ) : (
-            <Route path='/community/post' element={<PostPage/>}/>
+            <Route path='/community/post/:postId' element={<PostDetailPage/>}/>
+            )}
+          {isMobile ? (
+            <Route path='/community/post/:postId/edit' element={<MobilePage />} />
+          ) : (
+            <Route path='/community/post/:postId/edit' element={<PostEditPage/>}/>
             )}
         </Routes>
       </ThemeProvider>

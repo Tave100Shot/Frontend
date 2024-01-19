@@ -81,7 +81,7 @@ export const RecommendMeBox = styled.div`
 
 `
 
-export const RecommendRankBox = styled.div`
+export const RecommendLatestBox = styled.div`
   background-color : #E3B059;
   display: flex;
   flex-direction: column;
@@ -102,6 +102,9 @@ export const RecommendRankBox = styled.div`
         display : none;
       }
     }
+    form {
+      display : block
+    }
   }
 
   p {
@@ -119,6 +122,44 @@ export const RecommendRankBox = styled.div`
       letter-spacing : 0.05rem;
     }
   } 
+  form {
+    display : none;
+    input {
+      background-color : rgba(255, 255, 255, 0.2);
+      border : none;
+      width : 28rem;
+      height : 3.8rem;
+      margin : 0 1rem 0 0;
+      padding : 0 0 0 1.5rem;
+      outline: none;
+      border : 0.15rem solid #ffffff;
+      border-radius : 1rem;
+      color: #ffffff;
+      font-family : Poppins_Liht;
+      font-size : 1.3rem;
+    }
+    input::placeholder {
+      color: #ffffff;
+      font-family : Poppins_Light;
+      font-size : 1.2rem;
+    }
+    input[type="number"]::-webkit-outer-spin-button,
+    input[type="number"]::-webkit-inner-spin-button {
+        -webkit-appearance: none;
+        margin: 0;
+    }
+    button {
+      width : 7rem;
+      height : 3.8rem;
+      border-radius : 1.3rem;
+      align-items : center;
+      color :#ffffff;
+      background-color : none;
+      font-family : Poppins_Bold;
+      font-size : 1.5rem;
+    }
+
+  }
 `
 
 export const UserProfileLayout = styled.div`

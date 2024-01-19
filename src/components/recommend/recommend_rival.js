@@ -8,7 +8,7 @@ const RecommendByRival = () => {
     <div>
       <r.RecommendRivalTextBox>
         <hr/>
-        <h1>ALGORITHM PROBLEMS BY RIVAL</h1>
+        <h1>ALGORITHM PROBLEMS BY LATEST</h1>
         <hr/>
       </r.RecommendRivalTextBox>
       <r.ProblemContainer>

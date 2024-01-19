@@ -26,6 +26,7 @@ const RecommendByMe = () => {
     else if(!showFirstProblems && !showSecondProblems && showThirdProblems) {
       setShowFirstProblems(!showFirstProblems);
       setShowThirdProblems(!showThirdProblems);
+      alert("문제 추천이 완료되었습니다");
     }
   };
 

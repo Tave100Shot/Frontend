@@ -90,7 +90,7 @@ export const RecommendRivalTextBox = styled.div`
   }
   hr {
     margin : 0 5rem;
-    width : 21vw;
+    width : 15vw;
     height : 0.1rem;
     border : none;
     background : ${props => props.theme.colors.profileRival};

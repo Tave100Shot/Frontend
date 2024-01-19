@@ -24,10 +24,18 @@ const CompilingPage = () => {
   //languageButton
   const [currentValue, setCurrentValue] = useState("LANGUAGE");
   const [showOptions, setShowOptions] = useState(false);
+  const [questionNumber, setQuestionNumber] = useState('');
+  const [infoContainerVisible, setInfoContainerVisible] = useState(false);
 
   const handleOnChangeSelectValue = (e) => {
     const { innerText } = e.target;
     setCurrentValue(innerText);
+  };
+  const handleSearchClick = () => {
+    // 이 부분에 문제 검색 및 처리 로직을 추가하세요.
+    // 예: setQuestionNumber(입력받은 번호);
+    // 그리고 아래의 setInfoContainerVisible(true);를 호출하세요.
+    setInfoContainerVisible(true);
   };
 
   return (
@@ -35,6 +43,19 @@ const CompilingPage = () => {
       <Header click={moveToMain}/>
       <c.MainContainer>
         <c.QIOEContainer>
+          <c.QSearchContainer>
+            <input 
+           type="number"
+           placeholder="Enter the Question Number !"
+           value={questionNumber}
+           onChange={(e) => setQuestionNumber(e.target.value)}
+         />
+         <button onClick={handleSearchClick}>SEARCH</button>
+          </c.QSearchContainer>
+          <c.InfoContainer style={{ display: infoContainerVisible ? 'block' : 'none' }}>
+          <c.QNumberContainer>
+            백준 1004번 어린 왕자
+          </c.QNumberContainer>
           <c.QContainer>
             문제 설명
             <div>서기 2012년! 드디어 2년간 수많은 국민들을 기다리게 한 게임 ACM Craft (Association of Construction Manager Craft)가 발매되었다.
@@ -51,12 +72,17 @@ const CompilingPage = () => {
             </c.OContainer>
           <c.EContainer>
             입출력 예시
-            <div>입출력 설명</div>
+            <div>입력 #1</div>
+            <c.ExampleBox></c.ExampleBox>
+            <div>출력 #1</div>
+            <c.ExampleBox></c.ExampleBox>
             </c.EContainer>
+            </c.InfoContainer>
         </c.QIOEContainer>
+        <c.MiddleLine>l</c.MiddleLine>
         <c.CompileContainer>
+        <p>코드 입력</p>
         <c.CodeEditor>
-          코드 입력
         <AceEditor
             mode="java"
             theme="tomorrow"
@@ -66,7 +92,7 @@ const CompilingPage = () => {
             placeholder={`team_member = input(“팀원 이름을 입력하시오 : “)
             \n print(f”안녕하세요 {team_member}님 백발백준 사이트입니다”)`}
             fontSize={16}
-            style={{ width: '41em', height: '25em' }}
+            style={{ width: '38em', height: '30em' }}
           />
           <c.ButtonContainer>
           <s.SelectBox onClick={() => setShowOptions((prev) => !prev)} show={showOptions}>

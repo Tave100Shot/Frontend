@@ -2,6 +2,7 @@ import styled from "styled-components";
 
 export const MainContainer = styled.div`
     display: flex;
+    position: relative;
     flex-wrap: wrap;
     justify-content: space-between;
     align-items: center;
@@ -16,21 +17,37 @@ export const MainContainer = styled.div`
     flex-direction: column;
     }
 `;
-
-
-export const CompileContainer = styled.div`
-  width: 49%;
-  min-height: 90vh;
+export const InfoContainer = styled.div`
+  width: 100%;
+  min-height: 130vh;
   margin: 0 auto;
   flex-shrink: 0;
-  //background-color: #E6FADE;
-  border-left: 2px solid #91D1FA;
+  //background-color: lightyellow; //하늘 배경
   position: relative;
   color: #91D1FA;
   font-family: 'Poppins';
-  font-size: 2.5rem;
+  font-size: 2rem;
   font-style: normal;
   font-weight: 700;
+  `
+
+export const CompileContainer = styled.div`
+  width: 45%;
+  min-height: 150vh;
+  margin: 0 auto;
+  flex-shrink: 0;
+  //background-color: tomato; //핑크 배경
+  position: relative;
+  
+  & > p {
+    color: #91D1FA;
+    font-family: 'Poppins';
+    font-size: 2rem;
+    font-style: normal;
+    font-weight: 700;
+    margin: 0 0 2rem 0 ;
+  }
+  
   & > input {
     border: none;
     outline: none;
@@ -45,22 +62,14 @@ export const CompileContainer = styled.div`
     &::placeholder{
       color: rgba(145, 209, 250, 0.8);
     }
- /*    & > div {
-      display: flex;
-      flex-direction: column;
-      gap: 0.5em; /* 숫자 간격 조절 */
-    color: #91D1FA;
-      font-family: 'Poppins';
-      font-size: 1.5rem;
-      font-weight: 700;
-      line-height: normal;
-    } */
   }
 `;
 
 export const CodeEditor = styled.div`
-  height: 68vh;
-  //background-color: #000;
+  position: fixed;
+  top: 0;
+  height: 75vh;
+  //background-color: #000; //검 배경
   color: #91D1FA;
   font-family: 'Poppins';
   font-size: 2rem;
@@ -69,7 +78,7 @@ export const CodeEditor = styled.div`
   line-height: normal;
   position: relative; 
   //margin-bottom: 1rem;
-  padding: 1em;
+  //padding: 1rem;
 
   & > div {
     display: flex;
@@ -118,16 +127,90 @@ export const RunButton = styled.button`
   cursor: pointer;
 `;
 
+export const MiddleLine = styled.div`
+  width: 1px;
+  min-height: 155vh;
+  background-color: #91D1FA;
+  color:  #FAF9C4;
+`
 
 export const QIOEContainer = styled.div`
-  width: 49%;
+  width: 45%;
   min-height: 90vh;
   margin: 0 auto;
   flex-shrink: 0;
   //background-color: #FAF9C4;
   color: #91D1FA;
-
+  //border-right: 2px solid #91D1FA; //가운데 선
 `;
+
+export const QSearchContainer = styled.div`
+width: 100%;
+min-height: 10vh;
+margin: 0 auto;
+flex-shrink: 0;
+//background-color: #DEE3CC;
+border-top: 2px solid #91D1FA;
+padding: 1em;
+//margin-top: 10em;
+display: flex;
+align-items: center;
+gap: 1em;
+
+& > input {
+  display: flex;
+  height: 3em;
+  gap: 1em;
+  color: #000;
+  font-size: 1.5rem;
+  font-weight: 500;
+  padding-top: 1em;
+  flex-grow: 1;
+  border: 2px solid #91D1FA;
+  border-radius: 1em;
+  outline: none;
+  padding : 1rem 0 1rem 2rem;
+  font-family : Poppins;
+  font-size : 1.5rem;
+
+  } 
+& > button {
+  width: 7em;
+  height: 3em;
+  display: flex;
+  gap: 1em;
+  color: #000;
+  font-size: 1.5rem;
+  font-weight: 500;
+  text-align: center;
+  justify-content: center;
+  align-items: center;
+  border: none;
+  border-radius: 1em;
+  font-family : Poppins_SemiBold;
+  font-size : 1.5rem;
+  color: #fff;
+  background-color: #91D1FA;
+  } 
+
+`
+
+export const QNumberContainer = styled.div`
+  width: 100%;
+  min-height: 10vh;
+  margin: 0 auto;
+  flex-shrink: 0;
+  //background-color: #DEE3CC;
+  border-top: 2px solid #91D1FA;
+  border-bottom: 2px solid #91D1FA;
+  padding: 1em;
+  display: flex;
+  align-items: center;
+  gap: 1em;
+  font-weight: 700;
+  font:Poppins_SemiBold;
+  font-size : 2rem;
+`
 
 export const QContainer = styled.div`
   width: 100%;
@@ -221,10 +304,25 @@ export const EContainer = styled.div`
   & > div {
     display: flex;
     gap: 0.5em;
-    color: #000;
+    color: #91D1FA;
     font-size: 1.5rem;
-    font-weight: 500;
-  padding-top: 1em;
+    font-weight: 600;
+    padding-top: 1em;
 
     } 
 `;
+
+export const ExampleBox = styled.div`
+  width: 100%;
+  min-height: 20vh;
+  margin: 0 auto;
+  flex-shrink: 0;
+  background-color: #EDEDED;
+  color: #91D1FA;
+  font-family: 'Poppins';
+  font-size: 2rem;
+  font-style: normal;
+  font-weight: 700;
+  line-height: normal;
+  margin: 1rem 0 1rem 0;
+`

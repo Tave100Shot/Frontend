@@ -101,14 +101,29 @@ export const ExecutionResult = styled.div`
   padding: 3rem;
   border-top: 2px solid #91D1FA;
   border-bottom: 2px solid #91D1FA;
+  display: flex;
+  text-align: center;
 
-  & > div {
+  & > button {
     display: flex;
-    gap: 0.5em;
-    color: #000;
+    width: 13em;
+    height: 2.5em;
+    background-color: #91D1FA;
+    color: #fff;
+    padding: 1em;
+    font-family: 'Poppins';
+    font-size: 2rem;
+    font-style: normal;
+    font-weight: 700;
     font-size: 1.5rem;
-    font-weight: 500;
-    } 
+    border: none;
+    border-radius: 8px;
+    text-align: center;
+    justify-content: center;
+    align-items: center;
+margin-left: 2em;
+    }
+  }
 `
 
 export const ButtonContainer = styled.div`
@@ -126,6 +141,7 @@ export const RunButton = styled.button`
   border-radius: 8px;
   cursor: pointer;
 `;
+
 
 export const MiddleLine = styled.div`
   width: 1px;
@@ -151,6 +167,7 @@ margin: 0 auto;
 flex-shrink: 0;
 //background-color: #DEE3CC;
 border-top: 2px solid #91D1FA;
+border-bottom: 2px solid #91D1FA;
 padding: 1em;
 //margin-top: 10em;
 display: flex;
@@ -201,7 +218,7 @@ export const QNumberContainer = styled.div`
   margin: 0 auto;
   flex-shrink: 0;
   //background-color: #DEE3CC;
-  border-top: 2px solid #91D1FA;
+  //border-top: 2px solid #91D1FA;
   border-bottom: 2px solid #91D1FA;
   padding: 1em;
   display: flex;
@@ -325,4 +342,12 @@ export const ExampleBox = styled.div`
   font-weight: 700;
   line-height: normal;
   margin: 1rem 0 1rem 0;
+
+  & > p {
+    width: 100%;
+  font-size: 1.5rem;
+  margin: 1em;
+  color: #000;
+
+  }
 `

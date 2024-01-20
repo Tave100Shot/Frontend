@@ -43,7 +43,24 @@ const RecommendPage = () => {
   }
 
   const moveToRecommendLatest = () => {
-    navigate('/recommend-latest');
+    const storedToken = localStorage.getItem('accessToken');
+
+    axios.get('/api/v1/recommend/rival', {
+      headers : {
+        Authorization : `Bearer ${storedToken}`
+      }
+    })
+      .then(response => {
+        localStorage.setItem('userRightNum', response.data.result.rightCnt);
+        localStorage.setItem('userWrongNum', response.data.result.wrongCnt);
+        localStorage.setItem('userRank', response.data.result.userRank);
+        localStorage.setItem('userRivalNum', response.data.result.rivalCnt);
+        dispatch(SetByMeProblemList(response.data.result.result));
+      })
+      .catch(error => {
+        console.error(error);
+      });
+      navigate('/recommend-latest');
   }
 
   return (

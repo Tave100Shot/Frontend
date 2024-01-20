@@ -48,7 +48,7 @@ export const ProblemMeBox = styled.div`
   border-radius : 2rem;
   padding : 1rem 1.5rem;  
   hr {
-    margin : 0 0 1rem 0;
+    margin : 0.5rem 0;
   }
   h3 {
     font-size : 1.9rem;
@@ -63,6 +63,7 @@ export const ProblemMeBox = styled.div`
   h3 {
     font-family : "Poppins_Light";
     font-size : 1.5rem;
+    margin : 0 0 0 0.3rem;
   }
 `
 

@@ -17,7 +17,7 @@ export const TypographyDcp = styled.div`
   font-size: 1.5rem;
   font-style: normal;
   line-height: normal;
-  padding : 1rem;
+  padding : 2rem 0 2rem 0;
 `;
 export const MainContainer = styled.div`
     display: flex;
@@ -49,9 +49,9 @@ export const GridContainer = styled.div`
   display: grid;
   grid-template-columns: repeat(2, 1fr);
   grid-template-rows: repeat(2, 1fr);
-  gap: 0.5rem;
-  padding-right: 2rem;
-  padding-left: 2rem;
+  gap: 2rem;
+  //padding-right: 2rem;
+  //padding-left: 2rem;
   @media screen and (max-width: 768px) {
     grid-template-columns: 1fr; /* 한 개의 열로 변경 */
     padding-right: 1rem;

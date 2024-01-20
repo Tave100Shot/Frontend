@@ -2,7 +2,7 @@ import { FirstContainer, MainContainer, Typography, HorizontalLine } from '../..
 import Header from "../../components/common/Header";
 import { useNavigate, useParams } from "react-router-dom";
 import { useState, useEffect } from 'react';
-import * as c from "../../styles/communityPostStyle"
+import * as c from "../../styles/communityPostStyle";
 import axios from 'axios';
 
 
@@ -74,7 +74,7 @@ const PostDetailPage = () => {
   const handleAddComment = async () => {
     try {
       const response = await axios.post(`/api/post/${postId}/comments`, {
-        comment: 'inputValue',
+        comment: inputValue,
         parentCommentId: null,
       },
         {
@@ -84,7 +84,7 @@ const PostDetailPage = () => {
           },
         }
       );
-    console.log('새댓:', response.data);
+      console.log('새댓:', response.data);
 
       const updatedPostDetails = { ...postDetails };
       if (updatedPostDetails.postResponses && updatedPostDetails.postResponses[0]) {
@@ -95,9 +95,13 @@ const PostDetailPage = () => {
         }
         updatedPostDetails.postResponses[0].commentListResponse.commentResponses.push(response.data.comment);
         updatedPostDetails.postResponses[0].commentCount += 1;
+
         setPostDetails(updatedPostDetails);
         setInputValue('');
+        console.error('새댓 정보:', updatedPostDetails);
+
       }
+      //window.location.reload();
     } catch (error) {
       console.error('새댓 오류:', error);
     }
@@ -105,7 +109,7 @@ const PostDetailPage = () => {
 
   const handleEnterKeyPress = (e) => {
     if (e.key === 'Enter') {
-      e.preventDefault();
+      //e.preventDefault();
       handleAddComment();
       setInputValue('');
     }
@@ -146,17 +150,17 @@ const PostDetailPage = () => {
   const handleApplyEdit = async (commentId) => {
     try {
       if (editedCommentContent !== null && editedCommentContent !== undefined) {
-      await axios.patch(`/api/post/comments/${commentId}`, {
-        comment: editedCommentContent,
-      }, {
-        headers: {
-          Authorization: `Bearer ${storedToken}`,
-          'Content-Type': 'application/json',
-        },
-      });
-    }
+        await axios.patch(`/api/post/comments/${commentId}`, {
+          comment: editedCommentContent,
+        }, {
+          headers: {
+            Authorization: `Bearer ${storedToken}`,
+            'Content-Type': 'application/json',
+          },
+        });
+      }
 
-      setIsEditingComment(null); 
+      setIsEditingComment(null);
     } catch (error) {
       console.error('댓글 수정 오류:', error);
     }
@@ -184,6 +188,7 @@ const PostDetailPage = () => {
         updatedPostDetails.postResponses[0].commentCount -= 1;
         setPostDetails(updatedPostDetails);
       }
+
     } catch (error) {
       console.error('댓글 삭제 오류:', error);
     }
@@ -205,22 +210,27 @@ const PostDetailPage = () => {
             <div>
               {postDetails ? (
                 <>
-                <c.PostProfile>
-                <c.ProfileIcon />
-                <c.ProfileInfo>
-                <h2>{postDetails.writer}</h2>
-                <p>{postDetails.writtenTime}</p>
-                </c.ProfileInfo>
-              </c.PostProfile>
-              <c.PostDetailContainer>
-              <c.PostTitle>{postDetails.title}</c.PostTitle>
-              <c.PostContent>{postDetails.content}</c.PostContent>
-              <c.PostImage>
-                {postDetails.imageUrls.map((image, index) => (
-                  <img key={index} src={image.imageUrl} alt={`Image ${image.imageId}`} />
-                ))}
-              </c.PostImage>
-              </c.PostDetailContainer>
+                  <c.PostProfile>
+                    <c.ProfileIcon />
+                    <c.ProfileInfo>
+                      <h2>{postDetails.writer}</h2>
+                      <p>{postDetails.writtenTime}</p>
+                    </c.ProfileInfo>
+                  </c.PostProfile>
+                  <c.PostDetailContainer>
+                    <c.PostTitle>{postDetails.title}</c.PostTitle>
+                    <c.PostContent>{postDetails.content}</c.PostContent>
+                    <c.PostImage>
+                      {postDetails.imageUrls.map((image, index) => (
+                        <img
+                          key={index}
+                          src={image.imageUrl}
+                          alt={`Image ${image.imageId}`}
+                          style={{ width: '40%', height: '40%' }}
+                        />
+                      ))}
+                    </c.PostImage>
+                  </c.PostDetailContainer>
                 </>
               ) : (
                 <p>로딩 중...</p>
@@ -233,10 +243,10 @@ const PostDetailPage = () => {
               <c.CommentNum>{postDetails.commentCount}</c.CommentNum>
             </c.ViewCommentContianer>
           </c.DetailBulletinBox>
-          <c.CommentWriteBox> 
+          <c.CommentWriteBox>
             <input placeholder="댓글 작성 후 ENTER"
-            onKeyDown={(e) => e.key === 'Enter' && handleEnterKeyPress(e)} 
-            onChange={(e) => setInputValue(e.target.value)}
+              onKeyDown={(e) => e.key === 'Enter' && handleEnterKeyPress(e)}
+              onChange={(e) => setInputValue(e.target.value)}
             />
             <c.EnterButton onClick={handleAddComment}>ENTER</c.EnterButton>
           </c.CommentWriteBox>
@@ -245,15 +255,15 @@ const PostDetailPage = () => {
               <c.ParentCommentView key={comment.commentId} >
                 {!isEditingComment || isEditingComment !== comment.commentId ? (
                   <>
-                  <c.ParentComment>
-                  <c.CommentProfile>
-                  <c.CommentProfileId >
-                    <c.CommentProfileIcon />
-                    <p>{comment.gitLoginId}</p>
-                  </c.CommentProfileId>
-                  </c.CommentProfile>
-                  <p>{comment.content}</p>
-                  </c.ParentComment>
+                    <c.ParentComment>
+                      <c.CommentProfile>
+                        <c.CommentProfileId >
+                          <c.CommentProfileIcon />
+                          <p>{comment.gitLoginId}</p>
+                        </c.CommentProfileId>
+                      </c.CommentProfile>
+                      <p>{comment.content}</p>
+                    </c.ParentComment>
                   </>
                 ) : (
                   <>
@@ -261,14 +271,14 @@ const PostDetailPage = () => {
                       type="text"
                       value={editedCommentContent}
                       onChange={(e) => setEditedCommentContent(e.target.value)} // 수정된 내용을 state에 저장하도록 수정
-                      />
+                    />
                     <button onClick={() => handleApplyEdit(comment.commentId)}>수정 적용</button>
                   </>
                 )}
                 <c.CommentViewIconContainer>
                   <c.CommentViewWrite onClick={handleAddChildComment}>댓글 달기</c.CommentViewWrite>
-                  <c.CommentViewEdit onClick={() => setIsEditingComment(comment.commentId)}/>
-                  <c.CommentViewDelete onClick={() => handleDeleteComment(comment.commentId)}/>
+                  <c.CommentViewEdit onClick={() => setIsEditingComment(comment.commentId)} />
+                  <c.CommentViewDelete onClick={() => handleDeleteComment(comment.commentId)} />
                 </c.CommentViewIconContainer>
               </c.ParentCommentView>
             ))}

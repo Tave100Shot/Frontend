@@ -66,7 +66,7 @@ const BronzePage = () => {
           },
           params: {
             postTier: "BronzeSilver",
-            page: 1,
+            page: 0,
           }
         });
         setPosts(response.data.result.postResponses);
@@ -99,7 +99,7 @@ const BronzePage = () => {
                 <img src={search_white} alt="돋보기 그림" />
                 <input
                   type="text"
-                  placeholder="Search your problem with number !"
+                  placeholder="Search your problem !"
                 ></input>
               </c.SearchInputBox>
               <button onClick={handleEnterClick}>SEARCH</button>

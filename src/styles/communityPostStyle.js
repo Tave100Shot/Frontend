@@ -4,6 +4,7 @@ import { LuPencil } from "react-icons/lu";
 import { FiTrash } from "react-icons/fi";
 import { FiUsers } from "react-icons/fi";
 import { FiMessageCircle } from "react-icons/fi";
+import { TiDelete } from "react-icons/ti";
 import { Link } from "react-router-dom";
 import { IoPersonCircleOutline } from "react-icons/io5";
 
@@ -18,12 +19,12 @@ export const SearchBarContainer = styled.form`
   width : 80vw;
   height : 8rem;
   //margin : 2rem auto;
-  padding : 0 1rem;  
+  //padding : 0 1rem;  
   align-items : center;
   //justify-content : space-around;
 
   button {
-    width : 10rem;
+    width : 12rem;
     height : 5rem;
     padding : 0 1rem;
     border-radius : 1.3rem;
@@ -39,7 +40,7 @@ export const SearchBarContainer = styled.form`
 export const SearchInputBox = styled.div`
   background-color : ${props => props.theme.colors.colorAccent};
   display : flex;
-  width : 80rem;
+  width : 90rem;
   height : 5rem;
   border-radius : 1.3rem;
   padding : 1rem 0 1rem 2rem;
@@ -65,20 +66,21 @@ export const SearchInputBox = styled.div`
   input::placeholder {
     color: ${props => props.theme.colors.colorBg};
     font-family : Poppins_Light;
-    font-size : 1.3rem;
+    font-size : 1.5rem;
   }
 
 `
 
 export const WriteButton = styled.div`
-  width: 15%;
+  width: 10em;
   height: 5rem;
   flex-shrink: 0;
   border-radius: 1rem;
   border : 0.3rem solid #91D1FA;
   background : #fff;
   margin: 10px;
-  //position: relative;
+  position: absolute;
+  right: 5em;
   color: #91D1FA;
   font-size: 1.5rem;
   font-family: Poppins;
@@ -382,7 +384,7 @@ export const ModalContent = styled.div`
 export const HeaderBulletin = styled.div`
   display: grid;
   grid-template-columns: 1fr 3fr 1.5fr 1fr 1fr 1fr;
-  padding: 15px;
+  padding: 11px;
   font-weight: bold;
   background-color: #91d1fa;
   border-top-left-radius: 1.3rem;
@@ -489,4 +491,237 @@ export const PostImage = styled.div`
   margin-bottom: 2em;
 `;
 
+//write page
+
+export const WriteWrapContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+    //border: 1rem solid rgba(230, 250, 222, 0.5);
+    padding-top: 1rem;
+  @media (min-width: 1000px) {
+    flex-direction: row;
+  }
+`;
+
+export const AuthorContainer = styled.div`
+  display: flex;
+  justify-content: flex-start;
+
+  & > div {
+    padding: 2.5rem;
+    font-weight: 700;
+    font-family: 'Poppins';
+    font-size: 1.5rem;
+    white-space: nowrap;
+    border: 0.3rem solid #;
+    align-items: center; 
+
+  }
+  & > input {
+    width: 17em;
+    height: 5rem;
+    border-radius: 1rem;
+    border: 0.3rem solid #91D1FA;
+    font-size: 1.5rem;
+    background: #91D1FA;
+    color: #fff;
+    margin: 1.5rem;
+    margin-right: 5em;
+    padding: 1rem;
+    position: relative;
+    outline: none;
+
+  }
+`
+
+export const TitleContainer = styled.div`
+  display: flex;
+  justify-content: flex-start;
+
+  & > div {
+    padding: 2.5rem;
+    font-weight: 700;
+    font-family: 'Poppins';
+    font-size: 1.5rem;
+    white-space: nowrap;
+    align-items: center; 
+    border: 0.3rem solid #;
+
+  }
+
+  & > input {
+    width: 40rem;
+    height: 5rem;
+    border-radius: 1rem;
+    border: 0.3rem solid #91D1FA;
+    background: #91D1FA;
+    font-size: 1.5rem;
+    color: #fff;
+    margin: 1.5rem;
+    padding: 1rem;
+    position: relative;
+    outline: none;
+  }
+  }
+`
+
+export const ContentContainer = styled.div`
+  display: flex;
+  justify-content: flex-start;
+
+  & > div {
+    padding: 2.5rem;
+    font-weight: 700;
+    font-family: 'Poppins';
+    font-size: 1.5rem;
+    white-space: nowrap;
+    border: 0.3rem solid #;
+    width: 6.5em;
+  }
+  & > textarea {
+    font-size: 1.5rem;
+    font-family: 'Poppins';
+    width: 80em;
+    height: 20rem;
+    border-radius: 1rem;
+    border: 0.3rem solid #91D1FA;
+    color: #000;
+    margin: 1.5rem;
+    padding: 1rem;
+    position: relative;
+    outline: none;
+    resize: none;
+  }
+`
+
+export const FileContainer = styled.div`
+  display: flex;
+  justify-content: flex-start;
+
+  & > div {
+    padding: 2.5rem;
+    font-weight: 700;
+    font-family: 'Poppins';
+    font-size: 1.5rem;
+    white-space: nowrap;
+    border: 0.3rem solid #;
+    width: 10rem;
+  }
+  & > label {
+    width: 12em;
+    height: 5rem;
+    flex-shrink: 0;
+    border-radius: 1rem;
+    border: 0.3rem solid #91D1FA;
+    background: #91D1FA;
+    color: #fff;
+    margin: 1.5rem;
+    padding: 1rem;
+    position: relative;
+    font-size: 1.5rem;
+    cursor: pointer;
+    text-align: center;
+  }
+  & > input {
+    display: none;
+  }
+`
+
+export const FilesContainer = styled.div`
+  //background-color: red;
+    padding: 2.5rem;
+    font-weight: 700;
+    font-family: 'Poppins';
+    font-size: 1.5rem;
+    white-space: nowrap;
+    border: 0.3rem solid #;
+    width: 100%;
+    padding: 0 0 0 10rem;
+`
+
+export const SelectedFileContainer = styled.div`
+  min-width: 16em;
+  height: 4rem;
+  margin: 1rem;
+  //padding: 1rem;
+  border: 0.3rem solid #91D1FA;
+  border-radius: 1rem;
+  background: #fff;
+  text-align: center;
+  align-items: center;
+  justify-content: center;
+  color: #333;
+  display: flex;
+
+  & > div {
+    width: 12em;
+    height: 2rem;
+    text-align: center;
+  //background-color: red;
+  justify-content: center;
+  font-family: 'Poppins';
+  font-size: 1em;
+  //display: flex;
+  //margin: 0.5rem;
+
+  }
+  
+`;
+
+export const DeleteFileIcon = styled(TiDelete)`
+  //margin : 0.5rem;
+  font-size : 3rem;
+  color : #91D1FA;
+  postion: absolute;
+  right: 0;
+  cursor: pointer;
+  //background-color: green;
+  text-align: center;
+  //margin: 0.5rem;
+`
+
+export const ButtonContainer = styled.div`
+    display: flex;
+    gap : 1rem;
+    position: fixed;
+    bottom: 4rem;
+    right: 8rem;
+`
+
+export const CancelButton = styled.button`
+    width: 7rem;
+    height: 5rem;
+    justify-content: center;
+    align-items: center;
+    gap: 1rem;
+    background-color: #fff;
+    border-radius : 10rem;
+    border: 0.3rem solid #FA9DAD;
+    color: #FA9DAD;
+    font-family: 'Poppins';
+    font-size: 1.5rem;
+    font-style: normal;
+    font-weight: 500;
+    line-height: normal;
+    cursor: pointer;
+`;
+
+export const UploadButton = styled.button`
+    width: 8rem;
+    height: 5rem;
+    justify-content: center;
+    align-items: center;
+    gap: 1rem;
+    background-color: #fff;
+    border-radius : 10rem;
+    border: 0.3rem solid #91D1FA;
+    color: #91D1FA;
+    font-family: 'Poppins';
+    font-size: 1.5rem;
+    font-style: normal;
+    font-weight: 500;
+    line-height: normal;
+    cursor: pointer;
+
+`;
 

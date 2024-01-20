@@ -11,13 +11,7 @@ import axios from "axios";
 import { useHistory } from "react-router-dom";
 import * as c from "../../styles/communityPostStyle";
 
-const CommentItem  = ({ comment }) => {
-  return (
-    <c.StyledViewPost>
-    <p>{comment.commentId}</p>
-    </c.StyledViewPost>
-  );
-}
+
 
 const GoldPage = () => {
   const navigate = useNavigate();
@@ -30,7 +24,36 @@ const GoldPage = () => {
 
   };
 
+  const ViewPost = ({ post }) => {
+    const postId = post.postId;
+    //console.log(postId);
+    return (
+      <c.StyledLink to={`/community/post/${postId}`}>
+      <c.StyledViewPost>
+        <p>{post.postId}</p>
+        <p>{post.title}</p>
+        <p>{post.writer}</p>
+        <p>{post.view}</p>
+        <p>{post.commentCount}</p>
+        <p>{post.writtenTime}</p>
+      </c.StyledViewPost>
+      </c.StyledLink>
+    );
+  };
+  const ViewPosts = ({ posts }) => {
+    const postArray = Array.isArray(posts) ? posts : [];
+    return (
+      <div>
+        {postArray.map((post, index) => (
+          <ViewPost key={index} post={post}/>
+        ))}
+      </div>
+    );
+  };
+
   const [posts, setPosts] = useState([]);
+  const [currentPage, setCurrentPage] = useState(1);
+  const postsPerPage = 7;
 
   const storedToken = localStorage.getItem('accessToken')
 
@@ -42,7 +65,7 @@ const GoldPage = () => {
             Authorization: `Bearer ${storedToken}`,
           },
           params: {
-            postTier: "BronzeSilver",
+            postTier: "Gold",
             page: 0,
           }
         });
@@ -55,13 +78,20 @@ const GoldPage = () => {
     fetchPosts();
   }, []);
 
+  const indexOfLastPost = currentPage * postsPerPage;
+  const indexOfFirstPost = indexOfLastPost - postsPerPage;
+  const currentPosts = posts.slice(indexOfFirstPost, indexOfLastPost);
+
+  const paginate = (pageNumber) => {
+    setCurrentPage(pageNumber);
+  };
 
   return (
     <div>
       <Header click={moveToMain} />
       <MainContainer>
         <FirstContainer>
-          <Typography>BRONZE & SILVER</Typography>
+          <Typography>GOLD</Typography>
           <HorizontalLine></HorizontalLine>
           <c.WrapContainer>
             <c.SearchBarContainer>
@@ -69,31 +99,29 @@ const GoldPage = () => {
                 <img src={search_white} alt="돋보기 그림" />
                 <input
                   type="text"
-                  placeholder="Search your problem with number !"
+                  placeholder="Search your problem !"
                 ></input>
               </c.SearchInputBox>
               <button onClick={handleEnterClick}>SEARCH</button>
               <c.WriteButton onClick={handleEnterClick}>작성하기</c.WriteButton>
             </c.SearchBarContainer>
             </c.WrapContainer>
+            <c.HeaderBulletin>
+            <p>글번호</p>
+            <p>제목</p>
+            <p>글쓴이</p>
+            <p>조회수</p>
+            <p>댓글수</p>
+            <p>작성일</p>
+          </c.HeaderBulletin>
           <c.BulletinBox>
-          {posts.map((post, index) => (
-          <div key={index}>
-            {/* Display post details */}
-            <p>{post.postId}</p>
-            <p>{post.title}</p>
-            <p>{post.content}</p>
-            {/* Display comments */}
-            {post.commentListResponse && post.commentListResponse.commentResponses && (
-              <div>
-                {post.commentListResponse.commentResponses.map((comment, commentIndex) => (
-                  <CommentItem key={commentIndex} comment={comment} />
-                ))}
-              </div>
-            )}
-          </div>
-        ))}
+            <ViewPosts posts={currentPosts}/>
           </c.BulletinBox>
+          <c.Pagination>
+            {Array.from({ length: Math.ceil(posts.length / postsPerPage) }).map((_, index) => (
+              <button key={index} onClick={() => paginate(index + 1)}>{index + 1}</button>
+            ))}
+          </c.Pagination>
         </FirstContainer>
       </MainContainer>
     </div>

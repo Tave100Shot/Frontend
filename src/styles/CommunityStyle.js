@@ -1,4 +1,4 @@
-import styled from "styled-components";
+import styled, {keyframes } from "styled-components";
 
 export const Header = styled.header`
     width: 100%;
@@ -117,26 +117,42 @@ export const HorizontalLine = styled.div`
   background-color: #000;
 `;
 
+export const fadeIn = keyframes`
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+`;
+
 export const EnterButton = styled.button`
     display: flex;
-    width: 13rem;
-    height: 4rem;
+    width: 15rem;
+    height: 5rem;
     justify-content: center;
     align-items: center;
     gap: 1rem;
     flex-shrink: 0;
     background-color: #fff;
     border-radius : 10rem;
+    border: none;
     position: absolute;
     bottom: 0;
     right: 0;
     margin : 3rem;
     color: #000;
     font-family: 'Poppins';
-    font-size: 1.5rem;
+    font-size: 1.7rem;
     font-style: normal;
-    font-weight: 500;
+    font-weight: 600;
     line-height: normal;
+    cursor: pointer;
+    animation: ${fadeIn} 1s ease;
+    &:active {
+      transform: translateY(2px);
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+    }
 `;
 
 export const Footer = styled.footer`

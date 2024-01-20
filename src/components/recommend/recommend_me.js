@@ -9,27 +9,33 @@ const RecommendByMe = () => {
   const [showFirstProblems, setShowFirstProblems] = useState(true);
   const [showSecondProblems, setShowSecondProblems] = useState(false);
   const [showThirdProblems, setShowThirdProblems] = useState(false);
+  const [showFourthProblems, setShowFourthProblems] = useState(false);
 
-  const firstProblems = byMeProblemList.slice(0, 5);
-  const secondProblems = byMeProblemList.slice(5, 10);
-  const thirdProblems = byMeProblemList.slice(10, 15);
+  const firstProblems = byMeProblemList.slice(0, 4);
+  const secondProblems = byMeProblemList.slice(4, 8);
+  const thirdProblems = byMeProblemList.slice(8, 12);
+  const fourthProblems = byMeProblemList.slice(12, 15);
 
   const changeProblemList = () => {
-    if (showFirstProblems && !showSecondProblems && !showThirdProblems) {
+    if (showFirstProblems && !showSecondProblems && !showThirdProblems && !showFourthProblems) {
       setShowFirstProblems(!showFirstProblems);
       setShowSecondProblems(!showSecondProblems);
     } 
-    else if (!showFirstProblems && showSecondProblems && !showThirdProblems) {
+    else if (!showFirstProblems && showSecondProblems && !showThirdProblems && !showFourthProblems) {
       setShowSecondProblems(!showSecondProblems);
       setShowThirdProblems(!showThirdProblems);
     }
-    else if(!showFirstProblems && !showSecondProblems && showThirdProblems) {
-      setShowFirstProblems(!showFirstProblems);
+    else if(!showFirstProblems && !showSecondProblems && showThirdProblems && !showFourthProblems) {
       setShowThirdProblems(!showThirdProblems);
+      setShowFourthProblems(!showFourthProblems);
+    }
+    else if(!showFirstProblems && !showSecondProblems && !showThirdProblems && showFourthProblems) {
+      setShowFourthProblems(!showFourthProblems);
+      setShowFirstProblems(!showFirstProblems);
       alert("문제 추천이 완료되었습니다");
     }
   };
-
+  
   return (
     <div>
       <r.RecommendMeTextBox>
@@ -37,13 +43,19 @@ const RecommendByMe = () => {
         <h1>ALGORITHM PROBLEMS FOR ME</h1>
         <hr />
       </r.RecommendMeTextBox>
+      <r.ResetMeIcon onClick={changeProblemList} />
       <r.ProblemContainer>
         {/* 첫 번째 범위의 문제들 */}
         {showFirstProblems &&
           firstProblems.map((problem, index) => (
             <r.ProblemMeBox key={index}>
+              <r.ProblemTitleBox>
+                <h3>{problem}</h3>
+                <p>BRONZE</p>
+              </r.ProblemTitleBox>
+              <hr/>
               <h3>{problem}</h3>
-              <p>{problem}</p>
+
             </r.ProblemMeBox>
           ))}
 
@@ -51,8 +63,12 @@ const RecommendByMe = () => {
         {showSecondProblems &&
           secondProblems.map((problem, index) => (
             <r.ProblemMeBox key={index}>
+              <r.ProblemTitleBox>
+                <h3>{problem}</h3>
+                <p>BRONZE</p>
+              </r.ProblemTitleBox>
+              <hr/>
               <h3>{problem}</h3>
-              <p>{problem}</p>
             </r.ProblemMeBox>
           ))}
 
@@ -60,12 +76,27 @@ const RecommendByMe = () => {
         {showThirdProblems &&
           thirdProblems.map((problem, index) => (
             <r.ProblemMeBox key={index}>
+              <r.ProblemTitleBox>
+                <h3>{problem}</h3>
+                <p>BRONZE</p>
+              </r.ProblemTitleBox>
+              <hr/>
               <h3>{problem}</h3>
-              <p>{problem}</p>
+            </r.ProblemMeBox>
+          ))}
+        {/* 네 번째 범위의 문제들 */}
+        {showFourthProblems &&
+          fourthProblems.map((problem, index) => (
+            <r.ProblemMeBox key={index}>
+              <r.ProblemTitleBox>
+                <h3>{problem}</h3>
+                <p>BRONZE</p>
+              </r.ProblemTitleBox>
+              <hr/>
+              <h3>{problem}</h3>
             </r.ProblemMeBox>
           ))}
       </r.ProblemContainer>
-      <r.ResetMeIcon onClick={changeProblemList} />
     </div>
   );
 };

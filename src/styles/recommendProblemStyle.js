@@ -2,11 +2,16 @@ import { GrPowerReset } from "react-icons/gr";
 import styled from "styled-components";
 
 export const ProblemContainer = styled.div`
-display : flex;
-height : 18rem;
-width : 100vw;
-align-items : center;
-justify-content : center;
+  width : 85vw;
+  margin : 6rem auto;
+  display : grid;
+  grid-template-columns : repeat(4, 1fr);
+  row-gap : 2rem;
+  justify-items: center;
+  @media (min-width: 740px) and (max-width: 1341px) {
+    grid-template-columns : repeat(2, 1fr);
+    grid-template-rows : repeat(2, 1fr);  
+  }
 `
 
 
@@ -35,34 +40,30 @@ export const RecommendMeTextBox = styled.div`
 `
 
 export const ProblemMeBox = styled.div`
-  display : flex;
-  flex-direction : Column;
-  align-items : center;
-  width : 15rem;
+  width : 25rem;
   height : 15rem;
-  margin : 0 4rem;
-  padding : 2rem 2.5rem;
-  border-radius : 2rem;
+  margin : 1rem;
   background-color : ${props => props.theme.colors.profileRank};
   color : ${props => props.theme.colors.colorBg};
-  text-align : center;
-
+  border-radius : 2rem;
+  padding : 1rem 1.5rem;  
+  hr {
+    margin : 0 0 1rem 0;
+  }
   h3 {
-    margin : 2rem 0;
-    font-family : "Poppins_Regular";
-    font-size : 1.7rem;
+    font-size : 1.9rem;
   }
-  
-  p {
-    width : 10rem;
-    padding : 0.3rem 0;
-    border-radius : 2.5rem;
+  `
+  export const ProblemTitleBox = styled.div`
+  display : flex;
+  height : 3.5rem;
+  justify-content : space-between;
+  align-items : flex-end;
+  padding : 0 0.5rem 0.2rem 0;
+  h3 {
     font-family : "Poppins_Light";
-    font-size : 1.3rem;
-    background-color : ${props => props.theme.colors.colorBg};
-    color : ${props => props.theme.colors.profileRank};
+    font-size : 1.5rem;
   }
-  
 `
 
 export const ResetMeIcon = styled(GrPowerReset)`

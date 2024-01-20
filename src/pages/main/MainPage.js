@@ -66,7 +66,7 @@ const MainPage = ({click}) => {
       <TaveAnimation secondAuthStatus={secondAuthStatus}/>
       <w.ButtonWrapper>
         <MainButton 
-          text={'WANNA ANSWER?'} 
+          text={'GET SOLUTION'} 
           navigatePage={'/search-solution'}
           lockImg={'none'}
         />

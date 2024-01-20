@@ -14,6 +14,7 @@ import axios from 'axios';
 const AddAuthModal = ({isOpen, onRequestClose}) => {
   const dispatch = useDispatch();
   const storedToken = localStorage.getItem('accessToken');
+  const secondAuthStatus = localStorage.getItem('secondAuthStatus');
 
 
   const customStyles = {
@@ -125,12 +126,24 @@ const AddAuthModal = ({isOpen, onRequestClose}) => {
             <m.SlideBox>
               <img src={backjoonAuth} alt='backjoon' className='step1'/>
               <m.SlideItemBox>
-                <m.SlideTextBox>
-                  <h2>추가 인증</h2>
-                  <p>
-                      백발백준은 <span>사용자의 백준 회원 여부</span>를 파악하고 서비스 향상을 위해 <span>첫 로그인 후 한 번만</span> 필요한 <span>추가 인증 절차</span>를 도입하였습니다.
-                  </p>
-                </m.SlideTextBox>
+                {
+                  secondAuthStatus === 'true' ?
+                    <m.SlideTextBox>
+                      <h2>BOJ UPDATE</h2>
+                      <p>
+                        다음과 같은 경우, <span>백준 갱신</span>을 할 수 있습니다<br/>
+                        1. 자신의 티어가 올랐다<br/>
+                        2. 프로필 사진을 바꾸고 싶다
+                      </p>
+                    </m.SlideTextBox>
+                  : 
+                  <m.SlideTextBox>
+                    <h2>추가 인증</h2>
+                    <p>
+                        백발백준은 <span>사용자의 백준 회원 여부</span>를 파악하고 서비스 향상을 위해 <span>첫 로그인 후 한 번만</span> 필요한 <span>추가 인증 절차</span>를 도입하였습니다.
+                    </p>
+                  </m.SlideTextBox>
+                }
               </m.SlideItemBox>
             </m.SlideBox>
           </m.Slide>

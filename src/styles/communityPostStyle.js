@@ -5,6 +5,7 @@ import { FiTrash } from "react-icons/fi";
 import { FiUsers } from "react-icons/fi";
 import { FiMessageCircle } from "react-icons/fi";
 import { TiDelete } from "react-icons/ti";
+import { IoEnterOutline } from "react-icons/io5";
 import { Link } from "react-router-dom";
 import { IoPersonCircleOutline } from "react-icons/io5";
 
@@ -40,7 +41,7 @@ export const SearchBarContainer = styled.form`
 export const SearchInputBox = styled.div`
   background-color : ${props => props.theme.colors.colorAccent};
   display : flex;
-  width : 90rem;
+  width : 100rem;
   height : 5rem;
   border-radius : 1.3rem;
   padding : 1rem 0 1rem 2rem;
@@ -191,30 +192,34 @@ export const CommentWriteBox = styled.div`
   padding: 1rem;
   align-items: center;
   justify-content: space-between;
-  & input {
+  & > input {
     flex-grow: 1;
+    font-size: 1.5em;
     width: 90%;
     border: none;
     outline: none;
     background: transparent;
     color: #fff;
+    &::placeholder {
+      color: #fff;
+    }
   }
+
 `;
 
-export const EnterButton = styled.button`
-  width: 12%;
-  height: 4rem;
+export const EnterButton = styled(IoEnterOutline)`
   flex-shrink: 0;
-  border-radius: 1rem;
-  border: 0.3rem solid #91D1FA;
-  background: #fff;
-  color: #000;
-  padding: 1rem;
+  color: #fff;
+  padding: 0 1rem;
   position: relative;
-  font-size: 1.5rem;
-  &:active,
+  font-size: 5.5em;
+  cursor: pointer;
+
   &:focus {
     background-color: #91D1FA;
+  }
+  &:active {
+    background-color: #76ABCC;
   }
 `;
 
@@ -248,9 +253,17 @@ export const CommentViewIconContainer = styled.div`
 `
 //부모 댓글 컨테이너
 export const ParentComment = styled.div`
-display: flex;
-align-items: flex-start;
-margin-bottom: 0.5rem;
+  display: flex;
+  align-items: flex-start;
+  margin-bottom: 0.5rem;
+  align-items: center;
+  
+  & > p {
+    font-family: 'Poppins';
+    font-size: 1.5rem;
+    //background-color: red;
+    width: 40em;
+  }
 `
 //프로필 아이디
 export const CommentProfileId = styled.div`
@@ -308,6 +321,39 @@ export const CommentViewDelete = styled(FiTrash)`
   font-size: 2rem;
   color: #91D1FA;
   margin: auto;
+`
+
+export const CommentEditContainer = styled.div`
+  
+& > input {
+  width: 40em;
+  min-height: 3em;
+  border-radius: 1rem;
+  border: 0.3rem solid #91D1FA;
+  font-family: 'Poppins';
+  font-style: normal;
+  font-weight: 500;
+  line-height: normal;
+  font-size: 1.5rem;
+  outline: none;
+  padding: 0.5rem;
+}
+
+& > button {
+  font-family: 'Poppins';
+  font-style: normal;
+  font-weight: 700;
+  line-height: normal;
+  font-size: 1.5rem;
+  border-radius: 1rem;
+  border: 0.3rem solid #91D1FA;
+  padding: 1rem;
+  margin: 1rem;
+  background-color:#91D1FA;
+  color: #fff;
+  cursor: pointer;
+
+}
 `
 
 export const ButtonWrapper = styled.div`
@@ -501,6 +547,7 @@ export const WriteWrapContainer = styled.div`
   @media (min-width: 1000px) {
     flex-direction: row;
   }
+  
 `;
 
 export const AuthorContainer = styled.div`
@@ -530,7 +577,9 @@ export const AuthorContainer = styled.div`
     padding: 1rem;
     position: relative;
     outline: none;
-
+    &::placeholder {
+      color: #fff;
+    }
   }
 `
 
@@ -561,6 +610,9 @@ export const TitleContainer = styled.div`
     padding: 1rem;
     position: relative;
     outline: none;
+    &::placeholder {
+      color: #fff;
+    }
   }
   }
 `

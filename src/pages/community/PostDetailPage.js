@@ -13,6 +13,7 @@ const PostDetailPage = () => {
   const storedToken = localStorage.getItem('accessToken')
   const [isEditingComment, setIsEditingComment] = useState(null);
   const [inputValue, setInputValue] = useState('');
+  const [inputError, setInputError] = useState(false);
   const [editedCommentContent, setEditedCommentContent] = useState('');
 
   useEffect(() => {
@@ -73,6 +74,10 @@ const PostDetailPage = () => {
   // 댓글 추가
   const handleAddComment = async () => {
     try {
+      if (inputValue.trim() === '') {
+        setInputError(true);
+        return;
+      }
       const response = await axios.post(`/api/post/${postId}/comments`, {
         comment: inputValue,
         parentCommentId: null,
@@ -101,7 +106,10 @@ const PostDetailPage = () => {
         console.error('새댓 정보:', updatedPostDetails);
 
       }
-      //window.location.reload();
+      setInputValue('');
+      setInputError(false);
+      window.location.reload();
+
     } catch (error) {
       console.error('새댓 오류:', error);
     }
@@ -176,6 +184,7 @@ const PostDetailPage = () => {
           Authorization: `Bearer ${storedToken}`,
         },
       });
+      window.location.reload();
 
       // 삭제된 댓글을 제외하고 업데이트
       const updatedPostDetails = { ...postDetails };
@@ -247,6 +256,7 @@ const PostDetailPage = () => {
             <input placeholder="댓글 작성 후 ENTER"
               onKeyDown={(e) => e.key === 'Enter' && handleEnterKeyPress(e)}
               onChange={(e) => setInputValue(e.target.value)}
+              className={inputError ? 'error' : ''}
             />
             <c.EnterButton onClick={handleAddComment}>ENTER</c.EnterButton>
           </c.CommentWriteBox>
@@ -267,12 +277,23 @@ const PostDetailPage = () => {
                   </>
                 ) : (
                   <>
-                    <input
-                      type="text"
-                      value={editedCommentContent}
-                      onChange={(e) => setEditedCommentContent(e.target.value)} // 수정된 내용을 state에 저장하도록 수정
-                    />
-                    <button onClick={() => handleApplyEdit(comment.commentId)}>수정 적용</button>
+                    <c.ParentComment>
+                      <c.CommentProfile>
+                        <c.CommentProfileId >
+                          <c.CommentProfileIcon />
+                          <p>{comment.gitLoginId}</p>
+                        </c.CommentProfileId>
+                      </c.CommentProfile>
+                      <c.CommentEditContainer>
+                        <input
+                          type="text"
+                          value={editedCommentContent}
+                          onChange={(e) => setEditedCommentContent(e.target.value)} // 수정된 내용을 state에 저장하도록 수정
+                        />
+                        <button onClick={() => handleApplyEdit(comment.commentId)}>수정 적용</button>
+                      </c.CommentEditContainer>
+                    </c.ParentComment>
+
                   </>
                 )}
                 <c.CommentViewIconContainer>

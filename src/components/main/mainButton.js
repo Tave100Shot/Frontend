@@ -31,6 +31,8 @@ const MainButton = ({text, navigatePage, lockImg}) => {
           }
           {text}
         </b.MainButton>
+
+
   )
 }
 

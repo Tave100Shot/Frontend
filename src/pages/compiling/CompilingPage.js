@@ -121,14 +121,16 @@ const CompilingPage = () => {
               <s.SelectBox onClick={() => setShowOptions((prev) => !prev)} show={showOptions}>
                 <label>{currentValue}</label>
                 <ul >
-                  <li onClick={handleOnChangeSelectValue}>PYTHON</li>
-                  <li onClick={handleOnChangeSelectValue}>C</li>
-                  <li onClick={handleOnChangeSelectValue}>C++</li>
+                  <li onClick={handleOnChangeSelectValue}>Python 3</li>
+                  <li onClick={handleOnChangeSelectValue}>C99</li>
+                  <li onClick={handleOnChangeSelectValue}>C++17</li>
                   <li onClick={handleOnChangeSelectValue}>C#</li>
-                  <li onClick={handleOnChangeSelectValue}>JAVA</li>
-                  <li onClick={handleOnChangeSelectValue}>JAVASCRIPT</li>
-                  <li onClick={handleOnChangeSelectValue}>PHP</li>
-                  <li onClick={handleOnChangeSelectValue}>RUBY</li>
+                  <li onClick={handleOnChangeSelectValue}>Java 11</li>
+                  <li onClick={handleOnChangeSelectValue}>node.js</li>
+                  <li onClick={handleOnChangeSelectValue}>Kotlin (JVM)</li>
+                  <li onClick={handleOnChangeSelectValue}>Ruby</li>
+                  <li onClick={handleOnChangeSelectValue}>Go</li>
+                  <li onClick={handleOnChangeSelectValue}>Swift</li>
                 </ul>
               </s.SelectBox>
               <c.RunButton onClick={handleCompileRun}>COMPILE & RUN</c.RunButton>

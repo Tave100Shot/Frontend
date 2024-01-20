@@ -2,9 +2,6 @@ import Modal from 'react-modal';
 import { useDispatch, useSelector } from "react-redux";
 import * as m from "../../styles/loginModalStyle"
 import { SetModal, SetTwoFactorAuthStatus } from "../../redux/actions/mainAction";
-import { useEffect } from 'react';
-import { useState } from 'react';
-import { useRef } from 'react';
 
 import backjoonAuth from '../../assets/imgs/baekjoon_auth.png'
 import step1 from '../../assets/imgs/1step_편집.png'
@@ -12,7 +9,6 @@ import step2 from '../../assets/imgs/step2_편집.png'
 import step3 from '../../assets/imgs/step3_편집.png'
 import "slick-carousel/slick/slick.css"; 
 import "slick-carousel/slick/slick-theme.css";
-import Slider from 'react-slick';
 import axios from 'axios';
 
 const AddAuthModal = ({isOpen, onRequestClose}) => {
@@ -104,6 +100,13 @@ const AddAuthModal = ({isOpen, onRequestClose}) => {
       else if(errorCode === 'GITHUB_5000') {
         alert("Github API 서버에서 오류가 발생했습니다. 어느 시간이 지난 후 다시 시도해주세요.");
       }
+      else if(errorCode === 'JWT_4010') {
+        alert("로그인 유효 기간이 지났습니다. 다시 로그인 해주세요 :)");
+      }
+      else if(errorCode === 'JWT_4001') {
+        alert("로그인에 실패하였습니다. 다시 로그인 해주세요 :)");
+      }
+
       else {
         alert("2차 인증을 실패하였습니다.");
       }

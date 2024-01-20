@@ -248,19 +248,7 @@ export const UserProfileAccount = styled.div`
     letter-spacing : 0.2rem;
     text-align: right;
   }
-  
-  p {
-    margin-left: 3rem;
-    width: 8rem;
-    border-radius: 5rem;
-    color: #000000;
-    font-family: "Poppins_SemiBold";
-    font-size: 1rem;
-    letter-spacing : 0.1rem;
-    padding : 0.4rem 0;
-    text-align: center;
-    transition: ease-in-out 250ms background, ease-in-out 250ms color;
-  }
+
 `
 
 export const UserProfileStats = styled.div`
@@ -344,4 +332,18 @@ export const UserProfileIcon = styled.div`
   &.profile--wrong {
     color : ${props => props.theme.colors.profileWrong};
   }
+`
+
+export const TierBadgeBox = styled.p`
+  background-color : ${props => props.bojTierColor};
+  width : 5rem;
+  margin-left: 3rem;
+  width: 8rem;
+  border-radius: 5rem;
+  color: #ffffff;
+  font-family: "Poppins_SemiBold";
+  font-size: 1rem;
+  letter-spacing : 0.1rem;
+  padding : 0.4rem 0;
+  text-align: center;
 `

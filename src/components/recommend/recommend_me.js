@@ -1,6 +1,7 @@
 import * as r from "../../styles/recommendProblemStyle";
 import { useSelector, useDispatch } from "react-redux";
 import { useState } from "react";
+import TierBadge from "./tierBadge";
 
 const RecommendByMe = () => {
   const byMeProblemList = useSelector((state) => state.byMeProblemList);
@@ -51,7 +52,9 @@ const RecommendByMe = () => {
             <r.ProblemMeBox key={index}>
               <r.ProblemTitleBox>
                 <h3>{problem}</h3>
-                <p>BRONZE</p>
+                <TierBadge 
+                  bojTier="BRONZE"
+                />
               </r.ProblemTitleBox>
               <hr/>
               <h3>{problem}</h3>
@@ -65,7 +68,9 @@ const RecommendByMe = () => {
             <r.ProblemMeBox key={index}>
               <r.ProblemTitleBox>
                 <h3>{problem}</h3>
-                <p>BRONZE</p>
+                <TierBadge 
+                  bojTier="MASTER"
+                />
               </r.ProblemTitleBox>
               <hr/>
               <h3>{problem}</h3>
@@ -78,7 +83,9 @@ const RecommendByMe = () => {
             <r.ProblemMeBox key={index}>
               <r.ProblemTitleBox>
                 <h3>{problem}</h3>
-                <p>BRONZE</p>
+                <TierBadge 
+                  bojTier="PLATINUM"
+                />
               </r.ProblemTitleBox>
               <hr/>
               <h3>{problem}</h3>
@@ -90,7 +97,9 @@ const RecommendByMe = () => {
             <r.ProblemMeBox key={index}>
               <r.ProblemTitleBox>
                 <h3>{problem}</h3>
-                <p>BRONZE</p>
+                <TierBadge 
+                  bojTier="GOLD"
+                />
               </r.ProblemTitleBox>
               <hr/>
               <h3>{problem}</h3>

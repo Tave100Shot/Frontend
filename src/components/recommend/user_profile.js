@@ -3,6 +3,7 @@ import { TfiBarChart } from "react-icons/tfi";
 import { AiOutlineTeam } from "react-icons/ai";
 import * as r from "../../styles/RecommendMainStyle";
 import { useSelector } from "react-redux";
+import TierBadge from "./tierBadge";
 
 
 const UserProfile = () => {
@@ -15,29 +16,6 @@ const UserProfile = () => {
   const userRank = localStorage.getItem('userRank');
   const userRivalNum = localStorage.getItem('userRivalNum');
 
-  const getBackgroundColor = (bojTier) => {
-    switch (bojTier) {
-      case 'BRONZE':
-        return '#AD5700';
-      case 'SILVER':
-        return '#8688A1';
-      case 'GOLD':
-        return '#F1A627';
-      case 'PLATINUM':
-        return '#3BF8C4';
-      case 'DIAMOND':
-        return '#3EC2FE';
-      case 'RUBY':
-        return '#F957AD';
-      case 'MASTER':
-        return '#EDBBF8';
-      default:
-        return '#17CE3B'; // 기본값
-    }
-  };
-  const bojTierColor = getBackgroundColor(bojTier);
-  console.log("티어 색 : ", bojTierColor);
-
   return (
     <r.UserProfileLayout className="layout">
       <r.UserProfileBox className="profile">
@@ -47,13 +25,10 @@ const UserProfile = () => {
         <r.UserProfileHeader className="profile__header">
           <r.UserProfileAccount className="profile__account">
             <h4 className="profile__username">{bojName}</h4>
-            <p 
+            <TierBadge 
               className="profile__button" 
-              href="#" 
-              bojTierColor={bojTierColor}
-              >
-                {bojTier}
-            </p>
+              bojTier={bojTier}
+            />
           </r.UserProfileAccount>
         </r.UserProfileHeader>
 

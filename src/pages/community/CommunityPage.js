@@ -46,7 +46,7 @@ const CommunityPage = () => {
               <EnterButton onClick={() => handleEnterClick('PLATINUM')}>ENTER</EnterButton>
               </LevelBox>
             <LevelBox>
-              <LevelTypography>DIAMOND ~</LevelTypography>
+              <LevelTypography>HIGH</LevelTypography>
               <Description>
               다이아, 루비, 마스터 회원들의 채널방
               </Description>

@@ -189,6 +189,17 @@ gap: 1em;
   padding : 1rem 0 1rem 2rem;
   font-family : Poppins;
   font-size : 1.5rem;
+  &[type='number'] {
+    /* Firefox에서 카운터 버튼 숨기기 */
+    -moz-appearance: textfield;
+  }
+
+  /* Webkit(Chrome, Safari 등)에서 카운터 버튼 숨기기 */
+  &[type='number']::-webkit-inner-spin-button,
+  &[type='number']::-webkit-outer-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+  }
 
   } 
 & > button {

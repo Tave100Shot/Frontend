@@ -123,8 +123,8 @@ const PostDetailPage = () => {
     }
   };
 
-  // 대댓글 생성
-  const handleAddChildComment = async (parentCommentId) => {
+  // 대댓글 생성 -> 데이터 원형 구조 에러 확인 필수 ★
+ /*  const handleAddChildComment = async (parentCommentId) => {
     try {
       const response = await axios.post(`/api/post/${postId}/comments`, {
         comment: '대댓글 테슽 확인ㄴㄴㄴㄴㄴㄴㄴㄴㄴㄴ',
@@ -152,7 +152,7 @@ const PostDetailPage = () => {
     } catch (error) {
       console.error('새댓 오류:', error);
     }
-  };
+  }; */
 
   //댓글 수정
   const handleApplyEdit = async (commentId) => {
@@ -297,7 +297,7 @@ const PostDetailPage = () => {
                   </>
                 )}
                 <c.CommentViewIconContainer>
-                  <c.CommentViewWrite onClick={handleAddChildComment}>댓글 달기</c.CommentViewWrite>
+                  {/* <c.CommentViewWrite onClick={handleAddChildComment}>댓글 달기</c.CommentViewWrite> */}
                   <c.CommentViewEdit onClick={() => setIsEditingComment(comment.commentId)} />
                   <c.CommentViewDelete onClick={() => handleDeleteComment(comment.commentId)} />
                 </c.CommentViewIconContainer>

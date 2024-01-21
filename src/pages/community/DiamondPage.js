@@ -103,7 +103,7 @@ const HighPage = () => {
                 ></input>
               </c.SearchInputBox>
               <button onClick={handleEnterClick}>SEARCH</button>
-              <c.WriteButton onClick={handleEnterClick}>작성하기</c.WriteButton>
+              {/* <c.WriteButton onClick={handleEnterClick}>작성하기</c.WriteButton> */}
             </c.SearchBarContainer>
             </c.WrapContainer>
             <c.HeaderBulletin>

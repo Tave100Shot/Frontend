@@ -18,7 +18,7 @@ const WritePage = () => {
   const [content, setContent] = useState("");
   const [attachmentFile, setAttachmentFile] = useState(null);
   const [selectedFileContainers, setSelectedFileContainers] = useState([]);
-  const apiUrl = "http://43.200.95.44:8080/api/post";
+  const apiUrl = "http://api.100shot.net/api/post";
 
   const titleChange = (e) => setTitle(e.target.value);
   const contentChange = (e) => setContent(e.target.value);

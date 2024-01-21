@@ -154,6 +154,7 @@ const PostDetailPage = () => {
     }
   }; */
 
+
   //댓글 수정
   const handleApplyEdit = async (commentId) => {
     try {
@@ -174,8 +175,6 @@ const PostDetailPage = () => {
     }
   };
 
-
-
   // 댓글 삭제
   const handleDeleteComment = async (commentId) => {
     try {
@@ -185,6 +184,7 @@ const PostDetailPage = () => {
         },
       });
       window.location.reload();
+
 
       // 삭제된 댓글을 제외하고 업데이트
       const updatedPostDetails = { ...postDetails };
@@ -197,7 +197,6 @@ const PostDetailPage = () => {
         updatedPostDetails.postResponses[0].commentCount -= 1;
         setPostDetails(updatedPostDetails);
       }
-
     } catch (error) {
       console.error('댓글 삭제 오류:', error);
     }

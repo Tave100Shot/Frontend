@@ -45,33 +45,37 @@ export const StyledSlider = styled(Slider) `
 export const SliderContainer = styled.div`
   display : flex;
   overflow : hidden;
-  // width : 65rem;
-  // height : 45rem;
-  // margin : 2rem;
-  // padding : 2rem;
-  // background-color : ${props => props.theme.colors.colorBg};
-  // border-radius : 1.5rem;
 `
 export const Slide = styled.div`
-  display : flex;
-  flex-direction: column;
-  width : 65rem;
   height : 45rem;
-  justify-content: space-between; 
-  align-items: center;
   padding : 2rem;
   background-color : ${props => props.theme.colors.colorBg};
   border-radius : 1.5rem;
   &::-webkit-scrollbar {
-    display:none /* Chrome , Safari , Opera */
+    display:none;
   }
+`
+export const SlideBox = styled.div`
+  display : flex;
+  flex-direction : column;
+  align-items : center
+  justify-content: center; 
   img {
-    margin : 2rem 0 2rem 0;
+    &.backjoon {
+      width: auto;
+      height : 18rem;
+    }
+    &.step1 {
+      height : 15rem;
+      width: auto;
+    }
     &.step2 {
       height : 18rem;
+      width: auto;
     }
     &.step3 {
       height : 13rem;
+      width: auto;
     }
   }
 
@@ -100,13 +104,14 @@ export const SlideItemBox = styled.div`
 
 `
 export const SlideTextBox = styled.div`
-  width : 45rem;
+  width : 50rem;
   padding : 0 2rem;
   display : flex;
   flex-direction: column;
   justify-content: center; 
   align-items: center; 
   text-align : center;
+  word-break : keep-all;
 
   h2 {
     font-size : 2.4rem;

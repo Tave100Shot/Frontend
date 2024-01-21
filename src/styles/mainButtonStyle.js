@@ -5,7 +5,7 @@ export const MainButton = styled.button`
   align-items: center;
   justify-content : center;
 
-  width : 30rem;
+  width : 28rem;
   height : 5.5rem;
   position : relative;
   border : none;
@@ -21,4 +21,13 @@ export const MainButton = styled.button`
     margin : 0 1.5rem 0.4rem 0;
   }
   cursor : pointer;
+
+  // AltButton 전용 CSS
+  .hoverAfter {display :none;}
+
+  &.bojUpdateBtn:hover {
+    background-color : ${props => props.theme.colors.colorAccentReverse};
+    .hoverBefore {display : none;}
+    .hoverAfter {display :block;}
+  }
 `

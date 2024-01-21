@@ -170,6 +170,7 @@ const PostEditPage = ({ onSuccess }) => {
       </MainContainer>
     </div>
   );
+
 };
 
 export default PostEditPage;

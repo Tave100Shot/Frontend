@@ -271,7 +271,6 @@ display: flex;
 margin-right: 1.5em;
 font-size: 1em;
 color: #919191;
-
 `
 //프로필 묶기
 export const CommentProfile = styled.div`
@@ -355,7 +354,6 @@ export const CommentEditContainer = styled.div`
 
 }
 `
-
 export const ButtonWrapper = styled.div`
 display: flex;
 position: absolute;
@@ -776,4 +774,3 @@ export const UploadButton = styled.button`
     cursor: pointer;
 
 `;
-

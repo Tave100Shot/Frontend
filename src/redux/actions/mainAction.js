@@ -11,3 +11,10 @@ export const SetModal = (content) => {
     content
   }
 }
+// 2차 인증 확인
+export const SetTwoFactorAuthStatus = (content) => {
+  return {
+    type : 'SET_SECONDAUTH',
+    content
+  }
+}

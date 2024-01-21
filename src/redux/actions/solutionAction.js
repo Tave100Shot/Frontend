@@ -13,3 +13,11 @@ export const SetSolution = (content) => {
     content
   }
 }
+
+// ThemeMode 저장하는 Action
+export const SetTheme = (content) => {
+  return {
+    type : 'SET_THEME',
+    content
+  }
+}

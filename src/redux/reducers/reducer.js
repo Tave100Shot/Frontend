@@ -9,6 +9,13 @@ export const INITIAL_STATE = {
   ],
   solutionList : [
 
+  ],
+  userRightNum : '',
+  userWrongNum : '',
+  userRank : '',
+  userRivalNum : '',
+  byMeProblemList : [
+
   ]
 };
 
@@ -53,7 +60,31 @@ export const Reducer = (state = INITIAL_STATE, action) => {
       };
 
     // Recommend 
-
+    case 'SET_USER_RIGHT': 
+      return {
+        ...state,
+        userRightNum: action.content
+      };
+    case 'SET_USER_WRONG': 
+      return {
+        ...state,
+        userWrongNum: action.content
+      };
+    case 'SET_USER_RANK': 
+      return {
+        ...state,
+        userRank: action.content
+      };
+    case 'SET_USER_RIVAL': 
+      return {
+        ...state,
+        userRivalNum: action.content
+      };
+    case 'SET_ME_PROBLEM': 
+      return {
+        ...state,
+        byMeProblemList: action.content
+      };
     // Community
 
     // Compiling 

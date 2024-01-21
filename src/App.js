@@ -84,9 +84,9 @@ function App() {
             <Route path='/recommend-me' element={<RecommendMe/>}/>
             )}
           {isMobile ? (
-            <Route path='/recommend-rank' element={<MobilePage />} />
+            <Route path='/recommend-latest' element={<MobilePage />} />
           ) : (
-            <Route path='/recommend-rank' element={<RecommendRank />}/>
+            <Route path='/recommend-latest' element={<RecommendRank />}/>
             )}
           {isMobile ? (
             <Route path='/compile' element={<MobilePage />} />

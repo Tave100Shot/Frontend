@@ -104,13 +104,14 @@ export const SlideItemBox = styled.div`
 
 `
 export const SlideTextBox = styled.div`
-  width : 45rem;
+  width : 50rem;
   padding : 0 2rem;
   display : flex;
   flex-direction: column;
   justify-content: center; 
   align-items: center; 
   text-align : center;
+  word-break : keep-all;
 
   h2 {
     font-size : 2.4rem;

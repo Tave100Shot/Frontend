@@ -9,6 +9,7 @@ import AddAuthModal from "../../components/main/addAuthModal";
 import { useHistory , useLocation, useNavigate } from "react-router-dom";
 import { SetModal, SetToken, SetTwoFactorAuthStatus } from "../../redux/actions/mainAction";
 import { useDispatch, useSelector } from "react-redux";
+import AltButton from "../../components/main/altButton";
 
 const MainPage = ({click}) => {
   const location = useLocation();
@@ -17,7 +18,7 @@ const MainPage = ({click}) => {
   
   // Login 관련 변수
   let secondAuthStatus = localStorage.getItem('secondAuthStatus');
-  const gitLoginId = localStorage.getItem('gitLoginId');
+  const accessToken = localStorage.getItem('accessToken');
 
   // console.log("2차 인증 여부 : ", secondAuthStatus);
   
@@ -81,7 +82,11 @@ const MainPage = ({click}) => {
           navigatePage={''}
           lockImg={'locked'}
         />
-        
+        }
+        { (accessToken !== null) && secondAuthStatus === 'true' ? 
+          <AltButton/>
+        : 
+          <></>
         }
       </w.ButtonWrapper>
       <AddAuthModal isOpen={modalState} onRequestClose={closeModal} />

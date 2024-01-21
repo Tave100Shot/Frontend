@@ -81,7 +81,7 @@ export const RecommendMeBox = styled.div`
 
 `
 
-export const RecommendRankBox = styled.div`
+export const RecommendLatestBox = styled.div`
   background-color : #E3B059;
   display: flex;
   flex-direction: column;
@@ -102,6 +102,9 @@ export const RecommendRankBox = styled.div`
         display : none;
       }
     }
+    form {
+      display : block
+    }
   }
 
   p {
@@ -119,6 +122,44 @@ export const RecommendRankBox = styled.div`
       letter-spacing : 0.05rem;
     }
   } 
+  form {
+    display : none;
+    input {
+      background-color : rgba(255, 255, 255, 0.2);
+      border : none;
+      width : 28rem;
+      height : 3.8rem;
+      margin : 0 1rem 0 0;
+      padding : 0 0 0 1.5rem;
+      outline: none;
+      border : 0.15rem solid #ffffff;
+      border-radius : 1rem;
+      color: #ffffff;
+      font-family : Poppins_Liht;
+      font-size : 1.3rem;
+    }
+    input::placeholder {
+      color: #ffffff;
+      font-family : Poppins_Light;
+      font-size : 1.2rem;
+    }
+    input[type="number"]::-webkit-outer-spin-button,
+    input[type="number"]::-webkit-inner-spin-button {
+        -webkit-appearance: none;
+        margin: 0;
+    }
+    button {
+      width : 7rem;
+      height : 3.8rem;
+      border-radius : 1.3rem;
+      align-items : center;
+      color :#ffffff;
+      background-color : none;
+      font-family : Poppins_Bold;
+      font-size : 1.5rem;
+    }
+
+  }
 `
 
 export const UserProfileLayout = styled.div`
@@ -192,6 +233,7 @@ export const UserProfileHeader = styled.div`
   display: flex;
   margin-bottom: 2.5rem;
 `
+
 export const UserProfileAccount = styled.div`
   display: flex;
   flex: 1;
@@ -206,20 +248,7 @@ export const UserProfileAccount = styled.div`
     letter-spacing : 0.2rem;
     text-align: right;
   }
-  
-  p {
-    margin-left: 3rem;
-    width: 10rem;
-    border-radius: 5rem;
-    background-color : ${props => props.theme.colors.bronze};
-    color: #ffffff;
-    font-family: "Poppins_SemiBold";
-    font-size: 1rem;
-    letter-spacing : 0.1rem;
-    padding : 0.4rem 0;
-    text-align: center;
-    transition: ease-in-out 250ms background, ease-in-out 250ms color;
-  }
+
 `
 
 export const UserProfileStats = styled.div`
@@ -239,6 +268,17 @@ export const UserProfileStat = styled.div`
     border-right: none;
   }
   align-items : center;
+
+  .slash {
+    width: 1rem;
+    height: 5rem;
+    background: linear-gradient(
+      to bottom right,
+      #fff calc(50% - 1px),
+      #BEBEBE,
+      #fff calc(50% + 1px)
+    );
+  }
 `
 
 export const UserProfileIcon = styled.div`
@@ -267,6 +307,12 @@ export const UserProfileIcon = styled.div`
   &.profile--rival {
     color : ${props => props.theme.colors.profileRival};
   }
+  &.profile--correct {
+    color : ${props => props.theme.colors.profileCorrect};
+  }
+  &.profile--wrong {
+    color : ${props => props.theme.colors.profileWrong};
+  }
   `
   
   export const UserProfileKey = styled.div`
@@ -280,4 +326,24 @@ export const UserProfileIcon = styled.div`
   &.profile--rival {
     color : ${props => props.theme.colors.profileRival};
   }
+  &.profile--correct {
+    color : ${props => props.theme.colors.profileCorrect};
+  }
+  &.profile--wrong {
+    color : ${props => props.theme.colors.profileWrong};
+  }
+`
+
+export const TierBadgeBox = styled.p`
+  background-color : ${props => props.bojTierColor};
+  width : 5rem;
+  margin-left: 3rem;
+  width: 8rem;
+  border-radius: 5rem;
+  color: #ffffff;
+  font-family: "Poppins_SemiBold";
+  font-size: 1rem;
+  letter-spacing : 0.1rem;
+  padding : 0.4rem 0;
+  text-align: center;
 `

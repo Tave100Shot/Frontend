@@ -22,6 +22,7 @@ import { useDispatch } from "react-redux";
 import { SetTheme } from "./redux/actions/solutionAction";
 import Modal from 'react-modal';
 import MobilePage from "./pages/main/mobilePage";
+import Test from "./pages/test";
 
 function App() {
   Modal.setAppElement('#root');
@@ -132,6 +133,11 @@ function App() {
             <Route path='/community/post/:postId/edit' element={<MobilePage />} />
           ) : (
             <Route path='/community/post/:postId/edit' element={<PostEditPage/>}/>
+            )}
+          {isMobile ? (
+            <Route path='/health-front' element={<MobilePage />} />
+          ) : (
+            <Route path='/health-front' element={<Test/>}/>
             )}
         </Routes>
       </ThemeProvider>

@@ -57,7 +57,7 @@ const Header = ({ click}) => {
   return (
     <h.HeaderWrapper>
       <h.LogoWrapper className="logo">
-        <img src={mainLogo} />
+        <img src={mainLogo} alt="안녕" />
         <button onClick={click}>백발백준</button>
       </h.LogoWrapper>
       <h.MenuWrapper className="menu">

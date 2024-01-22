@@ -8,12 +8,12 @@ const MobilePage = () => {
   return (
     <m.MobileContainer>
       <m.IconContainer>
-        <img src={icon}/>
+        <img src={icon} alt="안녕"/>
         <h3>백발백준</h3>
       </m.IconContainer>
       <m.ImageContainer>
-        <img src={iphone} className="iphone"/>
-        <img src={galaxy} className="galaxy"/>
+        <img src={iphone} className="iphone" alt="안녕"/>
+        <img src={galaxy} className="galaxy" alt="안녕"/>
       </m.ImageContainer>
       <m.TextContainer>
         <h3>백발백준은 모바일 뷰를 지원하지 않습니다</h3>

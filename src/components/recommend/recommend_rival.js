@@ -1,5 +1,4 @@
 import * as r from "../../styles/recommendProblemStyle";
-import { GrPowerReset } from "react-icons/gr";
 
 const RecommendByRival = () => {
 

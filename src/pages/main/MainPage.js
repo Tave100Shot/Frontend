@@ -1,13 +1,11 @@
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import Header from "../../components/common/Header";
 import MainButton from "../../components/main/mainButton";
 import TaveAnimation from "../../components/main/tave_animation";
 import * as w from "../../styles/mainPageStyle";
-import Modal from 'react-modal';
-import account_white from "../../assets/imgs/verified-account-white.png"
 import AddAuthModal from "../../components/main/addAuthModal";
-import { useHistory , useLocation, useNavigate } from "react-router-dom";
-import { SetModal, SetToken, SetTwoFactorAuthStatus } from "../../redux/actions/mainAction";
+import {  useLocation, useNavigate } from "react-router-dom";
+import { SetModal, SetToken } from "../../redux/actions/mainAction";
 import { useDispatch, useSelector } from "react-redux";
 import AltButton from "../../components/main/altButton";
 

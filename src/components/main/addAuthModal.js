@@ -1,5 +1,5 @@
 import Modal from 'react-modal';
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import * as m from "../../styles/loginModalStyle"
 import { SetModal, SetTwoFactorAuthStatus } from "../../redux/actions/mainAction";
 

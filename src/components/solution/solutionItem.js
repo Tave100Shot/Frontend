@@ -1,9 +1,4 @@
 import * as s from "../../styles/solutionStyle";
-import naver from "../../assets/imgs/naverIcon.png"
-import github from "../../assets/imgs/githubBlog.png"
-import verlog from "../../assets/imgs/verlogIcon.png"
-import person from "../../assets/imgs/personIcon.png"
-import tistory from "../../assets/imgs/tistoryIcon.png"
 import { useEffect, useState } from "react";
 
 

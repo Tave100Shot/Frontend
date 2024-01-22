@@ -1,8 +1,6 @@
-import Sky from "../../assets/imgs/recommend_sky.jpg"
 import { TfiBarChart } from "react-icons/tfi";
 import { AiOutlineTeam } from "react-icons/ai";
 import * as r from "../../styles/RecommendMainStyle";
-import { useSelector } from "react-redux";
 import TierBadge from "./tierBadge";
 
 

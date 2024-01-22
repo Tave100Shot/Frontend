@@ -1,17 +1,15 @@
-import styled from "styled-components";
 import { useNavigate, useLocation } from "react-router-dom";
-import React, { useState, useRef } from "react";
+import React, { useState } from "react";
 import {
-  FirstContainer, MainContainer, GridContainer, LevelBox, Typography, LevelTypography, Description,
-  HorizontalLine, EnterButton, TypographyDcp, LockedButton
+  FirstContainer, MainContainer, Typography,
+  HorizontalLine
 } from '../../styles/CommunityStyle';
 import Header from "../../components/common/Header";
 import axios from "axios";
 import * as c from "../../styles/communityPostStyle";
-import {Link} from 'react-router-dom';
 
 
-const PostEditPage = ({ onSuccess }) => {
+const PostEditPage = () => {
 
   const { state } = useLocation();
   const { postDetails = {} } = state || {};

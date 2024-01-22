@@ -1,5 +1,5 @@
 import { FirstContainer, MainContainer, GridContainer, LevelBox, Typography, LevelTypography, Description,
-  HorizontalLine, EnterButton, TypographyDcp,LockedButton  } from '../../styles/CommunityStyle';
+  HorizontalLine, EnterButton, TypographyDcp  } from '../../styles/CommunityStyle';
 import Header from "../../components/common/Header";
 import {useNavigate} from 'react-router-dom';
 

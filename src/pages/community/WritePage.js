@@ -1,9 +1,8 @@
-import styled from "styled-components";
 import { useNavigate } from "react-router-dom";
 import React, { useState, useRef } from "react";
 import {
-  FirstContainer, MainContainer, GridContainer, LevelBox, Typography, LevelTypography, Description,
-  HorizontalLine, EnterButton, TypographyDcp, LockedButton
+  FirstContainer, MainContainer, Typography,
+  HorizontalLine
 } from '../../styles/CommunityStyle';
 import Header from "../../components/common/Header";
 import * as c from "../../styles/communityPostStyle";
@@ -18,7 +17,6 @@ const WritePage = () => {
   const [content, setContent] = useState("");
   const [attachmentFile, setAttachmentFile] = useState(null);
   const [selectedFileContainers, setSelectedFileContainers] = useState([]);
-  const apiUrl = "https://api.100shot.net/api/post";
 
   const titleChange = (e) => setTitle(e.target.value);
   const contentChange = (e) => setContent(e.target.value);

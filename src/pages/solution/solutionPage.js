@@ -5,7 +5,6 @@ import * as s from "../../styles/solutionStyle";
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect, useState } from "react";
 import SolutionItem from "../../components/solution/solutionItem";
-import { GrPowerReset } from "react-icons/gr";
 import axios from "axios";
 import { SetSearch, SetSolution } from "../../redux/actions/solutionAction";
 

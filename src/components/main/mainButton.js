@@ -1,7 +1,5 @@
 import * as b from "../../styles/mainButtonStyle";
 import lockIcon from '../../assets/imgs/lock_icon.png'
-import unLockIcon from '../../assets/imgs/unLock_icon.png'
-import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { SetModal } from "../../redux/actions/mainAction";
 import { useDispatch } from "react-redux";

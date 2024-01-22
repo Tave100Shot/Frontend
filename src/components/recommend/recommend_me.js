@@ -1,11 +1,10 @@
 import * as r from "../../styles/recommendProblemStyle";
-import { useSelector, useDispatch } from "react-redux";
+import { useSelector } from "react-redux";
 import { useState } from "react";
 import TierBadge from "./tierBadge";
 
 const RecommendByMe = () => {
   const byMeProblemList = useSelector((state) => state.byMeProblemList);
-  const dispatch = useDispatch();
   
   const [showFirstProblems, setShowFirstProblems] = useState(true);
   const [showSecondProblems, setShowSecondProblems] = useState(false);

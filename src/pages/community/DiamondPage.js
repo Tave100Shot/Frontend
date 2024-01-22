@@ -1,14 +1,12 @@
 import {
-  MainContainer, FirstContainer, Typography, Description,
-  HorizontalLine, EnterButton
+  MainContainer, FirstContainer, Typography,
+  HorizontalLine
 } from "../../styles/CommunityStyle"
 import Header from "../../components/common/Header";
 import { useNavigate } from "react-router-dom";
 import search_white from '../../assets/imgs/search_white.png'
-import WritePage from "./WritePage";
 import { useEffect, useState } from "react";
 import axios from "axios";
-import { useHistory } from "react-router-dom";
 import * as c from "../../styles/communityPostStyle";
 
 

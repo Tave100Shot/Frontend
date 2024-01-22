@@ -1,6 +1,5 @@
 import * as b from "../../styles/mainButtonStyle";
 import { SetModal } from "../../redux/actions/mainAction";
-import { useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
 
 const AltButton = () => {

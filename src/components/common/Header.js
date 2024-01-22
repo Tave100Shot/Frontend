@@ -2,7 +2,7 @@ import * as h from "../../styles/headerStyle";
 import mainLogo from '../../assets/imgs/100shot_icon.png';
 import { useLocation, useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import { SetModal, SetToken } from "../../redux/actions/mainAction";
 
 const Header = ({ click}) => {

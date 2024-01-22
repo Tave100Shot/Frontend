@@ -52,10 +52,9 @@ const AddAuthModal = ({isOpen, onRequestClose}) => {
   const setTier = async () => {
     // console.log("내 토큰 : ", storedToken);
     // console.log("내 토큰 : ", `Bearer ${storedToken}`);
-    const apiUrl='http://43.200.95.44:8080/authorization';
 
     try {
-      const response = await axios.get('/authorization', {
+      const response = await axios.get('/api/authorization', {
         headers : {
           Authorization : `Bearer ${storedToken}`
         }

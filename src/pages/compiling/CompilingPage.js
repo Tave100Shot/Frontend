@@ -34,7 +34,7 @@ const CompilingPage = ({theme}) => {
     setCurrentValue(innerText);
   };
   const handleSearchClick = () => {
-    setProblemTitle(`백준 ${questionNumber}번 어린 왕자`);
+    setProblemTitle(`백준 ${questionNumber}번`);
     setInfoContainerVisible(true);
   };
   const handleKeyPress = (e) => {
@@ -67,47 +67,26 @@ const CompilingPage = ({theme}) => {
             </c.QNumberContainer>
             <c.QContainer>
               문제 설명
-              <div>서기 2012년! 드디어 2년간 수많은 국민들을 기다리게 한 게임 ACM Craft (Association of Construction Manager Craft)가 발매되었다.
-                이 게임은 지금까지 나온 게임들과는 다르게 ACM크래프트는 다이나믹한 게임 진행을 위해 건물을 짓는 순서가 정해져 있지 않다. 즉, 첫 번째 게임과 두 번째 게임이 건물을 짓는 순서가 다를 수도 있다. 매 게임시작 시 건물을 짓는 순서가 주어진다. 또한 모든 건물은 각각 건설을 시작하여 완성이 될 때까지 Delay가 존재한다.
-                서기 2012년! 드디어 2년간 수많은 국민들을 기다리게 한 게임 ACM Craft (Association of Construction Manager Craft)가 발매되었다.
-                이 게임은 지금까지 나온 게임들과는 다르게 ACM크래프트는 다이
-                서기 2012년! 드디어 2년간 수많은 국민들을 기다리게 한 게임 ACM Craft (Association of Construction Manager Craft)가 발매되었다.
-                이 게임은 지금까지 나온 게임들과는 다르게 ACM크래프트는 다이서기 2012년! 드디어 2년간 수많은 국민들을 기다리게 한 게임 ACM Craft (Association of Construction Manager Craft)가 발매되었다.
-                이 게임은 지금까지 나온 게임들과는 다르게 ACM크래프트는 다이
-                서기 2012년! 드디어 2년간 수많은 국민들을 기다리게 한 게임 ACM Craft (Association of Construction Manager Craft)가 발매되었다.
-                이 게임은 지금까지 나온 게임들과는 다르게 ACM크래프트는 다이
-                서기 2012년! 드디어 2년간 수많은 국민들을 기다리게 한 게임 ACM Craft (Association of Construction Manager Craft)가 발매되었다.
-                이 게임은 지금까지 나온 게임들과는 다르게 ACM크래프트는 다이
-                서기 2012년! 드디어 2년간 수많은 국민들을 기다리게 한 게임 ACM Craft (Association of Construction Manager Craft)가 발매되었다.
-                이 게임은 지금까지 나온 게임들과는 다르게 ACM크래프트는 다이</div>
+              <div></div>
             </c.QContainer>
             <c.IContainer>
               입력
-              <div>첫째 줄에는 테스트케이스의 개수 T가 주어진다. 각 테스트 케이스는 다음과 같이 주어진다. 첫째 줄에 건물의 개수 N과 건물간의 건설순서 규칙의 총 개수 K이 주어진다. (건물의 번호는 1번부터 N번까지 존재한다)
-                둘째 줄에는 각 건물당 건설에 걸리는 시간 D1, D2, ..., DN이 공백을 사이...</div>
+              <div></div>
             </c.IContainer>
             <c.OContainer>
               출력
-              <div>첫째 줄에는 테스트케이스의 개수 T가 주어진다. 각 테스트 케이스는 다음과 같이 주어진다. 첫째 줄에 건물의 개수 N과 건물간의 건설순서 규칙의 총 개수 K이 주어진다. (건물의 번호는 1번부터 N번까지 존재한다) </div>
+              <div></div>
             </c.OContainer>
             <c.EContainer>
               입출력 예시
               <div>입력 #1</div>
               <c.ExampleBox style={{ whiteSpace: 'pre-line' }}>
                 <p>
-                  {`2
-                4 4
-                10 1 100 10
-                1 2`}
                 </p>
               </c.ExampleBox>
               <div>출력 #1</div>
               <c.ExampleBox style={{ whiteSpace: 'pre-line' }}>
                 <p>
-                  {`2
-                  4 4
-                  10 1 100 10
-                  1 2`}
                 </p>
               </c.ExampleBox>
             </c.EContainer>

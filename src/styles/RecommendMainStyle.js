@@ -336,9 +336,8 @@ export const UserProfileIcon = styled.div`
 
 export const TierBadgeBox = styled.p`
   background-color : ${props => props.bojTierColor};
-  width : 5rem;
+  width : 8rem;
   margin-left: 3rem;
-  width: 8rem;
   border-radius: 5rem;
   color: #ffffff;
   font-family: "Poppins_SemiBold";

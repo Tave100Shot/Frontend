@@ -29,6 +29,7 @@ const RecommendPage = () => {
       }
     })
       .then(response => {
+        console.log(response.data.result.result);
         localStorage.setItem('userRightNum', response.data.result.rightCnt);
         localStorage.setItem('userWrongNum', response.data.result.wrongCnt);
         localStorage.setItem('userRank', response.data.result.userRank);
@@ -45,7 +46,12 @@ const RecommendPage = () => {
   const moveToRecommendLatest = () => {
     const storedToken = localStorage.getItem('accessToken');
 
-    axios.get('/api/v1/recommend/rival', {
+    if (recentProblem === "") {
+      alert("최근에 푼 1개의 문제 번호를 입력해주세요 :)");
+      return;
+    }
+
+    axios.get(`/api/v1/recommend/problem?solvedRecentId=${recentProblem}`, {
       headers : {
         Authorization : `Bearer ${storedToken}`
       }

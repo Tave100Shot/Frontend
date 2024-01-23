@@ -23,7 +23,7 @@ const TierBadge = ({bojTier}) => {
     }
   };
   const bojTierColor = getBackgroundColor(bojTier);
-  console.log("티어 색 : ", bojTierColor);
+  // console.log("티어 색 : ", bojTierColor);
 
   return (
     <t.TierBadgeBox bojTierColor={bojTierColor}>

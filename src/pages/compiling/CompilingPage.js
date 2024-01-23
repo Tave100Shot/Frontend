@@ -7,13 +7,14 @@ import AceEditor from "react-ace";
 
 import "ace-builds/src-noconflict/mode-java";
 import "ace-builds/src-noconflict/theme-github";
+import "ace-builds/src-noconflict/theme-monokai";
 import "ace-builds/src-noconflict/ext-language_tools";
 
 function onChange(newValue) {
   console.log("change", newValue);
 }
 
-const CompilingPage = () => {
+const CompilingPage = ({theme}) => {
   const navigate = useNavigate();
 
   const moveToMain = () => {
@@ -67,7 +68,18 @@ const CompilingPage = () => {
             <c.QContainer>
               문제 설명
               <div>서기 2012년! 드디어 2년간 수많은 국민들을 기다리게 한 게임 ACM Craft (Association of Construction Manager Craft)가 발매되었다.
-                이 게임은 지금까지 나온 게임들과는 다르게 ACM크래프트는 다이나믹한 게임 진행을 위해 건물을 짓는 순서가 정해져 있지 않다. 즉, 첫 번째 게임과 두 번째 게임이 건물을 짓는 순서가 다를 수도 있다. 매 게임시작 시 건물을 짓는 순서가 주어진다. 또한 모든 건물은 각각 건설을 시작하여 완성이 될 때까지 Delay가 존재한다.</div>
+                이 게임은 지금까지 나온 게임들과는 다르게 ACM크래프트는 다이나믹한 게임 진행을 위해 건물을 짓는 순서가 정해져 있지 않다. 즉, 첫 번째 게임과 두 번째 게임이 건물을 짓는 순서가 다를 수도 있다. 매 게임시작 시 건물을 짓는 순서가 주어진다. 또한 모든 건물은 각각 건설을 시작하여 완성이 될 때까지 Delay가 존재한다.
+                서기 2012년! 드디어 2년간 수많은 국민들을 기다리게 한 게임 ACM Craft (Association of Construction Manager Craft)가 발매되었다.
+                이 게임은 지금까지 나온 게임들과는 다르게 ACM크래프트는 다이
+                서기 2012년! 드디어 2년간 수많은 국민들을 기다리게 한 게임 ACM Craft (Association of Construction Manager Craft)가 발매되었다.
+                이 게임은 지금까지 나온 게임들과는 다르게 ACM크래프트는 다이서기 2012년! 드디어 2년간 수많은 국민들을 기다리게 한 게임 ACM Craft (Association of Construction Manager Craft)가 발매되었다.
+                이 게임은 지금까지 나온 게임들과는 다르게 ACM크래프트는 다이
+                서기 2012년! 드디어 2년간 수많은 국민들을 기다리게 한 게임 ACM Craft (Association of Construction Manager Craft)가 발매되었다.
+                이 게임은 지금까지 나온 게임들과는 다르게 ACM크래프트는 다이
+                서기 2012년! 드디어 2년간 수많은 국민들을 기다리게 한 게임 ACM Craft (Association of Construction Manager Craft)가 발매되었다.
+                이 게임은 지금까지 나온 게임들과는 다르게 ACM크래프트는 다이
+                서기 2012년! 드디어 2년간 수많은 국민들을 기다리게 한 게임 ACM Craft (Association of Construction Manager Craft)가 발매되었다.
+                이 게임은 지금까지 나온 게임들과는 다르게 ACM크래프트는 다이</div>
             </c.QContainer>
             <c.IContainer>
               입력
@@ -107,14 +119,14 @@ const CompilingPage = () => {
           <c.CodeEditor>
             <AceEditor
               mode="java"
-              theme="tomorrow"
+              theme={theme.colors.compiler}
               onChange={onChange}
               name="UNIQUE_ID_OF_DIV"
               editorProps={{ $blockScrolling: true }}
               placeholder={`team_member = input(“팀원 이름을 입력하시오 : “)
             \n print(f”안녕하세요 {team_member}님 백발백준 사이트입니다”)`}
               fontSize={16}
-              style={{ width: '38em', height: '30em' }}
+              style={{ width: '100%', height: '90%' }}
             />
             <c.ButtonContainer>
               <s.SelectBox onClick={() => setShowOptions((prev) => !prev)} show={showOptions}>
@@ -137,7 +149,12 @@ const CompilingPage = () => {
           </c.CodeEditor>
           <c.ExecutionResult>
             실행 결과 
-            {isCompiling  && <button>채점 중</button>}
+            {isCompiling  && 
+            <>
+            <button>채점 중</button>
+            <c.AnswerButton>맞았습니다!</c.AnswerButton>
+            <c.WrongButton>틀렸습니다!</c.WrongButton>
+            </>}
           </c.ExecutionResult>
         </c.CompileContainer>
       </c.MainContainer>

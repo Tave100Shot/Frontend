@@ -1,3 +1,4 @@
+//WRITEGold
 import styled from "styled-components";
 import { useNavigate } from "react-router-dom";
 import React, { useState, useRef } from "react";
@@ -9,7 +10,7 @@ import Header from "../../components/common/Header";
 import * as c from "../../styles/communityPostStyle";
 import axios from "axios";
 
-const WritePage = () => {
+const WriteGoldPage = () => {
   const navigate = useNavigate();
   const moveToMain = () => {
     navigate('/');
@@ -69,7 +70,7 @@ const WritePage = () => {
 
     formData.append('title', title);
     formData.append('content', content);
-    formData.append('postTier', 'BronzeSilver');
+    formData.append('postTier', 'Gold');
     for (let i = 0; i < attachmentFiles.length; i++) {
       formData.append('attachmentFile', attachmentFiles[i]);
     }
@@ -83,8 +84,7 @@ const WritePage = () => {
       .then(res => {
         console.log(res);
         console.log(res.data);
-        navigate("/community/bronze");
-
+        navigate("/community/gold");
       })
       .catch(error => console.log(error))
   }
@@ -141,7 +141,7 @@ const WritePage = () => {
               )}
             </c.FilesContainer>
             <c.ButtonContainer>
-              <c.CancelButton onClick={() => { navigate("/community/bronze") }}>취소</c.CancelButton>
+              <c.CancelButton onClick={() => { navigate("/community/gold") }}>취소</c.CancelButton>
               <c.UploadButton onClick={onSubmit}>업로드</c.UploadButton>
             </c.ButtonContainer>
           </form>
@@ -152,4 +152,4 @@ const WritePage = () => {
 };
 
 
-export default WritePage;
+export default WriteGoldPage;

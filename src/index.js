@@ -5,7 +5,7 @@ import { Provider } from 'react-redux';
 import store from './store';
 import axios  from 'axios';
 
-axios.defaults.baseURL = "https://api.100shot.net";
+axios.defaults.baseURL = "http://43.200.95.44:8080";
 axios.defaults.withCredentials = true;
 
 const root = ReactDOM.createRoot(document.getElementById('root'));

@@ -1,26 +1,44 @@
 import {
-  MainContainer, FirstContainer, Typography,
-  HorizontalLine
+  MainContainer, FirstContainer, Typography, Description,
+  HorizontalLine, EnterButton
 } from "../../styles/CommunityStyle"
 import Header from "../../components/common/Header";
 import { useNavigate } from "react-router-dom";
 import search_white from '../../assets/imgs/search_white.png'
+import WritePage from "./WritePage";
 import { useEffect, useState } from "react";
 import axios from "axios";
+import { useHistory } from "react-router-dom";
 import * as c from "../../styles/communityPostStyle";
 
 
 
 const GoldPage = () => {
+  const bojTier = localStorage.getItem('bojTier');
   const navigate = useNavigate();
   const moveToMain = () => {
     navigate('/');
   }
 
-  const handleEnterClick = () => {
-    navigate("/community/write");
+  const handleWriteClick = () => {
+    navigate("/community/gold/write");
 
   };
+  const handleEnterClick = (e) => {
+    e.preventDefault();
+    handleSearch();
+  };
+
+  const handleSearch = () => {
+    // 검색어를 이용하여 게시판 제목을 필터링
+    const results = posts.filter(post =>
+      post.title.toLowerCase().includes(searchTerm.toLowerCase())
+    );
+
+    setSearchResults(results);
+  };
+  const [searchTerm, setSearchTerm] = useState('');
+  const [searchResults, setSearchResults] = useState([]);
 
   const ViewPost = ({ post }) => {
     const postId = post.postId;
@@ -84,6 +102,8 @@ const GoldPage = () => {
     setCurrentPage(pageNumber);
   };
 
+  const isTierAllowed = ["GOLD", "PLATINUM", "DIAMOND", "RUBY", "MASTER"].includes(bojTier?.toUpperCase());
+
   return (
     <div>
       <Header click={moveToMain} />
@@ -101,7 +121,7 @@ const GoldPage = () => {
                 ></input>
               </c.SearchInputBox>
               <button onClick={handleEnterClick}>SEARCH</button>
-              {/* <c.WriteButton onClick={handleEnterClick}>작성하기</c.WriteButton> */}
+              {isTierAllowed && <c.WriteButton onClick={handleWriteClick}>작성하기</c.WriteButton>}
             </c.SearchBarContainer>
             </c.WrapContainer>
             <c.HeaderBulletin>

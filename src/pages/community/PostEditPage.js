@@ -1,15 +1,17 @@
+import styled from "styled-components";
 import { useNavigate, useLocation } from "react-router-dom";
-import React, { useState } from "react";
+import React, { useState, useRef } from "react";
 import {
-  FirstContainer, MainContainer, Typography,
-  HorizontalLine
+  FirstContainer, MainContainer, GridContainer, LevelBox, Typography, LevelTypography, Description,
+  HorizontalLine, EnterButton, TypographyDcp, LockedButton
 } from '../../styles/CommunityStyle';
 import Header from "../../components/common/Header";
 import axios from "axios";
 import * as c from "../../styles/communityPostStyle";
+import {Link} from 'react-router-dom';
 
 
-const PostEditPage = () => {
+const PostEditPage = ({ onSuccess }) => {
 
   const { state } = useLocation();
   const { postDetails = {} } = state || {};
@@ -17,7 +19,6 @@ const PostEditPage = () => {
   console.log('postDetails:', postDetails);
   const postId = postDetails.postId;
   const storedToken = localStorage.getItem('accessToken')
-
 
   const [newData, setNewData] = useState({
     title: postDetails.title,
@@ -142,15 +143,15 @@ const PostEditPage = () => {
             </c.ContentContainer>
             <c.FileContainer>
               <div>파일 첨부</div>
-              <label htmlFor="attachmentFile">File Upload
+              <label htmlFor="attachmentFile">Unable To Change Files
               </label>
-              <input
+              {/* <input
                 id="attachmentFile"
                 type="file"
                 name="attachmentFile"
                 accept="*"
                 multiple
-                onChange={handleFileChange} />
+                onChange={handleFileChange} /> */}
             </c.FileContainer>
             <c.FileContainer>
                 {postDetails.imageUrls.map((image, index) => (

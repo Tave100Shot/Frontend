@@ -1,3 +1,4 @@
+//communitystyle.js
 import styled, {keyframes } from "styled-components";
 
 export const Header = styled.header`
@@ -12,7 +13,7 @@ export const Header = styled.header`
     right: 0;
 `;
 export const TypographyDcp = styled.div`
-  color: #000;
+  color: ${props => props.theme.colors.colorMain};
   font-family: 'Poppins';
   font-size: 1.5rem;
   font-style: normal;
@@ -29,7 +30,7 @@ export const MainContainer = styled.div`
     width: 100vw;
     //background-color: #E6FADE;
     margin: 0 auto;
-    margin-top: 50px;
+    margin-top: 20px;
 
     @media screen and (max-width: 500px) {
     flex-direction: column;
@@ -61,21 +62,24 @@ export const GridContainer = styled.div`
 
 export const LevelBox = styled.div`
   max-width: 55wv;
-  height: 22rem;
+  height: 25rem;
   flex-shrink: 0;
   border-radius: 3rem;
-  background: rgba(145, 209, 250, 0.6);
+  border: 0.1rem solid ${props => props.theme.colors.levelboxBorder};
+  background: ${props => props.theme.colors.levelbox};
   position: relative;
   display: flex;
   justify-content: center; /* 가로 중앙 정렬 */
   align-items: center;
+  box-shadow: 0 4px 5px rgba(0, 0, 0, 0.1); /* 그림자 추가 */
+  transition: background 0.3s ease;
   &:hover {
-    background : #91D1FA;
+    background : ${props => props.theme.colors.colorAccentHover};
   }
 `;
 
 export const Typography = styled.div`
-  color: #000;
+  color: ${props => props.theme.colors.colorMain};
   font-family: 'Poppins';
   font-size: 2.5rem;
   font-style: normal;
@@ -84,37 +88,37 @@ export const Typography = styled.div`
 `;
 
 export const LevelTypography = styled.div`
-  color: #000;
+  color: ${props => props.theme.colors.colorMain};
   width: 30vw;
   font-family: 'Audiowide';
-  font-size: 3.3rem;
+  font-size: 3.7rem;
   font-style: normal;
   font-weight: 400;
   line-height: normal;
   position: absolute;
   top: 0;
   left: 0;
-  margin-top: 3rem;
+  margin-top: 4rem;
   margin-left: 5rem;
 `;
 
 export const Description = styled.div`
   width: 22vw;
   height: 6rem;
-  color: #000;
+  color: ${props => props.theme.colors.colorMain};
   font-family: 'Poppins';
-  font-size: 1.5rem;
+  font-size: 1.8rem;
   font-style: normal;
   line-height: normal;
   position: absolute;
-  top: 10rem;
+  top: 11rem;
   left: 5.1rem;
 `;
 
 export const HorizontalLine = styled.div`
   width: 100%;
   height: 0.05rem;
-  background-color: #000;
+  background-color: ${props => props.theme.colors.colorMain};
 `;
 
 export const fadeIn = keyframes`
@@ -134,7 +138,7 @@ export const EnterButton = styled.button`
     align-items: center;
     gap: 1rem;
     flex-shrink: 0;
-    background-color: #fff;
+    background-color: ${props => props.theme.colors.enterButton};
     border-radius : 10rem;
     border: none;
     position: absolute;

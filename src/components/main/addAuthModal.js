@@ -74,8 +74,9 @@ const AddAuthModal = ({isOpen, onRequestClose}) => {
       if(storedToken === null) {
         alert("로그인 이후 2차 인증을 진행해주세요");
       }
+      // console.log(error);
       const errorCode = error.response.data.errorCode;
-      console.log(errorCode);
+      // console.log(errorCode);
       if(errorCode === 'SOLVED_5001') {
         alert("Solved API 서버에서 오류가 발생했습니다. 어느 시간이 지난 후 다시 시도해주세요.");
       }

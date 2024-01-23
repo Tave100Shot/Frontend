@@ -51,7 +51,11 @@ export const ProblemMeBox = styled.div`
     margin : 0.5rem 0;
   }
   h3 {
-    font-size : 1.9rem;
+    font-size : 1.7rem;
+    margin : 0 0 0.5rem 0;
+  }
+  span {
+    height : 3.9rem;
   }
   `
   export const ProblemTitleBox = styled.div`

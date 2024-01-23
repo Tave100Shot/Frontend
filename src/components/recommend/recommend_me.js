@@ -47,62 +47,90 @@ const RecommendByMe = () => {
       <r.ProblemContainer>
         {/* 첫 번째 범위의 문제들 */}
         {showFirstProblems &&
-          firstProblems.map((problem, index) => (
-            <r.ProblemMeBox key={index}>
-              <r.ProblemTitleBox>
-                <h3>{problem}</h3>
-                <TierBadge 
-                  bojTier="BRONZE"
-                />
-              </r.ProblemTitleBox>
-              <hr/>
-              <h3>{problem}</h3>
+        firstProblems.map((problem, index) => (
+          <r.ProblemMeBox key={index}>
+            <r.ProblemTitleBox>
+              <h3>{problem.problemId}</h3>
+              <TierBadge 
+                bojTier={problem.tier}
+              />
+            </r.ProblemTitleBox>
+            <hr/>
+            <h3>{problem.title}</h3>
+            <p>
+              {problem.bojTag.map((tag, index) => (
+                <span key={index}>
+                  #{tag}{' '}
+                </span>
+              ))}
+            </p>
+          </r.ProblemMeBox>
+        ))}
 
-            </r.ProblemMeBox>
-          ))}
 
         {/* 두 번째 범위의 문제들 */}
         {showSecondProblems &&
           secondProblems.map((problem, index) => (
             <r.ProblemMeBox key={index}>
-              <r.ProblemTitleBox>
-                <h3>{problem}</h3>
-                <TierBadge 
-                  bojTier="MASTER"
-                />
-              </r.ProblemTitleBox>
-              <hr/>
-              <h3>{problem}</h3>
-            </r.ProblemMeBox>
+            <r.ProblemTitleBox>
+              <h3>{problem.problemId}</h3>
+              <TierBadge 
+                bojTier={problem.tier}
+              />
+            </r.ProblemTitleBox>
+            <hr/>
+            <h3>{problem.title}</h3>
+            <p>
+              {problem.bojTag.map((tag, index) => (
+                <span key={index}>
+                  #{tag}{' '}
+                </span>
+              ))}
+            </p>
+          </r.ProblemMeBox>
           ))}
 
         {/* 세 번째 범위의 문제들 */}
         {showThirdProblems &&
           thirdProblems.map((problem, index) => (
             <r.ProblemMeBox key={index}>
-              <r.ProblemTitleBox>
-                <h3>{problem}</h3>
-                <TierBadge 
-                  bojTier="PLATINUM"
-                />
-              </r.ProblemTitleBox>
-              <hr/>
-              <h3>{problem}</h3>
-            </r.ProblemMeBox>
+            <r.ProblemTitleBox>
+              <h3>{problem.problemId}</h3>
+              <TierBadge 
+                bojTier={problem.tier}
+              />
+            </r.ProblemTitleBox>
+            <hr/>
+            <h3>{problem.title}</h3>
+            <p>
+              {problem.bojTag.map((tag, index) => (
+                <span key={index}>
+                  #{tag}{' '}
+                </span>
+              ))}
+            </p>
+          </r.ProblemMeBox>
           ))}
         {/* 네 번째 범위의 문제들 */}
         {showFourthProblems &&
           fourthProblems.map((problem, index) => (
             <r.ProblemMeBox key={index}>
-              <r.ProblemTitleBox>
-                <h3>{problem}</h3>
-                <TierBadge 
-                  bojTier="GOLD"
-                />
-              </r.ProblemTitleBox>
-              <hr/>
-              <h3>{problem}</h3>
-            </r.ProblemMeBox>
+            <r.ProblemTitleBox>
+              <h3>{problem.problemId}</h3>
+              <TierBadge 
+                bojTier={problem.tier}
+              />
+            </r.ProblemTitleBox>
+            <hr/>
+            <h3>{problem.title}</h3>
+            <p>
+              {problem.bojTag.map((tag, index) => (
+                <span key={index}>
+                  #{tag}{' '}
+                </span>
+              ))}
+            </p>
+          </r.ProblemMeBox>
           ))}
       </r.ProblemContainer>
     </div>

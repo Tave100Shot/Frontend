@@ -29,6 +29,7 @@ const RecommendPage = () => {
       }
     })
       .then(response => {
+        console.log(response.data.result.result);
         localStorage.setItem('userRightNum', response.data.result.rightCnt);
         localStorage.setItem('userWrongNum', response.data.result.wrongCnt);
         localStorage.setItem('userRank', response.data.result.userRank);

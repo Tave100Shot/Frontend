@@ -13,19 +13,21 @@ export const WrapContainer = styled.div`
   display: flex;
   justify-content: space-between;
   width: 100%;
+  //background-color: red;
 `;
 
 export const SearchBarContainer = styled.form`
   display : flex;
-  width : 80vw;
+  width : 70vw;
   height : 8rem;
   //margin : 2rem auto;
   //padding : 0 1rem;  
   align-items : center;
   //justify-content : space-around;
+  //background-color: red;
 
   button {
-    width : 12rem;
+    width : 10em;
     height : 5rem;
     padding : 0 1rem;
     border-radius : 1.3rem;
@@ -73,16 +75,15 @@ export const SearchInputBox = styled.div`
 `
 
 export const WriteButton = styled.div`
-  width: 10em;
+  width: 11em;
   height: 5rem;
-  flex-shrink: 0;
+  //flex-shrink: 0;
   border-radius: 1rem;
-  border : 0.3rem solid #91D1FA;
-  background : #fff;
-  margin: 10px;
-  position: absolute;
-  right: 5em;
-  color: #91D1FA;
+  border : 0.3rem solid ${props => props.theme.colors.colorAccent};
+  background : ${props => props.theme.colors.colorBg};
+  margin: 1em 0 1em 0 ;
+  display: flex;
+  color: ${props => props.theme.colors.colorAccent};
   font-size: 1.5rem;
   font-family: Poppins;
   font-weight: 600;
@@ -93,8 +94,15 @@ export const WriteButton = styled.div`
   cursor : pointer;
 `;
 
+export const PaginationContainer = styled.div`
+//background-color: yellow;
+width: 100%;
+height: 3em;
+position: relative;
+`
+
 export const Pagination = styled.div`
-  position: fixed;
+  position: relative;
   bottom: 10px; 
   left: 50%;
   transform: translateX(-50%);
@@ -103,19 +111,19 @@ export const Pagination = styled.div`
   margin-top: 20px;
 
   button {
-    margin: 0 5px;
-    padding: 8px 12px;
-    background-color: #91D1FA;
-    color: #fff;
+    margin: 8px;
+    width: 35px;
+    height: 35px;
+    //padding: 1rem 1.4rem;
+    background-color: ${props => props.theme.colors.colorAccent};
+    color: ${props => props.theme.colors.colorBg};
     border: none;
     border-radius: 4px;
     cursor: pointer;
+    font-size: 1.8em;
 
   &:hover{
-    background-color: rgba(145, 209, 250, 0.6);
-  }
-  &:active {
-    background-color: #76ABCC;
+    background-color: ${props => props.theme.colors.colorAccentHover};
   }
 `
 
@@ -125,19 +133,19 @@ export const ReportIcon = styled(FiThumbsDown)`
   margin : 1rem;
   cursor : pointer;
   font-size : 2.5rem;
-  color : #FA9DAD;
+  color : ${props => props.theme.colors.thumbsDown};
 `
 export const EditIcon = styled(LuPencil)`
   margin : 1rem;
   cursor : pointer;
   font-size : 2.5rem;
-  color : #91D1FA;
+  color : ${props => props.theme.colors.colorAccent};
 `
 export const DeleteIcon = styled(FiTrash)`
   margin : 1rem;
   cursor : pointer;
   font-size : 2.5rem;
-  color : #91D1FA;
+  color : ${props => props.theme.colors.colorAccent};
 `
 export const ViewCommentContianer = styled.div`
   position : absolute;
@@ -152,19 +160,19 @@ export const ViewCommentContianer = styled.div`
 export const ViewIcon = styled(FiUsers)`
   margin : 1rem 0 1rem 1rem;
   font-size : 3rem;
-  color : #91D1FA;
+  color : ${props => props.theme.colors.colorAccent};
 `
 
 export const CommentIcon = styled(FiMessageCircle)`
   margin : 1rem 0 1rem 1rem;
   font-size : 3rem;
-  color : #91D1FA;
+  color : ${props => props.theme.colors.colorAccent};
 `
 
 export const ViewNum = styled.div`
   font-size: 1.5rem;
   font-weight: 600;
-  color : #91D1FA;
+  color : ${props => props.theme.colors.colorAccent};
   margin : 1.3rem 1rem 1rem 0;
   text-align: center;
   
@@ -172,7 +180,7 @@ export const ViewNum = styled.div`
 export const CommentNum = styled.div`
   font-size: 1.5rem;
   font-weight: 600;
-  color : #91D1FA;
+  color : ${props => props.theme.colors.colorAccent};
   margin : 1.3rem 1rem 1rem 0;
   text-align: center;
 `
@@ -181,12 +189,12 @@ export const CommentWriteBox = styled.div`
   display: flex;
   width: 100%;
   height: 5rem;
-  color: #fff;
+  color: ${props => props.theme.colors.colorBg};
   flex-shrink: 0;
   border-radius: 1rem;
   outline: none;
-  border: 0.3rem solid #91D1FA;
-  background: #91D1FA;
+  border: 0.3rem solid ${props => props.theme.colors.colorAccent};
+  background: ${props => props.theme.colors.colorAccent};
   position: relative;
   margin-top: 1em;
   padding: 1rem;
@@ -209,19 +217,116 @@ export const CommentWriteBox = styled.div`
 
 export const EnterButton = styled(IoEnterOutline)`
   flex-shrink: 0;
-  color: #fff;
+  color: ${props => props.theme.colors.colorBg};
   padding: 0 1rem;
   position: relative;
   font-size: 5.5em;
   cursor: pointer;
 
   &:focus {
-    background-color: #91D1FA;
+    background-color: ${props => props.theme.colors.colorAccent};
   }
   &:active {
-    background-color: #76ABCC;
+    background-color: ${props => props.theme.colors.colorShadow};
   }
 `;
+
+export const EnterChildButton = styled(IoEnterOutline)`
+  flex-shrink: 0;
+  color: ${props => props.theme.colors.colorBg};
+  padding: 0 1rem;
+  position: relative;
+  font-size: 3.5em;
+  cursor: pointer;
+
+  &:focus {
+    background-color: ${props => props.theme.colors.colorAccent};
+  }
+  &:active {
+    background-color: ${props => props.theme.colors.colorShadow};
+  }
+`;
+
+export const CommentChildWriteBox = styled.div`
+  display: flex;
+  width: 50em;
+  height: 5rem;
+  color: ${props => props.theme.colors.colorBg};
+  lex-shrink: 0;
+  border-radius: 1rem;
+  outline: none;
+  border: 0.3rem solid ${props => props.theme.colors.colorAccent};
+  background: ${props => props.theme.colors.colorAccent};
+  position: relative;
+  margin-top: 1em;
+  margin-left: 12.5em;
+  padding: 1rem;
+  align-items: center;
+  justify-content: space-between;
+  //background-color: red;
+  & > input {
+    flex-grow: 1;
+    font-size: 1em;
+    width: 90%;
+    border: none;
+    outline: none;
+    background: transparent;
+    color: #fff;
+    &::placeholder {
+      color: #fff;
+    }
+  }
+
+`;
+
+export const DisplayedBabyInput = styled.div`
+  display: flex;
+  width: 50em;
+  height: 5rem;
+  color: ${props => props.theme.colors.colorMain};
+  lex-shrink: 0;
+  border-radius: 1rem;
+  outline: none;
+  border: 0.3rem solid ${props => props.theme.colors.colorAccentHover};
+  background: ${props => props.theme.colors.colorAccentHover};
+  position: relative;
+  margin-top: 1em;
+  margin-left: 12.5em;
+  padding: 1rem;
+  align-items: center;
+  justify-content: space-between;
+  //background-color: red;
+  & > input {
+    flex-grow: 1;
+    font-size: 1em;
+    width: 90%;
+    border: none;
+    outline: none;
+    background: transparent;
+    color: #fff;
+    &::placeholder {
+      color: #fff;
+    }
+  }
+
+`;
+
+export const ChildComment = styled.div`
+  display: flex;
+  align-items: flex-start;
+  margin-bottom: 0.5rem;
+  align-items: center;
+  //background-color: pink;
+
+  & > p {
+    font-family: 'Poppins';
+    font-size: 1.5rem;
+    //background-color: green;
+    width: 35em;
+    heigth: 5em;
+    margin-left: 1em;
+  }
+  `
 
 export const CommentViewBox = styled.div`
 display: flex;
@@ -230,13 +335,13 @@ min-height: 12em;
 flex-direction: column;
   align-items: stretch;
 border-radius: 1rem;
-border: 0.3rem solid #91D1FA;
+border: 0.3rem solid ${props => props.theme.colors.colorAccent};
 position: relative;
 margin-top: 1em;
 padding: 1rem;
 
 &::placeholder {
-    color: #fff;
+    color: ${props => props.theme.colors.colorBg};
   }
 `;
 
@@ -257,46 +362,59 @@ export const ParentComment = styled.div`
   align-items: flex-start;
   margin-bottom: 0.5rem;
   align-items: center;
+  //background-color: pink;
   
+
   & > p {
     font-family: 'Poppins';
     font-size: 1.5rem;
     //background-color: red;
     width: 40em;
+    margin-left: 1em;
   }
 `
 //프로필 아이디
 export const CommentProfileId = styled.div`
 display: flex;
-margin-right: 1.5em;
 font-size: 1em;
-color: #919191;
+color: ${props => props.theme.colors.colorMain};
+//justify-content: center;
+align-items: center;
+//background-color: pink;
+width: 180px;
+p{
+  margin: 0 0 0 10px;
+
+}
 `
 //프로필 묶기
 export const CommentProfile = styled.div`
 display: flex;
 flex-direction: column;
 margin-left: 1rem;
+position: relative;
+border-right: 0.2rem solid ${props => props.theme.colors.colorAccent};
 `
 //프로필 사진 불러오기
 export const CommentProfileIcon = styled(IoPersonCircleOutline)`
 cursor : pointer;
 font-size : 2rem;
 color : #919191;
-margin-right: 0.5rem;
+position: absolute;
+left: 0;
 `
 
 export const ParentCommentView = styled.div`
   position: relative;
   height: flex;
   border-radius: 1rem;
-  border: 0.3rem solid #91D1FA;
+  border: 0.3rem solid ${props => props.theme.colors.colorAccent};
   margin : 1.5rem;
   padding: 1em;
   font-size: 1.5rem;
   flex-direction: column;
   ${props => (props.isChildComment ? 
-    `background-color: #91D1FA;
+    `background-color: #${props => props.theme.colors.colorAccent};;
     width: 80%;
     margin-left: 2rem;`: '')}
 `
@@ -305,20 +423,20 @@ export const CommentViewWrite = styled.div`
   cursor: pointer;
   font-size: 1.5rem;
   font-weight: 600;
-  color: #91D1FA;
+  color: ${props => props.theme.colors.colorAccent};
   margin: auto;
 `
 export const CommentViewEdit = styled(LuPencil)`
   cursor : pointer;
   font-size : 2rem;
-  color : #91D1FA;
+  color : ${props => props.theme.colors.colorAccent};
   margin: auto;
 `
 
 export const CommentViewDelete = styled(FiTrash)`
   cursor: pointer;
   font-size: 2rem;
-  color: #91D1FA;
+  color: ${props => props.theme.colors.colorAccent};
   margin: auto;
 `
 
@@ -326,9 +444,9 @@ export const CommentEditContainer = styled.div`
   
 & > input {
   width: 40em;
-  min-height: 3em;
+  min-height: 5rem;
   border-radius: 1rem;
-  border: 0.3rem solid #91D1FA;
+  border: 0.3rem solid ${props => props.theme.colors.colorAccent};
   font-family: 'Poppins';
   font-style: normal;
   font-weight: 500;
@@ -336,19 +454,22 @@ export const CommentEditContainer = styled.div`
   font-size: 1.5rem;
   outline: none;
   padding: 0.5rem;
+  margin-left: 1em;
 }
 
 & > button {
+  min-height: 5rem;
+
   font-family: 'Poppins';
   font-style: normal;
   font-weight: 700;
   line-height: normal;
   font-size: 1.5rem;
   border-radius: 1rem;
-  border: 0.3rem solid #91D1FA;
+  border: 0.3rem solid ${props => props.theme.colors.colorAccent};
   padding: 1rem;
   margin: 1rem;
-  background-color:#91D1FA;
+  background-color:${props => props.theme.colors.colorAccent};
   color: #fff;
   cursor: pointer;
 
@@ -378,10 +499,10 @@ export const ModalOverlay = styled.div`
 export const ModalContent = styled.div`
   width: 60em;
   height: 50em;
-  background-color: #fff;
+  background-color: ${props => props.theme.colors.colorBg};
   padding: 20px;
   border-radius: 8px;
-  border: 0.7rem solid #91D1FA;
+  border: 0.7rem solid ${props => props.theme.colors.modalLayout};
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -393,6 +514,7 @@ export const ModalContent = styled.div`
     font-weight: 600;
     line-height: normal;
     font-size: 3rem;
+    color: ${props => props.theme.colors.colorMain};
   }
 
   & > button {
@@ -400,8 +522,8 @@ export const ModalContent = styled.div`
     height: 5rem;
     flex-shrink: 0;
     border-radius: 1rem;
-    border: 0.3rem solid #91D1FA;
-    background: #fff;
+    border: 0.3rem solid ${props => props.theme.colors.modalLayout};
+    background: ${props => props.theme.colors.colorBg};
     color: #000;
     margin: 0.5rem;
     padding: 1rem;
@@ -409,7 +531,11 @@ export const ModalContent = styled.div`
     font-size: 1.5rem;
     &:active,
     &:focus {
-      background-color: #91D1FA;
+      background-color: ${props => props.theme.colors.modalLayout};
+    }
+    cursor: pointer;
+    &:hover {
+      background-color: ${props => props.theme.colors.colorAccentHover};
     }
   }
 
@@ -420,7 +546,7 @@ export const ModalContent = styled.div`
     cursor: pointer;
     & > p {
       font-size: 2rem;
-      color: #91D1FA;
+      color: ${props => props.theme.colors.modalLayout};
     }
   }
 `;
@@ -430,7 +556,7 @@ export const HeaderBulletin = styled.div`
   grid-template-columns: 1fr 3fr 1.5fr 1fr 1fr 1fr;
   padding: 11px;
   font-weight: bold;
-  background-color: #91d1fa;
+  background-color: ${props => props.theme.colors.colorAccent};
   border-top-left-radius: 1.3rem;
   border-top-right-radius: 1.3rem;
   align-items: center;
@@ -451,9 +577,17 @@ export const BulletinBox = styled.div`
   flex-shrink: 0;
   border-bottom-left-radius: 1.3rem;
   border-bottom-right-radius: 1.3rem;
-  border: 0.3rem solid #91D1FA;
+  border: 0.3rem solid ${props => props.theme.colors.colorAccent};
   position: relative;
+  //background-color: red;
   `;
+
+export const BulletinPageContainer = styled.div`
+//background-color: green;
+width: 100%;
+height: 100%;
+position: relative;
+`
 
 export const StyledViewPost = styled.div`
   display: grid;
@@ -463,13 +597,13 @@ export const StyledViewPost = styled.div`
   cursor: pointer;
   
   &:hover {
-    background-color: rgba(145, 209, 250, 0.3);
+    background-color: ${props => props.theme.colors.colorAccentHover};
   }
 
   p {
     margin: 0;
     font-size: 1.5em;
-    color: #000;
+    color: ${props => props.theme.colors.colorMain};
     display: flex;
     align-items: center;
     justify-content: center;
@@ -486,7 +620,7 @@ export const DetailBulletinBox = styled.div`
   height: flex;
   flex-shrink: 0;
   border-radius: 1rem;
-  border: 0.3rem solid #91D1FA;
+  border: 0.3rem solid ${props => props.theme.colors.colorAccent};
   margin-top: 1rem;
   position: relative;
   `;
@@ -494,13 +628,25 @@ export const DetailBulletinBox = styled.div`
 export const PostProfile = styled.div`
   display: flex;
   font-size: 1em;
-  color: #919191;
+  color: ${props => props.theme.colors.colorMain};
   margin: 2em;
+  align-items: center;
 `
 export const ProfileInfo = styled.div`
   display: flex;
   flex-direction: column;
   margin-left: 1rem;
+  //background-color: red;
+  justify-content: center;
+align-items: center;
+  p {
+    //padding: 0 0 0 15px;
+    text-align: center;
+    align-items: center; 
+    justify-content: center;
+    font-size: 1.2rem;
+    color: #919191;
+  }
 `
 
 export const ProfileIcon = styled(IoPersonCircleOutline)`
@@ -516,20 +662,20 @@ export const PostDetailContainer = styled.div`
 
 export const PostTitle = styled.h1`
   font-size: 3em;
-  color: #333;
+  color: ${props => props.theme.colors.colorMain};
   margin-bottom: 1em;
   margin-top: 1em;
 `;
 
 export const PostContent = styled.h3`
   font-size: 1.5em;
-  color: #555;
+  color: ${props => props.theme.colors.colorMain};
   line-height: 1.6;
+  padding:0 0 2em;
 `;
 
 export const PostImage = styled.div`
   font-size: 1.5em;
-  color: #555;
   line-height: 1.6;
   margin-top: 2em;
   margin-bottom: 2em;
@@ -553,6 +699,7 @@ export const AuthorContainer = styled.div`
   justify-content: flex-start;
 
   & > div {
+    width: 100px;
     padding: 2.5rem;
     font-weight: 700;
     font-family: 'Poppins';
@@ -560,25 +707,41 @@ export const AuthorContainer = styled.div`
     white-space: nowrap;
     border: 0.3rem solid #;
     align-items: center; 
+    //background-color: red;
 
   }
   & > input {
     width: 17em;
     height: 5rem;
     border-radius: 1rem;
-    border: 0.3rem solid #91D1FA;
+    border: 0.3rem solid ${props => props.theme.colors.colorAccent};
     font-size: 1.5rem;
-    background: #91D1FA;
-    color: #fff;
+    background: ${props => props.theme.colors.colorAccent};
+    color: ${props => props.theme.colors.colorBg};
     margin: 1.5rem;
     margin-right: 5em;
     padding: 1rem;
     position: relative;
     outline: none;
     &::placeholder {
-      color: #fff;
-    }
-  }
+      color: ${props => props.theme.colors.colorBg};
+    }}
+    & > p {
+      width: 17em;
+      height: 5rem;
+      border-radius: 1rem;
+      border: 0.3rem solid ${props => props.theme.colors.colorAccent};
+      font-size: 1.5rem;
+      background: ${props => props.theme.colors.colorAccent};
+      color: ${props => props.theme.colors.colorBg};
+      margin: 1.5rem;
+      margin-right: 5em;
+      padding: 1rem;
+      position: relative;
+      outline: none;
+      &::placeholder {
+        color: ${props => props.theme.colors.colorBg};
+      }
 `
 
 export const TitleContainer = styled.div`
@@ -593,23 +756,25 @@ export const TitleContainer = styled.div`
     white-space: nowrap;
     align-items: center; 
     border: 0.3rem solid #;
+    width: 100px;
+    //background-color: red;
 
   }
 
   & > input {
-    width: 40rem;
+    width: 70rem;
     height: 5rem;
     border-radius: 1rem;
-    border: 0.3rem solid #91D1FA;
-    background: #91D1FA;
+    border: 0.3rem solid ${props => props.theme.colors.colorAccent};
+    background: ${props => props.theme.colors.colorAccent};
     font-size: 1.5rem;
-    color: #fff;
+    color: ${props => props.theme.colors.colorBg};
     margin: 1.5rem;
     padding: 1rem;
     position: relative;
     outline: none;
     &::placeholder {
-      color: #fff;
+      color: ${props => props.theme.colors.colorBg};
     }
   }
   }
@@ -620,22 +785,24 @@ export const ContentContainer = styled.div`
   justify-content: flex-start;
 
   & > div {
-    padding: 2.5rem;
+    padding: 30px;
     font-weight: 700;
     font-family: 'Poppins';
-    font-size: 1.5rem;
+    font-size: 15px;
     white-space: nowrap;
     border: 0.3rem solid #;
-    width: 6.5em;
+    width: 100px;
+    //background-color: red;
   }
   & > textarea {
     font-size: 1.5rem;
     font-family: 'Poppins';
-    width: 80em;
-    height: 20rem;
+    min-width: 80em;
+    height: 30rem;
     border-radius: 1rem;
-    border: 0.3rem solid #91D1FA;
-    color: #000;
+    background-color: ${props => props.theme.colors.colorBg};
+    border: 0.3rem solid ${props => props.theme.colors.colorAccent};
+    color: ${props => props.theme.colors.colorMain};
     margin: 1.5rem;
     padding: 1rem;
     position: relative;
@@ -649,32 +816,39 @@ export const FileContainer = styled.div`
   justify-content: flex-start;
 
   & > div {
-    padding: 2.5rem;
+    padding: 25px 10px 20px 20px;
     font-weight: 700;
     font-family: 'Poppins';
     font-size: 1.5rem;
     white-space: nowrap;
     border: 0.3rem solid #;
-    width: 10rem;
+    justify-content: center;
+    width: 100px;
+    //background-color: green;
   }
   & > label {
-    width: 12em;
+    width: 15em;
     height: 5rem;
     flex-shrink: 0;
     border-radius: 1rem;
-    border: 0.3rem solid #91D1FA;
-    background: #91D1FA;
-    color: #fff;
+    border: 0.3rem solid ${props => props.theme.colors.colorAccent};
+    background: ${props => props.theme.colors.colorAccent};
+    color: ${props => props.theme.colors.colorBg};
     margin: 1.5rem;
     padding: 1rem;
     position: relative;
     font-size: 1.5rem;
     cursor: pointer;
     text-align: center;
+    &:active {
+      transform: translateY(2px);
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+    }
   }
   & > input {
     display: none;
   }
+
 `
 
 export const FilesContainer = styled.div`
@@ -694,14 +868,18 @@ export const SelectedFileContainer = styled.div`
   height: 4rem;
   margin: 1rem;
   //padding: 1rem;
-  border: 0.3rem solid #91D1FA;
+  border: 0.3rem solid ${props => props.theme.colors.colorAccent};
   border-radius: 1rem;
-  background: #fff;
+  background: ${props => props.theme.colors.colorBg};
   text-align: center;
   align-items: center;
   justify-content: center;
-  color: #333;
+  color: ${props => props.theme.colors.selectedFileText};
   display: flex;
+  &:active {
+    transform: translateY(2px);
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+  }
 
   & > div {
     width: 12em;
@@ -714,6 +892,7 @@ export const SelectedFileContainer = styled.div`
   //display: flex;
   //margin: 0.5rem;
 
+
   }
   
 `;
@@ -721,7 +900,7 @@ export const SelectedFileContainer = styled.div`
 export const DeleteFileIcon = styled(TiDelete)`
   //margin : 0.5rem;
   font-size : 3rem;
-  color : #91D1FA;
+  color : ${props => props.theme.colors.colorAccent};
   postion: absolute;
   right: 0;
   cursor: pointer;
@@ -744,7 +923,7 @@ export const CancelButton = styled.button`
     justify-content: center;
     align-items: center;
     gap: 1rem;
-    background-color: #fff;
+    background-color: ${props => props.theme.colors.colorBg};
     border-radius : 10rem;
     border: 0.3rem solid #FA9DAD;
     color: #FA9DAD;
@@ -754,6 +933,10 @@ export const CancelButton = styled.button`
     font-weight: 500;
     line-height: normal;
     cursor: pointer;
+    &:active {
+      transform: translateY(2px);
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+    }
 `;
 
 export const UploadButton = styled.button`
@@ -762,15 +945,19 @@ export const UploadButton = styled.button`
     justify-content: center;
     align-items: center;
     gap: 1rem;
-    background-color: #fff;
+    background-color: ${props => props.theme.colors.colorBg};
     border-radius : 10rem;
-    border: 0.3rem solid #91D1FA;
-    color: #91D1FA;
+    border: 0.3rem solid ${props => props.theme.colors.colorAccent};
+    color: ${props => props.theme.colors.colorAccent};
     font-family: 'Poppins';
     font-size: 1.5rem;
     font-style: normal;
     font-weight: 500;
     line-height: normal;
     cursor: pointer;
+    &:active {
+      transform: translateY(2px);
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+    }
 
 `;

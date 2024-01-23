@@ -4,7 +4,7 @@ module.exports = function(app) {
   app.use(
     '/api',
     createProxyMiddleware({
-      target: 'https://api.100shot.net',
+      target: "http://43.200.95.44:8080/",
       changeOrigin: true,
     })
   );

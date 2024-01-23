@@ -65,6 +65,7 @@ export const ProblemMeBox = styled.div`
   align-items : flex-end;
   padding : 0 0.5rem 0.2rem 0;
   h3 {
+    height : 2.3rem;
     font-family : "Poppins_Light";
     font-size : 1.5rem;
     margin : 0 0 0 0.3rem;
@@ -104,33 +105,23 @@ export const RecommendRivalTextBox = styled.div`
   `
 
   export const ProblemRankBox = styled.div`
-  display : flex;
-  flex-direction : Column;
-  align-items : center;
-  width : 15rem;
+  width : 25rem;
   height : 15rem;
-  margin : 0 4rem;
-  padding : 2rem 2.5rem;
-  border-radius : 2rem;
+  margin : 1rem;
   background-color : ${props => props.theme.colors.profileRival};
   color : ${props => props.theme.colors.colorBg};
-  text-align : center;
-
-  h3 {
-    margin : 2rem 0;
-    font-family : "Poppins_Regular";
-    font-size : 1.7rem;
+  border-radius : 2rem;
+  padding : 1rem 1.5rem;  
+  hr {
+    margin : 0.5rem 0;
   }
-  
-  p {
-    width : 10rem;
-    padding : 0.3rem 0;
-    border-radius : 2.5rem;
-    font-family : "Poppins_Light";
-    font-size : 1.3rem;
-    background-color : ${props => props.theme.colors.colorBg};
-    color : ${props => props.theme.colors.profileRival};
-  } 
+  h3 {
+    font-size : 1.7rem;
+    margin : 0 0 0.5rem 0;
+  }
+  span {
+    height : 3.9rem;
+  }
 `
 
 export const ResetRivalIcon = styled(GrPowerReset)`

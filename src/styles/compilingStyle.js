@@ -69,6 +69,7 @@ export const CodeEditor = styled.div`
   position: fixed;
   top: 0;
   height: 72vh;
+  width: 40vw;
   //background-color: red; //빨간 배경
   color: #91D1FA;
   font-family: 'Poppins';
@@ -103,6 +104,7 @@ export const ExecutionResult = styled.div`
   border-bottom: 2px solid ${props => props.theme.colors.colorAccent};
   display: flex;
   text-align: center;
+
 
   & > button {
     display: flex;
@@ -307,7 +309,7 @@ export const QContainer = styled.div`
   height: 350px;
   gap: 0.5em;
   color: ${props => props.theme.colors.colorMain};
-  font-size: 0.9em;
+  font-size: 0.8em;
   font-weight: 500;
   padding-top: 1em;
   overflow: auto;
@@ -337,7 +339,7 @@ export const IContainer = styled.div`
     display: flex;
     gap: 0.5em;
     color: ${props => props.theme.colors.colorMain};
-    font-size: 0.9em;
+    font-size: 0.8em;
     font-weight: 500;
   padding-top: 1em;
   overflow: auto;
@@ -367,7 +369,7 @@ export const OContainer = styled.div`
     display: flex;
     gap: 0.5em;
     color: ${props => props.theme.colors.colorMain};
-    font-size: 0.9em;
+    font-size: 0.8em;
     font-weight: 500;
   padding-top: 1em;
   overflow: auto;

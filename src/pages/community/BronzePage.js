@@ -63,7 +63,7 @@ const BronzePage = () => {
   useEffect(() => {
     const fetchPosts = async () => {
       try {
-        for (let currentPage = 0; currentPage < 100; currentPage++) {
+        for (let currentPage = 0; currentPage < 5; currentPage++) {
         const response = await axios.get('/api/post', {
           headers: {
             Authorization: `Bearer ${storedToken}`,

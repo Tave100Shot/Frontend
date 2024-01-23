@@ -25,6 +25,7 @@ export const SearchBarContainer = styled.form`
   align-items : center;
   //justify-content : space-around;
   //background-color: red;
+  
 
   button {
     width : 10em;
@@ -38,6 +39,9 @@ export const SearchBarContainer = styled.form`
     font-family : Poppins_Bold;
     font-size : 1.5rem;
     cursor : pointer;
+    box-shadow: 0 2px 4px 2px rgba(0, 0, 0, 0.1);
+
+
   }
 `
 export const SearchInputBox = styled.div`
@@ -49,6 +53,7 @@ export const SearchInputBox = styled.div`
   padding : 1rem 0 1rem 2rem;
   margin : 0 10px;
   align-items : center;
+  box-shadow: 0 2px 4px 2px rgba(0, 0, 0, 0.1);
 
   img {
     width : 2.5rem;
@@ -65,6 +70,7 @@ export const SearchInputBox = styled.div`
     color: ${props => props.theme.colors.colorBg};
     font-family : Poppins_SemiBold;
     font-size : 1.5rem;
+    
   }
   input::placeholder {
     color: ${props => props.theme.colors.colorBg};
@@ -92,6 +98,8 @@ export const WriteButton = styled.div`
   align-items: center;
   justify-content: center;
   cursor : pointer;
+  box-shadow: 0 2px 4px 2px rgba(0, 0, 0, 0.1);
+
 `;
 
 export const PaginationContainer = styled.div`

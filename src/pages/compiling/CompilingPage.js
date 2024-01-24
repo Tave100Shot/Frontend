@@ -1,16 +1,16 @@
 import { useNavigate } from "react-router-dom";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Header from "../../components/common/Header";
 import * as s from "../../styles/searchBarStyle";
 import * as c from "../../styles/compilingStyle";
+import styled from "styled-components";
+import axios from "axios";
 import AceEditor from "react-ace";
 
 import "ace-builds/src-noconflict/mode-java";
 import "ace-builds/src-noconflict/theme-github";
 import "ace-builds/src-noconflict/theme-monokai";
 import "ace-builds/src-noconflict/ext-language_tools";
-
-import axios from "axios";
 
 function onChange(newValue) {
   console.log("change", newValue);
@@ -31,27 +31,31 @@ const CompilingPage = ({ theme }) => {
   const [problemTitle, setProblemTitle] = useState('');
   const [isCompiling, setIsCompiling] = useState(false);
   const [problemInfo, setProblemInfo] = useState(null);
+  
 
   const handleOnChangeSelectValue = (e) => {
     const { innerText } = e.target;
     setCurrentValue(innerText);
   };
+  const storedToken = localStorage.getItem('accessToken')
 
   const handleSearchClick = async () => {
 
     try {
-      const response = await axios.get(`/api/compile/problems/${questionNumber}`);
-
+      const response = await axios.get(`/api/compile/problems/${questionNumber}`,
+      {headers: {
+        Authorization: `Bearer ${storedToken}`,
+      }});
       console.log('서버 응답:', response.data);
 
       if (response.data.status === 200) {
 
       const fetchedProblemInfo = response.data.result;
-      const problemUrl = `https://www.acmicpc.net/problem/${fetchedProblemInfo.id}`;
+/*       const problemUrl = `https://www.acmicpc.net/problem/${fetchedProblemInfo.ID}`;
       fetchedProblemInfo.problemUrl = problemUrl;
-
+ */
         setProblemInfo(fetchedProblemInfo);
-        setProblemTitle(`백준 ${questionNumber}번 - ${fetchedProblemInfo.title}`);
+        setProblemTitle(`백준 ${questionNumber}번 - ${fetchedProblemInfo.Title}`);
         setInfoContainerVisible(true);
       } else {
 
@@ -62,6 +66,32 @@ const CompilingPage = ({ theme }) => {
       console.error('get 요청 오류:', error);
     }
   };
+  useEffect(() => {
+    const description = problemInfo && problemInfo.Description;
+    const imageUrlsMatch = description && description.match(/(https?:\/\/[^\s]+)/g);
+  
+    const imageContainer = document.getElementById('imageContainer');
+    
+    if (imageContainer) {
+      imageContainer.innerHTML = ''; 
+  
+      if (imageUrlsMatch) {
+        imageUrlsMatch.forEach((imageUrl, index) => {
+          const imgElement = document.createElement('img');
+          imgElement.src = imageUrl;
+          imgElement.alt = `Image ${index + 1}`;
+          imageContainer.appendChild(imgElement);
+        });
+      }
+  
+      const textElement = document.createElement('p');
+      textElement.textContent = description && description.replace(/(https?:\/\/[^\s]+)/g, '');
+      imageContainer.appendChild(textElement);
+    }
+  }, [problemInfo]);
+  
+
+  //enter키
   const handleKeyPress = (e) => {
     if (e.key === 'Enter') {
       handleSearchClick();
@@ -70,15 +100,11 @@ const CompilingPage = ({ theme }) => {
 
   const handleGoToBaekjoon = () => {
     console.log("백준 풀러 가기 버튼 클릭");
-    const problemUrl = problemInfo && problemInfo.problemUrl;
-
-    if (problemUrl) {
-      window.location.href = problemUrl;
-    } else {
-      console.error('Problem URL이 정의되지 않았습니다.');
-    }
-
-  };
+/*     const problemUrl = problemInfo && problemInfo.problemUrl;
+   *///problemUrl
+   const problemUrl = problemInfo && problemInfo.problemUrl;
+    window.open(problemUrl, '_blank');
+  }
   
   const handleMoveToSolution = () => {
     navigate(`/result-solution?problemId=${questionNumber}`);
@@ -92,7 +118,7 @@ const CompilingPage = ({ theme }) => {
         <c.QIOEContainer>
           <c.QSearchContainer>
             <input
-              type="number"
+              type="text"
               placeholder="Enter the Question Number !"
               value={questionNumber}
               onChange={(e) => setQuestionNumber(e.target.value)}
@@ -104,25 +130,25 @@ const CompilingPage = ({ theme }) => {
           <c.QNumberContainer>{problemTitle}</c.QNumberContainer>
             <c.QContainer>
               문제 설명 {/* ${problemInfo.Description} */}
-              <div>{problemInfo && problemInfo["description"]}</div>
+              <div id="imageContainer">{problemInfo && problemInfo["Description"]}</div>
             </c.QContainer>
             <c.IContainer>
               입력
-              <div>{problemInfo && problemInfo["inputDescription"]}</div>
+              <div>{problemInfo && problemInfo["Input Description"]}</div>
             </c.IContainer>
             <c.OContainer>
               출력
-              <div>{problemInfo && problemInfo["outputDescription;"]}</div>
+              <div>{problemInfo && problemInfo["Output Description"]}</div>
             </c.OContainer>
             <c.EContainer>
               입출력 예시
               <div>입력 #1</div>
               <c.ExampleBox style={{ whiteSpace: 'pre-line' }}>
-                <p>{problemInfo && problemInfo["sampleInput"]}</p>
+                <p>{problemInfo && problemInfo["Sample Input"]}</p>
               </c.ExampleBox>
               <div>출력 #1</div>
               <c.ExampleBox style={{ whiteSpace: 'pre-line' }}>
-                <p>{problemInfo && problemInfo["sampleOutput"]}</p>
+                <p>{problemInfo && problemInfo["Sample Output"]}</p>
               </c.ExampleBox>
             </c.EContainer>
           </c.InfoContainer>

@@ -308,6 +308,16 @@ export const QContainer = styled.div`
   padding-top: 1em;
   overflow: auto;
   font-family: 'Poppins';
+  & > p {
+    background-color: red;
+    width: 70em;
+  }
+  & > img {
+    width: 20%;
+    height: auto;
+  }
+
+
   } 
 `;
 

@@ -10,11 +10,13 @@ import "ace-builds/src-noconflict/theme-github";
 import "ace-builds/src-noconflict/theme-monokai";
 import "ace-builds/src-noconflict/ext-language_tools";
 
+import axios from "axios";
+
 function onChange(newValue) {
   console.log("change", newValue);
 }
 
-const CompilingPage = ({theme}) => {
+const CompilingPage = ({ theme }) => {
   const navigate = useNavigate();
 
   const moveToMain = () => {
@@ -28,22 +30,59 @@ const CompilingPage = ({theme}) => {
   const [infoContainerVisible, setInfoContainerVisible] = useState(false);
   const [problemTitle, setProblemTitle] = useState('');
   const [isCompiling, setIsCompiling] = useState(false);
+  const [problemInfo, setProblemInfo] = useState(null);
 
   const handleOnChangeSelectValue = (e) => {
     const { innerText } = e.target;
     setCurrentValue(innerText);
   };
-  const handleSearchClick = () => {
-    setProblemTitle(`백준 ${questionNumber}번`);
-    setInfoContainerVisible(true);
+
+  const handleSearchClick = async () => {
+
+    try {
+      const response = await axios.get(`/api/compile/problems/${questionNumber}`);
+
+      console.log('서버 응답:', response.data);
+
+      if (response.data.status === 200) {
+
+      const fetchedProblemInfo = response.data.result;
+      const problemUrl = `https://www.acmicpc.net/problem/${fetchedProblemInfo.id}`;
+      fetchedProblemInfo.problemUrl = problemUrl;
+
+        setProblemInfo(fetchedProblemInfo);
+        setProblemTitle(`백준 ${questionNumber}번 - ${fetchedProblemInfo.title}`);
+        setInfoContainerVisible(true);
+      } else {
+
+        console.error('서버 응답 오류:', response.data.message);
+      }
+    } catch (error) {
+
+      console.error('get 요청 오류:', error);
+    }
   };
   const handleKeyPress = (e) => {
     if (e.key === 'Enter') {
       handleSearchClick();
     }
   };
-  const handleCompileRun = () => {
-    setIsCompiling(true);
+
+  const handleGoToBaekjoon = () => {
+    console.log("백준 풀러 가기 버튼 클릭");
+    const problemUrl = problemInfo && problemInfo.problemUrl;
+
+    if (problemUrl) {
+      window.location.href = problemUrl;
+    } else {
+      console.error('Problem URL이 정의되지 않았습니다.');
+    }
+
+  };
+  
+  const handleMoveToSolution = () => {
+    navigate(`/result-solution?problemId=${questionNumber}`);
+    console.log("솔루션 이동 버튼 클릭");
   };
 
   return (
@@ -62,32 +101,28 @@ const CompilingPage = ({theme}) => {
             <button onClick={handleSearchClick}>SEARCH</button>
           </c.QSearchContainer>
           <c.InfoContainer style={{ display: infoContainerVisible ? 'block' : 'none' }}>
-            <c.QNumberContainer>
-              {problemTitle}
-            </c.QNumberContainer>
+          <c.QNumberContainer>{problemTitle}</c.QNumberContainer>
             <c.QContainer>
-              문제 설명
-              <div></div>
+              문제 설명 {/* ${problemInfo.Description} */}
+              <div>{problemInfo && problemInfo["description"]}</div>
             </c.QContainer>
             <c.IContainer>
               입력
-              <div></div>
+              <div>{problemInfo && problemInfo["inputDescription"]}</div>
             </c.IContainer>
             <c.OContainer>
               출력
-              <div></div>
+              <div>{problemInfo && problemInfo["outputDescription;"]}</div>
             </c.OContainer>
             <c.EContainer>
               입출력 예시
               <div>입력 #1</div>
               <c.ExampleBox style={{ whiteSpace: 'pre-line' }}>
-                <p>
-                </p>
+                <p>{problemInfo && problemInfo["sampleInput"]}</p>
               </c.ExampleBox>
               <div>출력 #1</div>
               <c.ExampleBox style={{ whiteSpace: 'pre-line' }}>
-                <p>
-                </p>
+                <p>{problemInfo && problemInfo["sampleOutput"]}</p>
               </c.ExampleBox>
             </c.EContainer>
           </c.InfoContainer>
@@ -105,35 +140,12 @@ const CompilingPage = ({theme}) => {
               placeholder={`team_member = input(“팀원 이름을 입력하시오 : “)
             \n print(f”안녕하세요 {team_member}님 백발백준 사이트입니다”)`}
               fontSize={16}
-              style={{ width: '100%', height: '90%' }}
+              style={{ width: '100%', height: '100%' }}
             />
-            <c.ButtonContainer>
-              <s.SelectBox onClick={() => setShowOptions((prev) => !prev)} show={showOptions}>
-                <label>{currentValue}</label>
-                <ul >
-                  <li onClick={handleOnChangeSelectValue}>Python 3</li>
-                  <li onClick={handleOnChangeSelectValue}>C99</li>
-                  <li onClick={handleOnChangeSelectValue}>C++17</li>
-                  <li onClick={handleOnChangeSelectValue}>C#</li>
-                  <li onClick={handleOnChangeSelectValue}>Java 11</li>
-                  <li onClick={handleOnChangeSelectValue}>node.js</li>
-                  <li onClick={handleOnChangeSelectValue}>Kotlin (JVM)</li>
-                  <li onClick={handleOnChangeSelectValue}>Ruby</li>
-                  <li onClick={handleOnChangeSelectValue}>Go</li>
-                  <li onClick={handleOnChangeSelectValue}>Swift</li>
-                </ul>
-              </s.SelectBox>
-              <c.RunButton onClick={handleCompileRun}>COMPILE & RUN</c.RunButton>
-            </c.ButtonContainer>
           </c.CodeEditor>
           <c.ExecutionResult>
-            실행 결과 
-            {isCompiling  && 
-            <>
-            <button>채점 중</button>
-            <c.AnswerButton>맞았습니다!</c.AnswerButton>
-            <c.WrongButton>틀렸습니다!</c.WrongButton>
-            </>}
+                <button onClick={handleGoToBaekjoon}>Submit To Boj</button>
+                <c.AnswerButton onClick={handleMoveToSolution}>Go To Solution</c.AnswerButton>
           </c.ExecutionResult>
         </c.CompileContainer>
       </c.MainContainer>

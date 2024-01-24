@@ -68,9 +68,9 @@ export const CompileContainer = styled.div`
 export const CodeEditor = styled.div`
   position: fixed;
   top: 0;
-  height: 72vh;
+  height: 70vh;
   width: 40vw;
-  //background-color: red; //빨간 배경
+  background-color: red; //빨간 배경
   color: #91D1FA;
   font-family: 'Poppins';
   font-size: 2rem;
@@ -93,26 +93,28 @@ export const CodeEditor = styled.div`
 export const ExecutionResult = styled.div`
   color: ${props => props.theme.colors.colorAccent};
   font-family: 'Poppins';
-  font-size: 2rem;
+  font-size: 1.5rem;
   font-style: normal;
   font-weight: 700;
   line-height: normal;
-  margin: 1rem;
+  //margin: 1rem;
   margin-top: 3rem;
   padding: 3rem;
   border-top: 2px solid ${props => props.theme.colors.colorAccent};
   border-bottom: 2px solid ${props => props.theme.colors.colorAccent};
   display: flex;
   text-align: center;
+justify-content: center;
+
 
 
   & > button {
     display: flex;
-    width: 13em;
-    height: 2.5em;
+    width: 15em;
+    height: 4em;
     background-color: ${props => props.theme.colors.colorAccent};
     color: ${props => props.theme.colors.colorBg};
-    padding: 1em;
+    //padding: 1em;
     font-family: 'Poppins';
     font-size: 2rem;
     font-style: normal;
@@ -123,40 +125,29 @@ export const ExecutionResult = styled.div`
     text-align: center;
     justify-content: center;
     align-items: center;
-margin-left: 2em;
+//margin-left: 2em;
+cursor: pointer;
+
     }
   }
 `
 
 export const ButtonContainer = styled.div`
     display: flex;
-    position: absolute;
+/*     position: absolute;
     bottom: 0;
-    right: 0;
+    right: 0; */
 `
-export const RunButton = styled.button`
-  background-color: ${props => props.theme.colors.colorAccent};
-  color: ${props => props.theme.colors.colorBg};
-  padding: 1em;
-  font-size: 1.5rem;
-  border: none;
-  border-radius: 8px;
-  cursor: pointer;
-  &:active {
-    transform: translateY(2px);
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
-  }
-`;
 
 export const AnswerButton = styled.div`
 display: flex;
 width: 15em;
-height: 2.5em;
-background-color: #06FF00;
+height: 4em;
+background-color: #FB5544;
 color: ${props => props.theme.colors.colorBg};
-padding: 1em;
+//padding: 1em;
 font-family: 'Poppins';
-font-size: 2rem;
+font-size: 2.5rem;
 font-style: normal;
 font-weight: 700;
 font-size: 1.5rem;
@@ -166,12 +157,14 @@ text-align: center;
 justify-content: center;
 align-items: center;
 margin-left: 2em;
+cursor: pointer;
+
 `
 
 export const WrongButton = styled.div`
 display: flex;
 width: 15em;
-height: 2.5em;
+height: 5em;
 background-color: #FF1700;
 color: ${props => props.theme.colors.colorBg};
 padding: 1em;
@@ -186,6 +179,7 @@ text-align: center;
 justify-content: center;
 align-items: center;
 margin-left: 2em;
+cursor: pointer;
 `
 
 

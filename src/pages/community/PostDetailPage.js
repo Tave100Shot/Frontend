@@ -382,7 +382,7 @@ const PostDetailPage = ({comment}) => {
                   </>
                 )}
                 <c.CommentViewIconContainer>
-                  <c.CommentViewWrite onClick={() => setShowCommentBox(!showCommentBox)}/* onClick={handleAddChildComment} */>댓글 달기</c.CommentViewWrite>
+                  {/* <c.CommentViewWrite onClick={() => setShowCommentBox(!showCommentBox)}/>댓글 달기 */}
                   <c.CommentViewEdit onClick={() => setIsEditingComment(comment.commentId)} />
                   <c.CommentViewDelete onClick={() => handleDeleteComment(comment.commentId)} />
                 </c.CommentViewIconContainer>

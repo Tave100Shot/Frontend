@@ -1,4 +1,3 @@
-
 import {
   MainContainer, FirstContainer, Typography, Description,
   HorizontalLine, EnterButton
@@ -17,6 +16,15 @@ import * as c from "../../styles/communityPostStyle";
 const BronzePage = () => {
   const bojTier = localStorage.getItem('bojTier');
   const navigate = useNavigate();
+
+  useEffect(() => {
+    if (bojTier?.toUpperCase() === 'BEGINNER') {
+      alert('Beginner 회원은 접근할 수 없습니다.');
+      navigate('/'); 
+    }
+  }, [bojTier, navigate]);
+
+
   const moveToMain = () => {
     navigate('/');
   }
@@ -63,7 +71,7 @@ const BronzePage = () => {
   useEffect(() => {
     const fetchPosts = async () => {
       try {
-        for (let currentPage = 0; currentPage < 5; currentPage++) {
+        for (let currentPage = 0; currentPage < 100; currentPage++) {
         const response = await axios.get('/api/post', {
           headers: {
             Authorization: `Bearer ${storedToken}`,

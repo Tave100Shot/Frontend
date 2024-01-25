@@ -20,6 +20,13 @@ const HighPage = () => {
     navigate('/');
   }
 
+  useEffect(() => {
+    if (bojTier?.toUpperCase() === 'BEGINNER') {
+      alert('Beginner 회원은 접근할 수 없습니다.');
+      navigate('/'); 
+    }
+  }, [bojTier, navigate]);
+
   const handleWriteClick = () => {
     navigate("/community/high/write");
 
@@ -76,17 +83,18 @@ const HighPage = () => {
   useEffect(() => {
     const fetchPosts = async () => {
       try {
+        for (let currentPage = 0; currentPage < 100; currentPage++) {
         const response = await axios.get('/api/post', {
           headers: {
             Authorization: `Bearer ${storedToken}`,
           },
           params: {
             postTier: "High",
-            page: 0,
+            page: currentPage,
           }
         });
-        setPosts(response.data.result.postResponses);
-      } catch (error) {
+        setPosts(prevPosts => [...prevPosts, ...response.data.result.postResponses]);
+      }} catch (error) {
         console.error(error);
       }
     };
@@ -132,7 +140,11 @@ const HighPage = () => {
             <p>작성일</p>
           </c.HeaderBulletin>
           <c.BulletinBox>
-            <ViewPosts posts={currentPosts}/>
+          {searchResults.length > 0 ? (
+          <ViewPosts posts={searchResults} />
+        ) : (
+          <ViewPosts posts={currentPosts} />
+        )}
           </c.BulletinBox>
           <c.Pagination>
             {Array.from({ length: Math.ceil(posts.length / postsPerPage) }).map((_, index) => (

@@ -298,6 +298,7 @@ export const QContainer = styled.div`
 
   & > div {
   display: flex;
+  flex-direction: column;
   //background-color: red;
   width: 100%;
   height: 350px;
@@ -309,15 +310,17 @@ export const QContainer = styled.div`
   overflow: auto;
   font-family: 'Poppins';
   & > p {
-    background-color: red;
-    width: 70em;
+    //background-color: red;
+    width: 100%;
   }
   & > img {
-    width: 20%;
-    height: auto;
+    width: 60%; 
+    max-width: 600px; // 이미지의 최대 가로 크기 설정 (선택적)
+    height: auto; 
+    margin-bottom: 1em; 
+    margin-left: auto;
+    margin-right: auto;
   }
-
-
   } 
 `;
 
@@ -421,10 +424,12 @@ export const ExampleBox = styled.div`
   margin: 1rem 0 1rem 0;
 
   & > p {
+    //background-color: red;
     width: 100%;
     height: 100px;
   font-size: 0.9em;
   margin: 1em;
+  margin-left: 1em;
   color: #000;
   overflow: auto;
   font-family: 'Poppins';

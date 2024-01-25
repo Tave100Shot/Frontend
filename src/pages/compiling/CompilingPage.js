@@ -10,6 +10,7 @@ import AceEditor from "react-ace";
 import "ace-builds/src-noconflict/mode-java";
 import "ace-builds/src-noconflict/theme-github";
 import "ace-builds/src-noconflict/theme-monokai";
+import "ace-builds/src-noconflict/theme-tomorrow";
 import "ace-builds/src-noconflict/ext-language_tools";
 
 function onChange(newValue) {
@@ -41,6 +42,11 @@ const CompilingPage = ({ theme }) => {
 
   const handleSearchClick = async () => {
 
+    if (questionNumber < 1000) {
+      alert('문제 번호는 1000번부터 시작합니다.');
+      return;
+    }
+
     try {
       const response = await axios.get(`/api/compile/problems/${questionNumber}`,
       {headers: {
@@ -54,10 +60,19 @@ const CompilingPage = ({ theme }) => {
 /*       const problemUrl = `https://www.acmicpc.net/problem/${fetchedProblemInfo.ID}`;
       fetchedProblemInfo.problemUrl = problemUrl;
  */
+      if (fetchedProblemInfo.Title === "N/A") {
+        alert("해당 문제의 정보를 찾을 수 없습니다.");
+        return; // 추가 처리를 중단하고 함수를 종료
+      }
+
         setProblemInfo(fetchedProblemInfo);
         setProblemTitle(`백준 ${questionNumber}번 - ${fetchedProblemInfo.Title}`);
         setInfoContainerVisible(true);
       } else {
+        if (response.data.errorCode === "PROBLEM_5002") {
+          alert("문제 정보 변환 중 오류가 발생했습니다.");
+          return;
+        }
 
         console.error('서버 응답 오류:', response.data.message);
       }

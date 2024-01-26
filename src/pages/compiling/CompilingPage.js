@@ -42,8 +42,8 @@ const CompilingPage = ({ theme }) => {
 
   const handleSearchClick = async () => {
 
-    if (questionNumber < 1000) {
-      alert('문제 번호는 1000번부터 시작합니다.');
+    if (questionNumber < 1000 && questionNumber > 31226) {
+      alert('문제 번호는 1000번부터 31226번까지 존재합니다.');
       return;
     }
 

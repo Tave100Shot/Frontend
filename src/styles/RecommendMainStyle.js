@@ -274,9 +274,9 @@ export const UserProfileStat = styled.div`
     height: 5rem;
     background: linear-gradient(
       to bottom right,
-      #fff calc(50% - 1px),
+      ${props => props.theme.colors.colorBg} calc(50% - 1px),
       #BEBEBE,
-      #fff calc(50% + 1px)
+      ${props => props.theme.colors.colorBg} calc(50% + 1px)
     );
   }
 `

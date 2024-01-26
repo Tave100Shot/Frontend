@@ -17,12 +17,12 @@ const BronzePage = () => {
   const bojTier = localStorage.getItem('bojTier');
   const navigate = useNavigate();
 
-/*   useEffect(() => {
+  useEffect(() => {
     if (bojTier?.toUpperCase() === 'BEGINNER') {
       alert('Beginner 회원은 접근할 수 없습니다.');
       navigate('/'); 
     }
-  }, [bojTier, navigate]); */
+  }, [bojTier, navigate]);
 
 
   const moveToMain = () => {

@@ -20,12 +20,12 @@ const GoldPage = () => {
     navigate('/');
   }
 
-/*   useEffect(() => {
+  useEffect(() => {
     if (bojTier?.toUpperCase() === 'BEGINNER') {
       alert('Beginner 회원은 접근할 수 없습니다.');
       navigate('/'); 
     }
-  }, [bojTier, navigate]); */
+  }, [bojTier, navigate]);
 
   const handleWriteClick = () => {
     navigate("/community/gold/write");
@@ -99,10 +99,17 @@ const GoldPage = () => {
           }
         });
         setPosts(prevPosts => [...prevPosts, ...response.data.result.postResponses]);
-      }} catch (error) {
+      }
+    } catch (error) {
+      //토큰 유효 기간
+      if (error.response && error.response.data.errorCode === 'JWT_4010') {
+        alert("로그인 유효 기간이 지났습니다. 다시 로그인 해주세요 :)");
+        navigate('/');
+      } else {
         console.error(error);
       }
-    };
+    }
+  };
 
     fetchPosts();
   }, []);

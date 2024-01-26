@@ -102,7 +102,7 @@ export const RecommendLatestBox = styled.div`
         display : none;
       }
     }
-    form {
+    div {
       display : block
     }
   }
@@ -122,7 +122,7 @@ export const RecommendLatestBox = styled.div`
       letter-spacing : 0.05rem;
     }
   } 
-  form {
+  div {
     display : none;
     input {
       background-color : rgba(255, 255, 255, 0.2);

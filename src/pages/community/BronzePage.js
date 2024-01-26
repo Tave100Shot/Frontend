@@ -84,7 +84,13 @@ const BronzePage = () => {
         setPosts(prevPosts => [...prevPosts, ...response.data.result.postResponses]);
         }
       } catch (error) {
-        console.error(error);
+        //토큰 유효 기간
+        if (error.response && error.response.data.errorCode === 'JWT_4010') {
+          alert("로그인 유효 기간이 지났습니다. 다시 로그인 해주세요 :)");
+          navigate('/');
+        } else {
+          console.error(error);
+        }
       }
     };
 

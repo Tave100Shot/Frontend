@@ -48,25 +48,30 @@ const RecommendPage = () => {
 
     if (recentProblem === "") {
       alert("최근에 푼 1개의 문제 번호를 입력해주세요 :)");
-      return;
     }
-
-    axios.get(`/api/v1/recommend/problem?solvedRecentId=${recentProblem}`, {
-      headers : {
-        Authorization : `Bearer ${storedToken}`
-      }
-    })
-      .then(response => {
-        localStorage.setItem('userRightNum', response.data.result.rightCnt);
-        localStorage.setItem('userWrongNum', response.data.result.wrongCnt);
-        localStorage.setItem('userRank', response.data.result.userRank);
-        localStorage.setItem('userRivalNum', response.data.result.rivalCnt);
-        dispatch(SetByMeProblemList(response.data.result.result));
+    else {
+      axios.get(`/api/v1/recommend/problem?solvedRecentId=${recentProblem}`, {
+        headers : {
+          Authorization : `Bearer ${storedToken}`
+        }
       })
-      .catch(error => {
-        console.error(error);
-      });
-      navigate('/recommend-latest');
+        .then(response => {
+          localStorage.setItem('userRightNum', response.data.result.rightCnt);
+          localStorage.setItem('userWrongNum', response.data.result.wrongCnt);
+          localStorage.setItem('userRank', response.data.result.userRank);
+          localStorage.setItem('userRivalNum', response.data.result.rivalCnt);
+          dispatch(SetByMeProblemList(response.data.result.result));
+        })
+        .catch(error => {
+          console.error(error);
+          const errorCode = error.response.data.errorCode;
+          console.log(errorCode);
+          if(errorCode === 'PROBLEM_4001') {
+            alert("존재하지 않는 문제입니다.");
+          }
+        });
+        navigate('/recommend-latest');
+    }
   }
 
   return (

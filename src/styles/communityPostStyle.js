@@ -133,6 +133,13 @@ export const Pagination = styled.div`
   &:hover{
     background-color: ${props => props.theme.colors.colorAccentHover};
   }
+}
+  .prevButton, .nextButton {
+    color: ${props => props.theme.colors.colorAccent};
+    font-size: 1.2em;
+    background-color: ${props => props.theme.colors.colorBg};
+    border: 0.3rem solid ${props => props.theme.colors.colorAccent};
+  }
 `
 
 /* 단일 게시물 CSS */
@@ -582,7 +589,7 @@ export const HeaderBulletin = styled.div`
 
 export const BulletinBox = styled.div`
   max-width: 100%;
-  min-height: 30rem;
+  min-height: 40rem;
   height: flex;
   flex-shrink: 0;
   border-bottom-left-radius: 1.3rem;

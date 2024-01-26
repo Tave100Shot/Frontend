@@ -48,10 +48,7 @@ const CompilingPage = ({ theme }) => {
     }
 
     try {
-      const response = await axios.get(`/api/compile/problems/${questionNumber}`,
-      {headers: {
-        Authorization: `Bearer ${storedToken}`,
-      }});
+      const response = await axios.get(`/api/compile/problems/${questionNumber}`);
       console.log('서버 응답:', response.data);
 
       if (response.data.status === 200) {
@@ -60,7 +57,12 @@ const CompilingPage = ({ theme }) => {
 /*       const problemUrl = `https://www.acmicpc.net/problem/${fetchedProblemInfo.ID}`;
       fetchedProblemInfo.problemUrl = problemUrl;
  */
-      if (fetchedProblemInfo.Title === "N/A") {
+      if (fetchedProblemInfo.Title === "N/A" || 
+      fetchedProblemInfo["Sample Input"] === "N/A" ||
+      fetchedProblemInfo["Sample Output"] === "N/A" ||
+      fetchedProblemInfo["Input Description"] === "N/A" ||
+      fetchedProblemInfo["Output Description"] === "N/A"
+      ) {
         alert("해당 문제의 정보를 찾을 수 없습니다.");
         return; // 추가 처리를 중단하고 함수를 종료
       }

@@ -47,7 +47,7 @@ export const SearchBarContainer = styled.form`
 export const SearchInputBox = styled.div`
   background-color : ${props => props.theme.colors.colorAccent};
   display : flex;
-  width : 100rem;
+  width : 125rem;
   height : 5rem;
   border-radius : 1.3rem;
   padding : 1rem 0 1rem 2rem;
@@ -132,6 +132,13 @@ export const Pagination = styled.div`
 
   &:hover{
     background-color: ${props => props.theme.colors.colorAccentHover};
+  }
+}
+  .prevButton, .nextButton {
+    color: ${props => props.theme.colors.colorAccent};
+    font-size: 1.2em;
+    background-color: ${props => props.theme.colors.colorBg};
+    border: 0.3rem solid ${props => props.theme.colors.colorAccent};
   }
 `
 
@@ -357,11 +364,13 @@ export const CommentViewIconContainer = styled.div`
   position: absolute;
   display: grid;
   top: 0;
-  right: 0;
-  grid-template-columns: repeat(3, 1fr);
+  right: 1em;
+  grid-gap: 1.5em;
+  grid-template-columns: repeat(2, 1fr);
   margin-top: 1.5rem;
   align-items: center;
   justify-content: center;
+  //background-color: red;
   //border: 3px solid #000;
 `
 //부모 댓글 컨테이너
@@ -580,7 +589,7 @@ export const HeaderBulletin = styled.div`
 
 export const BulletinBox = styled.div`
   max-width: 100%;
-  min-height: 30rem;
+  min-height: 40rem;
   height: flex;
   flex-shrink: 0;
   border-bottom-left-radius: 1.3rem;
@@ -793,15 +802,16 @@ export const ContentContainer = styled.div`
   justify-content: flex-start;
 
   & > div {
-    padding: 30px;
+    padding: 2.5rem;
     font-weight: 700;
     font-family: 'Poppins';
-    font-size: 15px;
+    font-size: 1.5rem;
     white-space: nowrap;
     border: 0.3rem solid #;
     width: 100px;
     //background-color: red;
   }
+
   & > textarea {
     font-size: 1.5rem;
     font-family: 'Poppins';
@@ -848,9 +858,11 @@ export const FileContainer = styled.div`
     font-size: 1.5rem;
     cursor: pointer;
     text-align: center;
+    box-shadow: 0 2px 2px rgba(0, 0, 0, 0.3);
+    
     &:active {
-      transform: translateY(2px);
-      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+      transform: translateY(3px);
+      box-shadow: 0 3px 4px rgba(0, 0, 0, 0.3);
     }
   }
   & > input {
@@ -963,6 +975,7 @@ export const UploadButton = styled.button`
     font-weight: 500;
     line-height: normal;
     cursor: pointer;
+    
     &:active {
       transform: translateY(2px);
       box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);

@@ -29,7 +29,7 @@ const Header = ({ click}) => {
   }
 
   const githubLogin = () => {
-    const loginUrl = "https://api.100shot.net";
+    const loginUrl = "https://api.100shot.net/login/github";
     window.open(loginUrl, "_blank");
   }
 

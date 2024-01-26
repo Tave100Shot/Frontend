@@ -20,6 +20,13 @@ const GoldPage = () => {
     navigate('/');
   }
 
+/*   useEffect(() => {
+    if (bojTier?.toUpperCase() === 'BEGINNER') {
+      alert('Beginner 회원은 접근할 수 없습니다.');
+      navigate('/'); 
+    }
+  }, [bojTier, navigate]); */
+
   const handleWriteClick = () => {
     navigate("/community/gold/write");
 
@@ -31,12 +38,17 @@ const GoldPage = () => {
 
   const handleSearch = () => {
     // 검색어를 이용하여 게시판 제목을 필터링
-    const results = posts.filter(post =>
-      post.title.toLowerCase().includes(searchTerm.toLowerCase())
-    );
-
-    setSearchResults(results);
+    if (searchTerm.trim() !== '') {
+      const results = posts.filter(post =>
+        post.title.toLowerCase().includes(searchTerm.toLowerCase())
+      );
+      setSearchResults(results);
+    } else {
+      // If search term is empty, reset the search results to show all posts
+      setSearchResults([]);
+    }
   };
+
   const [searchTerm, setSearchTerm] = useState('');
   const [searchResults, setSearchResults] = useState([]);
 
@@ -76,17 +88,18 @@ const GoldPage = () => {
   useEffect(() => {
     const fetchPosts = async () => {
       try {
+        for (let currentPage = 0; currentPage < 100; currentPage++) {
         const response = await axios.get('/api/post', {
           headers: {
             Authorization: `Bearer ${storedToken}`,
           },
           params: {
             postTier: "Gold",
-            page: 0,
+            page: currentPage,
           }
         });
-        setPosts(response.data.result.postResponses);
-      } catch (error) {
+        setPosts(prevPosts => [...prevPosts, ...response.data.result.postResponses]);
+      }} catch (error) {
         console.error(error);
       }
     };
@@ -98,8 +111,31 @@ const GoldPage = () => {
   const indexOfFirstPost = indexOfLastPost - postsPerPage;
   const currentPosts = posts.slice(indexOfFirstPost, indexOfLastPost);
 
+
+  const totalPages = Math.ceil(posts.length / postsPerPage);
+  const [maxPageNumberLimit, setMaxPageNumberLimit] = useState(5);
+  const [minPageNumberLimit, setMinPageNumberLimit] = useState(0);
+
   const paginate = (pageNumber) => {
     setCurrentPage(pageNumber);
+  };
+
+  const handlePrevBtn = () => {
+    setCurrentPage(currentPage - 1);
+
+    if ((currentPage - 1) % 5 === 0) {
+      setMaxPageNumberLimit(maxPageNumberLimit - 5);
+      setMinPageNumberLimit(minPageNumberLimit - 5);
+    }
+  };
+
+  const handleNextBtn = () => {
+    setCurrentPage(currentPage + 1);
+
+    if (currentPage + 1 > maxPageNumberLimit) {
+      setMaxPageNumberLimit(maxPageNumberLimit + 5);
+      setMinPageNumberLimit(minPageNumberLimit + 5);
+    }
   };
 
   const isTierAllowed = ["GOLD", "PLATINUM", "DIAMOND", "RUBY", "MASTER"].includes(bojTier?.toUpperCase());
@@ -118,6 +154,8 @@ const GoldPage = () => {
                 <input
                   type="text"
                   placeholder="Search your problem !"
+                  value={searchTerm}
+                  onChange={(e) => setSearchTerm(e.target.value)}
                 ></input>
               </c.SearchInputBox>
               <button onClick={handleEnterClick}>SEARCH</button>
@@ -133,12 +171,23 @@ const GoldPage = () => {
             <p>작성일</p>
           </c.HeaderBulletin>
           <c.BulletinBox>
-            <ViewPosts posts={currentPosts}/>
+          {searchResults.length > 0 ? (
+          <ViewPosts posts={searchResults} />
+        ) : (
+          <ViewPosts posts={currentPosts} />
+        )}
           </c.BulletinBox>
           <c.Pagination>
-            {Array.from({ length: Math.ceil(posts.length / postsPerPage) }).map((_, index) => (
-              <button key={index} onClick={() => paginate(index + 1)}>{index + 1}</button>
-            ))}
+          <button onClick={handlePrevBtn} className="prevButton" disabled={currentPage === 1}>Prev</button>
+          {Array.from({ length: totalPages }).map((_, index) => {
+            if (index >= minPageNumberLimit && index < maxPageNumberLimit) {
+              return <button key={index} onClick={() => paginate(index + 1)}>{index + 1}</button>;
+            } else {
+              return null;
+            }
+          })}
+          <button onClick={handleNextBtn}  className="nextButton" disabled={currentPage === totalPages}>Next</button>
+          
           </c.Pagination>
         </FirstContainer>
       </MainContainer>

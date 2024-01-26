@@ -19,7 +19,7 @@ const WriteGoldPage = () => {
   const [content, setContent] = useState("");
   const [attachmentFiles, setAttachmentFiles] = useState([]);
   const [selectedFileContainers, setSelectedFileContainers] = useState([]);
-  const bojName = localStorage.getItem('bojName');
+  const gitLoginId = localStorage.getItem('gitLoginId');
   const bojTier = localStorage.getItem('bojTier');
 
 
@@ -101,7 +101,7 @@ const WriteGoldPage = () => {
             <c.WriteWrapContainer>
               <c.AuthorContainer>
                 <div>글쓴이</div>
-                <p>{bojName}</p>
+                <p>{gitLoginId}</p>
               </c.AuthorContainer>
               <c.TitleContainer>
                 <div>제목</div>

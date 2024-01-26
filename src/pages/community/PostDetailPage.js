@@ -26,6 +26,8 @@ const PostDetailPage = ({comment}) => {
   const [babyComments, setBabyComments] = useState([]);
   const [displayedInputValue, setDisplayedInputValue] = useState('');
 
+  const gitLoginId = localStorage.getItem('gitLoginId');
+
   useEffect(() => {
     const fetchPostDetails = async () => {
       try {
@@ -64,6 +66,8 @@ const PostDetailPage = ({comment}) => {
 
   //게시물 삭제
   const handleDelete = async () => {
+
+    if (gitLoginId === postDetails.writer) {
     try {
       await axios.delete(`/api/post/${postId}`, {
         headers: {
@@ -73,13 +77,24 @@ const PostDetailPage = ({comment}) => {
       navigate('/community/bronze');
     } catch (error) {
       console.error(error);
-    }
+    } 
+  } else {
+    // Handle the case where the user is not the writer of the post
+   alert("타인의 게시글은 삭제할 수 없습니다.");
+    // You can also display an error message to the user here
   }
+}
 
   // 게시물 수정
   const handleEdit = () => {
+
+  if (gitLoginId === postDetails.writer) {
     navigate(`/community/post/${postId}/edit`, { state: { postDetails } });
-  };
+  } else {
+  
+    alert("타인의 게시글은 수정할 수 없습니다.");
+  }
+};
 
   // 댓글 추가
   const handleAddComment = async () => {
@@ -196,6 +211,9 @@ const PostDetailPage = ({comment}) => {
 
   //댓글 수정
   const handleApplyEdit = async (commentId) => {
+    const comment = postDetails.commentListResponse.commentResponses.find((comment) => comment.commentId === commentId);
+
+    if (comment && comment.gitLoginId === gitLoginId) {
     try {
       if (editedCommentContent !== null && editedCommentContent !== undefined) {
         await axios.patch(`/api/post/comments/${commentId}`, {
@@ -225,10 +243,16 @@ const PostDetailPage = ({comment}) => {
     } finally {
       window.location.reload();
     }
-  };
+  } else {
+    alert("타인의 댓글은 수정할 수 없습니다.");
+  }
+};
 
   // 댓글 삭제
   const handleDeleteComment = async (commentId) => {
+    const comment = postDetails.commentListResponse.commentResponses.find((comment) => comment.commentId === commentId);
+
+  if (comment && comment.gitLoginId === gitLoginId) {
     try {
       await axios.delete(`/api/post/comments/${commentId}`, {
         headers: {
@@ -252,7 +276,10 @@ const PostDetailPage = ({comment}) => {
     } catch (error) {
       console.error('댓글 삭제 오류:', error);
     }
-  };
+  }else {
+    alert("타인의 댓글은 삭제할 수 없습니다.");
+  }
+};
 
 
 
@@ -382,7 +409,7 @@ const PostDetailPage = ({comment}) => {
                   </>
                 )}
                 <c.CommentViewIconContainer>
-                  <c.CommentViewWrite onClick={() => setShowCommentBox(!showCommentBox)}/* onClick={handleAddChildComment} */>댓글 달기</c.CommentViewWrite>
+                  {/* <c.CommentViewWrite onClick={() => setShowCommentBox(!showCommentBox)}/>댓글 달기 */}
                   <c.CommentViewEdit onClick={() => setIsEditingComment(comment.commentId)} />
                   <c.CommentViewDelete onClick={() => handleDeleteComment(comment.commentId)} />
                 </c.CommentViewIconContainer>

@@ -1,4 +1,4 @@
-import { BrowserRouter, Route, Routes } from "react-router-dom";
+import { BrowserRouter, Route, Routes, useNavigate } from "react-router-dom";
 import GlobalStyle from "./styles/GlobalStyle";
 import MainPage from './pages/main/MainPage';
 import SearchPage from './pages/solution/SearchPage';
@@ -9,6 +9,9 @@ import DiamondPage from './pages/community/DiamondPage';
 import GoldPage from './pages/community/GoldPage';
 import PlatinumPage from './pages/community/PlatinumPage';
 import WritePage from './pages/community/WritePage';
+import WritePlatinumPage from "./pages/community/WritePlatinumPage";
+import WriteGoldPage from "./pages/community/WriteGoldPage";
+import WriteHighPage from "./pages/community/WriteHighPage";
 import PostDetailPage from './pages/community/PostDetailPage';
 import PostEditPage from './pages/community/PostEditPage';
 import CompilingPage from './pages/compiling/CompilingPage';
@@ -22,7 +25,6 @@ import { useDispatch } from "react-redux";
 import { SetTheme } from "./redux/actions/solutionAction";
 import Modal from 'react-modal';
 import MobilePage from "./pages/main/mobilePage";
-import Test from "./pages/test";
 
 function App() {
   Modal.setAppElement('#root');
@@ -92,12 +94,12 @@ function App() {
           {isMobile ? (
             <Route path='/compile' element={<MobilePage />} />
           ) : (
-            <Route path='/compile' element={<CompilingPage/>}/>
+            <Route path='/compile' element={<CompilingPage theme={theme}/>}/>
             )}
           {isMobile ? (
             <Route path='/community' element={<MobilePage />} />
           ) : (
-            <Route path='/community' element={<CommunityPage/>}/>
+            <Route path='/community' element={<CommunityPage />}/>
             )}
           {isMobile ? (
             <Route path='/community/bronze' element={<MobilePage />} />
@@ -125,6 +127,21 @@ function App() {
             <Route path='/community/write' element={<WritePage />}/>
             )}
           {isMobile ? (
+            <Route path='/community/gold/write' element={<MobilePage />} />
+          ) : (
+            <Route path='/community/gold/write' element={<WriteGoldPage />}/>
+            )}
+          {isMobile ? (
+            <Route path='/community/platinum/write' element={<MobilePage />} />
+          ) : (
+            <Route path='/community/platinum/write' element={<WritePlatinumPage />}/>
+            )}
+          {isMobile ? (
+            <Route path='/community/high/write' element={<MobilePage />} />
+          ) : (
+            <Route path='/community/high/write' element={<WriteHighPage />}/>
+            )}
+          {isMobile ? (
             <Route path='/community/post/:postId' element={<MobilePage />} />
           ) : (
             <Route path='/community/post/:postId' element={<PostDetailPage/>}/>
@@ -133,11 +150,6 @@ function App() {
             <Route path='/community/post/:postId/edit' element={<MobilePage />} />
           ) : (
             <Route path='/community/post/:postId/edit' element={<PostEditPage/>}/>
-            )}
-          {isMobile ? (
-            <Route path='/health-front' element={<MobilePage />} />
-          ) : (
-            <Route path='/health-front' element={<Test/>}/>
             )}
         </Routes>
       </ThemeProvider>

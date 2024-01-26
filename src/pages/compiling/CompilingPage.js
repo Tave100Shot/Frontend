@@ -1,19 +1,23 @@
 import { useNavigate } from "react-router-dom";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Header from "../../components/common/Header";
 import * as s from "../../styles/searchBarStyle";
 import * as c from "../../styles/compilingStyle";
+import styled from "styled-components";
+import axios from "axios";
 import AceEditor from "react-ace";
 
 import "ace-builds/src-noconflict/mode-java";
 import "ace-builds/src-noconflict/theme-github";
+import "ace-builds/src-noconflict/theme-monokai";
+import "ace-builds/src-noconflict/theme-tomorrow";
 import "ace-builds/src-noconflict/ext-language_tools";
 
 function onChange(newValue) {
   console.log("change", newValue);
 }
 
-const CompilingPage = () => {
+const CompilingPage = ({ theme }) => {
   const navigate = useNavigate();
 
   const moveToMain = () => {
@@ -27,22 +31,101 @@ const CompilingPage = () => {
   const [infoContainerVisible, setInfoContainerVisible] = useState(false);
   const [problemTitle, setProblemTitle] = useState('');
   const [isCompiling, setIsCompiling] = useState(false);
+  const [problemInfo, setProblemInfo] = useState(null);
+  
 
   const handleOnChangeSelectValue = (e) => {
     const { innerText } = e.target;
     setCurrentValue(innerText);
   };
-  const handleSearchClick = () => {
-    setProblemTitle(`백준 ${questionNumber}번 어린 왕자`);
-    setInfoContainerVisible(true);
+  const storedToken = localStorage.getItem('accessToken')
+
+  const handleSearchClick = async () => {
+
+    if (questionNumber < 1000) {
+      alert('문제 번호는 1000번부터 시작합니다.');
+      return;
+    }
+
+    try {
+      const response = await axios.get(`/api/compile/problems/${questionNumber}`);
+      console.log('서버 응답:', response.data);
+
+      if (response.data.status === 200) {
+
+      const fetchedProblemInfo = response.data.result;
+/*       const problemUrl = `https://www.acmicpc.net/problem/${fetchedProblemInfo.ID}`;
+      fetchedProblemInfo.problemUrl = problemUrl;
+ */
+      if (fetchedProblemInfo.Title === "N/A" || 
+      fetchedProblemInfo["Sample Input"] === "N/A" ||
+      fetchedProblemInfo["Sample Output"] === "N/A" ||
+      fetchedProblemInfo["Input Description"] === "N/A" ||
+      fetchedProblemInfo["Output Description"] === "N/A"
+      ) {
+        alert("해당 문제의 정보를 찾을 수 없습니다.");
+        return; // 추가 처리를 중단하고 함수를 종료
+      }
+
+        setProblemInfo(fetchedProblemInfo);
+        setProblemTitle(`백준 ${questionNumber}번 - ${fetchedProblemInfo.Title}`);
+        setInfoContainerVisible(true);
+      } else {
+        if (response.data.errorCode === "PROBLEM_5002") {
+          alert("문제 정보 변환 중 오류가 발생했습니다.");
+          return;
+        }
+
+        console.error('서버 응답 오류:', response.data.message);
+      }
+    } catch (error) {
+
+      console.error('get 요청 오류:', error);
+    }
   };
+  useEffect(() => {
+    const description = problemInfo && problemInfo.Description;
+    const imageUrlsMatch = description && description.match(/(https?:\/\/[^\s]+)/g);
+  
+    const imageContainer = document.getElementById('imageContainer');
+    
+    if (imageContainer) {
+      imageContainer.innerHTML = ''; 
+  
+      if (imageUrlsMatch) {
+        imageUrlsMatch.forEach((imageUrl, index) => {
+          const imgElement = document.createElement('img');
+          imgElement.src = imageUrl;
+          imgElement.alt = `Image ${index + 1}`;
+          imageContainer.appendChild(imgElement);
+        });
+      }
+  
+      const textElement = document.createElement('p');
+      textElement.textContent = description && description.replace(/(https?:\/\/[^\s]+)/g, '');
+      imageContainer.appendChild(textElement);
+    }
+  }, [problemInfo]);
+  
+
+  //enter키
   const handleKeyPress = (e) => {
     if (e.key === 'Enter') {
       handleSearchClick();
     }
   };
-  const handleCompileRun = () => {
-    setIsCompiling(true);
+
+  const handleGoToBaekjoon = () => {
+    console.log("백준 풀러 가기 버튼 클릭");
+/*     const problemUrl = problemInfo && problemInfo.problemUrl;
+   *///problemUrl
+   const problemUrl = problemInfo && problemInfo.problemUrl;
+    window.open(problemUrl, '_blank');
+  }
+  
+  const handleMoveToSolution = () => {
+    navigate(`/result-solution?problemId=${questionNumber}`);
+    console.log("솔루션 이동 버튼 클릭");
   };
 
   return (
@@ -52,7 +135,7 @@ const CompilingPage = () => {
         <c.QIOEContainer>
           <c.QSearchContainer>
             <input
-              type="number"
+              type="text"
               placeholder="Enter the Question Number !"
               value={questionNumber}
               onChange={(e) => setQuestionNumber(e.target.value)}
@@ -61,42 +144,28 @@ const CompilingPage = () => {
             <button onClick={handleSearchClick}>SEARCH</button>
           </c.QSearchContainer>
           <c.InfoContainer style={{ display: infoContainerVisible ? 'block' : 'none' }}>
-            <c.QNumberContainer>
-              {problemTitle}
-            </c.QNumberContainer>
+          <c.QNumberContainer>{problemTitle}</c.QNumberContainer>
             <c.QContainer>
-              문제 설명
-              <div>서기 2012년! 드디어 2년간 수많은 국민들을 기다리게 한 게임 ACM Craft (Association of Construction Manager Craft)가 발매되었다.
-                이 게임은 지금까지 나온 게임들과는 다르게 ACM크래프트는 다이나믹한 게임 진행을 위해 건물을 짓는 순서가 정해져 있지 않다. 즉, 첫 번째 게임과 두 번째 게임이 건물을 짓는 순서가 다를 수도 있다. 매 게임시작 시 건물을 짓는 순서가 주어진다. 또한 모든 건물은 각각 건설을 시작하여 완성이 될 때까지 Delay가 존재한다.</div>
+              문제 설명 {/* ${problemInfo.Description} */}
+              <div id="imageContainer">{problemInfo && problemInfo["Description"]}</div>
             </c.QContainer>
             <c.IContainer>
               입력
-              <div>첫째 줄에는 테스트케이스의 개수 T가 주어진다. 각 테스트 케이스는 다음과 같이 주어진다. 첫째 줄에 건물의 개수 N과 건물간의 건설순서 규칙의 총 개수 K이 주어진다. (건물의 번호는 1번부터 N번까지 존재한다)
-                둘째 줄에는 각 건물당 건설에 걸리는 시간 D1, D2, ..., DN이 공백을 사이...</div>
+              <div>{problemInfo && problemInfo["Input Description"]}</div>
             </c.IContainer>
             <c.OContainer>
               출력
-              <div>첫째 줄에는 테스트케이스의 개수 T가 주어진다. 각 테스트 케이스는 다음과 같이 주어진다. 첫째 줄에 건물의 개수 N과 건물간의 건설순서 규칙의 총 개수 K이 주어진다. (건물의 번호는 1번부터 N번까지 존재한다) </div>
+              <div>{problemInfo && problemInfo["Output Description"]}</div>
             </c.OContainer>
             <c.EContainer>
               입출력 예시
               <div>입력 #1</div>
               <c.ExampleBox style={{ whiteSpace: 'pre-line' }}>
-                <p>
-                  {`2
-                4 4
-                10 1 100 10
-                1 2`}
-                </p>
+                <p>{problemInfo && problemInfo["Sample Input"]}</p>
               </c.ExampleBox>
               <div>출력 #1</div>
               <c.ExampleBox style={{ whiteSpace: 'pre-line' }}>
-                <p>
-                  {`2
-                  4 4
-                  10 1 100 10
-                  1 2`}
-                </p>
+                <p>{problemInfo && problemInfo["Sample Output"]}</p>
               </c.ExampleBox>
             </c.EContainer>
           </c.InfoContainer>
@@ -107,37 +176,19 @@ const CompilingPage = () => {
           <c.CodeEditor>
             <AceEditor
               mode="java"
-              theme="tomorrow"
+              theme={theme.colors.compiler}
               onChange={onChange}
               name="UNIQUE_ID_OF_DIV"
               editorProps={{ $blockScrolling: true }}
               placeholder={`team_member = input(“팀원 이름을 입력하시오 : “)
             \n print(f”안녕하세요 {team_member}님 백발백준 사이트입니다”)`}
               fontSize={16}
-              style={{ width: '38em', height: '30em' }}
+              style={{ width: '100%', height: '100%' }}
             />
-            <c.ButtonContainer>
-              <s.SelectBox onClick={() => setShowOptions((prev) => !prev)} show={showOptions}>
-                <label>{currentValue}</label>
-                <ul >
-                  <li onClick={handleOnChangeSelectValue}>Python 3</li>
-                  <li onClick={handleOnChangeSelectValue}>C99</li>
-                  <li onClick={handleOnChangeSelectValue}>C++17</li>
-                  <li onClick={handleOnChangeSelectValue}>C#</li>
-                  <li onClick={handleOnChangeSelectValue}>Java 11</li>
-                  <li onClick={handleOnChangeSelectValue}>node.js</li>
-                  <li onClick={handleOnChangeSelectValue}>Kotlin (JVM)</li>
-                  <li onClick={handleOnChangeSelectValue}>Ruby</li>
-                  <li onClick={handleOnChangeSelectValue}>Go</li>
-                  <li onClick={handleOnChangeSelectValue}>Swift</li>
-                </ul>
-              </s.SelectBox>
-              <c.RunButton onClick={handleCompileRun}>COMPILE & RUN</c.RunButton>
-            </c.ButtonContainer>
           </c.CodeEditor>
           <c.ExecutionResult>
-            실행 결과 
-            {isCompiling  && <button>채점 중</button>}
+                <button onClick={handleGoToBaekjoon}>Submit To Boj</button>
+                <c.AnswerButton onClick={handleMoveToSolution}>Go To Solution</c.AnswerButton>
           </c.ExecutionResult>
         </c.CompileContainer>
       </c.MainContainer>

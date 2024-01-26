@@ -52,7 +52,7 @@ const SearchBar = () => {
     dispatch(SetSearch(newQuestion));
     navigate('/result-solution');
 
-    const apiUrl = `/api/v1/search?query=${encodeURIComponent(questionString)}&start=${newQuestion.solultionIndex}`;
+    const apiUrl = `/api/v1/search?query=${questionString}&start=${newQuestion.solultionIndex}`;
     
     axios.get(apiUrl)
       .then(response => {

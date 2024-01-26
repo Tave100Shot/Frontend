@@ -41,7 +41,7 @@ const SolutionPage = () => {
     };
     console.log("설정할 인덱스 : ", newQuestion.solultionIndex)
     dispatch(SetSearch(newQuestion));
-    const apiUrl = `/api/v1/search/refresh?query=${encodeURIComponent(solutionQuestion.questionString)}&start=${nextIndex}`;
+    const apiUrl = `/api/v1/search/refresh?query=${newQuestion.questionString}&start=${nextIndex}`;
     console.log("신규 URL : ", apiUrl)
 
     axios.get(apiUrl)

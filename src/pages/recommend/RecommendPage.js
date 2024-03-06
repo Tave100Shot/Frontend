@@ -1,5 +1,5 @@
 import { useNavigate } from "react-router-dom";
-import * as r from "../../styles/RecommendMainStyle";
+import * as r from "../../styles/recommendMainStyle";
 import { useState } from "react";
 import axios from "axios";
 import { useDispatch } from "react-redux";

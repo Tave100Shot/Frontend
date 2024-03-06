@@ -1,6 +1,6 @@
 //PostDetail.js
 
-import { FirstContainer, MainContainer, Typography, HorizontalLine } from '../../styles/CommunityStyle';
+import { FirstContainer, MainContainer, Typography, HorizontalLine } from '../../styles/communityStyle';
 import Header from "../../components/common/Header";
 import { useNavigate, useParams } from "react-router-dom";
 import { useState, useEffect } from 'react';

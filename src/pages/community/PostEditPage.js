@@ -4,7 +4,7 @@ import React, { useState, useRef } from "react";
 import {
   FirstContainer, MainContainer, GridContainer, LevelBox, Typography, LevelTypography, Description,
   HorizontalLine, EnterButton, TypographyDcp, LockedButton
-} from '../../styles/CommunityStyle';
+} from '../../styles/communityStyle';
 import Header from "../../components/common/Header";
 import axios from "axios";
 import * as c from "../../styles/communityPostStyle";

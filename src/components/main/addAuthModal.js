@@ -72,7 +72,9 @@ const AddAuthModal = ({isOpen, onRequestClose}) => {
       // console.log(response.data);
     } catch (error) {
       if(storedToken === null) {
-        alert("로그인 이후 2차 인증을 진행해주세요");
+        alert("로그인 먼저 진행해주세요 :)");
+        const loginUrl = "https://api.100shot.net/login/github";
+        window.open(loginUrl, "_blank");
       }
       // console.log(error);
       const errorCode = error.response.data.errorCode;

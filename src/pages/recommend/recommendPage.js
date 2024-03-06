@@ -1,5 +1,5 @@
 import { useNavigate } from "react-router-dom";
-import * as r from "../../styles/RecommendMainStyle";
+import * as r from "../../styles/recommendMainStyle";
 import { useState } from "react";
 import axios from "axios";
 import { useDispatch } from "react-redux";
@@ -45,29 +45,39 @@ const RecommendPage = () => {
 
   const moveToRecommendLatest = () => {
     const storedToken = localStorage.getItem('accessToken');
-
+  
     if (recentProblem === "") {
       alert("최근에 푼 1개의 문제 번호를 입력해주세요 :)");
+      navigate('/recommend');
       return;
     }
 
-    axios.get(`/api/v1/recommend/problem?solvedRecentId=${recentProblem}`, {
-      headers : {
-        Authorization : `Bearer ${storedToken}`
-      }
-    })
-      .then(response => {
-        localStorage.setItem('userRightNum', response.data.result.rightCnt);
-        localStorage.setItem('userWrongNum', response.data.result.wrongCnt);
-        localStorage.setItem('userRank', response.data.result.userRank);
-        localStorage.setItem('userRivalNum', response.data.result.rivalCnt);
-        dispatch(SetByMeProblemList(response.data.result.result));
+    else {
+      axios.get(`/api/v1/recommend/problem?solvedRecentId=${recentProblem}`, {
+        headers : {
+          Authorization : `Bearer ${storedToken}`
+        }
       })
-      .catch(error => {
-        console.error(error);
-      });
-      navigate('/recommend-latest');
+        .then(response => {
+          localStorage.setItem('userRightNum', response.data.result.rightCnt);
+          localStorage.setItem('userWrongNum', response.data.result.wrongCnt);
+          localStorage.setItem('userRank', response.data.result.userRank);
+          localStorage.setItem('userRivalNum', response.data.result.rivalCnt);
+          dispatch(SetByMeProblemList(response.data.result.result));
+          navigate('/recommend-latest'); // navigate 코드를 이동합니다.
+        })
+        .catch(error => {
+          console.error(error);
+          const errorCode = error.response.data.errorCode;
+          console.log(errorCode);
+          if(errorCode === 'PROBLEM_4001') {
+            alert("존재하지 않는 문제입니다.");
+          }
+          return;
+        });
+    }
   }
+  
 
   return (
     <r.RecommendContainer>
@@ -80,7 +90,7 @@ const RecommendPage = () => {
         <r.RecommendLatestBox className="Algorithm-By-latest">
           <p className="title">ALGORITHM<br/>BY LATEST</p>
           <p className="desc">홍길동님의 최근 푼 문제를 기반하여<br/>새로운 문제 추천</p>
-          <form action="/recommend-latest" method="">
+          <div>
             <input
               type="number"
               value={recentProblem}
@@ -88,7 +98,7 @@ const RecommendPage = () => {
               onChange={handleOnChangeInput}
             ></input>
             <button onClick={moveToRecommendLatest}>ENTER</button>
-          </form>
+          </div>
           
         </r.RecommendLatestBox>
       </r.RecommendSelectBox>

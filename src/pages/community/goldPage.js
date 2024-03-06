@@ -1,11 +1,11 @@
 import {
   MainContainer, FirstContainer, Typography, Description,
   HorizontalLine, EnterButton
-} from "../../styles/CommunityStyle"
-import Header from "../../components/common/Header";
+} from "../../styles/communityStyle"
+import Header from "../../components/common/header";
 import { useNavigate } from "react-router-dom";
 import search_white from '../../assets/imgs/search_white.png'
-import WritePage from "./WritePage";
+import WritePage from "./writePage";
 import { useEffect, useState } from "react";
 import axios from "axios";
 import { useHistory } from "react-router-dom";
@@ -13,7 +13,7 @@ import * as c from "../../styles/communityPostStyle";
 
 
 
-const PlatinumPage = () => {
+const GoldPage = () => {
   const bojTier = localStorage.getItem('bojTier');
   const navigate = useNavigate();
   const moveToMain = () => {
@@ -28,7 +28,7 @@ const PlatinumPage = () => {
   }, [bojTier, navigate]);
 
   const handleWriteClick = () => {
-    navigate("/community/platinum/write");
+    navigate("/community/gold/write");
 
   };
   const handleEnterClick = (e) => {
@@ -94,15 +94,22 @@ const PlatinumPage = () => {
             Authorization: `Bearer ${storedToken}`,
           },
           params: {
-            postTier: "Platinum",
+            postTier: "Gold",
             page: currentPage,
           }
         });
-        setPosts(response.data.result.postResponses);
-      }} catch (error) {
+        setPosts(prevPosts => [...prevPosts, ...response.data.result.postResponses]);
+      }
+    } catch (error) {
+      //토큰 유효 기간
+      if (error.response && error.response.data.errorCode === 'JWT_4010') {
+        alert("로그인 유효 기간이 지났습니다. 다시 로그인 해주세요 :)");
+        navigate('/');
+      } else {
         console.error(error);
       }
-    };
+    }
+  };
 
     fetchPosts();
   }, []);
@@ -111,7 +118,8 @@ const PlatinumPage = () => {
   const indexOfFirstPost = indexOfLastPost - postsPerPage;
   const currentPosts = posts.slice(indexOfFirstPost, indexOfLastPost);
 
-   const totalPages = Math.ceil(posts.length / postsPerPage);
+
+  const totalPages = Math.ceil(posts.length / postsPerPage);
   const [maxPageNumberLimit, setMaxPageNumberLimit] = useState(5);
   const [minPageNumberLimit, setMinPageNumberLimit] = useState(0);
 
@@ -136,13 +144,15 @@ const PlatinumPage = () => {
       setMinPageNumberLimit(minPageNumberLimit + 5);
     }
   };
-  const isTierAllowed = ["PLATINUM", "DIAMOND", "RUBY", "MASTER"].includes(bojTier?.toUpperCase());
+
+  const isTierAllowed = ["GOLD", "PLATINUM", "DIAMOND", "RUBY", "MASTER"].includes(bojTier?.toUpperCase());
+
   return (
     <div>
       <Header click={moveToMain} />
       <MainContainer>
         <FirstContainer>
-          <Typography>PLATINUM</Typography>
+          <Typography>GOLD</Typography>
           <HorizontalLine></HorizontalLine>
           <c.WrapContainer>
             <c.SearchBarContainer>
@@ -192,4 +202,4 @@ const PlatinumPage = () => {
   )
 }
 
-export default PlatinumPage;
+export default GoldPage;

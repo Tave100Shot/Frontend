@@ -4,8 +4,8 @@ import React, { useState, useRef } from "react";
 import {
   FirstContainer, MainContainer, GridContainer, LevelBox, Typography, LevelTypography, Description,
   HorizontalLine, EnterButton, TypographyDcp, LockedButton
-} from '../../styles/CommunityStyle';
-import Header from "../../components/common/Header";
+} from '../../styles/communityStyle';
+import Header from "../../components/common/header";
 import axios from "axios";
 import * as c from "../../styles/communityPostStyle";
 import {Link} from 'react-router-dom';

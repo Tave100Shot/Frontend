@@ -1,7 +1,7 @@
 import { useEffect } from "react";
-import Header from "../../components/common/Header";
+import Header from "../../components/common/header";
 import MainButton from "../../components/main/mainButton";
-import TaveAnimation from "../../components/main/tave_animation";
+import TaveAnimation from "../../components/main/taveAnimation";
 import * as w from "../../styles/mainPageStyle";
 import AddAuthModal from "../../components/main/addAuthModal";
 import {  useLocation, useNavigate } from "react-router-dom";

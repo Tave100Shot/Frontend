@@ -1,11 +1,11 @@
 import {
   MainContainer, FirstContainer, Typography, Description,
   HorizontalLine, EnterButton
-} from "../../styles/CommunityStyle"
-import Header from "../../components/common/Header";
+} from "../../styles/communityStyle"
+import Header from "../../components/common/header";
 import { useNavigate } from "react-router-dom";
 import search_white from '../../assets/imgs/search_white.png'
-import WritePage from "./WritePage";
+import WritePage from "./writePage";
 import { useEffect, useState } from "react";
 import axios from "axios";
 import { useHistory } from "react-router-dom";
@@ -13,9 +13,12 @@ import * as c from "../../styles/communityPostStyle";
 
 
 
-const BronzePage = () => {
+const HighPage = () => {
   const bojTier = localStorage.getItem('bojTier');
   const navigate = useNavigate();
+  const moveToMain = () => {
+    navigate('/');
+  }
 
   useEffect(() => {
     if (bojTier?.toUpperCase() === 'BEGINNER') {
@@ -24,29 +27,44 @@ const BronzePage = () => {
     }
   }, [bojTier, navigate]);
 
-
-  const moveToMain = () => {
-    navigate('/');
-  }
-
   const handleWriteClick = () => {
-    navigate("/community/write");
+    navigate("/community/high/write");
 
   };
+  const handleEnterClick = (e) => {
+    e.preventDefault();
+    handleSearch();
+  };
+
+  const handleSearch = () => {
+    // 검색어를 이용하여 게시판 제목을 필터링
+    if (searchTerm.trim() !== '') {
+      const results = posts.filter(post =>
+        post.title.toLowerCase().includes(searchTerm.toLowerCase())
+      );
+      setSearchResults(results);
+    } else {
+      // If search term is empty, reset the search results to show all posts
+      setSearchResults([]);
+    }
+  };
+
+  const [searchTerm, setSearchTerm] = useState('');
+  const [searchResults, setSearchResults] = useState([]);
 
   const ViewPost = ({ post }) => {
     const postId = post.postId;
     //console.log(postId);
     return (
       <c.StyledLink to={`/community/post/${postId}`}>
-        <c.StyledViewPost>
-          <p>{post.postId}</p>
-          <p>{post.title}</p>
-          <p>{post.writer}</p>
-          <p>{post.view}</p>
-          <p>{post.commentCount}</p>
-          <p>{post.writtenTime}</p>
-        </c.StyledViewPost>
+      <c.StyledViewPost>
+        <p>{post.postId}</p>
+        <p>{post.title}</p>
+        <p>{post.writer}</p>
+        <p>{post.view}</p>
+        <p>{post.commentCount}</p>
+        <p>{post.writtenTime}</p>
+      </c.StyledViewPost>
       </c.StyledLink>
     );
   };
@@ -55,13 +73,12 @@ const BronzePage = () => {
     return (
       <div>
         {postArray.map((post, index) => (
-          <ViewPost key={index} post={post} />
+          <ViewPost key={index} post={post}/>
         ))}
       </div>
     );
   };
-  const [searchTerm, setSearchTerm] = useState('');
-  const [searchResults, setSearchResults] = useState([]);
+
   const [posts, setPosts] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
   const postsPerPage = 7;
@@ -77,16 +94,22 @@ const BronzePage = () => {
             Authorization: `Bearer ${storedToken}`,
           },
           params: {
-            postTier: "BronzeSilver",
+            postTier: "High",
             page: currentPage,
           }
         });
         setPosts(prevPosts => [...prevPosts, ...response.data.result.postResponses]);
-        }
-      } catch (error) {
+      }
+    } catch (error) {
+      //토큰 유효 기간
+      if (error.response && error.response.data.errorCode === 'JWT_4010') {
+        alert("로그인 유효 기간이 지났습니다. 다시 로그인 해주세요 :)");
+        navigate('/');
+      } else {
         console.error(error);
       }
-    };
+    }
+  };
 
     fetchPosts();
   }, []);
@@ -121,32 +144,14 @@ const BronzePage = () => {
     }
   };
 
-  const handleSearch = () => {
-    // 검색어를 이용하여 게시판 제목을 필터링
-    if (searchTerm.trim() !== '') {
-      const results = posts.filter(post =>
-        post.title.toLowerCase().includes(searchTerm.toLowerCase())
-      );
-      setSearchResults(results);
-    } else {
-      // If search term is empty, reset the search results to show all posts
-      setSearchResults([]);
-    }
-  };
-
-
-  const handleEnterClick = (e) => {
-    e.preventDefault();
-    handleSearch();
-  };
-  const isTierAllowed = ["BRONZE", "SILVER", "GOLD", "PLATINUM", "DIAMOND", "RUBY", "MASTER"].includes(bojTier?.toUpperCase());
+  const isTierAllowed = ["DIAMOND", "RUBY", "MASTER"].includes(bojTier?.toUpperCase());
 
   return (
     <div>
       <Header click={moveToMain} />
       <MainContainer>
         <FirstContainer>
-          <Typography>BRONZE & SILVER</Typography>
+          <Typography>HIGH</Typography>
           <HorizontalLine></HorizontalLine>
           <c.WrapContainer>
             <c.SearchBarContainer>
@@ -160,12 +165,10 @@ const BronzePage = () => {
                 ></input>
               </c.SearchInputBox>
               <button onClick={handleEnterClick}>SEARCH</button>
-              </c.SearchBarContainer>
-              {isTierAllowed && 
-              <c.WriteButton onClick={handleWriteClick}>작성하기</c.WriteButton>}     
-          </c.WrapContainer>
-          <c.BulletinPageContainer>
-          <c.HeaderBulletin>
+              {isTierAllowed && <c.WriteButton onClick={handleWriteClick}>작성하기</c.WriteButton>}
+            </c.SearchBarContainer>
+            </c.WrapContainer>
+            <c.HeaderBulletin>
             <p>글번호</p>
             <p>제목</p>
             <p>글쓴이</p>
@@ -180,7 +183,6 @@ const BronzePage = () => {
           <ViewPosts posts={currentPosts} />
         )}
           </c.BulletinBox>
-          <c.PaginationContainer>
           <c.Pagination>
           <button onClick={handlePrevBtn} className="prevButton" disabled={currentPage === 1}>Prev</button>
           {Array.from({ length: totalPages }).map((_, index) => {
@@ -191,13 +193,12 @@ const BronzePage = () => {
             }
           })}
           <button onClick={handleNextBtn}  className="nextButton" disabled={currentPage === totalPages}>Next</button>
+          
           </c.Pagination>
-          </c.PaginationContainer>
-        </c.BulletinPageContainer>
-      </FirstContainer>
-    </MainContainer>
-    </div >
+        </FirstContainer>
+      </MainContainer>
+    </div>
   )
 }
 
-export default BronzePage;
+export default HighPage;

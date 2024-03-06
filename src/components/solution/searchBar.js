@@ -69,7 +69,12 @@ const SearchBar = () => {
         dispatch(SetSearch(totalQuestion))
       })
       .catch(error => {
-        console.error(error);
+        // console.error(error);
+        const errorCode = error.response.data.errorCode;
+        console.log(errorCode);
+        if(errorCode === 'PROBLEM_4001') {
+          alert("존재하지 않는 문제입니다.");
+        }
       });
     }
 

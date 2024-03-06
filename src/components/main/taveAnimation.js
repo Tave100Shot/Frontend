@@ -1,5 +1,5 @@
 import { useNavigate } from "react-router-dom";
-import * as t from "../../styles/tave_animationStyle"
+import * as t from "../../styles/taveAnimationStyle"
 import { SetModal } from "../../redux/actions/mainAction";
 import { useDispatch } from "react-redux";
 

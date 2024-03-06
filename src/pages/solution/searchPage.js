@@ -1,7 +1,7 @@
 import { useNavigate } from "react-router-dom";
-import Header from "../../components/common/Header";
-import SolutionText from "../../components/solution/solution_text";
-import SearchBar from "../../components/solution/search_bar";
+import Header from "../../components/common/header";
+import SolutionText from "../../components/solution/solutionText";
+import SearchBar from "../../components/solution/searchBar";
 
 const SearchPage = () => {
   const navigate = useNavigate();

@@ -1,16 +1,15 @@
-//WRITEGold
 import styled from "styled-components";
 import { useNavigate } from "react-router-dom";
 import React, { useState, useRef } from "react";
 import {
   FirstContainer, MainContainer, GridContainer, LevelBox, Typography, LevelTypography, Description,
   HorizontalLine, EnterButton, TypographyDcp, LockedButton
-} from '../../styles/CommunityStyle';
-import Header from "../../components/common/Header";
+} from '../../styles/communityStyle';
+import Header from "../../components/common/header";
 import * as c from "../../styles/communityPostStyle";
 import axios from "axios";
 
-const WriteGoldPage = () => {
+const WritePlatinumPage = () => {
   const navigate = useNavigate();
   const moveToMain = () => {
     navigate('/');
@@ -70,7 +69,7 @@ const WriteGoldPage = () => {
 
     formData.append('title', title);
     formData.append('content', content);
-    formData.append('postTier', 'Gold');
+    formData.append('postTier', 'Platinum');
     for (let i = 0; i < attachmentFiles.length; i++) {
       formData.append('attachmentFile', attachmentFiles[i]);
     }
@@ -84,7 +83,7 @@ const WriteGoldPage = () => {
       .then(res => {
         console.log(res);
         console.log(res.data);
-        navigate("/community/gold");
+        navigate("/community/platinum");
       })
       .catch(error => console.log(error))
   }
@@ -141,7 +140,7 @@ const WriteGoldPage = () => {
               )}
             </c.FilesContainer>
             <c.ButtonContainer>
-              <c.CancelButton onClick={() => { navigate("/community/gold") }}>취소</c.CancelButton>
+              <c.CancelButton onClick={() => { navigate("/community/platinum") }}>취소</c.CancelButton>
               <c.UploadButton onClick={onSubmit}>업로드</c.UploadButton>
             </c.ButtonContainer>
           </form>
@@ -152,4 +151,4 @@ const WriteGoldPage = () => {
 };
 
 
-export default WriteGoldPage;
+export default WritePlatinumPage;

@@ -1,6 +1,6 @@
 import { TfiBarChart } from "react-icons/tfi";
 import { AiOutlineTeam } from "react-icons/ai";
-import * as r from "../../styles/RecommendMainStyle";
+import * as r from "../../styles/recommendMainStyle";
 import TierBadge from "./tierBadge";
 
 

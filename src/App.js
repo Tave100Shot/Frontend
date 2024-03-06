@@ -1,7 +1,7 @@
 import { BrowserRouter, Route, Routes, useNavigate } from "react-router-dom";
 import GlobalStyle from "./styles/globalStyle";
-import MainPage from './pages/main/MainPage';
-import SearchPage from './pages/solution/SearchPage';
+import MainPage from './pages/main/mainPage';
+import SearchPage from './pages/solution/searchPage';
 import RecommendPage from './pages/recommend/recommendPage';
 import CommunityPage from './pages/community/communityPage';
 import BronzePage from './pages/community/bronzePage';
@@ -19,7 +19,7 @@ import { ThemeProvider } from "styled-components";
 import { useState, useEffect } from "react";
 import { darkTheme, lightTheme } from "./styles/theme";
 import SolutionPage from "./pages/solution/solutionPage";
-import RecommendMe from "./pages/recommend/RecommendMePage";
+import RecommendMe from "./pages/recommend/recommendMePage";
 import RecommendRank from "./pages/recommend/recommendRankPage";
 import { useDispatch } from "react-redux";
 import { SetTheme } from "./redux/actions/solutionAction";

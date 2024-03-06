@@ -5,7 +5,7 @@ import {
   FirstContainer, MainContainer, GridContainer, LevelBox, Typography, LevelTypography, Description,
   HorizontalLine, EnterButton, TypographyDcp, LockedButton
 } from '../../styles/communityStyle';
-import Header from "../../components/common/Header";
+import Header from "../../components/common/header";
 import axios from "axios";
 import * as c from "../../styles/communityPostStyle";
 import {Link} from 'react-router-dom';

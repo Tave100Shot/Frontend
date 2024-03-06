@@ -1,6 +1,6 @@
 import { useNavigate } from "react-router-dom";
 import { useState, useEffect } from "react";
-import Header from "../../components/common/Header";
+import Header from "../../components/common/header";
 import * as s from "../../styles/searchBarStyle";
 import * as c from "../../styles/compilingStyle";
 import styled from "styled-components";

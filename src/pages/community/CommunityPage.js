@@ -1,6 +1,6 @@
 import { FirstContainer, MainContainer, GridContainer, LevelBox, Typography, LevelTypography, Description,
   HorizontalLine, EnterButton, TypographyDcp  } from '../../styles/communityStyle';
-import Header from "../../components/common/Header";
+import Header from "../../components/common/header";
 import {useNavigate} from 'react-router-dom';
 
 const CommunityPage = () => {

@@ -1,6 +1,6 @@
 import { useNavigate } from "react-router-dom";
-import Header from "../../components/common/Header";
-import SearchBar from "../../components/solution/search_bar";
+import Header from "../../components/common/header";
+import SearchBar from "../../components/solution/searchBar";
 import * as s from "../../styles/solutionStyle";
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect, useState } from "react";

@@ -1,7 +1,7 @@
 //PostDetail.js
 
 import { FirstContainer, MainContainer, Typography, HorizontalLine } from '../../styles/communityStyle';
-import Header from "../../components/common/Header";
+import Header from "../../components/common/header";
 import { useNavigate, useParams } from "react-router-dom";
 import { useState, useEffect } from 'react';
 import * as c from "../../styles/communityPostStyle";

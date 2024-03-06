@@ -2,7 +2,7 @@ import {
   MainContainer, FirstContainer, Typography, Description,
   HorizontalLine, EnterButton
 } from "../../styles/communityStyle"
-import Header from "../../components/common/Header";
+import Header from "../../components/common/header";
 import { useNavigate } from "react-router-dom";
 import search_white from '../../assets/imgs/search_white.png'
 import WritePage from "./writePage";

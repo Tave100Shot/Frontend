@@ -1,7 +1,7 @@
 import { useNavigate } from "react-router-dom";
-import Header from "../../components/common/Header";
-import UserProfile from "../../components/recommend/user_profile";
-import RecommendByRival from "../../components/recommend/recommend_rival";
+import Header from "../../components/common/header";
+import UserProfile from "../../components/recommend/userProfile";
+import RecommendByRival from "../../components/recommend/recommendRival";
 
 const RecommendRank = () => {
   const navigate = useNavigate();

@@ -6,7 +6,7 @@ import {
   FirstContainer, MainContainer, GridContainer, LevelBox, Typography, LevelTypography, Description,
   HorizontalLine, EnterButton, TypographyDcp, LockedButton
 } from '../../styles/communityStyle';
-import Header from "../../components/common/Header";
+import Header from "../../components/common/header";
 import * as c from "../../styles/communityPostStyle";
 import axios from "axios";
 

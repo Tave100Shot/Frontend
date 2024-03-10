@@ -5,7 +5,7 @@ import Header from "../../components/common/header";
 import * as c from "../../styles/communityPostStyle";
 import { MainContainer, FirstContainer, Typography, HorizontalLine } from '../../styles/communityStyle';
 
-const WritePage = () => {
+const WritePage = () => { 
   const navigate = useNavigate();
   const [formData, setFormData] = useState({ title: "", content: "" });
   const [attachmentFiles, setAttachmentFiles] = useState([]);

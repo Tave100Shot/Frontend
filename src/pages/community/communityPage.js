@@ -4,11 +4,9 @@ import {useNavigate} from 'react-router-dom';
 
 const CommunityPage = () => {
   const navigate = useNavigate();
-
   const moveToMain = () => {
     navigate('/');
   }
-
   const handleEnterClick = (level) => {
     navigate(`/community/${level.toLowerCase()}`);
   };

@@ -5,7 +5,7 @@ import Header from "../../components/common/header";
 import { MainContainer, FirstContainer, Typography, HorizontalLine } from '../../styles/communityStyle';
 import * as c from "../../styles/communityPostStyle";
 
-const PostEditPage = () => {
+const PostEditPage = () => { 
   const navigate = useNavigate();
   const { state } = useLocation();
   const { postDetails = {} } = state || {};

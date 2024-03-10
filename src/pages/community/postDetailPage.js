@@ -6,6 +6,7 @@ import * as c from "../../styles/communityPostStyle";
 import axios from 'axios';
 
 const PostDetailPage = ({comment}) => {
+  const navigate = useNavigate();
   const { postId } = useParams();
   const [postDetails, setPostDetails] = useState(null);
   const [loading, setLoading] = useState(true);
@@ -16,6 +17,7 @@ const PostDetailPage = ({comment}) => {
   const [inputValue, setInputValue] = useState('');
   const [inputError, setInputError] = useState(false);
   const [editedCommentContent, setEditedCommentContent] = useState('');
+  const [isModalOpen, setIsModalOpen] = useState(false);
 
   useEffect(() => {
     const fetchPostDetails = async () => {
@@ -35,11 +37,9 @@ const PostDetailPage = ({comment}) => {
     fetchPostDetails();
   }, [postId]);
 
-  const navigate = useNavigate();
   const moveToMain = () => {
     navigate('/');
   }
-  const [isModalOpen, setIsModalOpen] = useState(false);
 
   const openModal = () => {
     setIsModalOpen(true);

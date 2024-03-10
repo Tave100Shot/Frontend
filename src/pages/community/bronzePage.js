@@ -73,9 +73,6 @@ const BronzePage = () => {
     const results = posts.filter(post => post.title.toLowerCase().includes(searchTerm.toLowerCase()));
     setPosts(results.length ? results : ['검색 결과가 없습니다.']);
   };
-
-  const paginate = (pageNumber) => setCurrentPage(pageNumber);
-  const totalPages = Math.ceil(posts.length / postsPerPage);
   const currentPosts = posts.slice((currentPage - 1) * postsPerPage, currentPage * postsPerPage);
 
   return (

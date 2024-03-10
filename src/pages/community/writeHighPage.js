@@ -32,7 +32,7 @@ const WriteHighPage = () => {
     submitFormData.append('content', formData.content);
     attachmentFiles.forEach(file => submitFormData.append('attachmentFile', file));
 
-    try {
+    try { 
       const response = await axios.post('/api/post', submitFormData, {
         headers: {
           'Content-Type': 'multipart/form-data',

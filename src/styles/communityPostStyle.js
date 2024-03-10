@@ -831,10 +831,10 @@ export const FileContainer = styled.div`
   & > input {
     display: none;
   }
-
 `
 
 export const FilesContainer = styled.div`
+  display: flex;
   padding: 2.5rem;
   font-weight: 700;
   font-family: 'Poppins';

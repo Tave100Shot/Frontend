@@ -1,21 +1,20 @@
 import styled from "styled-components";
 
 export const MainContainer = styled.div`
-    display: flex;
-    position: relative;
-    flex-wrap: wrap;
-    justify-content: space-between;
-    //align-items: center;
-    padding-left: 8rem;
-    padding-right: 8rem;
-    width: 100vw;
-    //background-color: #E6FADE;
-    margin: 0 auto;
-    margin-top: 20px;
+  display: flex;
+  position: relative;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  padding-left: 8rem;
+  padding-right: 8rem;
+  width: 100vw;
+  //background-color: #E6FADE;
+  margin: 0 auto;
+  margin-top: 20px;
 
-    @media screen and (max-width: 500px) {
-    flex-direction: column;
-    }
+  @media screen and (max-width: 500px) {
+  flex-direction: column;
+  }
 `;
 export const InfoContainer = styled.div`
   width: 100%;
@@ -36,7 +35,7 @@ export const CompileContainer = styled.div`
   min-height: 150vh;
   margin: 0 auto;
   flex-shrink: 0;
-  //background-color: tomato; //핑크 배경
+  //background-color: tomato;
   position: relative;
   
   & > p {
@@ -104,9 +103,7 @@ export const ExecutionResult = styled.div`
   border-bottom: 2px solid ${props => props.theme.colors.colorAccent};
   display: flex;
   text-align: center;
-justify-content: center;
-
-
+  justify-content: center;
 
   & > button {
     display: flex;
@@ -125,9 +122,8 @@ justify-content: center;
     text-align: center;
     justify-content: center;
     align-items: center;
-//margin-left: 2em;
-cursor: pointer;
-
+    //margin-left: 2em;
+    cursor: pointer;
     }
   }
 `
@@ -145,7 +141,6 @@ width: 15em;
 height: 4em;
 background-color: #FB5544;
 color: ${props => props.theme.colors.colorBg};
-//padding: 1em;
 font-family: 'Poppins';
 font-size: 2.5rem;
 font-style: normal;
@@ -158,7 +153,6 @@ justify-content: center;
 align-items: center;
 margin-left: 2em;
 cursor: pointer;
-
 `
 
 export const WrongButton = styled.div`
@@ -182,8 +176,6 @@ margin-left: 2em;
 cursor: pointer;
 `
 
-
-
 export const MiddleLine = styled.div`
   width: 1px;
   min-height: 155vh;
@@ -192,7 +184,6 @@ export const MiddleLine = styled.div`
 `
 
 export const QIOEContainer = styled.div`
-  
   width: 45%;
   min-height: 90vh;
   margin: 0 auto;
@@ -348,9 +339,9 @@ export const IContainer = styled.div`
     color: ${props => props.theme.colors.colorMain};
     font-size: 0.8em;
     font-weight: 500;
-  padding-top: 1em;
-  overflow: auto;
-  font-family: 'Poppins';
+    padding-top: 1em;
+    overflow: auto;
+    font-family: 'Poppins';
     } 
 `;
 
@@ -378,9 +369,9 @@ export const OContainer = styled.div`
     color: ${props => props.theme.colors.colorMain};
     font-size: 0.8em;
     font-weight: 500;
-  padding-top: 1em;
-  overflow: auto;
-  font-family: 'Poppins';
+    padding-top: 1em;
+    overflow: auto;
+    font-family: 'Poppins';
     } 
 `;
 
@@ -424,9 +415,9 @@ export const ExampleBox = styled.div`
   margin: 1rem 0 1rem 0;
 
   & > p {
-    //background-color: red;
-    width: 100%;
-    height: 100px;
+  //background-color: red;
+  width: 100%;
+  height: 100px;
   font-size: 0.9em;
   margin: 1em;
   margin-left: 1em;

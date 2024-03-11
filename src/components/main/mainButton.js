@@ -1,8 +1,8 @@
-import * as b from "../../styles/mainButtonStyle";
-import lockIcon from '../../assets/imgs/lock_icon.png'
 import { useNavigate } from "react-router-dom";
 import { SetModal } from "../../redux/actions/mainAction";
 import { useDispatch } from "react-redux";
+import lockIcon from '../../assets/imgs/lock_icon.png'
+import * as b from "../../styles/main/mainButtonStyle";
 
 const MainButton = ({text, navigatePage, lockImg}) => {
   const navigate = useNavigate();

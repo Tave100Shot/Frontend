@@ -1,7 +1,7 @@
 import iphone from "../../assets/imgs/아이폰.png"
 import galaxy from "../../assets/imgs/갤럭시.png"
 import icon from "../../assets/imgs/100shot_icon.png"
-import * as m from "../../styles/mobileStyle"
+import * as m from "../../styles/main//mobileStyle"
 
 const MobilePage = () => {
 

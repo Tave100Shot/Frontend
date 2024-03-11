@@ -1,15 +1,14 @@
 import Modal from 'react-modal';
 import { useDispatch } from "react-redux";
-import * as m from "../../styles/loginModalStyle"
 import { SetModal, SetTwoFactorAuthStatus } from "../../redux/actions/mainAction";
-
+import axios from 'axios';
+import "slick-carousel/slick/slick.css"; 
+import "slick-carousel/slick/slick-theme.css";
 import backjoonAuth from '../../assets/imgs/baekjoon_auth.png'
 import step1 from '../../assets/imgs/1step_편집.png'
 import step2 from '../../assets/imgs/step2_편집.png'
 import step3 from '../../assets/imgs/step3_편집.png'
-import "slick-carousel/slick/slick.css"; 
-import "slick-carousel/slick/slick-theme.css";
-import axios from 'axios';
+import * as m from "../../styles/main/loginModalStyle"
 
 const AddAuthModal = ({isOpen, onRequestClose}) => {
   const dispatch = useDispatch();

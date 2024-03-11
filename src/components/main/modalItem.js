@@ -1,8 +1,8 @@
-import * as m from "../../styles/loginModalStyle"
 import step1 from '../../assets/imgs/1step_편집.png'
 import step2 from '../../assets/imgs/step2_편집.png'
 import right_black from "../../assets/imgs/right_black.png"
 import left_black from "../../assets/imgs/left_black.png"
+import * as m from "../../styles/main/loginModalStyle"
 
 const ModalItem = ({slideNumber, prevSlide, nextSlide}) => {
 

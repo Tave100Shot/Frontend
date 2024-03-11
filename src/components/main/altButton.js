@@ -1,6 +1,6 @@
-import * as b from "../../styles/mainButtonStyle";
 import { SetModal } from "../../redux/actions/mainAction";
 import { useDispatch } from "react-redux";
+import * as b from "../../styles/main/mainButtonStyle";
 
 const AltButton = () => {
   const dispatch = useDispatch();

@@ -73,7 +73,7 @@ const AddAuthModal = ({isOpen, onRequestClose}) => {
     } catch (error) {
       if(storedToken === null) {
         alert("로그인 먼저 진행해주세요 :)");
-        const loginUrl = "https://api.100shot.net/login/github";
+        const loginUrl = "http://43.203.21.185:8080/login/github";
         window.open(loginUrl, "_blank");
       }
       // console.log(error);

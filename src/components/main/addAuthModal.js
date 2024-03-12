@@ -4,18 +4,19 @@ import { SetModal, SetTwoFactorAuthStatus } from "../../redux/actions/mainAction
 import axios from 'axios';
 import "slick-carousel/slick/slick.css"; 
 import "slick-carousel/slick/slick-theme.css";
-import backjoonAuth from '../../assets/imgs/baekjoon_auth.png'
-import step1 from '../../assets/imgs/1step_편집.png'
-import step2 from '../../assets/imgs/step2_편집.png'
-import step3 from '../../assets/imgs/step3_편집.png'
+import backjoonAuth from '../../assets/imgs/baekjoon_icon.png'
+import step1 from '../../assets/imgs/step1.png'
+import step2 from '../../assets/imgs/step2.png'
+import step3 from '../../assets/imgs/step3.png'
+import leftBtn from '../../assets/imgs/left_black.png'
+import rightBtn from '../../assets/imgs/right_black.png'
 import * as m from "../../styles/main/loginModalStyle"
 
 const AddAuthModal = ({isOpen, onRequestClose}) => {
   const dispatch = useDispatch();
   const storedToken = localStorage.getItem('accessToken');
   const secondAuthStatus = localStorage.getItem('secondAuthStatus');
-
-
+  
   const customStyles = {
     overlay: {
         zIndex: 1000,
@@ -42,9 +43,15 @@ const AddAuthModal = ({isOpen, onRequestClose}) => {
     speed: 500,
     slidesToShow: 1,
     slidesToScroll: 1,
-    arrows:false,
-    // nextArrow: ,  
-    // prevArrow: <>  
+    arrows:true,
+		prevArrow:
+      <m.PrevBtn>
+        <img src={leftBtn}/>
+      </m.PrevBtn>,
+		nextArrow: 
+      <m.NextBtn>
+        <img src={rightBtn}/>
+      </m.NextBtn>,
   };
 
 
@@ -72,7 +79,7 @@ const AddAuthModal = ({isOpen, onRequestClose}) => {
     } catch (error) {
       if(storedToken === null) {
         alert("로그인 먼저 진행해주세요 :)");
-        const loginUrl = "https://api.100shot.net/login/github";
+        const loginUrl = "http://43.200.95.44:8080/login/github";
         window.open(loginUrl, "_blank");
       }
       // console.log(error);
@@ -192,7 +199,7 @@ const AddAuthModal = ({isOpen, onRequestClose}) => {
           </m.Slide> 
            <m.Slide>
             <m.SlideItemBox>
-              <m.SlideTextBox>
+              <m.SlideTextBox className='lastStepContainer'>
                 <h2 className='lastStep'>추가 인증 절차 완료</h2> 
                 <p className='lastStep'>
                   Github Repository의 Description에 적은 <span>백준 이름</span>과 백준 소개글에 적은 <span>깃허브 아이디</span>가 <span>일치</span>하면, 추가 인증이 <span>완료</span>됩니다 :)

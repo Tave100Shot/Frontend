@@ -40,6 +40,11 @@ export const StyledSlider = styled(Slider) `
     bottom: 20px;
     margin-top: 200px;
   }
+  .slick-prev::before,
+  .slick-next::before {
+    opacity: 0;
+    display: none;
+  }
 `
 
 export const SliderContainer = styled.div`
@@ -61,22 +66,8 @@ export const SlideBox = styled.div`
   align-items : center
   justify-content: center; 
   img {
-    &.backjoon {
-      width: auto;
-      height : 18rem;
-    }
-    &.step1 {
-      height : 15rem;
-      width: auto;
-    }
-    &.step2 {
-      height : 18rem;
-      width: auto;
-    }
-    &.step3 {
-      height : 13rem;
-      width: auto;
-    }
+    width: auto;
+    height : 18rem;
   }
 
 `
@@ -117,9 +108,6 @@ export const SlideTextBox = styled.div`
     font-size : 2.4rem;
     font-family : 'Poppins_SemiBold';
     margin : 0 0 1.5rem;
-    &.lastStep {
-      margin : 1.5rem 0 2.5rem 0;
-    }
   }
   p {
     font-size : 1.8rem;
@@ -128,9 +116,6 @@ export const SlideTextBox = styled.div`
     span {
       font-weight : bold;
       color : ${props => props.theme.colors.colorAccent}
-    }
-    &.lastStep {
-      margin : 1.5rem 0 0 0;
     }
   }
   button {
@@ -144,5 +129,29 @@ export const SlideTextBox = styled.div`
     background-color : ${props => props.theme.colors.colorAccent};
     color : ${props => props.theme.colors.colorBg};
   }
-`
 
+  &.lastStepContainer {
+    height : 35rem;
+    h2 {
+      margin : 1.5rem 0 2.5rem 0;
+    }
+    p {
+      margin : 1.5rem 0 0 0;
+    }
+  }
+`
+export const PrevBtn = styled.div`
+  img {
+    width : 3rem;  
+    height: 3rem;  
+  }
+`
+export const NextBtn = styled.div`
+  img {
+    width : 3rem;  
+    height: 3rem;  
+  }
+  position: absolute;
+  right: -3%;
+  z-index: 3;
+`

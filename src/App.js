@@ -1,5 +1,10 @@
 import { BrowserRouter, Route, Routes, useNavigate } from "react-router-dom";
-import GlobalStyle from "./styles/globalStyle";
+import { ThemeProvider } from "styled-components";
+import { useState, useEffect } from "react";
+import { darkTheme, lightTheme } from "./styles/theme";
+import { useDispatch } from "react-redux";
+import { SetTheme } from "./redux/actions/solutionAction";
+import Modal from 'react-modal';
 import MainPage from './pages/main/mainPage';
 import SearchPage from './pages/solution/searchPage';
 import RecommendPage from './pages/recommend/recommendPage';
@@ -15,29 +20,23 @@ import WriteHighPage from "./pages/community/writeHighPage";
 import PostDetailPage from './pages/community/postDetailPage';
 import PostEditPage from './pages/community/postEditPage';
 import CompilingPage from './pages/compiling/compilingPage';
-import { ThemeProvider } from "styled-components";
-import { useState, useEffect } from "react";
-import { darkTheme, lightTheme } from "./styles/theme";
 import SolutionPage from "./pages/solution/solutionPage";
 import RecommendMe from "./pages/recommend/recommendMePage";
 import RecommendRank from "./pages/recommend/recommendRankPage";
-import { useDispatch } from "react-redux";
-import { SetTheme } from "./redux/actions/solutionAction";
-import Modal from 'react-modal';
 import MobilePage from "./pages/main/mobilePage";
+import GlobalStyle from "./styles/globalStyle";
 
 function App() {
   Modal.setAppElement('#root');
   const dispatch = useDispatch();
-  
+
   const [themeMode, setThemeMode] = useState('lightTheme');
   const theme = themeMode === 'lightTheme' ? lightTheme : darkTheme;
-  const toggleTheme = () => 
-  {
+  const [isMobile, setIsMobile] = useState(window.innerWidth < 740); // 초기에 화면 크기에 따라 isMobile 상태를 설정합니다.
+
+  const toggleTheme = () => {   // 다크모드 전환 함수
     setThemeMode(themeMode === 'lightTheme' ? 'darkTheme' : 'lightTheme');
   }
-
-  const [isMobile, setIsMobile] = useState(window.innerWidth < 740); // 초기에 화면 크기에 따라 isMobile 상태를 설정합니다.
 
   useEffect(() => {
     const handleResize = () => {

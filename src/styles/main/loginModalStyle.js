@@ -28,7 +28,7 @@ export const StyledSlider = styled(Slider) `
       margin : 2rem 0 2rem 0;
     }
   }
-  =::-webkit-scrollbar {
+  ::-webkit-scrollbar {
     display:none /* Chrome , Safari , Opera */
   }
 
@@ -39,6 +39,11 @@ export const StyledSlider = styled(Slider) `
   .slick-dots {  //슬라이드의 위치
     bottom: 20px;
     margin-top: 200px;
+  }
+  .slick-prev::before,
+  .slick-next::before {
+    opacity: 0;
+    display: none;
   }
 `
 
@@ -61,50 +66,14 @@ export const SlideBox = styled.div`
   align-items : center
   justify-content: center; 
   img {
-    &.backjoon {
-      width: auto;
-      height : 18rem;
-    }
-    &.step1 {
-      height : 15rem;
-      width: auto;
-    }
-    &.step2 {
-      height : 18rem;
-      width: auto;
-    }
-    &.step3 {
-      height : 13rem;
-      width: auto;
-    }
+    width: auto;
+    height : 18rem;
   }
 
 `
 
-export const SlideItemBox = styled.div`
-  width : 61rem;
-  // height : 30rem;
-  display : flex;
-  justify-content: center; 
-  align-items: center;
-
-  button {
-    width : 4rem;
-    height : 4rem;
-    background-color : ${props => props.theme.colors.colorBg};
-    border : none;
-    cursor : pointer;
-
-    img {
-      margin : 0;
-      width : 4rem;
-      height : 4rem;
-    }
-  }
-
-`
 export const SlideTextBox = styled.div`
-  width : 50rem;
+  width : 61rem;  
   padding : 0 2rem;
   display : flex;
   flex-direction: column;
@@ -117,9 +86,6 @@ export const SlideTextBox = styled.div`
     font-size : 2.4rem;
     font-family : 'Poppins_SemiBold';
     margin : 0 0 1.5rem;
-    &.lastStep {
-      margin : 1.5rem 0 2.5rem 0;
-    }
   }
   p {
     font-size : 1.8rem;
@@ -129,11 +95,10 @@ export const SlideTextBox = styled.div`
       font-weight : bold;
       color : ${props => props.theme.colors.colorAccent}
     }
-    &.lastStep {
-      margin : 1.5rem 0 0 0;
-    }
   }
   button {
+    border : none;
+    cursor : pointer;
     margin : 2rem  0 2rem 0;
     width : 20rem;
     height : 3.5rem;
@@ -144,5 +109,29 @@ export const SlideTextBox = styled.div`
     background-color : ${props => props.theme.colors.colorAccent};
     color : ${props => props.theme.colors.colorBg};
   }
-`
 
+  &.lastStepContainer {
+    height : 35rem;
+    h2 {
+      margin : 1.5rem 0 2.5rem 0;
+    }
+    p {
+      margin : 1.5rem 0 0 0;
+    }
+  }
+`
+export const PrevBtn = styled.div`
+  img {
+    width : 2rem;  
+    height: 2rem;  
+    position: absolute;
+    right: -3%;
+    z-index: 3;
+  }
+`
+export const NextBtn = styled.div`
+  img {
+    width : 2rem;  
+    height: 2rem;  
+  }
+`

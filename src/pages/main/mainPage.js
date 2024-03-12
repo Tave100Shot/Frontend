@@ -1,13 +1,13 @@
 import { useEffect } from "react";
-import Header from "../../components/common/header";
-import MainButton from "../../components/main/mainButton";
-import TaveAnimation from "../../components/main/taveAnimation";
-import * as w from "../../styles/mainPageStyle";
-import AddAuthModal from "../../components/main/addAuthModal";
 import {  useLocation, useNavigate } from "react-router-dom";
 import { SetModal, SetToken } from "../../redux/actions/mainAction";
 import { useDispatch, useSelector } from "react-redux";
+import Header from "../../components/common/header";
+import MainButton from "../../components/main/mainButton";
+import TaveAnimation from "../../components/main/taveAnimation";
+import AddAuthModal from "../../components/main/addAuthModal";
 import AltButton from "../../components/main/altButton";
+import * as w from "../../styles/main/mainPageStyle";
 
 const MainPage = ({click}) => {
   const location = useLocation();

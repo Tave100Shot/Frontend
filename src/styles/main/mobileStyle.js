@@ -9,7 +9,7 @@ export const MobileContainer = styled.div`
   justify-content: center;
 `;
 
-export const IconContainer = styled.div`
+export const LogoContainer = styled.div`
   width : 16.5rem;
   height : 5rem;
   display : flex;

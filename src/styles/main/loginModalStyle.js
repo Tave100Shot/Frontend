@@ -72,30 +72,8 @@ export const SlideBox = styled.div`
 
 `
 
-export const SlideItemBox = styled.div`
-  width : 61rem;
-  // height : 30rem;
-  display : flex;
-  justify-content: center; 
-  align-items: center;
-
-  button {
-    width : 4rem;
-    height : 4rem;
-    background-color : ${props => props.theme.colors.colorBg};
-    border : none;
-    cursor : pointer;
-
-    img {
-      margin : 0;
-      width : 4rem;
-      height : 4rem;
-    }
-  }
-
-`
 export const SlideTextBox = styled.div`
-  width : 50rem;
+  width : 61rem;  
   padding : 0 2rem;
   display : flex;
   flex-direction: column;
@@ -119,6 +97,8 @@ export const SlideTextBox = styled.div`
     }
   }
   button {
+    border : none;
+    cursor : pointer;
     margin : 2rem  0 2rem 0;
     width : 20rem;
     height : 3.5rem;
@@ -142,16 +122,16 @@ export const SlideTextBox = styled.div`
 `
 export const PrevBtn = styled.div`
   img {
-    width : 3rem;  
-    height: 3rem;  
+    width : 2rem;  
+    height: 2rem;  
+    position: absolute;
+    right: -3%;
+    z-index: 3;
   }
 `
 export const NextBtn = styled.div`
   img {
-    width : 3rem;  
-    height: 3rem;  
+    width : 2rem;  
+    height: 2rem;  
   }
-  position: absolute;
-  right: -3%;
-  z-index: 3;
 `

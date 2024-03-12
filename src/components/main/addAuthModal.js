@@ -79,7 +79,7 @@ const AddAuthModal = ({isOpen, onRequestClose}) => {
     } catch (error) {
       if(storedToken === null) {
         alert("로그인 먼저 진행해주세요 :)");
-        const loginUrl = "http://43.200.95.44:8080/login/github";
+        const loginUrl = "http://43.203.21.185:8080/login/github";
         window.open(loginUrl, "_blank");
       }
       // console.log(error);
@@ -133,7 +133,6 @@ const AddAuthModal = ({isOpen, onRequestClose}) => {
           <m.Slide >
             <m.SlideBox>
               <img src={backjoonAuth} alt='backjoon' className='step1'/>
-              <m.SlideItemBox>
                 {
                   secondAuthStatus === 'true' ?
                     <m.SlideTextBox>
@@ -152,40 +151,33 @@ const AddAuthModal = ({isOpen, onRequestClose}) => {
                     </p>
                   </m.SlideTextBox>
                 }
-              </m.SlideItemBox>
             </m.SlideBox>
           </m.Slide>
           <m.Slide >
             <m.SlideBox>
               <img src={step1} alt='step1' className='step1'/>
-              <m.SlideItemBox>
                 <m.SlideTextBox>
                   <h2>1. Github에서 Repository 생성</h2>
                   <p>
                     <span>'taveshot'</span>이라는 이름을 가진 <span>Public</span>의 <span>새로운 Repository</span>를 생성해주세요.
                   </p>
                 </m.SlideTextBox>
-              </m.SlideItemBox>
-
             </m.SlideBox>
           </m.Slide>
           <m.Slide>
             <m.SlideBox>
               <img src={step2} alt='step2' className='step2'/>
-              <m.SlideItemBox>
                 <m.SlideTextBox>
                   <h2>2. Repository Description 작성</h2>
                   <p>
                     새로운 Repository에 <span>Description</span>에 자신의 <span>백준 닉네임</span>을 적어주세요.
                   </p>
                 </m.SlideTextBox>
-              </m.SlideItemBox>
             </m.SlideBox>
           </m.Slide> 
           <m.Slide>
             <m.SlideBox>
               <img src={step3} alt='step3' className='step3'/>
-              <m.SlideItemBox>
                 <m.SlideTextBox>
                   <h2>3. 백준 소개글 수정</h2>
                   <p>
@@ -194,11 +186,9 @@ const AddAuthModal = ({isOpen, onRequestClose}) => {
                     (백준 프로필 소개글 X)
                   </p>
                 </m.SlideTextBox>
-              </m.SlideItemBox>
             </m.SlideBox>
           </m.Slide> 
            <m.Slide>
-            <m.SlideItemBox>
               <m.SlideTextBox className='lastStepContainer'>
                 <h2 className='lastStep'>추가 인증 절차 완료</h2> 
                 <p className='lastStep'>
@@ -210,7 +200,6 @@ const AddAuthModal = ({isOpen, onRequestClose}) => {
                 </p>
                 <button onClick={setTier}>AUTHENTICATION</button>
               </m.SlideTextBox>
-            </m.SlideItemBox>
           </m.Slide> 
         </m.StyledSlider>
       </m.ModalContainer>

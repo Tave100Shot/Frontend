@@ -28,7 +28,7 @@ export const StyledSlider = styled(Slider) `
       margin : 2rem 0 2rem 0;
     }
   }
-  =::-webkit-scrollbar {
+  ::-webkit-scrollbar {
     display:none /* Chrome , Safari , Opera */
   }
 

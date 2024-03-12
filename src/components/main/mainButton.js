@@ -24,7 +24,7 @@ const MainButton = ({text, navigatePage, lockImg}) => {
         : 
         <b.MainButton onClick={movePage}>
           {lockImg === 'locked' ?
-            <img src={lockIcon} alt="안녕"/> :
+            <img src={lockIcon} alt="잠금"/> :
             <></>
           }
           {text}

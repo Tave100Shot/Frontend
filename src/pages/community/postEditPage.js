@@ -1,175 +1,95 @@
-import styled from "styled-components";
+import React, { useState } from "react";
 import { useNavigate, useLocation } from "react-router-dom";
-import React, { useState, useRef } from "react";
-import {
-  FirstContainer, MainContainer, GridContainer, LevelBox, Typography, LevelTypography, Description,
-  HorizontalLine, EnterButton, TypographyDcp, LockedButton
-} from '../../styles/communityStyle';
-import Header from "../../components/common/header";
 import axios from "axios";
+import Header from "../../components/common/header";
+import { MainContainer, FirstContainer, Typography, HorizontalLine } from '../../styles/communityStyle';
 import * as c from "../../styles/communityPostStyle";
-import {Link} from 'react-router-dom';
 
-
-const PostEditPage = ({ onSuccess }) => {
-
+const PostEditPage = () => { 
+  const navigate = useNavigate();
   const { state } = useLocation();
   const { postDetails = {} } = state || {};
-  const navigate = useNavigate();
-  console.log('postDetails:', postDetails);
-  const postId = postDetails.postId;
-  const storedToken = localStorage.getItem('accessToken')
+  const { postId, title, content, imageUrls, writer } = postDetails;
 
-  const [newData, setNewData] = useState({
-    title: postDetails.title,
-    content: postDetails.content,
-    postTier: 'BronzeSilver',
-    attachmentFile: postDetails.imageUrls,
+  const [editData, setEditData] = useState({
+    title: title,
+    content: content,
   });
-  const [selectedFileName, setSelectedFileName] = useState('');
-  console.log(state.postDetails);
 
-  const handleEdit = async (event) => {
-    event.preventDefault();
+  const handleInputChange = (e) => {
+    const { name, value } = e.target;
+    setEditData({ ...editData, [name]: value });
+  };
+
+  const handleEditSubmit = async (e) => {
+    e.preventDefault();
+    const formData = new FormData();
+    formData.append('title', editData.title);
+    formData.append('content', editData.content);
+
     try {
-      const formData = new FormData();
-      formData.append('title', newData.title);
-      formData.append('content', newData.content);
-      formData.append('postTier', newData.postTier);
-
-      if (newData.attachmentFile) {
-        const filesArray = Array.isArray(newData.attachmentFile)
-          ? newData.attachmentFile
-          : [newData.attachmentFile];
-
-        filesArray.forEach((file, index) => {
-          formData.append(`attachmentFile${index + 1}`, file);
-        });
-      }
-
       await axios.patch(`/api/post/${postId}`, formData, {
         headers: {
-          Authorization: `Bearer ${storedToken}`,
+          Authorization: `Bearer ${localStorage.getItem('accessToken')}`,
           'Content-Type': 'multipart/form-data',
         },
       });
-
-      console.log('게시물 수정 완룡');
-      //onSuccess();
       navigate(`/community/post/${postId}`);
     } catch (error) {
-      console.error(error);
+      console.error("게시물 수정 실패:", error);
     }
-  };
-  console.log(newData);
-
-  const moveToMain = () => {
-    navigate('/');
-  }
-  const titleChange = (event) => {
-    setNewData((prevData) => ({
-      ...prevData,
-      title: event.target.value,
-    }));
-  };
-  const contentChange = (event) => {
-    setNewData((prevData) => ({
-      ...prevData,
-      content: event.target.value,
-    }));
-  };
-  const handleFileChange = (event) => {
-    const files = event.target.files;
-    const updatedFiles = [...newData.attachmentFile, ...Array.from(files)];
-    setNewData((prevData) => ({
-      ...prevData,
-      attachmentFile: Array.from(updatedFiles),
-    }));
-    setSelectedFileName(files.length > 0 ? files[0].name : '');
-
-    const newImageUrls = [
-      ...postDetails.imageUrls,
-      ...Array.from(files).map((file, index) => ({
-        imageId: postDetails.imageUrls.length + index + 1,
-        imageUrl: URL.createObjectURL(file),
-        fileName: postDetails.name,
-      })),
-    ];
-
-    console.log('되나?',newImageUrls);
-
-    setNewData((prevData) => ({
-      ...prevData,
-      imageUrls: newImageUrls,
-    }));
-    console.log('Updated Image URLs:', newImageUrls);
   };
 
   return (
     <div>
-      <Header click={moveToMain} />
+      <Header click={() => navigate('/')} />
       <MainContainer>
         <FirstContainer>
-          <Typography>WRITE</Typography>
-          <HorizontalLine></HorizontalLine>
-          <form encType="multipart/form-data">
+          <Typography>POST EDIT</Typography>
+          <HorizontalLine />
+          <form onSubmit={handleEditSubmit} encType="multipart/form-data">
             <c.WriteWrapContainer>
               <c.AuthorContainer>
                 <div>글쓴이</div>
-                <input
-                  id="writer"
-                  type="text"
-                  readOnly
-                  value={postDetails.writer} />
+                <input id="writer" type="text" readOnly value={writer} />
               </c.AuthorContainer>
               <c.TitleContainer>
                 <div>제목</div>
                 <input
                   id="title"
+                  name="title"
                   type="text"
-                  value={newData.title}
-                  onChange={titleChange}
-                  placeholder="Write Title" />
+                  value={editData.title}
+                  onChange={handleInputChange}
+                  placeholder="Write Title"
+                />
               </c.TitleContainer>
             </c.WriteWrapContainer>
             <c.ContentContainer>
               <div>내용</div>
               <textarea
                 id="content"
-                type="text"
-                value={newData.content}
-                onChange={contentChange}
-                placeholder="Write Your Problems" />
+                name="content"
+                value={editData.content}
+                onChange={handleInputChange}
+                placeholder="Write Your Problems"
+              />
             </c.ContentContainer>
             <c.FileContainer>
-              <div>파일 첨부</div>
-              <label htmlFor="attachmentFile">Unable To Change Files
-              </label>
-              {/* <input
-                id="attachmentFile"
-                type="file"
-                name="attachmentFile"
-                accept="*"
-                multiple
-                onChange={handleFileChange} /> */}
-            </c.FileContainer>
-            <c.FileContainer>
-                {postDetails.imageUrls.map((image, index) => (
-                  <div key={index}>
-                    <p>{image.fileName}</p> {/* 파일명 표시 */}
-                  </div>
-                ))}
+              <div>첨부 파일</div>
+              {imageUrls.map((image, index) => (
+                <div key={index}>{image.fileName}</div>
+              ))}
             </c.FileContainer>
             <c.ButtonContainer>
-              <c.CancelButton onClick={() => {  navigate(`/community/post/${postId}`) }}>취소</c.CancelButton>
-              <c.UploadButton onClick={handleEdit}>수정 완료</c.UploadButton>
+              <c.CancelButton type="button" onClick={() => navigate(`/community/post/${postId}`)}>취소</c.CancelButton>
+              <c.UploadButton type="submit">수정 완료</c.UploadButton>
             </c.ButtonContainer>
           </form>
         </FirstContainer>
       </MainContainer>
     </div>
   );
-
 };
 
 export default PostEditPage;

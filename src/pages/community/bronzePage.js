@@ -1,21 +1,22 @@
 import {
-  MainContainer, FirstContainer, Typography, Description,
-  HorizontalLine, EnterButton
+  MainContainer, FirstContainer, Typography, HorizontalLine
 } from "../../styles/communityStyle"
 import Header from "../../components/common/header";
 import { useNavigate } from "react-router-dom";
 import search_white from '../../assets/imgs/search_white.png'
-import WritePage from "./writePage";
 import { useEffect, useState } from "react";
 import axios from "axios";
-import { useHistory } from "react-router-dom";
 import * as c from "../../styles/communityPostStyle";
 
-
-
 const BronzePage = () => {
+  const storedToken = localStorage.getItem('accessToken')
   const bojTier = localStorage.getItem('bojTier');
   const navigate = useNavigate();
+  const [searchTerm, setSearchTerm] = useState('');
+  const [searchResults, setSearchResults] = useState([]);
+  const [posts, setPosts] = useState([]);
+  const [currentPage, setCurrentPage] = useState(1);
+  const postsPerPage = 7;
 
   useEffect(() => {
     if (bojTier?.toUpperCase() === 'BEGINNER') {
@@ -23,7 +24,6 @@ const BronzePage = () => {
       navigate('/'); 
     }
   }, [bojTier, navigate]);
-
 
   const moveToMain = () => {
     navigate('/');
@@ -36,7 +36,6 @@ const BronzePage = () => {
 
   const ViewPost = ({ post }) => {
     const postId = post.postId;
-    //console.log(postId);
     return (
       <c.StyledLink to={`/community/post/${postId}`}>
         <c.StyledViewPost>
@@ -60,13 +59,6 @@ const BronzePage = () => {
       </div>
     );
   };
-  const [searchTerm, setSearchTerm] = useState('');
-  const [searchResults, setSearchResults] = useState([]);
-  const [posts, setPosts] = useState([]);
-  const [currentPage, setCurrentPage] = useState(1);
-  const postsPerPage = 7;
-
-  const storedToken = localStorage.getItem('accessToken')
 
   useEffect(() => {
     const fetchPosts = async () => {
@@ -84,7 +76,6 @@ const BronzePage = () => {
         setPosts(prevPosts => [...prevPosts, ...response.data.result.postResponses]);
         }
       } catch (error) {
-        //토큰 유효 기간
         if (error.response && error.response.data.errorCode === 'JWT_4010') {
           alert("로그인 유효 기간이 지났습니다. 다시 로그인 해주세요 :)");
           navigate('/');
@@ -93,14 +84,12 @@ const BronzePage = () => {
         }
       }
     };
-
     fetchPosts();
   }, []);
 
   const indexOfLastPost = currentPage * postsPerPage;
   const indexOfFirstPost = indexOfLastPost - postsPerPage;
   const currentPosts = posts.slice(indexOfFirstPost, indexOfLastPost);
-
   const totalPages = Math.ceil(posts.length / postsPerPage);
   const [maxPageNumberLimit, setMaxPageNumberLimit] = useState(5);
   const [minPageNumberLimit, setMinPageNumberLimit] = useState(0);
@@ -128,18 +117,15 @@ const BronzePage = () => {
   };
 
   const handleSearch = () => {
-    // 검색어를 이용하여 게시판 제목을 필터링
     if (searchTerm.trim() !== '') {
       const results = posts.filter(post =>
         post.title.toLowerCase().includes(searchTerm.toLowerCase())
       );
       setSearchResults(results);
     } else {
-      // If search term is empty, reset the search results to show all posts
       setSearchResults([]);
     }
   };
-
 
   const handleEnterClick = (e) => {
     e.preventDefault();

@@ -1,5 +1,3 @@
-//PostDetail.js
-
 import { FirstContainer, MainContainer, Typography, HorizontalLine } from '../../styles/communityStyle';
 import Header from "../../components/common/header";
 import { useNavigate, useParams } from "react-router-dom";
@@ -7,26 +5,19 @@ import { useState, useEffect } from 'react';
 import * as c from "../../styles/communityPostStyle";
 import axios from 'axios';
 
-
 const PostDetailPage = ({comment}) => {
+  const navigate = useNavigate();
   const { postId } = useParams();
   const [postDetails, setPostDetails] = useState(null);
   const [loading, setLoading] = useState(true);
+  const gitLoginId = localStorage.getItem('gitLoginId');
   const storedToken = localStorage.getItem('accessToken');
   const gitUserImg = localStorage.getItem('profileImg');
   const [isEditingComment, setIsEditingComment] = useState(null);
   const [inputValue, setInputValue] = useState('');
   const [inputError, setInputError] = useState(false);
   const [editedCommentContent, setEditedCommentContent] = useState('');
-  const [showCommentBox, setShowCommentBox] = useState(false);
-
-  const [parentId, setParentId] = useState(null);
-  const [inputBabyValue, setInputBabyValue] = useState('');
-  const [showBabyCommentBox, setShowBabyCommentBox] = useState(false);
-  const [babyComments, setBabyComments] = useState([]);
-  const [displayedInputValue, setDisplayedInputValue] = useState('');
-
-  const gitLoginId = localStorage.getItem('gitLoginId');
+  const [isModalOpen, setIsModalOpen] = useState(false);
 
   useEffect(() => {
     const fetchPostDetails = async () => {
@@ -46,11 +37,9 @@ const PostDetailPage = ({comment}) => {
     fetchPostDetails();
   }, [postId]);
 
-  const navigate = useNavigate();
   const moveToMain = () => {
     navigate('/');
   }
-  const [isModalOpen, setIsModalOpen] = useState(false);
 
   const openModal = () => {
     setIsModalOpen(true);
@@ -64,7 +53,7 @@ const PostDetailPage = ({comment}) => {
     return <p>로딩 중...</p>;
   }
 
-  //게시물 삭제
+  /* 게시물 삭제 */
   const handleDelete = async () => {
 
     if (gitLoginId === postDetails.writer) {
@@ -79,13 +68,11 @@ const PostDetailPage = ({comment}) => {
       console.error(error);
     } 
   } else {
-    // Handle the case where the user is not the writer of the post
    alert("타인의 게시글은 삭제할 수 없습니다.");
-    // You can also display an error message to the user here
   }
 }
 
-  // 게시물 수정
+  /* 게시물 수정 */
   const handleEdit = () => {
 
   if (gitLoginId === postDetails.writer) {
@@ -96,7 +83,7 @@ const PostDetailPage = ({comment}) => {
   }
 };
 
-  // 댓글 추가
+  /* 댓글 추가 */
   const handleAddComment = async () => {
     try {
       if (inputValue.trim() === '') {
@@ -142,74 +129,13 @@ const PostDetailPage = ({comment}) => {
 
   const handleEnterKeyPress = (e) => {
     if (e.key === 'Enter') {
-      //e.preventDefault();
+      e.preventDefault();
       handleAddComment();
       setInputValue('');
     }
   };
-  //-------------------------------------------
 
-  // 댓글 달기 > input 창 노출
-  const addBabyComment = () => {
-    if (inputBabyValue.trim() === '') {
-      return; // 빈 내용의 댓글은 추가하지 않음
-    }
-
-    const newComment = {
-      commentId: babyComments.length + 1, // 적절한 방식으로 commentId 생성
-      content: inputBabyValue,
-      parentId: parentId,
-      // ... (다른 댓글 속성들)
-    };
-
-    // 기존 댓글에 추가
-    setBabyComments([...babyComments, newComment]);
-
-    // 상태 초기화
-    setParentId(null);
-    setInputBabyValue('');
-    //setShowBabyCommentBox(false);
-  };
-  const handleEnterButtonClick = () => {
-    addBabyComment();
-    //setDisplayedInputValue(inputBabyValue);
-
-  };
-
-  //-------------------------------------------
-
-  // 대댓글 생성 -> 데이터 원형 구조 에러 확인 필수 ★
-  const handleAddChildComment = async (parentCommentId) => {
-    try {
-      const response = await axios.post(`/api/post/${postId}/comments`, {
-        comment: inputBabyValue,
-        parentCommentId: parentCommentId,
-      },
-        {
-          headers: {
-            Authorization: `Bearer ${storedToken}`,
-            'Content-Type': 'application/json',
-          },
-        }
-      );
-
-      const updatedPostDetails = { ...postDetails };
-      if (updatedPostDetails.postResponses && updatedPostDetails.postResponses[0]) {
-        if (!updatedPostDetails.postResponses[0].commentListResponse) {
-          updatedPostDetails.postResponses[0].commentListResponse = {
-            commentResponses: [],
-          };
-        }
-        setParentId(null);
-        setInputBabyValue('');
-      }
-    } catch (error) {
-      console.error('새댓 오류:', error);
-    }
-  };
-
-
-  //댓글 수정
+  /* 댓글 수정 */
   const handleApplyEdit = async (commentId) => {
     const comment = postDetails.commentListResponse.commentResponses.find((comment) => comment.commentId === commentId);
 
@@ -248,7 +174,7 @@ const PostDetailPage = ({comment}) => {
   }
 };
 
-  // 댓글 삭제
+  /* 댓글 삭제 */
   const handleDeleteComment = async (commentId) => {
     const comment = postDetails.commentListResponse.commentResponses.find((comment) => comment.commentId === commentId);
 
@@ -261,8 +187,7 @@ const PostDetailPage = ({comment}) => {
       });
       window.location.reload();
 
-
-      // 삭제된 댓글을 제외하고 업데이트
+      /* 삭제된 댓글을 제외하고 업데이트 */
       const updatedPostDetails = { ...postDetails };
       const commentIndex = updatedPostDetails.postResponses[0].commentListResponse.commentResponses.findIndex(
         (comment) => comment.commentId === commentId
@@ -276,12 +201,10 @@ const PostDetailPage = ({comment}) => {
     } catch (error) {
       console.error('댓글 삭제 오류:', error);
     }
-  }else {
+  } else {
     alert("타인의 댓글은 삭제할 수 없습니다.");
   }
 };
-
-
 
   return (
     <div>
@@ -354,37 +277,6 @@ const PostDetailPage = ({comment}) => {
                       </c.CommentProfile>
                       <p>{comment.content}</p>
                     </c.ParentComment>
-                    {showCommentBox && (<c.CommentChildWriteBox>
-                      <input type="text"
-                        value={inputBabyValue}
-                        onChange={(e) => setInputBabyValue(e.target.value)}
-                        placeholder="답글로 소통해요 ~"
-                        onKeyDown={(e) => {
-                          if (e.key === 'Enter') {
-                            e.preventDefault();
-                            handleEnterButtonClick();
-                            setShowBabyCommentBox(true); 
-                          }
-                        }}
-                      />
-                      <c.EnterChildButton 
-                       onClick={handleEnterButtonClick}
-                      ></c.EnterChildButton>
-                    </c.CommentChildWriteBox>)}
-                    {showBabyCommentBox && (
-                      babyComments.map((comment) => (
-                      <c.DisplayedBabyInput key={comment.commentId}>
-                        <c.ChildComment>
-                        <c.CommentProfile>
-                        <c.CommentProfileId >
-                          {<img src={gitUserImg} alt="Profile" style={{ width: '30px', height: '30px', borderRadius: '30px', border: '1px solid #fff' }} />}
-                          <p>{comment.gitLoginId}</p>
-                        </c.CommentProfileId>
-                      </c.CommentProfile>
-                      <p>{comment.content}</p>
-                      </c.ChildComment>
-                      </c.DisplayedBabyInput>))
-                    )}
                   </>
                 ) : (
                   <>
@@ -399,7 +291,7 @@ const PostDetailPage = ({comment}) => {
                         <input
                           type="text"
                           value={editedCommentContent}
-                          onChange={(e) => setEditedCommentContent(e.target.value)} // 수정된 내용을 state에 저장하도록 수정
+                          onChange={(e) => setEditedCommentContent(e.target.value)}
                           onKeyDown={(e) => e.key === 'Enter' && handleApplyEdit(comment.commentId)}
                         />
                         <button onClick={() => handleApplyEdit(comment.commentId)}>수정 적용</button>
@@ -409,7 +301,6 @@ const PostDetailPage = ({comment}) => {
                   </>
                 )}
                 <c.CommentViewIconContainer>
-                  {/* <c.CommentViewWrite onClick={() => setShowCommentBox(!showCommentBox)}/>댓글 달기 */}
                   <c.CommentViewEdit onClick={() => setIsEditingComment(comment.commentId)} />
                   <c.CommentViewDelete onClick={() => handleDeleteComment(comment.commentId)} />
                 </c.CommentViewIconContainer>

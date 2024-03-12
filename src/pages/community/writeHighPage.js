@@ -1,114 +1,72 @@
-import styled from "styled-components";
+import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import React, { useState, useRef } from "react";
-import {
-  FirstContainer, MainContainer, GridContainer, LevelBox, Typography, LevelTypography, Description,
-  HorizontalLine, EnterButton, TypographyDcp, LockedButton
-} from '../../styles/communityStyle';
+import axios from "axios";
 import Header from "../../components/common/header";
 import * as c from "../../styles/communityPostStyle";
-import axios from "axios";
+import { MainContainer, FirstContainer, Typography, HorizontalLine } from '../../styles/communityStyle';
 
 const WriteHighPage = () => {
   const navigate = useNavigate();
-  const moveToMain = () => {
-    navigate('/');
-  }
-  const [title, setTitle] = useState("");
-  const [content, setContent] = useState("");
+  const [formData, setFormData] = useState({ title: "", content: "" });
   const [attachmentFiles, setAttachmentFiles] = useState([]);
-  const [selectedFileContainers, setSelectedFileContainers] = useState([]);
-  const gitLoginId = localStorage.getItem('gitLoginId');
-  const bojTier = localStorage.getItem('bojTier');
 
-
-  const titleChange = (e) => setTitle(e.target.value);
-  const contentChange = (e) => setContent(e.target.value);
+  const handleInputChange = (e) => {
+    const { name, value } = e.target;
+    setFormData({ ...formData, [name]: value });
+  };
 
   const handleFileChange = (e) => {
     const files = e.target.files;
-    setAttachmentFiles([...attachmentFiles, ...files]);
-    /* const fileNames = Array.from(files).map(file => file.name);
-    setSelectedFileNames(fileNames); */
-     console.log('Selected Files:', files);
-    const fileContainers = Array.from(files).map((file, index) => (
-      <c.SelectedFileContainer key={index}>
-        <div>
-          {file.name}
-          </div>
-        <c.DeleteFileIcon onClick={() => handleFileRemove(index)} />
-
-      </c.SelectedFileContainer>
-    ));
-
-    setSelectedFileContainers((prevContainers) => [
-      ...prevContainers,
-      ...fileContainers,
-    ]);
+    const newFiles = [...attachmentFiles, ...files];
+    setAttachmentFiles(newFiles);
   };
 
-  const handleFileRemove = (fileToRemove) => {
-    // 개별 파일을 attachmentFiles에서 삭제
-    const updatedFiles = attachmentFiles.filter((file) => file !== fileToRemove);
-    setAttachmentFiles(updatedFiles);
-  
-    // 개별 파일 컨테이너를 selectedFileContainers에서 삭제
-    const updatedContainers = selectedFileContainers.filter(
-      (container) => container.key !== fileToRemove.name
-    );
-    setSelectedFileContainers(updatedContainers);
+  const handleFileRemove = (indexToRemove) => {
+    setAttachmentFiles(attachmentFiles.filter((_, index) => index !== indexToRemove));
   };
 
-/* 게시물 작성 */
-  const storedToken = localStorage.getItem('accessToken')
-
-  const onSubmit = (e) => {
+  const onSubmit = async (e) => {
     e.preventDefault();
+    const submitFormData = new FormData();
+    submitFormData.append('title', formData.title);
+    submitFormData.append('content', formData.content);
+    attachmentFiles.forEach(file => submitFormData.append('attachmentFile', file));
 
-    const formData = new FormData();
-
-    formData.append('title', title);
-    formData.append('content', content);
-    formData.append('postTier', 'High');
-    for (let i = 0; i < attachmentFiles.length; i++) {
-      formData.append('attachmentFile', attachmentFiles[i]);
+    try { 
+      const response = await axios.post('/api/post', submitFormData, {
+        headers: {
+          'Content-Type': 'multipart/form-data',
+          Authorization: `Bearer ${localStorage.getItem('accessToken')}`,
+        },
+      });
+      console.log(response.data);
+      navigate("/community/high");
+    } catch (error) {
+      console.error(error);
     }
-
-    axios.post('/api/post', formData, {
-      headers: {
-        'Content-type': 'multipart/form-data',
-        Authorization: `Bearer ${storedToken}`,
-      }
-    })
-      .then(res => {
-        console.log(res);
-        console.log(res.data);
-        navigate("/community/high");
-      })
-      .catch(error => console.log(error))
-  }
-
+  };
 
   return (
     <div>
-      <Header click={moveToMain} />
+      <Header click={() => navigate('/')} />
       <MainContainer>
         <FirstContainer>
           <Typography>WRITE</Typography>
-          <HorizontalLine></HorizontalLine>
-          <form encType="multipart/form-data">
+          <HorizontalLine />
+          <form onSubmit={onSubmit} encType="multipart/form-data">
             <c.WriteWrapContainer>
               <c.AuthorContainer>
                 <div>글쓴이</div>
-                <p>{gitLoginId}</p>
+                <p>{localStorage.getItem('gitLoginId')}</p>
               </c.AuthorContainer>
               <c.TitleContainer>
                 <div>제목</div>
                 <input
                   id="title"
                   type="text"
-                  value={title}
-                  onChange={titleChange}
+                  name="title"
+                  value={formData.title}
+                  onChange={handleInputChange}
                   placeholder="Write Title" />
               </c.TitleContainer>
             </c.WriteWrapContainer>
@@ -116,9 +74,9 @@ const WriteHighPage = () => {
               <div>&nbsp;내용&nbsp;&nbsp;</div>
               <textarea
                 id="content"
-                type="text"
-                value={content}
-                onChange={contentChange}
+                name="content"
+                value={formData.content}
+                onChange={handleInputChange}
                 placeholder="Write Your Problems" />
             </c.ContentContainer>
             <c.FileContainer>
@@ -133,15 +91,16 @@ const WriteHighPage = () => {
                 onChange={handleFileChange} />
             </c.FileContainer>
             <c.FilesContainer>
-            {selectedFileContainers.length > 0 && (
-                <div style={{ display: 'flex' }}>
-                  {selectedFileContainers}
-                </div>
-              )}
+              {attachmentFiles.map((file, index) => (
+                <c.SelectedFileContainer key={index}>
+                  <div>{file.name}</div>
+                  <c.DeleteFileIcon onClick={() => handleFileRemove(index)} />
+                </c.SelectedFileContainer>
+              ))}
             </c.FilesContainer>
             <c.ButtonContainer>
-              <c.CancelButton onClick={() => { navigate("/community/high") }}>취소</c.CancelButton>
-              <c.UploadButton onClick={onSubmit}>업로드</c.UploadButton>
+              <c.CancelButton type="button" onClick={() => navigate("/community/high")}>취소</c.CancelButton>
+              <c.UploadButton type="submit">업로드</c.UploadButton>
             </c.ButtonContainer>
           </form>
         </FirstContainer>
@@ -149,6 +108,5 @@ const WriteHighPage = () => {
     </div>
   );
 };
-
 
 export default WriteHighPage;

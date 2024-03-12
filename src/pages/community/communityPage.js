@@ -1,18 +1,14 @@
-import { FirstContainer, MainContainer, GridContainer, LevelBox, Typography, LevelTypography, Description,
-  HorizontalLine, EnterButton, TypographyDcp  } from '../../styles/communityStyle';
+import { FirstContainer, MainContainer, GridContainer, LevelBox, Typography, LevelTypography, Description, HorizontalLine, EnterButton, TypographyDcp  } from '../../styles/communityStyle';
 import Header from "../../components/common/header";
 import {useNavigate} from 'react-router-dom';
 
 const CommunityPage = () => {
   const navigate = useNavigate();
-
   const moveToMain = () => {
     navigate('/');
   }
-
   const handleEnterClick = (level) => {
     navigate(`/community/${level.toLowerCase()}`);
-    //toLowerCase: JavaScript의 문자열 메서드, 문자열의 모든 문자 -> 소문자로 변환
   };
 
   return (

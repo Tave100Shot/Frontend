@@ -1,15 +1,10 @@
 import { useNavigate } from "react-router-dom";
 import { useState, useEffect } from "react";
 import Header from "../../components/common/header";
-import * as s from "../../styles/searchBarStyle";
 import * as c from "../../styles/compilingStyle";
-import styled from "styled-components";
 import axios from "axios";
 import AceEditor from "react-ace";
-
 import "ace-builds/src-noconflict/mode-java";
-import "ace-builds/src-noconflict/theme-github";
-import "ace-builds/src-noconflict/theme-monokai";
 import "ace-builds/src-noconflict/theme-tomorrow";
 import "ace-builds/src-noconflict/ext-language_tools";
 
@@ -24,39 +19,22 @@ const CompilingPage = ({ theme }) => {
     navigate('/');
   }
 
-  //languageButton
-  const [currentValue, setCurrentValue] = useState("LANGUAGE");
-  const [showOptions, setShowOptions] = useState(false);
   const [questionNumber, setQuestionNumber] = useState('');
   const [infoContainerVisible, setInfoContainerVisible] = useState(false);
   const [problemTitle, setProblemTitle] = useState('');
-  const [isCompiling, setIsCompiling] = useState(false);
   const [problemInfo, setProblemInfo] = useState(null);
-  
-
-  const handleOnChangeSelectValue = (e) => {
-    const { innerText } = e.target;
-    setCurrentValue(innerText);
-  };
-  const storedToken = localStorage.getItem('accessToken')
 
   const handleSearchClick = async () => {
-
     if (questionNumber < 1000 && questionNumber > 31226) {
       alert('문제 번호는 1000번부터 31226번까지 존재합니다.');
       return;
     }
-
     try {
       const response = await axios.get(`/api/compile/problems/${questionNumber}`);
       console.log('서버 응답:', response.data);
 
       if (response.data.status === 200) {
-
       const fetchedProblemInfo = response.data.result;
-/*       const problemUrl = `https://www.acmicpc.net/problem/${fetchedProblemInfo.ID}`;
-      fetchedProblemInfo.problemUrl = problemUrl;
- */
       if (fetchedProblemInfo.Title === "N/A" || 
       fetchedProblemInfo["Sample Input"] === "N/A" ||
       fetchedProblemInfo["Sample Output"] === "N/A" ||
@@ -64,9 +42,8 @@ const CompilingPage = ({ theme }) => {
       fetchedProblemInfo["Output Description"] === "N/A"
       ) {
         alert("해당 문제의 정보를 찾을 수 없습니다.");
-        return; // 추가 처리를 중단하고 함수를 종료
+        return;
       }
-
         setProblemInfo(fetchedProblemInfo);
         setProblemTitle(`백준 ${questionNumber}번 - ${fetchedProblemInfo.Title}`);
         setInfoContainerVisible(true);
@@ -75,18 +52,15 @@ const CompilingPage = ({ theme }) => {
           alert("문제 정보 변환 중 오류가 발생했습니다.");
           return;
         }
-
         console.error('서버 응답 오류:', response.data.message);
       }
     } catch (error) {
-
       console.error('get 요청 오류:', error);
     }
   };
   useEffect(() => {
     const description = problemInfo && problemInfo.Description;
     const imageUrlsMatch = description && description.match(/(https?:\/\/[^\s]+)/g);
-  
     const imageContainer = document.getElementById('imageContainer');
     
     if (imageContainer) {
@@ -117,9 +91,7 @@ const CompilingPage = ({ theme }) => {
 
   const handleGoToBaekjoon = () => {
     console.log("백준 풀러 가기 버튼 클릭");
-/*     const problemUrl = problemInfo && problemInfo.problemUrl;
-   *///problemUrl
-   const problemUrl = problemInfo && problemInfo.problemUrl;
+    const problemUrl = problemInfo && problemInfo.problemUrl;
     window.open(problemUrl, '_blank');
   }
   
@@ -146,7 +118,7 @@ const CompilingPage = ({ theme }) => {
           <c.InfoContainer style={{ display: infoContainerVisible ? 'block' : 'none' }}>
           <c.QNumberContainer>{problemTitle}</c.QNumberContainer>
             <c.QContainer>
-              문제 설명 {/* ${problemInfo.Description} */}
+              문제 설명
               <div id="imageContainer">{problemInfo && problemInfo["Description"]}</div>
             </c.QContainer>
             <c.IContainer>

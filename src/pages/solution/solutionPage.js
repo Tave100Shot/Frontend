@@ -1,12 +1,12 @@
+import axios from "axios";
 import { useNavigate } from "react-router-dom";
-import Header from "../../components/common/header";
-import SearchBar from "../../components/solution/searchBar";
-import * as s from "../../styles/solutionStyle";
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect, useState } from "react";
-import SolutionItem from "../../components/solution/solutionItem";
-import axios from "axios";
 import { SetSearch, SetSolution } from "../../redux/actions/solutionAction";
+import Header from "../../components/common/header";
+import SearchBar from "../../components/solution/searchBar";
+import SolutionItem from "../../components/solution/solutionItem";
+import * as s from "../../styles/solution/solutionStyle";
 
 
 const SolutionPage = () => {

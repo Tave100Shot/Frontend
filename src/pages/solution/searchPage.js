@@ -5,11 +5,11 @@ import SearchBar from "../../components/solution/searchBar";
 
 const SearchPage = () => {
   const navigate = useNavigate();
-
   const moveToMain = () => {
     navigate('/');
   }
-  console.log("hi new version")
+
+  console.log("hi new version");
   return (
     <div>
       <Header click={moveToMain}/>

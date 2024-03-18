@@ -1,52 +1,53 @@
-import * as s from "../../styles/searchBarStyle";
-import search_black from '../../assets/imgs/search_black.png'
-import search_white from '../../assets/imgs/search_white.png'
 import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { SetSearch, SetSolution } from "../../redux/actions/solutionAction";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
+import search_black from '../../assets/imgs/search_black.png'
+import search_white from '../../assets/imgs/search_white.png'
+import * as s from "../../styles/solution/searchBarStyle";
 
 const SearchBar = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
-  let themeMode = useSelector( (state)=>{ return state.theme } );
+  let themeMode = useSelector((state)=>{ return state.theme });
 
   const [questionNumber, setQuestionNumber] = useState("");
-  const [currentValue, setCurrentValue] = useState("LANGUAGE");
+  const [questionLanguage, setQuestionLanguage] = useState("LANGUAGE");
   const [solutionArray, setSolutionArray] = useState([]);
   const [showOptions, setShowOptions] = useState(false);
   
 
-  const handleOnChangeSelectValue = (e) => {
+  const handleOnChangeLanguage = (e) => {
     const { innerText } = e.target;
-    setCurrentValue(innerText);
+    setQuestionLanguage(innerText);
   };
-  const makeString = (questionNumber, currentValue) => {
-    let message = "백준 " + questionNumber + "번 " + currentValue;
-    return message;
-  }
-
-  const handleOnChangeInput = (e) => {
+  
+  const handleOnChangeNumber = (e) => {
     setQuestionNumber(e.target.value);
   };
+
+  const makeQuestionString = (questionNumber, questionLanguage) => {
+    let message = "백준 " + questionNumber + "번 " + questionLanguage;
+    return message;
+  }
 
 
   const handleSearchSubmit = (event) => {
     event.preventDefault();
     
-    if (isNaN(questionNumber) || currentValue === "" || questionNumber === "") {
+    if (questionLanguage === "" || questionNumber === "") {
       alert("검색하고 싶은 문제의 정보를 모두 입력해주세요.");
       return;
     }
 
-    const questionString = makeString(questionNumber, currentValue);
+    const questionString = makeQuestionString(questionNumber, questionLanguage);
 
     const newQuestion = {
       number : questionNumber,
-      language : currentValue,
-      questionString : makeString(questionNumber, currentValue),
+      language : questionLanguage,
+      questionString : makeQuestionString(questionNumber, questionLanguage),
       solultionIndex: 1
     };
     dispatch(SetSearch(newQuestion));
@@ -71,7 +72,7 @@ const SearchBar = () => {
       .catch(error => {
         // console.error(error);
         const errorCode = error.response.data.errorCode;
-        console.log(errorCode);
+        // console.log(errorCode);
         if(errorCode === 'PROBLEM_4001') {
           alert("존재하지 않는 문제입니다.");
         }
@@ -89,20 +90,23 @@ const SearchBar = () => {
               type="number"
               value={questionNumber}
               placeholder="Search your problem with number !" 
-              onChange={handleOnChangeInput}
+              onChange={handleOnChangeNumber}
             ></input>
           </s.SearchInputBox>
-          <s.SelectBox onClick={() => setShowOptions((prev) => !prev)} show={showOptions}>
-            <label>{currentValue}</label>
+          <s.SelectBox onClick={() => 
+            setShowOptions((prev) => !prev)} 
+            show={showOptions}
+          >
+            <label>{questionLanguage}</label>
             <ul >
-              <li onClick={handleOnChangeSelectValue}>PYTHON</li>
-              <li onClick={handleOnChangeSelectValue}>C</li>
-              <li onClick={handleOnChangeSelectValue}>C++</li>
-              <li onClick={handleOnChangeSelectValue}>C#</li>
-              <li onClick={handleOnChangeSelectValue}>JAVA</li>
-              <li onClick={handleOnChangeSelectValue}>JAVASCRIPT</li>
-              <li onClick={handleOnChangeSelectValue}>PHP</li>
-              <li onClick={handleOnChangeSelectValue}>RUBY</li>
+              <li onClick={handleOnChangeLanguage}>PYTHON</li>
+              <li onClick={handleOnChangeLanguage}>C</li>
+              <li onClick={handleOnChangeLanguage}>C++</li>
+              <li onClick={handleOnChangeLanguage}>C#</li>
+              <li onClick={handleOnChangeLanguage}>JAVA</li>
+              <li onClick={handleOnChangeLanguage}>JAVASCRIPT</li>
+              <li onClick={handleOnChangeLanguage}>PHP</li>
+              <li onClick={handleOnChangeLanguage}>RUBY</li>
             </ul>
           </s.SelectBox>
           <button onClick={handleSearchSubmit}>SEARCH</button>

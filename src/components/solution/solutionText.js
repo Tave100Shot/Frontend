@@ -1,4 +1,4 @@
-import  * as s  from "../../styles/solutionTextStyle";
+import  * as s  from "../../styles/solution/solutionTextStyle";
 
 const SolutionText = () => {
   

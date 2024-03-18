@@ -1,5 +1,5 @@
-import * as s from "../../styles/solutionStyle";
 import { useEffect, useState } from "react";
+import * as s from "../../styles/solution/solutionStyle";
 
 
 const SolutionItem = ({title, link, snippet, blog, createdDate}) => {

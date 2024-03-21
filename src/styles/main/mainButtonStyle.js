@@ -23,11 +23,18 @@ export const MainButton = styled.button`
   cursor : pointer;
 
   // AltButton 전용 CSS
-  .hoverAfter {display :none;}
+  .hoverAfter {
+    display :none;
+  }
 
   &.bojUpdateBtn:hover {
     background-color : ${props => props.theme.colors.colorAccentReverse};
     .hoverBefore {display : none;}
     .hoverAfter {display :block;}
+  }
+  
+  // GO BACK Button 전용 CSS
+  &.colorChange {
+    background-color : ${props => props.theme.colors.colorAccentReverse};
   }
 `

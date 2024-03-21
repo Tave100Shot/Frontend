@@ -3,7 +3,7 @@ import { SetModal } from "../../redux/actions/mainAction";
 import { useDispatch } from "react-redux";
 import * as t from "../../styles/main/taveAnimationStyle"
 
-const TaveAnimation = ({secondAuthStatus}) => {
+const TaveAnimation = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
 

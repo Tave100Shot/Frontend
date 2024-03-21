@@ -40,7 +40,7 @@ export const TaveAnimationWrapper = styled.div`
     color: ${props => props.theme.colors.colorOpposite};
     font-size: 9.5rem;
     border : none;
-    cursor : pointer;
+    cursor : default;
     
     clip-path: polygon(0 50%, 100% 50%, 100% 50%, 0 50%);
     transform-origin: center;

@@ -66,21 +66,10 @@ const MainPage = ({click}) => {
         <MainButton 
           text={'GET SOLUTION'} 
           navigatePage={'/search-solution'}
-          lockImg={'none'}
         />
-        { secondAuthStatus === 'true' ? 
-          <MainButton 
-          text={'GET RECOMMEND'} 
-          navigatePage={'/recommend'}
-          lockImg={'unlocked'}
-        />
-        : 
         <MainButton 
-          text={'GET RECOMMEND'} 
-          navigatePage={''}
-          lockImg={'locked'}
+          text={"TODAY'S QUESTION"} 
         />
-        }
         { (accessToken !== null) && secondAuthStatus === 'true' ? 
           <AltButton/>
         : 

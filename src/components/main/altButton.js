@@ -8,7 +8,6 @@ const AltButton = () => {
     dispatch(SetModal(true)); 
   }
 
-
   return (
         <b.MainButton className="bojUpdateBtn" onClick={openModal}>
           <p className="hoverBefore">BOJ UPDATE</p>

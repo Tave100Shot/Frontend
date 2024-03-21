@@ -18,16 +18,16 @@ const Header = ({ click}) => {
   const moveToSolution = () => {
     navigate('/search-solution');
   }
-  const moveToRecommend = () => {
-    navigate('/recommend');
-  }
   const moveToCompile = () => {
     navigate('/compile');
   }
   const moveToCommunity = () => {
     navigate('/community');
   }
-
+  // const moveToRecommend = () => {
+  //   navigate('/recommend');
+  // }
+  
   const githubLogin = () => {
     const loginUrl = "http://43.203.21.185:8080/login/github";
     window.open(loginUrl, "_blank");
@@ -65,7 +65,7 @@ const Header = ({ click}) => {
           onClick={moveToSolution}
           className={location.pathname === "/search-solution" || location.pathname === "/result-solution" ? "active" : ""}
         >SOLUTION</button>
-        {
+        {/* {
           secondAuthStatus === 'true' ?
           <button
               onClick={moveToRecommend}
@@ -76,7 +76,7 @@ const Header = ({ click}) => {
             onClick={openModal}
             className={location.pathname === "/recommend-me" || location.pathname === "/recommend-rank" ? "active" : ""}
           >RECOMMEND</button>
-        }
+        } */}
         <button
           onClick={moveToCompile}
           className={location.pathname === "/compile" ? "active" : ""}

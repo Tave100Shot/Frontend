@@ -20,7 +20,7 @@ export const TaveAnimationWrapper = styled.div`
     background: linear-gradient(to right, ${props => props.theme.colors.colorAccent}, ${props => props.theme.colors.colorAccent}) no-repeat;
     background-clip: text;
     background-size: 0%;
-    transition: background-size cubic-bezier(.1,.5,.5,1) 0.5s;
+    transition: background-size cubic-bezier(.1,.5,.5,1) 0.3s;
     
     border-bottom: none;
     
@@ -40,11 +40,11 @@ export const TaveAnimationWrapper = styled.div`
     color: ${props => props.theme.colors.colorOpposite};
     font-size: 9.5rem;
     border : none;
-    cursor : pointer;
+    cursor : default;
     
     clip-path: polygon(0 50%, 100% 50%, 100% 50%, 0 50%);
     transform-origin: center;
-    transition: all cubic-bezier(.1,.5,.5,1) 0.7s;
+    transition: all cubic-bezier(.1,.5,.5,1) 0.3s;
     
     display: flex;
     flex-direction: column;

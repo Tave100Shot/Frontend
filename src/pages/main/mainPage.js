@@ -31,7 +31,7 @@ const MainPage = ({click}) => {
 
   // Button 관련
   const [todayShowState, setTodayShowState] = useState(false);
-  console.log("오늘의 추천 문제 보여주기 여부 : ", todayShowState)
+  // console.log("오늘의 추천 문제 보여주기 여부 : ", todayShowState)
 
   const moveToSolution = () => {
     navigate('/search-solution')
@@ -41,21 +41,15 @@ const MainPage = ({click}) => {
   // 로그인 이후 params 받아오기
   useEffect(() => {
     const searchParams = new URLSearchParams(location.search);
+
     if (searchParams.get('token') !== null) {
       dispatch(SetToken(searchParams.get('token')));
       localStorage.setItem('accessToken', searchParams.get('token'));
-      localStorage.setItem('profileImg', searchParams.get('profileImgUrl'));
+      localStorage.setItem('secondAuthStatus', searchParams.get('secondAuth'));
     }
   
-    const gitLoginId = localStorage.getItem('gitLoginId');
     const accessToken = localStorage.getItem('accessToken');
-  
-    if (gitLoginId && accessToken) {
-      localStorage.setItem('secondAuthStatus', true);
-    } else {
-      localStorage.setItem('secondAuthStatus', false);
-    }
-  
+    
     // 화면 전환
     if (accessToken) {
       navigate('/');

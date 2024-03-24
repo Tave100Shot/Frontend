@@ -12,7 +12,6 @@ const PostDetailPage = ({comment}) => {
   const [loading, setLoading] = useState(true);
   const gitLoginId = localStorage.getItem('gitLoginId');
   const storedToken = localStorage.getItem('accessToken');
-  const gitUserImg = localStorage.getItem('profileImg');
   const [isEditingComment, setIsEditingComment] = useState(null);
   const [inputValue, setInputValue] = useState('');
   const [inputError, setInputError] = useState(false);
@@ -28,6 +27,7 @@ const PostDetailPage = ({comment}) => {
           },
         });
         setPostDetails(response.data.result);
+        console.log(response.data.result);
         setLoading(false);
       } catch (error) {
         console.error(error);
@@ -223,7 +223,7 @@ const PostDetailPage = ({comment}) => {
               {postDetails ? (
                 <>
                   <c.PostProfile>
-                    {<img src={gitUserImg} alt="Profile" style={{ width: '40px', height: '40px', borderRadius: '30px', border: '1px solid #fff' }} />}
+                    {<img src={postDetails.writerProfileImgUrl} alt="Profile" style={{ width: '40px', height: '40px', borderRadius: '30px', border: '1px solid #fff' }} />}
                     <c.ProfileInfo>
                       <h1>{postDetails.writer}</h1>
                       <p>{postDetails.writtenTime}</p>
@@ -271,7 +271,7 @@ const PostDetailPage = ({comment}) => {
                     <c.ParentComment>
                       <c.CommentProfile>
                         <c.CommentProfileId >
-                          {<img src={gitUserImg} alt="Profile" style={{ width: '30px', height: '30px', borderRadius: '30px', border: '1px solid #fff' }} />}
+                          {<img src={comment.writerProfileImgUrl} alt="Profile" style={{ width: '30px', height: '30px', borderRadius: '30px', border: '1px solid #fff' }} />}
                           <p>{comment.gitLoginId}</p>
                         </c.CommentProfileId>
                       </c.CommentProfile>

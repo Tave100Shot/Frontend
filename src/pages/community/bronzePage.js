@@ -18,12 +18,12 @@ const BronzePage = () => {
   const [currentPage, setCurrentPage] = useState(1);
   const postsPerPage = 7;
 
-  useEffect(() => {
+/*   useEffect(() => {
     if (bojTier?.toUpperCase() === 'BEGINNER') {
       alert('Beginner 회원은 접근할 수 없습니다.');
       navigate('/'); 
     }
-  }, [bojTier, navigate]);
+  }, [bojTier, navigate]); */
 
   const moveToMain = () => {
     navigate('/');

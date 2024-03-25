@@ -9,6 +9,7 @@ import AltButton from "../../components/main/altButton";
 import * as w from "../../styles/main/mainPageStyle";
 import * as b from "../../styles/main/mainButtonStyle";
 import TodayQuestion from "../../components/main/todayQuestions";
+import IntroButton from "../../components/main/introButton";
 
 
 const MainPage = ({click}) => {
@@ -99,6 +100,7 @@ const MainPage = ({click}) => {
           <></>
         }
       </w.ButtonWrapper>
+      <IntroButton />
       <AddAuthModal isOpen={modalState} onRequestClose={closeModal} />
     </div>
   

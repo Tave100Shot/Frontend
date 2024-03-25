@@ -1,7 +1,7 @@
 import styled from "styled-components";
 
 export const ButtonWrapper = styled.div`
-  width : 80vw;
+  width : 75vw;
   height : 10rem;
   display : grid;
   grid-template-columns: repeat(3, 1fr);

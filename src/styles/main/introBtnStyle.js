@@ -1,4 +1,4 @@
-import styled from "styled-components";
+import styled, { keyframes } from "styled-components";
 import { IoIosCloseCircle } from "react-icons/io";
 import { IoIosCheckmarkCircle } from "react-icons/io";
 
@@ -17,6 +17,10 @@ export const IntroBtn = styled.button`
       height : 100%;
     }
 `
+export const floatingMotion = keyframes`
+    0% {bottom : 10rem;} 
+	100% {bottom: 11rem;}
+`
 
 export const IntroModalBox = styled.div`
     width : 36rem;
@@ -30,7 +34,13 @@ export const IntroModalBox = styled.div`
     right : 5rem;
     cursor : default;
     padding : 1.8rem;
+    animation: ${floatingMotion} 1s linear infinite alternate;
+    &:hover {
+        animation: none;
+    }
+
 `
+
 export const TitleBox = styled.div`
     width : 100%;
     justify-content : space-around;
@@ -92,4 +102,3 @@ export const CheckIcon = styled(IoIosCheckmarkCircle)`
     color : ${props => props.theme.colors.colorAccent};
     margin : 0 1rem 0 0;
 `
-

@@ -23,8 +23,8 @@ const AddAuthModal = ({isOpen, onRequestClose}) => {
         backgroundColor: 'rgba(0,0,0,0.3)',
     },
     content: {
-        width: '70rem',
-        height: '50rem',
+        width: '66rem',
+        height: '46rem',
         inset: 'unset',
         margin: '50vh auto',
         padding: 0,
@@ -159,7 +159,7 @@ const AddAuthModal = ({isOpen, onRequestClose}) => {
                 <m.SlideTextBox>
                   <h2>1. Github에서 Repository 생성</h2>
                   <p>
-                    <span>'taveshot'</span>이라는 이름을 가진 <span>Public</span>의 <span>새로운 Repository</span>를 생성해주세요.
+                    <span>'taveshot'</span>이라는 이름을 가진<br/> <span>Public</span>의 <span>새로운 Repository</span>를 생성해주세요.
                   </p>
                 </m.SlideTextBox>
             </m.SlideBox>
@@ -170,7 +170,7 @@ const AddAuthModal = ({isOpen, onRequestClose}) => {
                 <m.SlideTextBox>
                   <h2>2. Repository Description 작성</h2>
                   <p>
-                    새로운 Repository에 <span>Description</span>에 자신의 <span>백준 닉네임</span>을 적어주세요.
+                    새로운 Repository의 <span>Description</span>에 <br/>자신의 <span>백준 닉네임</span>을 적어주세요.
                   </p>
                 </m.SlideTextBox>
             </m.SlideBox>
@@ -181,7 +181,7 @@ const AddAuthModal = ({isOpen, onRequestClose}) => {
                 <m.SlideTextBox>
                   <h2>3. 백준 소개글 수정</h2>
                   <p>
-                    Solved.ac 사이트에 로그인한 뒤, <span>상태 메세지</span>에 본인의 <span>Github 아이디</span>를 적어주세요.
+                    Solved.ac 사이트에 로그인한 뒤, <br/><span>상태 메세지</span>에 본인의 <span>Github 아이디</span>를 적어주세요.
                     <br/>
                     (백준 프로필 소개글 X)
                   </p>

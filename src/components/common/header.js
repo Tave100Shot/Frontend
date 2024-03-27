@@ -10,7 +10,7 @@ const Header = ({ click}) => {
   const location = useLocation();
   const dispatch = useDispatch();
 
-  const [loginStat, setLoginStat] = useState(false);
+  const [loginStat, setLoginStat] = useState(false);  // 현재 로그인 상태 여부
 
   const accessToken = localStorage.getItem('accessToken');
   const secondAuthStatus = localStorage.getItem('secondAuthStatus');

@@ -297,7 +297,6 @@ const PostDetailPage = ({comment}) => {
                         <button onClick={() => handleApplyEdit(comment.commentId)}>수정 적용</button>
                       </c.CommentEditContainer>
                     </c.ParentComment>
-
                   </>
                 )}
                 <c.CommentViewIconContainer>

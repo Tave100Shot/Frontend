@@ -34,6 +34,10 @@ export const SearchBarContainer = styled.form`
     font-size : 1.5rem;
     cursor : pointer;
     box-shadow: 0 2px 4px 2px rgba(0, 0, 0, 0.1);
+    &:active {
+      transform: translateY(2px);
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+    }
   }
 `
 export const SearchInputBox = styled.div`
@@ -68,6 +72,7 @@ export const SearchInputBox = styled.div`
     font-family : Poppins_Light;
     font-size : 1.5rem;
   }
+
 `
 
 export const WriteButton = styled.div`
@@ -88,6 +93,10 @@ export const WriteButton = styled.div`
   justify-content: center;
   cursor : pointer;
   box-shadow: 0 2px 4px 2px rgba(0, 0, 0, 0.1);
+  &:active {
+    transform: translateY(2px);
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+  }
 `;
 
 export const PaginationContainer = styled.div`
@@ -199,13 +208,19 @@ export const CommentWriteBox = styled.div`
   background: ${props => props.theme.colors.colorAccent};
   position: relative;
   margin-top: 1em;
-  padding: 1rem;
+  padding: 2rem;
   align-items: center;
   justify-content: space-between;
+  font-family: 'Poppins';
+  font-weight: 600;
+
 
   & > input {
     flex-grow: 1;
     font-size: 1.5em;
+    font-weight: 600;
+    font-family: 'Poppins';
+    font-s
     width: 90%;
     border: none;
     outline: none;
@@ -452,7 +467,6 @@ export const CommentEditContainer = styled.div`
 
   & > button {
     min-height: 5rem;
-
     font-family: 'Poppins';
     font-style: normal;
     font-weight: 700;
@@ -465,6 +479,10 @@ export const CommentEditContainer = styled.div`
     background-color:${props => props.theme.colors.colorAccent};
     color: #fff;
     cursor: pointer;
+    &:active {
+      transform: translateY(2px);
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+    }
 }
 `
 export const ButtonWrapper = styled.div`
@@ -626,12 +644,8 @@ export const ProfileInfo = styled.div`
   display: flex;
   flex-direction: column;
   margin-left: 1rem;
-  justify-content: center;
-  align-items: center;
   p {
-    text-align: center;
-    align-items: center; 
-    justify-content: center;
+    justify-content: left; */
     font-size: 1.2rem;
     color: #919191;
   }

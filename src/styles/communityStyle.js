@@ -24,8 +24,8 @@ export const MainContainer = styled.div`
   flex-wrap: wrap;
   justify-content: space-between;
   align-items: center;
-  padding-left: 8rem;
-  padding-right: 8rem;
+  padding-left: 12rem;
+  padding-right: 12rem;
   width: 100vw;
   margin: 0 auto;
   margin-top: 20px;
@@ -38,8 +38,8 @@ export const MainContainer = styled.div`
 export const FirstContainer = styled.div`
   width: 100%;
   min-height: 70vh;
-  margin: 0 auto;
   flex-shrink: 0;
+
 `;
 
 export const GridContainer = styled.div`

@@ -35,7 +35,7 @@ const SolutionPage = () => {
       <s.SolutionContainer>
         <hr/>
         <s.SolutionInfo>
-          <h3>BAEKJOON {SolutionNumber} RESULT WITH {SolutionLanguage}</h3>
+          <h3>BAEKJOON <span>{SolutionNumber}</span> RESULT WITH <span>{SolutionLanguage}</span></h3>
         </s.SolutionInfo>
       </s.SolutionContainer>
       <s.SolutionItemContainer>

@@ -30,6 +30,7 @@ export const MainButton = styled.button`
   &:active { 
     border : none;
     box-shadow:  inset 0.2rem 0.2rem 0.7rem 0.1rem ${props => props.theme.colors.colorShadow};
+  }
 
   &.bojUpdateBtn:hover {
     background-color : ${props => props.theme.colors.colorAccentReverse};
@@ -40,5 +41,6 @@ export const MainButton = styled.button`
   // GO BACK Button 전용 CSS
   &.colorChange {
     background-color : ${props => props.theme.colors.colorAccentReverse};
+    border : none;
   }
 `

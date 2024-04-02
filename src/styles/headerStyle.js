@@ -10,24 +10,25 @@ export const HeaderWrapper = styled.div`
 `
 
 export const LogoWrapper = styled.div`
-  width : 19rem;
-  height : 7rem;
+  width : 18rem;
+  height : 6rem;
   display : flex;
   align-items : center;
   justify-content : space-between;
   margin : 0 0 0 1rem;
 
   img {
-    width : 6rem;
+    width : 5.8rem;
   }
   button {
     width : 12rem;
-    font-size : 3.3rem;
+    font-size : 3rem;
     font-family : "BMHANNAPROOTF";
     border : none;
     cursor : pointer;
     background-color : ${props => props.theme.colors.colorBg};
     color : ${props => props.theme.colors.colorMain};
+    margin : 1rem 0 1.7rem 0;
   }
 `
 export const MenuWrapper = styled.div`

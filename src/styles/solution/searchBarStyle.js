@@ -20,6 +20,12 @@ export const SearchBarContainer = styled.form`
     background-color : ${props => props.theme.colors.colorAccent};
     font-family : Poppins_Bold;
     font-size : 1.5rem;
+    cursor : pointer;
+    box-shadow:  0.2rem 0.2rem 0.7rem 0.1rem ${props => props.theme.colors.colorShadow};
+    &:active { 
+      border : none;
+      box-shadow:  inset 0.2rem 0.2rem 0.7rem 0.1rem ${props => props.theme.colors.colorShadow};
+    }
   }
 `
 

@@ -24,6 +24,11 @@ export const SolutionContainer = styled.div`
     font-size : 2.5rem;
     color : ${props => props.theme.colors.colorAccent};
   }
+  span {
+    font-size : 2.5rem;
+    font-family : 'Poppins_SemiBold';
+    color : ${props => props.theme.colors.colorAccentDark};
+  }
 `
 export const ResetSolution = styled(GrPowerReset)`
   position : absolute;

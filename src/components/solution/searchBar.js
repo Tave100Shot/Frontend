@@ -48,33 +48,26 @@ const SearchBar = () => {
       number : questionNumber,
       language : questionLanguage,
       questionString : makeQuestionString(questionNumber, questionLanguage),
-      solultionIndex: 1
     };
     dispatch(SetSearch(newQuestion));
     navigate('/result-solution');
 
-    const apiUrl = `/api/v1/search?query=${questionString}&start=${newQuestion.solultionIndex}`;
+    const apiUrl = `/api/v1/search?query=${questionString}`;
     
     axios.get(apiUrl)
       .then(response => {
-        // console.log(response.data.result.dtos[0].queries.request[0].startIndex);
-        const slicedArray = response.data.result.dtos[0].items.slice(0, 8);
-        setSolutionArray(slicedArray);
-        dispatch(SetSolution(slicedArray));
-        const totalResult = response.data.result.dtos[0].queries.request[0].totalResults;
-        const maxTotalResult = totalResult / 10 + 1
-        const  resultIndex = {
-          maxIndex : maxTotalResult
-        }
-        let totalQuestion = {...newQuestion, ...resultIndex}
-        dispatch(SetSearch(totalQuestion))
+        console.log(response.data.result.dtos.slice(0, 8));
+        const solutionArray = response.data.result.dtos.slice(0, 8);
+        dispatch(SetSolution(solutionArray));
       })
       .catch(error => {
-        // console.error(error);
+        console.error(error);
         const errorCode = error.response.data.errorCode;
-        // console.log(errorCode);
-        if(errorCode === 'PROBLEM_4001') {
+        console.log(errorCode);
+        if(errorCode === 'PROBLEM_4002') {
           alert("존재하지 않는 문제입니다.");
+          dispatch(SetSolution([]));
+          navigate('/search-solution');
         }
       });
     }

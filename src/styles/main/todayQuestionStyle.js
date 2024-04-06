@@ -115,7 +115,7 @@ p {
 export const applyContainer = styled.div`
 display: flex;
 width : 35vw;
-height : 45vh;
+height : 47vh;
 border-left : 0.1rem solid #B4B4B4;
 flex-direction: column;
 justify-content: center;
@@ -139,7 +139,6 @@ font-weight: 600;
 margin: 2rem 0 2rem 0;
 
   table {
-    
     width: 100%;
     height: 100%;
     border: none;
@@ -150,7 +149,11 @@ margin: 2rem 0 2rem 0;
     border: none;
     //text-align: center;
     //border : 0.1rem solid black;
-
+  }
+  p {
+    font-size: 1rem;
+    color: #FF1700;
+    margin: 5px 0 5px 1rem;
   }
 `
 
@@ -191,6 +194,7 @@ text-align: center;
 box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.2);
 border-radius: 10px;
 cursor: pointer;
+margin-top: 1rem;
 &:active {
   transform: translateY(2px);
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);

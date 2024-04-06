@@ -72,35 +72,39 @@ export const letterInfoContainter = styled.div`
 `
 export const devLetterContainer = styled.div`
 width : 50vw;
-height : 20vh;
-//background-color: pink;
+height : 22vh;
+//background-color: yellow;
+border-bottom : 0.1rem solid #B4B4B4;
 margin : 3rem 0 0 5rem;
 padding: 0 0 3rem 0;
 h1 {
-  font-size: 3rem;
+  font-size: 2.5rem;
+  margin-bottom: 1rem;
 }
 
 p {
-  font-size: 1.8rem;
+//background-color: pink;
+font-size: 1.8rem;
 }
 `
 
 export const styledHr = styled.div`
-border: none; // 기본 테두리 스타일 제거
-  height: 2px; // 선의 두께
-  background-color: #333; // 선의 색상
-  width: 50%; // 선의 길이 (부모 컨테이너에 대한 상대적 길이)
-  margin: 0 auto; // 수평 중앙 정렬
+border: none;
+  height: 2px; 
+  background-color: #333;
+  width: 50%; /
+  margin: 0 auto;
 `
 
 export const employLetterContainer = styled.div`
 width : 50vw;
 height : 25vh;
 //background-color: lightgreen;
-margin : 0 0 5rem 5rem;
+margin : 2rem 0 0 5rem;
 
 h1 {
-  font-size: 3rem;
+  margin-bottom: 1rem;
+  font-size: 2.5rem;
 }
 
 p {
@@ -113,17 +117,82 @@ display: flex;
 width : 35vw;
 height : 45vh;
 border-left : 0.1rem solid #B4B4B4;
+flex-direction: column;
 justify-content: center;
+align-items: center;
 margin : 3rem 0 2rem 5rem;
-background-color: lightblue;
+//background-color: lightblue;
 
 h1 {
   display: flex;
-  font-size: 3rem;
+  font-size: 2.5rem;
 
 }
 `
 
 export const applyForm = styled.div`
+width: 90%;
+height: 20rem;
+font-size: 1.5rem;
+font-weight: 600;
+//background-color: pink;
+margin: 2rem 0 2rem 0;
 
+  table {
+    
+    width: 100%;
+    height: 100%;
+    border: none;
+  }
+
+  th, td {
+    font-size: 2rem;
+    border: none;
+    //text-align: center;
+    //border : 0.1rem solid black;
+
+  }
+`
+
+export const StyledButton = styled.button`
+font-size: 1.5rem;
+width : 8vw;
+  padding: 13px;
+  margin-right: 1rem;
+  border: none;
+  outline: none;
+  border-radius: 2rem;
+  background-color: rgba(0, 117, 255, 0.16);
+  cursor : pointer;
+  background-color: ${props => props.isClicked ? '#0075FF' : 'rgba(0, 117, 255, 0.16)'};
+`
+
+export const StyledInput = styled.input`
+font-size: 1.5rem;
+width : 17vw;
+  padding: 13px;
+  border: none;
+  outline: none;
+  border-radius: 2rem;
+  background-color: rgba(0, 117, 255, 0.16);
+`;
+
+export const applyButton = styled.div`
+display: flex;
+font-size: 2rem;
+font-weight: 600;
+color: white;
+width : 16rem;
+height : 5rem;
+background-color: #0075FF;
+align-items: center;
+justify-content: center;
+text-align: center;
+box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.2);
+border-radius: 10px;
+cursor: pointer;
+&:active {
+  transform: translateY(2px);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+}
 `

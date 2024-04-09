@@ -59,13 +59,24 @@ margin : 5rem 0 5rem 5rem;
 `
 export const highlight = styled.span`
 color: #0075FF;
+font-weight: 600;
 `
 
 export const image = styled.img`
-  width: 20%;
-  height : 70%;
+  width: 20vw;
+  height : 40vh;
   //background-color: lightblue;
   margin: 5rem 4rem 5rem 0;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+`
+
+export const finalImage = styled.img`
+width: 15vw;
+height: 30vh;
+margin: 2rem 0 2rem 0;
+
 `
 export const letterInfoContainter = styled.div`
 //background-color: tomato;
@@ -131,8 +142,10 @@ h1 {
 `
 
 export const applyForm = styled.div`
-width: 90%;
+//width: flex;
 height: 20rem;
+justify-content: center;
+align-items: center;
 font-size: 1.5rem;
 font-weight: 600;
 //background-color: pink;
@@ -147,6 +160,8 @@ margin: 2rem 0 2rem 0;
   th, td {
     font-size: 2rem;
     border: none;
+    padding-right: 3rem;
+    //background-color: pink;
     //text-align: center;
     //border : 0.1rem solid black;
   }
@@ -154,6 +169,10 @@ margin: 2rem 0 2rem 0;
     font-size: 1rem;
     color: #FF1700;
     margin: 5px 0 5px 1rem;
+  }
+  h5 {
+    width: 17vw;
+    color: #0075FF;
   }
 `
 

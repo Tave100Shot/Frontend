@@ -7,8 +7,8 @@ const TodayQuestion = () => {
 
   const [showInformation, setShowInformation] = useState(true);
   const [isClicked, setIsClicked] = useState({
-    DEV:false,
-    EMPLOY:false
+    DEV: false,
+    EMPLOY: false
   });
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
@@ -17,6 +17,13 @@ const TodayQuestion = () => {
     name: '',
     email: '',
   });
+  const [saveInfo, setSaveInfo] = useState({
+    letterType: '',
+    userName: '',
+    userEmail: '',
+  })
+  const [isSubmitted, setIsSubmitted] = useState(false);
+  const [finalSubmitted, setfinalSubmitted] = useState(false);
   const nameInputRef = useRef(null);
   const emailInputRef = useRef(null);
 
@@ -29,22 +36,22 @@ const TodayQuestion = () => {
       ...prevState,
       [buttonName]: !prevState[buttonName]
     }));
-    setValidationMessage(prevMessage => ({...prevMessage, letter: ''}));
+    setValidationMessage(prevMessage => ({ ...prevMessage, letter: '' }));
   };
 
   const handleNameChange = (e) => {
     setName(e.target.value);
-    setValidationMessage(prevMessage => ({...prevMessage, name: ''}));
+    setValidationMessage(prevMessage => ({ ...prevMessage, name: '' }));
   };
 
   const handleEmailChange = (e) => {
     setEmail(e.target.value);
-    setValidationMessage(prevMessage => ({...prevMessage, email: ''}));
+    setValidationMessage(prevMessage => ({ ...prevMessage, email: '' }));
   };
 
   const validateEmail = (email) => {
     const re = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,6}$/;
-  return re.test(String(email).toLowerCase());
+    return re.test(String(email).toLowerCase());
   }
 
   const handleSubmit = () => {
@@ -53,6 +60,7 @@ const TodayQuestion = () => {
 
     if (!isClicked.DEV && !isClicked.EMPLOY) {
       message.letter = '최소 하나 이상의 뉴스레터를 눌러주세요 :)';
+      isValid = false;
     }
     if (name === '') {
       message.name = '이름을 작성해주세요.';
@@ -63,17 +71,32 @@ const TodayQuestion = () => {
       message.email = '이메일을 입력해주세요.';
       emailInputRef.current.focus();
       isValid = false;
-    } else if (!validateEmail(email)) { // 이메일 형식 검사
+    } else if (!validateEmail(email)) {
       message.email = '이메일 형식이 올바르지 않습니다.';
       emailInputRef.current.focus();
       isValid = false;
     }
+    if (isValid) {
+      let selectedLetters = [];
+      if (isClicked.DEV) selectedLetters.push('DEV');
+      if (isClicked.EMPLOY) selectedLetters.push('EMPLOY');
+      let letterType = selectedLetters.join(', ') || 'None';
+      setSaveInfo({
+        letterType: letterType,
+        userName: name,
+        userEmail: email,
+      })
+      setIsSubmitted(true);
+    }
 
-    if(!isValid){
+    if (!isValid) {
       setValidationMessage(message);
       return;
     }
   };
+  const handleFinalSubmit = () => {
+    setfinalSubmitted(true);
+  }
 
 
   return (
@@ -107,45 +130,75 @@ const TodayQuestion = () => {
             </t.letterInfoContainter>
             <t.applyContainer>
               <h1>백발백준 뉴스레터 구독 신청</h1>
-              <t.applyForm>
-                <table>
-                  <tbody>
-                    <tr>
-                      <td>Letter</td>
-                      <td>
-                        <t.StyledButton isClicked={isClicked.DEV} onClick={() => letterChooseClick('DEV')}>DEV</t.StyledButton>
-                        <t.StyledButton isClicked={isClicked.EMPLOY} onClick={() => letterChooseClick('EMPLOY')}>EMPLOY</t.StyledButton>
-                        {validationMessage.letter && <p>{validationMessage.letter}</p>}
-                      </td>
-                    </tr>
-                    <tr>
-                      <td>Name</td>
-                      <td>
-                        <t.StyledInput 
-                        ref={nameInputRef}
-                        type="text"
-                        placeholder="이름을 입력하세요" 
-                        value={name} 
-                        onChange={handleNameChange}/>
-                        {validationMessage.name && <p>{validationMessage.name}</p>}
-                      </td>
-                    </tr>
-                    <tr>
-                      <td>Email</td>
-                      <td>
-                        <t.StyledInput
-                        ref={emailInputRef} 
-                        type="email" 
-                        placeholder="이메일을 입력하세요" 
-                        value={email} 
-                        onChange={handleEmailChange}/>
-                        {validationMessage.email && <p>{validationMessage.email}</p>}
-                      </td>
-                    </tr>
-                  </tbody>
-                </table>
-              </t.applyForm>
-              <t.applyButton onClick={handleSubmit}>구독 신청</t.applyButton>
+              {!finalSubmitted ? (
+                <>
+                  <t.applyForm>
+                    <table>
+                      <tbody>
+                        <tr>
+                          <td>Letter</td>
+                          <td>
+                            {!isSubmitted ? (
+                              <>
+                                <t.StyledButton isClicked={isClicked.DEV} onClick={() => letterChooseClick('DEV')}>DEV</t.StyledButton>
+                                <t.StyledButton isClicked={isClicked.EMPLOY} onClick={() => letterChooseClick('EMPLOY')}>EMPLOY</t.StyledButton>
+                                {validationMessage.letter && <p>{validationMessage.letter}</p>}
+                              </>
+                            ) : (
+                              <h5>{saveInfo.letterType}</h5>
+                            )}
+                          </td>
+                        </tr>
+                        <tr>
+                          <td>Name</td>
+                          <td>
+                            {!isSubmitted ? (
+                              <>
+                                <t.StyledInput
+                                  ref={nameInputRef}
+                                  type="text"
+                                  placeholder="이름을 입력하세요"
+                                  value={name}
+                                  onChange={handleNameChange} />
+                                {validationMessage.name && <p>{validationMessage.name}</p>}
+                              </>
+                            ) : (
+                              <h5>{saveInfo.userName}</h5>
+                            )}
+                          </td>
+                        </tr>
+                        <tr>
+                          <td>Email</td>
+                          <td>
+                            {!isSubmitted ? (
+                              <>
+                                <t.StyledInput
+                                  ref={emailInputRef}
+                                  type="email"
+                                  placeholder="이메일을 입력하세요"
+                                  value={email}
+                                  onChange={handleEmailChange} />
+                                {validationMessage.email && <p>{validationMessage.email}</p>}
+                              </>
+                            ) : (
+                              <h5>{saveInfo.userEmail}</h5>
+                            )}
+                          </td>
+                        </tr>
+                      </tbody>
+                    </table>
+                  </t.applyForm>
+                  {!isSubmitted ? (
+                    <>
+                      <t.applyButton onClick={handleSubmit}>구독 신청</t.applyButton> </>
+                  ) : (<t.applyButton onClick={handleFinalSubmit}>정보 확인</t.applyButton>)}
+                </>
+              ) : (
+                <>
+              <t.finalImage src={newsImage} />
+              <h2>구독 완료되었습니다 :)</h2>
+              </>)}
+
             </t.applyContainer>
           </>
         )}

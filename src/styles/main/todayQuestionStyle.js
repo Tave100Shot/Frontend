@@ -12,16 +12,17 @@ export const todayQuestionsWrapper = styled.div`
 export const mainBox = styled.div`
   display : flex;
   width : 90vw;
-  height : 55vh;
+  height : flex;
   justify-content: space-between;
-  background-color: white;
-  box-shadow: 0px 5px 10px rgba(0, 0, 0, 0.2);
+  background-color: ${props => props.theme.colors.colorBg};
+  box-shadow: 0px 5px 10px ${props => props.theme.colors.colorShadow};;
   border-radius: 20px;
 `
 
 export const titleBox = styled.div`
   font-size: 4rem;
   font-weight: bold;
+  color: ${props => props.theme.colors.colorMain};
 `
 export const informationBox = styled.div`
 font-size: 2rem;
@@ -63,8 +64,8 @@ font-weight: 600;
 `
 
 export const image = styled.img`
-  width: 20vw;
-  height : 40vh;
+  width: flex;
+  height : flex;
   //background-color: lightblue;
   margin: 5rem 4rem 5rem 0;
   align-items: center;
@@ -73,17 +74,16 @@ export const image = styled.img`
 `
 
 export const finalImage = styled.img`
-width: 15vw;
-height: 30vh;
+width: 12vw;
+height: 24vh;
 margin: 2rem 0 2rem 0;
-
 `
 export const letterInfoContainter = styled.div`
 //background-color: tomato;
 `
 export const devLetterContainer = styled.div`
 width : 50vw;
-height : 22vh;
+height : flex;
 //background-color: yellow;
 border-bottom : 0.1rem solid #B4B4B4;
 margin : 3rem 0 0 5rem;
@@ -97,14 +97,6 @@ p {
 //background-color: pink;
 font-size: 1.8rem;
 }
-`
-
-export const styledHr = styled.div`
-border: none;
-  height: 2px; 
-  background-color: #333;
-  width: 50%; /
-  margin: 0 auto;
 `
 
 export const employLetterContainer = styled.div`
@@ -126,12 +118,12 @@ p {
 export const applyContainer = styled.div`
 display: flex;
 width : 35vw;
-height : 47vh;
+height : flex;
 border-left : 0.1rem solid #B4B4B4;
 flex-direction: column;
 justify-content: center;
 align-items: center;
-margin : 3rem 0 2rem 5rem;
+margin : 3rem 0 3rem 5rem;
 //background-color: lightblue;
 
 h1 {
@@ -143,6 +135,7 @@ h1 {
 
 export const applyForm = styled.div`
 //width: flex;
+color: ${props => props.theme.colors.colorMain};
 height: 20rem;
 justify-content: center;
 align-items: center;
@@ -184,19 +177,21 @@ width : 8vw;
   border: none;
   outline: none;
   border-radius: 2rem;
-  background-color: rgba(0, 117, 255, 0.16);
+  color: ${props => props.theme.colors.colorMain};
+  background-color: rgba(145, 209, 250, 0.5);
   cursor : pointer;
-  background-color: ${props => props.isClicked ? '#0075FF' : 'rgba(0, 117, 255, 0.16)'};
+  background-color: ${props => props.isClicked ? '#0075FF' : 'rgba(145, 209, 250, 0.5)'};
 `
 
 export const StyledInput = styled.input`
+color: ${props => props.theme.colors.colorMain};
 font-size: 1.5rem;
 width : 17vw;
   padding: 13px;
   border: none;
   outline: none;
   border-radius: 2rem;
-  background-color: rgba(0, 117, 255, 0.16);
+  background-color: rgba(145, 209, 250, 0.5);
 `;
 
 export const applyButton = styled.div`

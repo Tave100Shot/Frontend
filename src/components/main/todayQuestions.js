@@ -120,7 +120,6 @@ const TodayQuestion = () => {
                 <p><LuCheck /> ~~~~</p>
                 <p><LuCheck /> 매 달 <t.highlight>10일</t.highlight>에 메일함으로 보내드려요!</p>
               </t.devLetterContainer>
-              <styledHr />
               <t.employLetterContainer>
                 <h1>EMPLOY LETTER</h1>
                 <p><LuCheck /> 최근 올라온 <t.highlight>취업 공고</t.highlight>들을 모아드려요.</p>

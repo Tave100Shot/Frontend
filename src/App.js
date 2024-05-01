@@ -25,6 +25,7 @@ import RecommendMe from "./pages/recommend/recommendMePage";
 import RecommendRank from "./pages/recommend/recommendRankPage";
 import MobilePage from "./pages/main/mobilePage";
 import GlobalStyle from "./styles/globalStyle";
+import ManageMain from "./pages/manage/manageMainPage";
 
 function App() {
   Modal.setAppElement('#root');
@@ -150,6 +151,7 @@ function App() {
           ) : (
             <Route path='/community/post/:postId/edit' element={<PostEditPage/>}/>
             )}
+          <Route path='/manage' element={<ManageMain/>}/>
         </Routes>
       </ThemeProvider>
     </BrowserRouter>

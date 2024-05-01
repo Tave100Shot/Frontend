@@ -10,7 +10,7 @@ export const HeaderWrapper = styled.div`
 `
 
 export const LogoWrapper = styled.div`
-  width : 19rem;
+  width : 28.5rem;
   height : 7rem;
   display : flex;
   align-items : center;
@@ -21,7 +21,7 @@ export const LogoWrapper = styled.div`
     width : 6rem;
   }
   button {
-    width : 12rem;
+    width : 22rem;
     font-size : 3.3rem;
     font-family : "BMHANNAPROOTF";
     border : none;

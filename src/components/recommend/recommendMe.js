@@ -1,4 +1,4 @@
-import * as r from "../../styles/recommendProblemStyle";
+import * as r from "../../styles/recommend/recommendProblemStyle";
 import { useSelector } from "react-redux";
 import { useState } from "react";
 import TierBadge from "./tierBadge";

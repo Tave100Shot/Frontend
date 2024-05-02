@@ -1,15 +1,15 @@
+import { useNavigate } from "react-router-dom";
 import HeaderManage from "../../components/manage/headerManage";
 import * as m from "../../styles/manage/manageMainStyle"
 
 const ManageMain = () => {
+    const navigate = useNavigate();
 
     return (
         <m.ManageContainer>
             <HeaderManage/>
-            <m.ManageValidContainer>
-                <h1>백발백준<br/>관리자 페이지입니다</h1>
-                <button>확인했습니다</button>
-            </m.ManageValidContainer>
+            <h1>관리자페이지</h1>
+            <h2>추후 추가 예정</h2>
         </m.ManageContainer>
     )
 }

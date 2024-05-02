@@ -25,7 +25,9 @@ import RecommendMe from "./pages/recommend/recommendMePage";
 import RecommendRank from "./pages/recommend/recommendRankPage";
 import MobilePage from "./pages/main/mobilePage";
 import GlobalStyle from "./styles/globalStyle";
+import ManageCheck from "./pages/manage/manageCheckPage";
 import ManageMain from "./pages/manage/manageMainPage";
+import ManageLetter from "./pages/manage/manageLetterPage";
 
 function App() {
   Modal.setAppElement('#root');
@@ -151,7 +153,9 @@ function App() {
           ) : (
             <Route path='/community/post/:postId/edit' element={<PostEditPage/>}/>
             )}
-          <Route path='/manage' element={<ManageMain/>}/>
+          <Route path='/manage' element={<ManageCheck/>}/>
+          <Route path='/manage/main' element={<ManageMain/>}/>
+          <Route path='/manage/letter' element={<ManageLetter/>}/>
         </Routes>
       </ThemeProvider>
     </BrowserRouter>

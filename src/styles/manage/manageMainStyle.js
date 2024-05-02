@@ -3,7 +3,7 @@ import styled from "styled-components";
 export const ManageContainer = styled.div`
   display : flex;
   flex-direction : column;
-  justift-contents : center;
+  justify-content: center;
   align-items : center;
 `;
 export const ManageValidContainer = styled.div`

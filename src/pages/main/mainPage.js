@@ -85,7 +85,7 @@ const MainPage = ({click}) => {
           <b.MainButton 
             onClick={() => {setTodayShowState(true)}}
           >
-            {"TODAY'S QUESTION"}
+            {"NEWS LETTER"}
           </b.MainButton>
         }
         { (accessToken !== null) && secondAuthStatus === 'true' ? 

@@ -10,6 +10,7 @@ const TodayQuestion = () => {
     DEV: false,
     EMPLOY: false
   });
+  const [headerMessage, setHeaderMessage] = useState('받아볼 레터의 종류를 선택해주세요!');
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [validationMessage, setValidationMessage] = useState({
@@ -23,6 +24,11 @@ const TodayQuestion = () => {
     userEmail: '',
   })
   const [isSubmitted, setIsSubmitted] = useState(false);
+  const [emailVerifyState, setEmailVerifyState] = useState({
+    isVerifyNeed: false,
+    buttonText: '확인',
+    verifyPrompt: '',
+  });
   const [finalSubmitted, setfinalSubmitted] = useState(false);
   const nameInputRef = useRef(null);
   const emailInputRef = useRef(null);
@@ -54,26 +60,12 @@ const TodayQuestion = () => {
     return re.test(String(email).toLowerCase());
   }
 
-  const handleSubmit = () => {
-    let message = { letter: '', name: '', email: '' };
+  const handleLetterSubmit = () => {
+    let message = { letter: '' };
     let isValid = true;
 
     if (!isClicked.DEV && !isClicked.EMPLOY) {
       message.letter = '최소 하나 이상의 뉴스레터를 눌러주세요 :)';
-      isValid = false;
-    }
-    if (name === '') {
-      message.name = '이름을 작성해주세요.';
-      nameInputRef.current.focus();
-      isValid = false;
-    }
-    if (email === '') {
-      message.email = '이메일을 입력해주세요.';
-      emailInputRef.current.focus();
-      isValid = false;
-    } else if (!validateEmail(email)) {
-      message.email = '이메일 형식이 올바르지 않습니다.';
-      emailInputRef.current.focus();
       isValid = false;
     }
     if (isValid) {
@@ -83,19 +75,62 @@ const TodayQuestion = () => {
       let letterType = selectedLetters.join(', ') || 'None';
       setSaveInfo({
         letterType: letterType,
-        userName: name,
-        userEmail: email,
       })
       setIsSubmitted(true);
+      setHeaderMessage('레터를 받아볼 회원님의 정보를 입력해주세요.');
     }
-
     if (!isValid) {
       setValidationMessage(message);
       return;
     }
   };
+
+  const handleNameEmailSubmit = () => {
+    let message = { name: '', email: '' };
+    let isValid = true;
+
+    if (isValid) {
+      if (name === '') {
+        message.name = '이름을 작성해주세요.';
+        nameInputRef.current.focus();
+        isValid = false;
+      }
+      if (email === '') {
+        message.email = '이메일을 입력해주세요.';
+        emailInputRef.current.focus();
+        isValid = false;
+      } else if (!validateEmail(email)) {
+        message.email = '이메일 형식이 올바르지 않습니다.';
+        emailInputRef.current.focus();
+        isValid = false;
+      }
+      if (isValid) {
+        setSaveInfo({
+          userName: name,
+          userEmail: email,
+        });
+        setEmailVerifyState({
+          isVerifyNeed: true,
+          buttonText: '이메일 인증',
+          verifyPrompt: '해당 이메일로 인증하시겠습니까?',
+        });
+      setIsSubmitted(true);
+    } else {
+      setValidationMessage(message);
+    }
+
+
+  }};
+
   const handleFinalSubmit = () => {
     setfinalSubmitted(true);
+  }
+
+  const handleBack = () => {
+    if (isSubmitted) {
+      setIsSubmitted(false);
+      setValidationMessage({ name: '', email: '' });
+    }
   }
 
 
@@ -129,74 +164,75 @@ const TodayQuestion = () => {
             </t.letterInfoContainter>
             <t.applyContainer>
               <h1>백발백준 뉴스레터 구독 신청</h1>
+
               {!finalSubmitted ? (
                 <>
+                  <p>{headerMessage}</p>
                   <t.applyForm>
                     <table>
                       <tbody>
-                        <tr>
-                          <td>Letter</td>
-                          <td>
-                            {!isSubmitted ? (
-                              <>
-                                <t.StyledButton isClicked={isClicked.DEV} onClick={() => letterChooseClick('DEV')}>DEV</t.StyledButton>
-                                <t.StyledButton isClicked={isClicked.EMPLOY} onClick={() => letterChooseClick('EMPLOY')}>EMPLOY</t.StyledButton>
-                                {validationMessage.letter && <p>{validationMessage.letter}</p>}
-                              </>
-                            ) : (
-                              <h5>{saveInfo.letterType}</h5>
-                            )}
-                          </td>
-                        </tr>
-                        <tr>
-                          <td>Name</td>
-                          <td>
-                            {!isSubmitted ? (
-                              <>
-                                <t.StyledInput
+                        {!isSubmitted ? (
+                          <>
+                            <t.LetterButtonContainer>
+                              <t.StyledButton isClicked={isClicked.DEV} onClick={() => letterChooseClick('DEV')}>DEV</t.StyledButton>
+                              <t.StyledButton isClicked={isClicked.EMPLOY} onClick={() => letterChooseClick('EMPLOY')}>EMPLOY</t.StyledButton>
+                              {validationMessage.letter && <p>{validationMessage.letter}</p>}
+                            </t.LetterButtonContainer>
+                          </>
+                        ) : (
+                          <>
+                            <tr>
+                              <td>Name</td>
+                              <td>
+                                <t.StyledNameInput
                                   ref={nameInputRef}
                                   type="text"
-                                  placeholder="이름을 입력하세요"
+                                  placeholder="이름을 입력해주세요."
                                   value={name}
                                   onChange={handleNameChange} />
                                 {validationMessage.name && <p>{validationMessage.name}</p>}
-                              </>
-                            ) : (
-                              <h5>{saveInfo.userName}</h5>
-                            )}
-                          </td>
-                        </tr>
-                        <tr>
-                          <td>Email</td>
-                          <td>
-                            {!isSubmitted ? (
-                              <>
-                                <t.StyledInput
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>Email</td>
+                              <td>
+                                <t.StyledEmailInput
                                   ref={emailInputRef}
                                   type="email"
-                                  placeholder="이메일을 입력하세요"
+                                  placeholder="이메일을 입력해주세요."
                                   value={email}
                                   onChange={handleEmailChange} />
                                 {validationMessage.email && <p>{validationMessage.email}</p>}
-                              </>
-                            ) : (
-                              <h5>{saveInfo.userEmail}</h5>
-                            )}
-                          </td>
-                        </tr>
+                              </td>
+                            </tr>
+                          </>
+                        )}
                       </tbody>
                     </table>
                   </t.applyForm>
                   {!isSubmitted ? (
                     <>
-                      <t.applyButton onClick={handleSubmit}>구독 신청</t.applyButton> </>
-                  ) : (<t.applyButton onClick={handleFinalSubmit}>정보 확인</t.applyButton>)}
+                      <t.DefaultButton onClick={handleLetterSubmit}>구독 신청</t.DefaultButton> 
+                    </>
+                  ) : (
+                    <>
+                    <t.VerifyPromptContainer>
+                    {emailVerifyState.verifyPrompt && <p>{emailVerifyState.verifyPrompt}</p>}
+                    <t.ClickButtonContainer>
+                      <t.BackButton onClick={handleBack}>뒤로 가기</t.BackButton>
+                      <t.DefaultButton onClick={handleNameEmailSubmit}>
+                        {emailVerifyState.buttonText}
+                      </t.DefaultButton>
+                      </t.ClickButtonContainer>
+                      </t.VerifyPromptContainer>
+                    </>
+                  )}
                 </>
               ) : (
                 <>
-              <t.finalImage src={newsImage} />
-              <h2>구독 완료되었습니다 :)</h2>
-              </>)}
+                  <t.finalImage src={newsImage} />
+                  <h2>구독 완료되었습니다😊</h2>
+                </>)}
 
             </t.applyContainer>
           </>

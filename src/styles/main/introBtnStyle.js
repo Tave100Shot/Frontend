@@ -9,8 +9,8 @@ export const IntroBtn = styled.button`
     border : none;
     position : absolute;
     cursor : pointer;
-    bottom : 10rem;
-    right : 5rem;
+    bottom : 10vh;
+    right : 5vh;
 
     img {
       width : 100%;

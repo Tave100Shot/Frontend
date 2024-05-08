@@ -131,6 +131,10 @@ h1 {
   font-size: 2.5rem;
 }
 
+h2 {
+  font-size: 2rem;
+}
+
 p {
   font-size: 1.5rem;
   font-weight: bold;
@@ -150,7 +154,8 @@ margin: 1rem 0 1rem 0;
 
   table {
     width: 100%;
-    height: 100%;
+    height: 16rem;
+    ///background-color: pink;
     border: none;
   }
 
@@ -166,6 +171,15 @@ margin: 1rem 0 1rem 0;
     font-size: 1rem;
     color: #FF1700;
     margin-left: 4rem;
+  }
+  h2 {
+    font-size: 1.5rem;
+    font-weight: 500;
+    color: #0075FF;
+    margin-left: 10rem;
+    margin-bottom: 3rem;
+    //background-color: pink;
+
   }
   h5 {
     width: 17vw;
@@ -216,27 +230,13 @@ export const StyledEmailInput = styled.input`
   font-size: 1.5rem;
   width : 20vw;
   padding: 13px;
-  margin: 0 1rem 0 3rem;
+  margin: 0 1rem 1rem 3rem;
   border: none;
   outline: none;
   border-radius: 2rem;
   background-color: rgba(145, 209, 250, 0.5);
 `;
 
-export const VerifyPromptContainer = styled.div`
-  display: flex;
-  width: 100%;
-  //background-color: pink;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  text-align: center;
-
-  p {
-    color: #0075FF;
-    font-size: 1.5rem;
-  }
-`
 
 export const ClickButtonContainer = styled.div`
   display: flex;
@@ -286,5 +286,43 @@ export const BackButton = styled.div`
   &:active {
     transform: translateY(2px);
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+  }
+`
+
+export const finalForm = styled.div`
+display: flex;
+width: 80%;
+height: 17rem;
+color: ${props => props.theme.colors.colorMain};
+justify-content: center;
+align-items: center;
+font-size: 1.5rem;
+font-weight: 600;
+//background-color: skyblue;
+margin: 1rem 3rem 1rem 3rem;
+
+  table{
+    width: 100%;
+  }
+  td {
+    font-size: 2rem;
+    width: 10rem;
+    border: none;
+    //background-color: green;
+    //text-align: center;
+    //border : 0.1rem solid black;
+    padding: 1rem;
+    margin: 1.5rem 0 1.5rem 0;
+    vertical-align: middle;
+
+
+  }
+
+  p {
+    font-size: 2rem;
+    color: #0075FF;
+    //background-color: green;
+    padding: 1rem;
+    
   }
 `

@@ -35,7 +35,7 @@ export const ManageValidContainer = styled.div`
   }
 `;
 
-export const ManageList = styled.div`
+export const ManageSmallList = styled.div`
   width : 43vw;
   height : 45rem;
   box-shadow: 0 0 2rem 0 ${props => props.theme.colors.colorShadow};

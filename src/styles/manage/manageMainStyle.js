@@ -7,7 +7,7 @@ export const ManageContainer = styled.div`
   height : 80rem;
 `;
 export const ManageValidContainer = styled.div`
-  margin : 1rem 0 0 0;
+  margin : 10rem 0 0 0;
   box-shadow: 0px 5px 10px ${props => props.theme.colors.colorShadow};
   border-radius: 20px;
   width : 90vw;

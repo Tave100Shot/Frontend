@@ -14,9 +14,9 @@ export const LogoWrapper = styled.div`
   height : 7rem;
   display : flex;
   align-items : center;
-  justify-content : space-between;
+  justify-content : center;
   margin : 0 0 0 1rem;
-
+  
   img {
     width : 6rem;
   }
@@ -26,6 +26,8 @@ export const LogoWrapper = styled.div`
     font-family : "BMHANNAPROOTF";
     border : none;
     cursor : pointer;
+    text-align : left;
+    padding : 0 0 0 1rem;
     background-color : ${props => props.theme.colors.colorBg};
     color : ${props => props.theme.colors.colorMain};
   }

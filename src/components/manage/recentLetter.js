@@ -1,5 +1,6 @@
 import * as ml from "../../styles/manage/manageLetterStyle";
 import * as mm from "../../styles/manage/manageMainStyle"
+import PaginationButton from "./paginationButton";
 import RecentLetterItem from "./recentLetterItem";
 
 const RecentLetter = () => {
@@ -18,7 +19,9 @@ const RecentLetter = () => {
         <RecentLetterItem/>
         <RecentLetterItem/>
         <RecentLetterItem/>
+        <RecentLetterItem/>
      </mm.ManageList>
+     <PaginationButton/>
     </ml.HalfLetterContainer>
   )
 }

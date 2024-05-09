@@ -8,6 +8,8 @@ export const LetterContainer = styled.div`
   justify-content: space-around;
   margin : 1rem 0 0 0;
 `;
+
+// HalfLetterContainer : Letter 페이지 중 절반에 해당하는 컴포넌트의 레이아웃
 export const HalfLetterContainer = styled.div`
   width : 44vw;
   height : 60rem;

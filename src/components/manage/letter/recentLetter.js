@@ -24,7 +24,7 @@ const RecentLetter = () => {
         <RecentLetterItem/>
         <RecentLetterItem/>
      </mm.ManageSmallList>
-     <PaginationButton/>
+     {/* <PaginationButton/> */}
     </ml.HalfLetterContainer>
   )
 }

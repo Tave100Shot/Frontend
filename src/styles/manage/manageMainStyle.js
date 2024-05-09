@@ -1,11 +1,14 @@
 import styled from "styled-components";
 
+// ManageContainer : Manage 페이지 레이아웃
 export const ManageContainer = styled.div`
   display : flex;
   flex-direction : column;
   align-items : center;
   height : 80rem;
 `;
+
+// ManageValidContainer : 관리자 확인 기능의 div 디자인
 export const ManageValidContainer = styled.div`
   margin : 10rem 0 0 0;
   box-shadow: 0px 5px 10px ${props => props.theme.colors.colorShadow};
@@ -35,6 +38,8 @@ export const ManageValidContainer = styled.div`
   }
 `;
 
+// ManageSmallList : Manage 페이지 중 절반에 해당하는 게시물 div 레이아웃
+// 예시 : recentLetter, devLetter, employLetter
 export const ManageSmallList = styled.div`
   width : 43vw;
   height : 45rem;
@@ -45,8 +50,8 @@ export const ManageSmallList = styled.div`
   grid-template-row: repeat(6, 1fr);
   // border-bottom : 0.2rem solid rgba(0,0,0,0.1);
 `
-// flex 형태로 만든 Item
-export const FlexItemBtn = styled.button`
+// ThreeItemBtn : 3가지 항목만 들어가는 Letter Item
+export const ThreeItemBtn = styled.button`
   background-color : #ffffff;
   border : none;
   border-bottom : 0.2rem solid rgba(0,0,0,0.1);
@@ -55,9 +60,26 @@ export const FlexItemBtn = styled.button`
   font-family : "BMHANNAPROOTF";
   cursor : pointer;
   .item-box {
-    display : flex;
-    justify-content: space-between;
-    align-items : center;
+    display : grid;
+    grid-template-columns: 1.5fr 1fr 5fr 1fr 1.5fr;
+  }
+  &:hover {
+    color : #91d1fa;
+  }
+`
+
+// GridItemBtn : 2가지 항목만 들어가는 Letter Item
+export const TwoItemBtn = styled.button`
+  background-color : #ffffff;
+  border : none;
+  border-bottom : 0.2rem solid rgba(0,0,0,0.1);
+  padding : 0 2rem;
+  font-size : 2rem;
+  font-family : "BMHANNAPROOTF";
+  cursor : pointer;
+  .item-box {
+    display : grid;
+    grid-template-columns: 5fr 1fr 1fr;
   }
   &:hover {
     color : #91d1fa;

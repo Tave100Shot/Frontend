@@ -5,7 +5,7 @@ import { useEffect, useState } from "react"
 const RecentLetterItem = () => {
 
   return (
-    <mm.FlexItemBtn>
+    <mm.ThreeItemBtn>
       <div className="item-box">
         <p>DEV</p>
         <p>|</p>
@@ -13,7 +13,7 @@ const RecentLetterItem = () => {
         <p>|</p>
         <p>2024.05.07</p>
       </div>
-    </mm.FlexItemBtn>
+    </mm.ThreeItemBtn>
   )
 }
 export default RecentLetterItem;

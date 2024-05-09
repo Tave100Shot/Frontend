@@ -1,8 +1,8 @@
-import * as mm from "../../styles/manage/manageMainStyle"
-import * as ml from "../../styles/manage/manageLetterStyle"
+import * as mm from "../../../styles/manage/manageMainStyle"
+import * as ml from "../../../styles/manage/manageLetterStyle"
 import { useEffect, useState } from "react"
 
-const RecentLetterItem = ({lastBtn}) => {
+const RecentLetterItem = () => {
 
   return (
     <mm.FlexItemBtn>

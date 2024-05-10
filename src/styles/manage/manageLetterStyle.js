@@ -16,9 +16,6 @@ export const HalfLetterContainer = styled.div`
   padding : 1rem;
   display : flex;
   flex-direction : column;
-  // justify-content: center;
-  // align-items : center;
-  // border : 1px solid #000000;
   .topBar {
     width : 100%;
     height : 5rem;
@@ -43,5 +40,27 @@ export const HalfLetterContainer = styled.div`
       }
     }
     .AllLetterBtn:nth-child(2) {margin : 0;}
+
+    // 달력에 존재하는 버튼 div
+    .btnBox {
+      display : flex;
+      align-items : center;
+      justify-content: space-between;
+      button {
+        border : none;
+        background-color : #ffffff;
+        box-shadow: 0 0 2rem 0 ${props => props.theme.colors.colorShadow};
+        font-size : 3rem;
+        height : 3.5rem;
+        width : 3.5rem;
+        cursor : pointer;
+        border-radius : 0.5rem;
+        margin : 0 0 0 1.5rem;
+        &:hover {
+          background-color : #656565;
+          color : #ffffff;
+        }
+      }
+    }
   }
 `

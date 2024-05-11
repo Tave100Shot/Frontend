@@ -50,6 +50,7 @@ export const ManageSmallList = styled.div`
   grid-template-row: repeat(6, 1fr);
   // border-bottom : 0.2rem solid rgba(0,0,0,0.1);
 `
+
 // ThreeItemBtn : 3가지 항목만 들어가는 Letter Item
 export const ThreeItemBtn = styled.button`
   background-color : #ffffff;
@@ -68,7 +69,6 @@ export const ThreeItemBtn = styled.button`
     color : #91d1fa;
   }
 `
-
 // GridItemBtn : 2가지 항목만 들어가는 Letter Item
 export const TwoItemBtn = styled.button`
   background-color : #ffffff;

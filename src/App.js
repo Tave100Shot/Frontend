@@ -29,6 +29,7 @@ import ManageCheck from "./pages/manage/manageCheckPage";
 import ManageMain from "./pages/manage/manageMainPage";
 import ManageLetter from "./pages/manage/manageLetterPage";
 import ManageAllLetter from "./pages/manage/manageAllLetterPage";
+import ManageLetterCheck from "./pages/manage/manageLetterCheckPage";
 
 function App() {
   Modal.setAppElement('#root');
@@ -158,6 +159,7 @@ function App() {
           <Route path='/manage/main' element={<ManageMain/>}/>
           <Route path='/manage/letter' element={<ManageLetter/>}/>
           <Route path='/manage/letter/all' element={<ManageAllLetter/>}/>
+          <Route path='/manage/letter/:postId' element={<ManageLetterCheck/>}/>
         </Routes>
       </ThemeProvider>
     </BrowserRouter>

@@ -62,6 +62,7 @@ export const ThreeItemBtn = styled.button`
   .item-box {
     display : grid;
     grid-template-columns: 1.5fr 1fr 5fr 1fr 1.5fr;
+    text-align : left;
   }
   &:hover {
     color : #91d1fa;
@@ -80,6 +81,7 @@ export const TwoItemBtn = styled.button`
   .item-box {
     display : grid;
     grid-template-columns: 5fr 1fr 1fr;
+    text-align : left;
   }
   &:hover {
     color : #91d1fa;

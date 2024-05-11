@@ -228,12 +228,13 @@ const TodayQuestion = () => {
                                 <t.StyledButton isClicked={isClicked.DEV} onClick={() => letterChooseClick('DEV')}>DEV</t.StyledButton>
                                 <t.StyledButton isClicked={isClicked.EMPLOY} onClick={() => letterChooseClick('EMPLOY')}>EMPLOY</t.StyledButton>
                                 {validationMessage.letter && <p>{validationMessage.letter}</p>}
+                                {!validationMessage.letter && <h3>.</h3>}
                               </t.LetterButtonContainer>
                             </>
                           ) : (
                             <>
                               <tr>
-                                <td>Name</td>
+                                <td><h4>Name</h4></td>
                                 <td>
                                   <t.StyledNameInput
                                     ref={nameInputRef}
@@ -243,10 +244,11 @@ const TodayQuestion = () => {
                                     onChange={handleNameChange}
                                     disabled={isConfirmed} />
                                   {validationMessage.name && <p>{validationMessage.name}</p>}
+                                  {!validationMessage.name && <h3>.</h3>}
                                 </td>
                               </tr>
                               <tr>
-                                <td>Email</td>
+                                <td><h4>Email</h4></td>
                                 <td>
                                   <t.StyledEmailInput
                                     ref={emailInputRef}
@@ -256,6 +258,7 @@ const TodayQuestion = () => {
                                     onChange={handleEmailChange}
                                     disabled={isConfirmed} />
                                   {validationMessage.email && <p>{validationMessage.email}</p>}
+                                  {!validationMessage.email && <h3>.</h3>}
                                 </td>
                               </tr>
                             </>

@@ -125,6 +125,7 @@ export const DateContainer = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
+  margin : 0 auto;
   justify-content: center;
   height: 100%;
   position: relative;
@@ -166,7 +167,7 @@ export const DateContainer = styled.div`
   
   // 뉴스레터가 등록된 날짜에 대한 추가 스타일
   .enrolled-letterBox {
-    display: none; // 기본적으로 숨김
+    display: flex; // 기본적으로 숨김
     flex-direction: column;
     position: absolute;
     z-index: 1;
@@ -174,12 +175,24 @@ export const DateContainer = styled.div`
     left: 16rem;
     transform: translateX(-50%);
     width : 30rem;
-    height : 10rem;
+    height : 12rem;
     justify-content: center;  
     background-color: #91d1fa;
+    border-radius: 5rem 5rem 5rem 0;
+    border: 0.2rem solid #91d1fa;
+    padding : 1rem;
     
     button {
-      margin: 0.5rem
+      border : none;
+      background-color : #91d1fa;
+      text-align : left;
+      color: #000000;
+      font-family: "BMHANNAPROOTF";
+      font-size : 2rem;
+      margin : 0 0 0 2rem;
+      width : 23rem;
+      cursor : pointer;
+      &:hover {color : #ffffff;}
     }
   }
 

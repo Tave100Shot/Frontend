@@ -78,18 +78,18 @@ const LetterCalender = () => {
           <div key={v ? v.toString() : `${v}${i}`}>
           {v && (
             <mc.DateContainer>
+              {selectedDay === v && (
+                <div className="enrolled-letterBox">
+                  <button>DEV | </button>
+                  <button>EMP | </button>
+                </div>
+              )}
               <li
                 className={selectedDay === v ? 'enrolled' : 'not-enrolled'}
                 onClick={() => setSelectedDay(v)}
               >
                 {dayjs(v).date()}
               </li>
-              {selectedDay === v && (
-                <div className="enrolled-letterBox">
-                  <button>Dev Letter</button>
-                  <button>Employ Letter</button>
-                </div>
-              )}
             </mc.DateContainer>
           )}
           </div>

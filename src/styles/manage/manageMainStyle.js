@@ -5,7 +5,7 @@ export const ManageContainer = styled.div`
   display : flex;
   flex-direction : column;
   align-items : center;
-  height : 80rem;
+  height : 73rem;
 `;
 
 // ManageValidContainer : 관리자 확인 기능의 div 디자인

@@ -124,93 +124,214 @@ flex-direction: column;
 justify-content: center;
 align-items: center;
 margin : 3rem 0 3rem 5rem;
-//background-color: lightblue;
+//background-color: green;
 
 h1 {
   display: flex;
   font-size: 2.5rem;
+}
 
+h2 {
+  font-size: 2rem;
+}
+
+p {
+  font-size: 1.5rem;
+  font-weight: bold;
 }
 `
 
 export const applyForm = styled.div`
-//width: flex;
+width: 80%;
+height: 18rem;
 color: ${props => props.theme.colors.colorMain};
-height: 20rem;
 justify-content: center;
 align-items: center;
 font-size: 1.5rem;
 font-weight: 600;
-//background-color: pink;
-margin: 2rem 0 2rem 0;
+//background-color: yellow;
+//margin: 1rem 0 0 0;
 
   table {
     width: 100%;
-    height: 100%;
+    height: 16rem;
+    //background-color: pink;
     border: none;
   }
 
   th, td {
     font-size: 2rem;
+    height: 8rem;
     border: none;
-    padding-right: 3rem;
-    //background-color: pink;
+    //background-color: green;
     //text-align: center;
     //border : 0.1rem solid black;
   }
+
   p {
+    //background-color: pink;
     font-size: 1rem;
     color: #FF1700;
-    margin: 5px 0 5px 1rem;
+    margin-left: 4rem;
+  }
+  h2 {
+    font-size: 1.5rem;
+    font-weight: 500;
+    color: #0075FF;
+    margin: 0 0 0 13rem;
+    //background-color: pink;
+  }
+  h3 {
+    color: ${props => props.theme.colors.colorBg};
+    font-size: 1rem;
+  }
+  h4 {
+    font-size: 2rem;
+    margin-bottom: 1.5rem;
   }
   h5 {
     width: 17vw;
     color: #0075FF;
   }
 `
+export const LetterButtonContainer = styled.div`
+  display: flex;
+  //background-color: pink;
+  margin-top: 2rem;
+  width: 100%;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+`
 
 export const StyledButton = styled.button`
-font-size: 1.5rem;
-width : 8vw;
+  font-size: 2rem;
+  //font-weight: bold;
+  width : 17rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 10px;
   padding: 13px;
-  margin-right: 1rem;
   border: none;
   outline: none;
-  border-radius: 2rem;
+  border-radius: 3rem;
   color: ${props => props.theme.colors.colorMain};
   background-color: rgba(145, 209, 250, 0.5);
   cursor : pointer;
   background-color: ${props => props.isClicked ? '#0075FF' : 'rgba(145, 209, 250, 0.5)'};
 `
 
-export const StyledInput = styled.input`
-color: ${props => props.theme.colors.colorMain};
-font-size: 1.5rem;
-width : 17vw;
+export const StyledNameInput = styled.input`
+  color: ${props => props.theme.colors.colorMain};
+  font-size: 1.5rem;
+  width : 12vw;
   padding: 13px;
+  margin: 1rem 1rem 0.2rem 3rem;
   border: none;
   outline: none;
   border-radius: 2rem;
   background-color: rgba(145, 209, 250, 0.5);
 `;
 
-export const applyButton = styled.div`
+export const StyledEmailInput = styled.input`
+  color: ${props => props.theme.colors.colorMain};
+  font-size: 1.5rem;
+  width : 20vw;
+  padding: 13px;
+  margin: 0 1rem 0.2rem 3rem;
+  border: none;
+  outline: none;
+  border-radius: 2rem;
+  background-color: rgba(145, 209, 250, 0.5);
+`;
+
+
+export const ClickButtonContainer = styled.div`
+  display: flex;
+  width: 100%;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  //background-color: pink;
+  margin-top: 2rem;
+`
+
+export const DefaultButton = styled.div`
+  display: flex;
+  margin-left: 1rem;
+  font-size: 2rem;
+  font-weight: 600;
+  color: white;
+  width : 16rem;
+  height : 5rem;
+  background-color: #0075FF;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.2);
+  border-radius: 10px;
+  cursor: pointer;
+  &:active {
+    transform: translateY(2px);
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+  }
+`
+export const BackButton = styled.div`
+  display: flex;
+  margin-right: 1rem;
+  font-size: 2rem;
+  font-weight: 600;
+  color: white;
+  width : 16rem;
+  height : 5rem;
+  background-color: #CECDCD;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.2);
+  border-radius: 10px;
+  cursor: pointer;
+  &:active {
+    transform: translateY(2px);
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+  }
+`
+
+export const finalForm = styled.div`
 display: flex;
-font-size: 2rem;
-font-weight: 600;
-color: white;
-width : 16rem;
-height : 5rem;
-background-color: #0075FF;
-align-items: center;
+width: 80%;
+height: 17rem;
+color: ${props => props.theme.colors.colorMain};
 justify-content: center;
-text-align: center;
-box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.2);
-border-radius: 10px;
-cursor: pointer;
-margin-top: 1rem;
-&:active {
-  transform: translateY(2px);
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
-}
+align-items: center;
+font-size: 1.5rem;
+font-weight: 600;
+//background-color: skyblue;
+margin: 1rem 3rem 1rem 3rem;
+
+  table{
+    width: 100%;
+  }
+  td {
+    font-size: 2rem;
+    width: 10rem;
+    border: none;
+    //background-color: green;
+    //text-align: center;
+    //border : 0.1rem solid black;
+    padding: 1rem;
+    margin: 1.5rem 0 1.5rem 0;
+    vertical-align: middle;
+
+
+  }
+
+  p {
+    font-size: 2rem;
+    color: #0075FF;
+    //background-color: green;
+    padding: 1rem;
+    
+  }
 `

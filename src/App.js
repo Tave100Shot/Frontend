@@ -25,7 +25,6 @@ import RecommendMe from "./pages/recommend/recommendMePage";
 import RecommendRank from "./pages/recommend/recommendRankPage";
 import MobilePage from "./pages/main/mobilePage";
 import GlobalStyle from "./styles/globalStyle";
-import ManageCheck from "./pages/manage/manageCheckPage";
 import ManageMain from "./pages/manage/manageMainPage";
 import ManageLetter from "./pages/manage/manageLetterPage";
 import ManageAllLetter from "./pages/manage/manageAllLetterPage";

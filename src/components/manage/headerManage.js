@@ -8,7 +8,7 @@ const HeaderManage = () => {
 
     const moveToMain = () => navigate('/');
     const moveToLetter = () => navigate('/manage/letter')
-    const moveToManageMain = () => navigate('/manage/main')
+    const moveToManageMain = () => navigate('/manage')
 
     return (
         <h.HeaderWrapper>

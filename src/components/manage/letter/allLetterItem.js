@@ -6,7 +6,7 @@ import { useNavigate } from "react-router-dom"
 const AllLetterItem = () => {
   const navigate = useNavigate();
   const moveToPost = () => {
-    navigate('/manage/letter/:postId')
+    navigate('/manage/letter/view/:letterId')
   }
 
   return (

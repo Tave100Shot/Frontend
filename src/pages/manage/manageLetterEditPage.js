@@ -19,7 +19,7 @@ const ManageLetterEdit = () => {
   const letterSave = () => {
     var saveResult = window.confirm("레터를 저장하시겠습니까?");
     if(saveResult){
-      navigate('/manage/letter');
+      navigate('/manager/letter');
     }
   }
 

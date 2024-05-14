@@ -6,7 +6,7 @@ import RecentLetterItem from "./recentLetterItem";
 
 const RecentLetter = () => {
   const navigate = useNavigate();
-  const moveToAllLetter = () => navigate('/manage/letter/all');
+  const moveToAllLetter = () => navigate('/manager/letter/all');
   return (
     <ml.HalfLetterContainer>
       <div className="topBar">

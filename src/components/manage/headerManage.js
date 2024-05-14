@@ -7,8 +7,8 @@ const HeaderManage = () => {
     const navigate = useNavigate();
 
     const moveToMain = () => navigate('/');
-    const moveToLetter = () => navigate('/manage/letter')
-    const moveToManageMain = () => navigate('/manage')
+    const moveToLetter = () => navigate('/manager/letter')
+    const moveToManageMain = () => navigate('/manager')
 
     return (
         <h.HeaderWrapper>
@@ -20,11 +20,11 @@ const HeaderManage = () => {
         </h.LogoWrapper>
         <h.MenuWrapper className="menu">
             <button
-                className={location.pathname === "/manage/member" ? "active" : ""}
+                className={location.pathname === "/manager/member" ? "active" : ""}
 
             >MEMBER</button>
             <button
-                className={location.pathname === "/manage/letter" ? "active" : ""}
+                className={location.pathname === "/manager/letter" ? "active" : ""}
                 onClick={moveToLetter}
             >LETTER</button>
             <button 

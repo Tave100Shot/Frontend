@@ -6,7 +6,7 @@ import { useNavigate } from "react-router-dom"
 const RecentLetterItem = () => {
   const navigate = useNavigate();
   const moveToPost = () => {
-    navigate('/manage/letter/view/:letterId')
+    navigate('/manager/letter/view/:letterId')
   }
 
   return (

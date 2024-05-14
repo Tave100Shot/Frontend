@@ -14,7 +14,7 @@ const LetterCalender = () => {
 
   // Letter 작성 페이지 이동
   const moveToLetterPost = () => {
-    navigate('/manage/letter/edit');
+    navigate('/manager/letter/edit');
   }
 
   const initArr = (firstDay, daysInMonth) => {

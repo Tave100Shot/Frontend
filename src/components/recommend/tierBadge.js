@@ -1,4 +1,4 @@
-import * as t from "../../styles/recommendMainStyle";
+import * as t from "../../styles/recommend/recommendMainStyle";
 
 const TierBadge = ({bojTier}) => {
 

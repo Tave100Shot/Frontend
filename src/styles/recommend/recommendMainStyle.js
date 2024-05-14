@@ -1,6 +1,4 @@
 import styled, { keyframes } from "styled-components";
-import Sky from "../assets/imgs/recommend_sky.jpg"
-import Sunset from "../assets/imgs/recommend_sunset.jpg"
 
 export const RecommendContainer = styled.div`
   display : flex;
@@ -52,7 +50,6 @@ export const RecommendMeBox = styled.div`
   color : #ffffff;
   margin: 0;
   &:hover {
-    background-image: url(${Sky});
     background-size: cover;
     border: 1rem solid ${props => props.theme.colors.colorBg};
     border-radius : 4rem;
@@ -93,7 +90,6 @@ export const RecommendLatestBox = styled.div`
   &:hover {
     background-repeat: no-repeat;
     background-position: center;
-    background-image: url(${Sunset});
     background-size: cover;
     border: 1rem solid ${props => props.theme.colors.colorBg};
     border-radius : 4rem;

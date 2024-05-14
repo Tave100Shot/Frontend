@@ -10,22 +10,24 @@ export const HeaderWrapper = styled.div`
 `
 
 export const LogoWrapper = styled.div`
-  width : 18rem;
-  height : 6rem;
+  width : 28.5rem;
+  height : 7rem;
   display : flex;
   align-items : center;
-  justify-content : space-between;
+  justify-content : center;
   margin : 0 0 0 1rem;
-
+  
   img {
     width : 5.8rem;
   }
   button {
-    width : 12rem;
-    font-size : 3rem;
+    width : 22rem;
+    font-size : 3.3rem;
     font-family : "BMHANNAPROOTF";
     border : none;
     cursor : pointer;
+    text-align : left;
+    padding : 0 0 0 1rem;
     background-color : ${props => props.theme.colors.colorBg};
     color : ${props => props.theme.colors.colorMain};
     margin : 1rem 0 1.7rem 0;

@@ -5,11 +5,17 @@ import React, { useState, useEffect } from 'react'
 import dayjs from 'dayjs';
 import {GoChevronLeft, GoChevronRight} from 'react-icons/go'
 import { useSelector } from 'react-redux';
+import { useNavigate } from "react-router-dom";
 
 const LetterCalender = () => {
+  const navigate = useNavigate();
   const [arr, setArr] = useState([]);
   const [selectedDay, setSelectedDay] = useState('2024-05-15') // 첫 렌더링되는 달
 
+  // Letter 작성 페이지 이동
+  const moveToLetterPost = () => {
+    navigate('/manage/letter/edit');
+  }
 
   const initArr = (firstDay, daysInMonth) => {
       return Array.from({length: firstDay+ daysInMonth},
@@ -60,7 +66,7 @@ const LetterCalender = () => {
       <div className="btnBox">
         <GoChevronLeft style={{width: '3rem', height: '3rem', cursor: 'pointer'}} onClick={handlePrevMonth}/>
         <GoChevronRight style={{width: '3rem', height: '3rem', cursor: 'pointer'}} onClick={handleNextMonth}/>
-        <button>+</button>
+        <button onClick={moveToLetterPost}>+</button>
       </div>
     </div>
     <mc.CalendarContainer>

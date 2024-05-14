@@ -29,6 +29,7 @@ import ManageMain from "./pages/manage/manageMainPage";
 import ManageLetter from "./pages/manage/manageLetterPage";
 import ManageAllLetter from "./pages/manage/manageAllLetterPage";
 import ManageLetterView from "./pages/manage/manageLetterViewPage";
+import ManageLetterEdit from "./pages/manage/manageLetterEditPage";
 
 function App() {
   Modal.setAppElement('#root');
@@ -157,7 +158,8 @@ function App() {
           <Route path='/manage' element={<ManageMain/>}/>
           <Route path='/manage/letter' element={<ManageLetter/>}/>
           <Route path='/manage/letter/all' element={<ManageAllLetter/>}/>
-          <Route path='/manage/letter/:postId' element={<ManageLetterView/>}/>
+          <Route path='/manage/letter/view/:letterId' element={<ManageLetterView/>}/>
+          <Route path='/manage/letter/edit/:letterId?' element={<ManageLetterEdit/>}/>
         </Routes>
       </ThemeProvider>
     </BrowserRouter>

@@ -66,7 +66,7 @@ export const HalfLetterContainer = styled.div`
 `
 
 // Letter 상세 보기 박스
-export const LetterCheckContainer = styled.div`
+export const LetterViewkContainer = styled.div`
   margin : 5rem 0 0 0;
   width : 87vw;
   height : 55rem;
@@ -120,4 +120,114 @@ export const LetterCheckContainer = styled.div`
 
   }
 
+`
+
+// Letter 작성 박스
+export const LetterEditContainer = styled.form`
+  margin : 5rem 0 0 0;
+  width : 87vw;
+  height : 55rem;
+  box-shadow: 0 0 2rem 0 ${props => props.theme.colors.colorShadow};
+  border-radius : 2.5rem;
+  padding : 1.5rem 2rem;
+  font-size : 2.3rem;
+  font-family : "BMHANNAPROOTF";
+  display : flex;
+  flex-direction : column;
+  align-items : center;
+  justify-content: space-between;
+
+
+  .letter-header {
+    display : flex;
+    align-items : center;
+    justify-content: space-between;
+    text-align : center;
+    width : 80vw;  
+    height : 6rem;    
+
+    // 레터 제목 작성 input (text)
+    .letter-title {
+      width : 65rem;
+      height : 5rem;
+      border : none;
+      background-color : #F5F5F5;
+      padding : 0.5rem 2rem;
+      font-size : 2.5rem;
+      font-family : "BMHANNAPROOTF";
+      outline : none;
+      border-radius : 1rem;
+      margin : 0 1rem 0 0;
+    }
+    // 레터 종류 선택 - select 
+    .letter-select {
+      width : 16rem;
+      height : 5rem;
+      border : 0.3rem solid #F5F5F5;
+      background-color : #ffffff;
+      border-radius : 3rem;
+      font-size : 1.5rem;
+      font-family : "BMHANNAPROOTF";
+      outline : none;
+      padding : 0 2rem;
+      color : #838383;
+      margin : 0 13rem 0 0;
+      cursor : pointer;
+      &:hover{color:#91D1FA;}
+    }
+    // 레터 날짜 선택 - input(date)
+    .letter-date {
+      width : 25rem;
+      height : 5rem;
+      border : none;
+      padding : 0.5rem 2rem;
+      font-size : 2rem;
+      color : #838383;
+      font-family : "BMHANNAPROOTF";
+      outline : none;
+      border-radius : 1rem;
+      margin : 0 2rem 0 0;
+      cursor : pointer;
+    }
+  }
+
+  // 레터 본문 작성 - textarea
+  .letter-body {
+    width : 80vw;
+    height : 38rem;
+    background-color : #F5F5F5;
+    font-family : "WantedSans_Medium";
+    padding : 1rem 2rem;
+    font-size : 1.7rem;
+    letter-spacing : 0.3rem;
+    line-height : 3rem;
+    overflow-y: scroll;
+    outline : none;
+    border : none;
+    resize : none;
+    border-radius : 1rem;
+  }
+  // 버튼 박스 
+  .btn-box {
+    display : flex;
+    align-items : center;
+    justify-content: end;
+    width : 80vw;
+    height : 5rem;
+
+    // 취소, 저장 버튼 - button
+    .letter-btn {
+      margin : 0 4rem;
+      &:nth-child(2){margin : 0;}
+      border : none;
+      font-size : 2rem;
+      font-family : "BMHANNAPROOTF";
+      text-align : center;
+      border-radius : 1rem;
+      padding : 0 4rem;
+      cursor : pointer;
+      background-color : #F5F5F5;
+      &:hover{background-color : #CCCCCC;}
+    }
+  }
 `

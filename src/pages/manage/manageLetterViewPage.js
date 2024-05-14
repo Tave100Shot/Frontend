@@ -17,7 +17,7 @@ const ManageLetterView = () => {//변수 할당시켜서 사용
   return (
     <mm.ManageContainer>
       <HeaderManage/>
-      <ml.LetterCheckContainer>
+      <ml.LetterViewkContainer>
         <div className="letter-header">
           <div className="letter-info">
             <p>EMPLOY LETTER</p>
@@ -77,7 +77,7 @@ const ManageLetterView = () => {//변수 할당시켜서 사용
             어쩌구저쩌구...어쩌구저쩌구...어쩌구저쩌구...어쩌구저쩌구...어쩌구저쩌구...
           </p>
         </div>
-      </ml.LetterCheckContainer>
+      </ml.LetterViewkContainer>
     </mm.ManageContainer>
   )
 }

@@ -175,11 +175,11 @@ font-weight: 600;
     margin-left: 4rem;
   }
   h2 {
+    display: flex;
+    justify-content: center;
     font-size: 1.5rem;
     font-weight: 500;
     color: #0075FF;
-    margin: 0 0 0 13rem;
-    //background-color: pink;
   }
   h3 {
     color: ${props => props.theme.colors.colorBg};

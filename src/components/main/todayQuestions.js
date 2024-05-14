@@ -2,17 +2,17 @@ import React, { useState, useRef } from 'react';
 import * as t from "../../styles/main/todayQuestionStyle";
 import newsImage from '../../assets/imgs/today.png';
 import { LuCheck } from "react-icons/lu";
+import axios from "axios";
 
 const TodayQuestion = () => {
-
   const [showInformation, setShowInformation] = useState(true);
   const [isClicked, setIsClicked] = useState({
     DEV: false,
     EMPLOY: false
   });
   const [headerMessage, setHeaderMessage] = useState('받아볼 레터의 종류를 선택해주세요!');
-  const [name, setName] = useState('');
-  const [email, setEmail] = useState('');
+  const [name, setName] = useState(localStorage.getItem('bojName') || '');
+  const [email, setEmail] = useState(localStorage.getItem('gitEmail') || '');
   const [validationMessage, setValidationMessage] = useState({
     letter: '',
     name: '',
@@ -57,35 +57,54 @@ const TodayQuestion = () => {
     return re.test(String(email).toLowerCase());
   }
 
-  const handleLetterSubmit = () => {
+  const handleLetterSubmit = async () => {
     let message = { letter: '' };
     let isValid = true;
 
     if (!isClicked.DEV && !isClicked.EMPLOY) {
-      message.letter = '최소 하나 이상의 뉴스레터를 눌러주세요 :)';
-      isValid = false;
+        message.letter = '최소 하나 이상의 뉴스레터를 눌러주세요 :)';
+        isValid = false;
+        setValidationMessage(message);
+        return;
     }
-    if (isValid) {
-      let selectedLetters = [];
-      if (isClicked.DEV) selectedLetters.push('DEV');
-      if (isClicked.EMPLOY) selectedLetters.push('EMPLOY');
-      let letterType = selectedLetters.join(', ') || 'None';
-      setSaveInfo({
-        letterType: letterType,
-      })
-      setIsSubmitted(true);
-      setHeaderMessage('레터를 받아볼 회원님의 정보를 입력해주세요.');
-    }
-    if (!isValid) {
-      setValidationMessage(message);
-      return;
-    }
-  };
 
-  const handleNameEmailSubmit = () => {
+    if (isValid) {
+        let selectedLetters = [];
+        if (isClicked.DEV) selectedLetters.push('DEV_LETTER');
+        if (isClicked.EMPLOY) selectedLetters.push('EMPLOYEE_LETTER');
+        let letterType;
+        if(selectedLetters.length === 2){
+            letterType = 'ALL';
+        } else {
+            letterType = selectedLetters[0];
+        }
+
+        setSaveInfo({
+            letterType: letterType,
+        });
+        setIsSubmitted(true);
+        setHeaderMessage('레터를 받아볼 회원님의 정보를 입력해주세요.');
+
+        try {
+            const response = await axios.post('/api/subscription', {
+                letterTypes : [letterType]
+            }, {
+                headers: {
+                    'Content-Type': 'application/json',
+                    Authorization: `Bearer ${localStorage.getItem('accessToken')}`,
+                }
+            });
+            console.log('레터', response);
+        } catch (error) {
+          console.error('레터에러', error);
+            console.error('레터 에러', error.response);
+        }
+    }
+};
+
+  const handleNameEmailSubmit = async () => {
     let message = { name: '', email: '' };
     let isValid = true;
-
 
     if (isValid) {
       if (name === '') {
@@ -108,10 +127,26 @@ const TodayQuestion = () => {
           userName: name,
           userEmail: email,
         })
-
-        // [확인] 버튼 눌렀을 때 input 수정 불가
         setIsConfirmed(true);
         setIsSubmitted(true);
+        try {
+          const response = await axios.post('/api/member', {
+              gitEmail : email,
+              bojName : name,
+          }, {
+              headers: {
+                  'Content-Type': 'application/json',
+                  Authorization: `Bearer ${localStorage.getItem('accessToken')}`,
+              }
+          });
+          console.log(response);
+          // [확인] 버튼 눌렀을 때 input 수정 불가
+  
+      } catch (error) {
+          console.error(error);
+          console.error(error.response.status);
+          console.error(error.response.data);
+      }
       } else {
         setValidationMessage(message);
       }
@@ -130,11 +165,12 @@ const TodayQuestion = () => {
   }
 
   // [뒤로 가기 - 이메일인증] 버튼 눌렀을 때
-  const handleBackEmail = () => {
+  const handleBackEmail = async() => {
     if (isSubmitted) {
       setIsConfirmed(false);
       setValidationMessage({ name: '', email: '' });
     }
+
   }
 
   // [뒤로 가기 - (최종)확인] 버튼 눌렀을 때
@@ -146,17 +182,47 @@ const TodayQuestion = () => {
   }
 
   // [이메일 인증] 버튼 눌렀을 때
-  const handleVerify = () => {
+  const handleVerify = async () => {
     alert('인증 메일을 보내드렸어요! \n메일함을 확인하신 후 인증을 완료해주세요.');
     setClickEmailButton(true);
+    try {
+      const response = await axios.post('/api/email/send-verification', {
+          gitEmail : '27sojeong@gmail.com',
+          bojName : 'cucubab',
+      }, {
+          headers: {
+              'Content-Type': 'application/json',
+              Authorization: `Bearer ${localStorage.getItem('accessToken')}`,
+          }
+      });
+      console.log('이메일인증',response);
+  } catch (error) {
+      console.error('이메일인증',error);
+      console.error('이메일인증', error.response.status);
+      console.error('이메일인증',error.response.data);
+  }
   }
 
-  // [확인하러 가기] 버튼 눌렀을 때
-  const handleFinalSubmit = () => {
+  // [확인] 구독 버튼 눌렀을 때
+  const handleFinalSubmit = async () => {
     setfinalSubmitted(true);
+    try {
+      const response = await axios.post('/api/subscription', {
+          letterTypes : ['DEV_LETTER']
+      }, {
+          headers: {
+              'Content-Type': 'application/json',
+              Authorization: `Bearer ${localStorage.getItem('accessToken')}`,
+          }
+      });
+      console.log(response);
+  } catch (error) {
+    console.error(error.response.status);
+      console.error(error.response.status);
+  }
   }
 
-
+  
 
   return (
     <t.todayQuestionsWrapper>
@@ -278,7 +344,7 @@ const TodayQuestion = () => {
                           clickEmailButton ? (
                             <>
                               <t.BackButton onClick={handleBackFinal}>뒤로 가기</t.BackButton>
-                              <t.DefaultButton onClick={handleFinalSubmit}>확인</t.DefaultButton>
+                              <t.DefaultButton onClick={handleLetterSubmit}>확인</t.DefaultButton>
                             </>
                           ) : (
                             <>

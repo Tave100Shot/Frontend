@@ -8,13 +8,13 @@ export const MainButton = styled.button`
   width : 28rem;
   height : 5.5rem;
   position : relative;
-  border : none;
+  border : 0.1rem solid ${props => props.theme.colors.colorAccent};
   border-radius : 1.5rem;
+  box-shadow: inset -0.4rem -0.4rem 0.7rem 0.1rem ${props => props.theme.colors.colorWhiteShadow};
   
-  font-size : 2rem;
+  font-size : 1.8rem;
   font-family : 'Poppins_Regular';
   background-color :${props => props.theme.colors.colorAccent};
-  box-shadow : 0.5rem 0.56rem 1rem ${props => props.theme.colors.colorShadow}
   letter-spacing : .2rem;
   img {
     width : 2.5rem;
@@ -27,6 +27,11 @@ export const MainButton = styled.button`
     display :none;
   }
 
+  &:active { 
+    border : none;
+    box-shadow:  inset 0.2rem 0.2rem 0.7rem 0.1rem ${props => props.theme.colors.colorShadow};
+  }
+
   &.bojUpdateBtn:hover {
     background-color : ${props => props.theme.colors.colorAccentReverse};
     .hoverBefore {display : none;}
@@ -36,5 +41,6 @@ export const MainButton = styled.button`
   // GO BACK Button 전용 CSS
   &.colorChange {
     background-color : ${props => props.theme.colors.colorAccentReverse};
+    border : none;
   }
 `

@@ -18,7 +18,7 @@ export const LogoWrapper = styled.div`
   margin : 0 0 0 1rem;
   
   img {
-    width : 6rem;
+    width : 5.8rem;
   }
   button {
     width : 22rem;
@@ -30,6 +30,7 @@ export const LogoWrapper = styled.div`
     padding : 0 0 0 1rem;
     background-color : ${props => props.theme.colors.colorBg};
     color : ${props => props.theme.colors.colorMain};
+    margin : 1rem 0 1.7rem 0;
   }
 `
 export const MenuWrapper = styled.div`

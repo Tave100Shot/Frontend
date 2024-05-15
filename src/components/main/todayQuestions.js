@@ -299,6 +299,7 @@ const TodayQuestion = () => {
       console.error('이메일인증', error);
       console.error('이메일인증', error.response.status);
       console.error('이메일인증', error.response.data);
+
     }
     //setfinalSubmitted(true);
   }
@@ -317,10 +318,16 @@ const TodayQuestion = () => {
       console.log('레터', response);
     } catch (error) {
       console.error('레터에러', error);
-      console.error('레터 에러', error.response);
+      console.error('레터 에러wha', error.response);
       if (error.response.data.errorCode === "LETTER_4040") {
-        //alert('이미 구독 중입니다. \n정보를 수정하려면 [정보 수정] 버튼을 클릭하세요!');
+        // 여기서는 ALERT 띄우지 않음.
         setfinalSubmitted(true);
+      }
+      if (error.response.data.errorCode === "EAMIL4041") {
+        alert('이메일 인증이 완료되지 않았어요!');
+      }
+      if (error.response.data.errorCode === "EAMIL4042") {
+        alert('유효하지 않은 이메일 토큰이에요!');
       }
     }
   }

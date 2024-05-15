@@ -174,6 +174,13 @@ font-weight: 600;
     color: #FF1700;
     margin-left: 4rem;
   }
+  h1 {
+    display: flex;
+    justify-content: center;
+    font-size: 1rem;
+    //font-weight: 600;
+    color: #FF1700;
+  }
   h2 {
     display: flex;
     justify-content: center;

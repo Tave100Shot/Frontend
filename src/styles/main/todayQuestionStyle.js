@@ -178,7 +178,7 @@ font-weight: 600;
     display: flex;
     justify-content: center;
     font-size: 1.5rem;
-    font-weight: 500;
+    font-weight: 600;
     color: #0075FF;
   }
   h3 {
@@ -332,6 +332,6 @@ margin: 1rem 3rem 1rem 3rem;
     color: #0075FF;
     //background-color: green;
     padding: 1rem;
-    
+    font-weight: 300;
   }
 `

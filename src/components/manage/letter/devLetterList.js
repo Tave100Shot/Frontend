@@ -23,9 +23,7 @@ const DevLetterList = () => {
                 writtenTime = {letterId.writtenTime}
               />
             )
-          })
-
-        }
+          })}
       </mm.ManageSmallList>
     </ml.HalfLetterContainer>
   )

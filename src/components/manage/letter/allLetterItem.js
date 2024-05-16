@@ -21,7 +21,7 @@ const AllLetterItem = ({newsletterId, title, writtenTime}) => {
       }
     })
     .then(response => {
-      console.log(response.data.result);
+      // console.log(response.data.result);
       const letterInfoArray = response.data.result;
       dispatch(SetLetterInfo(letterInfoArray));
     

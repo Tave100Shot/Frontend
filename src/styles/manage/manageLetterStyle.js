@@ -111,15 +111,34 @@ export const LetterViewkContainer = styled.div`
   .letter-body {
     margin : 1.6rem 0 0 0;
     padding : 0 2rem;
-    height : 43rem;
+    height : 38rem;
     font-family : "WantedSans_Medium";
     font-size : 1.7rem;
     letter-spacing : 0.3rem;
     line-height : 3rem;
     overflow-y: scroll;
-
   }
+  .letter-btn {
+    height : 5rem;
+    display : flex;
+    align-items : center;
+    justify-content: end;
 
+    button {
+      margin : 0 2rem;
+      &:nth-child(2){margin : 0;}
+      border : none;
+      font-size : 1.8rem;
+      font-family : "BMHANNAPROOTF";
+      text-align : center;
+      border-radius : 1rem;
+      padding : 0 3rem;
+      cursor : pointer;
+      background-color : #F5F5F5;
+      &:hover{background-color : #CCCCCC;}
+
+    }
+  }
 `
 
 // Letter 작성 박스

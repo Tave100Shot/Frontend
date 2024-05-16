@@ -16,6 +16,9 @@ export const INITIAL_STATE = {
   employLetterList : [
 
   ],
+  letterInfo : [
+
+  ],
 };
 
 export const Reducer = (state = INITIAL_STATE, action) => {
@@ -86,15 +89,20 @@ export const Reducer = (state = INITIAL_STATE, action) => {
       };
     // Letter
     case 'SET_DEV': 
-    return {
-      ...state,
-      devLetterList: action.content
-    };
+      return {
+        ...state,
+        devLetterList: action.content
+      };
     case 'SET_EMPLOY': 
-    return {
-      ...state,
-      employLetterList: action.content
-    };
+      return {
+        ...state,
+        employLetterList: action.content
+      };
+    case 'SET_LETTERINFO': 
+      return {
+        ...state,
+        letterInfo: action.content
+      };
 
     // Compiling 
 

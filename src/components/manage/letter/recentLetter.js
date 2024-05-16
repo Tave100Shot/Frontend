@@ -26,16 +26,17 @@ const RecentLetter = () => {
       // console.log(response.data.result.newsletterResponses);
       const devLetterArray = response.data.result.newsletterResponses.filter(item => item.letterType === 'DEV_LETTER');
       const employLetterArray = response.data.result.newsletterResponses.filter(item => item.letterType === 'EMPLOYEE_LETTER');
-      // console.log(devLetterArray);
-      // console.log(employLetterArray);
+      
+      // Redux State 내에 결과값 저장
       dispatch(SetDevLetter(devLetterArray));
       dispatch(SetEmployLetter(employLetterArray));
-      navigate('/manager/letter/all');
+
+      navigate('/manager/letter/all');  // 전체 보기 페이지로 이동
     })
     .catch(error => {
       console.error(error);
       const errorCode = error.response.data.errorCode;
-      console.log(errorCode);
+      // console.log(errorCode);
 
     });
 

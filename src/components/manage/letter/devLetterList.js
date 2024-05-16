@@ -18,8 +18,8 @@ const DevLetterList = () => {
           .map((letterId) => {
             return (
               <AllLetterItem
+                newsletterId = {letterId.newsletterId}
                 title = {letterId.title}
-                content = {letterId.content}
                 writtenTime = {letterId.writtenTime}
               />
             )

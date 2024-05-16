@@ -12,3 +12,10 @@ export const SetEmployLetter = (content) => {
     content
   }
 }
+// LETTER 상세 정보 저장하는 action
+export const SetLetterInfo = (content) => {
+  return {
+    type : 'SET_LETTERINFO',
+    content
+  }
+}

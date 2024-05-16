@@ -62,7 +62,7 @@ export const Slide = styled.div`
 export const SlideBox = styled.div`
   display : flex;
   flex-direction : column;
-  align-items : center
+  align-items : center;
   justify-content: center; 
   img {
     width: auto;
@@ -72,7 +72,7 @@ export const SlideBox = styled.div`
 `
 
 export const SlideTextBox = styled.div`
-  width : 100%;  
+  width : 80%;  
   display : flex;
   flex-direction: column;
   justify-content: center; 
@@ -111,7 +111,8 @@ export const SlideTextBox = styled.div`
   }
 
   &.lastStepContainer {
-    height : 35rem;
+    height : 39rem;
+    margin : 0 auto;
     h2 {
       margin : 1.5rem 0 2.5rem 0;
     }

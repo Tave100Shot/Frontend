@@ -107,7 +107,6 @@ const TodayQuestion = () => {
         });
         console.log('정보수정 레터', response);
       } catch (error) {
-        console.error('정보수정 레터에러', error);
         console.error('정보수정 레터에러', error.response);
       }
 
@@ -138,7 +137,8 @@ const TodayQuestion = () => {
     }
   };
 
-  const handleLetterSubmit = async () => {
+  // [레터 선택] 버튼
+    const handleLetterSubmit = async () => {
     let message = { letter: '' };
     let isValid = true;
 
@@ -166,24 +166,6 @@ const TodayQuestion = () => {
       setIsSubmitted(true);
       setHeaderMessage('레터를 받아볼 회원님의 정보를 입력해주세요.');
 
-      try {
-        const response = await axios.post('/api/subscription', {
-          letterTypes: [letterType]
-        }, {
-          headers: {
-            'Content-Type': 'application/json',
-            Authorization: `Bearer ${localStorage.getItem('accessToken')}`,
-          }
-        });
-        console.log('레터', response);
-      } catch (error) {
-        console.error('레터에러', error);
-        console.error('레터 에러', error.response);
-        if (error.response.data.errorCode === "LETTER_4040") {
-          alert('이미 구독 중입니다. \n정보를 수정하려면 [정보 수정] 버튼을 클릭하세요!');
-          setIsSubmitted(false);
-        }
-      }
       // 회원 이름, 이메일 정보 띄우기
       try {
         const response = await axios.get('/api/member/info',
@@ -196,9 +178,41 @@ const TodayQuestion = () => {
         );
         setName(response.data.result.bojName === null ? '' : response.data.result.bojName);
         setEmail(response.data.result.gitEmail === null ? '' : response.data.result.gitEmail);
+        setSaveInfo(prevInfo => ({
+          ...prevInfo,
+          userName: response.data.result.bojName,
+          userEmail: response.data.result.gitEmail,
+        }))
+        console.log('get', saveInfo.userName);
+        console.log('get', saveInfo.userEmail);
       } catch (error) {
         console.error('회원get:', error);
       }
+
+      try {
+        const response = await axios.post('/api/subscription', {
+          letterTypes: [letterType]
+        }, {
+          headers: {
+            'Content-Type': 'application/json',
+            Authorization: `Bearer ${localStorage.getItem('accessToken')}`,
+          }
+        });
+        console.log('레터', response);
+      } catch (error) {
+        console.error('레터 에러', error.response);
+        if (error.response.data.errorCode === "LETTER_4040") {
+          alert('이미 구독 중입니다. \n정보를 수정하려면 [정보 수정] 버튼을 클릭하세요!');
+          setIsSubmitted(false);
+        }
+        if (error.response.data.errorCode === "EAMIL4041") {
+          alert('이메일 인증이 완료되지 않았어요!');
+          console.log(saveInfo.userName);
+          console.log(saveInfo.userEmail);
+          setIsConfirmed(true);
+        }
+      }
+      
     }
   };
 
@@ -296,7 +310,6 @@ const TodayQuestion = () => {
       });
       console.log('이메일인증', response);
     } catch (error) {
-      console.error('이메일인증', error);
       console.error('이메일인증', error.response.status);
       console.error('이메일인증', error.response.data);
 

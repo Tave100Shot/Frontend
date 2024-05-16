@@ -5,7 +5,6 @@ import { useSelector } from "react-redux";
 
 const EmployLetterList = () => {
   let employLetterArray = useSelector( (state)=>{ return state.employLetterList } );
-  console.log(employLetterArray);
   
   return (
     <ml.HalfLetterContainer>
@@ -17,8 +16,8 @@ const EmployLetterList = () => {
           .map((letterId) => {
             return (
               <AllLetterItem
+                newsletterId = {letterId.newsletterId}
                 title = {letterId.title}
-                content = {letterId.content}
                 writtenTime = {letterId.writtenTime}
               />
             )

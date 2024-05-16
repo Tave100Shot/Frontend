@@ -3,11 +3,12 @@ import * as ml from "../../../styles/manage/manageLetterStyle"
 import { useEffect, useState } from "react"
 import { useNavigate } from "react-router-dom"
 
-const AllLetterItem = () => {
+const AllLetterItem = ({title, content, writtenTime}) => {
   const navigate = useNavigate();
   const moveToPost = () => {
     navigate('/manager/letter/view/:letterId')
   }
+  console.log(writtenTime)
 
   return (
     <mm.TwoItemBtn>
@@ -15,9 +16,9 @@ const AllLetterItem = () => {
         className="item-box"
         onClick={moveToPost}
       >
-        <p>레터 제목</p>
+        <p>{title}</p>
         <p>|</p>
-        <p>2024.05.07</p>
+        <p>{writtenTime}</p>
       </div>
     </mm.TwoItemBtn>
   )

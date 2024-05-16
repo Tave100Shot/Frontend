@@ -1,8 +1,12 @@
 import * as mm from "../../../styles/manage/manageMainStyle"
 import * as ml from "../../../styles/manage/manageLetterStyle"
 import AllLetterItem from "./allLetterItem";
+import { useSelector } from "react-redux";
 
 const DevLetterList = () => {
+  let devLetterArray = useSelector( (state)=>{ return state.devLetterList } );
+  console.log(devLetterArray);
+
   
   return (
     <ml.HalfLetterContainer>
@@ -10,12 +14,18 @@ const DevLetterList = () => {
         <h1>DEV Letter.</h1>
       </div>
       <mm.ManageSmallList>
-        <AllLetterItem/>
-        <AllLetterItem/>
-        <AllLetterItem/>
-        <AllLetterItem/>
-        <AllLetterItem/>
-        <AllLetterItem/>
+        {devLetterArray
+          .map((letterId) => {
+            return (
+              <AllLetterItem
+                title = {letterId.title}
+                content = {letterId.content}
+                writtenTime = {letterId.writtenTime}
+              />
+            )
+          })
+
+        }
       </mm.ManageSmallList>
     </ml.HalfLetterContainer>
   )

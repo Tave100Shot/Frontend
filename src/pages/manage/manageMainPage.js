@@ -1,9 +1,26 @@
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import HeaderManage from "../../components/manage/headerManage";
 import * as m from "../../styles/manage/manageMainStyle"
+import { useDispatch } from "react-redux";
+import { useEffect } from "react";
 
 const ManageMain = () => {
     const navigate = useNavigate();
+    const dispatch = useDispatch();
+    const location = useLocation();
+
+    // 로그인 이후 params 받아오기
+    useEffect(() => {
+        const searchParams = new URLSearchParams(location.search);
+
+        if (searchParams.get('token') !== null) {
+        localStorage.setItem('accessToken', searchParams.get('token'));
+        localStorage.setItem('secondAuthStatus', searchParams.get('secondAuth'));
+        }
+    
+        const accessToken = localStorage.getItem('accessToken')
+    }, []);
+
 
     return (
         <m.ManageContainer>

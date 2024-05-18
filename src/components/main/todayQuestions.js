@@ -216,6 +216,7 @@ const TodayQuestion = () => {
     }
   };
 
+  // [확인] 버튼
   const handleNameEmailSubmit = async () => {
     let message = { name: '', email: '' };
     let isValid = true;
@@ -312,7 +313,10 @@ const TodayQuestion = () => {
     } catch (error) {
       console.error('이메일인증', error.response.status);
       console.error('이메일인증', error.response.data);
-
+      if (error.response.data.errorCode === "EAMIL4043") {
+        alert('이미 인증이 완료된 이메일이에요!');
+        setfinalSubmitted(true);
+      }
     }
     //setfinalSubmitted(true);
   }

@@ -48,6 +48,7 @@ export const ManageSmallList = styled.div`
   padding : 1.5rem 2rem;
   display : grid;
   grid-template-row: repeat(6, 1fr);
+  overflow-y : scroll;
   // border-bottom : 0.2rem solid rgba(0,0,0,0.1);
 `
 
@@ -79,8 +80,11 @@ export const TwoItemBtn = styled.button`
   font-family : "BMHANNAPROOTF";
   cursor : pointer;
   .item-box {
+    height : 7rem;
     display : grid;
-    grid-template-columns: 5fr 1fr 1fr;
+    justify-content: center;
+    align-items : center;
+    grid-template-columns: 5fr 0.5fr 1.8fr;
     text-align : left;
   }
   &:hover {

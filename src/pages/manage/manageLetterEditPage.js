@@ -130,11 +130,16 @@ const ManageLetterEdit = () => {
         try {
           // API 호출
           await updateLetter(UpdateLetterInfo);
-          alert('저장 완료')
+          alert('행사가 저장되었습니다 :)');
           navigate('/manager/letter');
         } catch (error) {
-          alert('저장 실패')
-          // 에러 처리 로직 추가
+          const errorCode = error.response.data.errorCode;
+          // console.log(errorCode);
+          if(errorCode ==='JWT_4010') {
+            alert('로그인 유지 시간이 만료되었습니다. 다시 로그인 해주세요 :)');
+          } else {
+            alert('저장 실패하였습니다.');
+          }
         }
       }
       // Letter 생성
@@ -148,11 +153,16 @@ const ManageLetterEdit = () => {
         try {
           // API 호출
           await createLetter(NewLetterInfo);
-          alert('저장 완료')
+          alert('행사가 저장되었습니다 :)');
           navigate('/manager/letter');
         } catch (error) {
-          alert('저장 실패')
-          // 에러 처리 로직 추가
+          const errorCode = error.response.data.errorCode;
+          // console.log(errorCode);
+          if(errorCode ==='JWT_4010') {
+            alert('로그인 유지 시간이 만료되었습니다. 다시 로그인 해주세요 :)');
+          } else {
+            alert('저장 실패하였습니다.');
+          }
         }
 
       }

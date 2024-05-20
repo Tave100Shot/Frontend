@@ -28,9 +28,13 @@ const AllLetterItem = ({newsletterId, title, writtenTime}) => {
       navigate(`/manager/letter/view/${newsletterId}`)
     })
     .catch(error => {
-      console.error(error);
       const errorCode = error.response.data.errorCode;
       // console.log(errorCode);
+      if(errorCode ==='JWT_4010') {
+        alert('로그인 유지 시간이 만료되었습니다. 다시 로그인 해주세요 :)')
+      } else {
+        alert('문제가 발생했습니다. 다시 로그인 부탁드립니다 :)')
+      }
 
     });
 

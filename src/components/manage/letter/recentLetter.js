@@ -53,6 +53,7 @@ const RecentLetter = () => {
           .map((letterId) => {
             return (
               <RecentLetterItem
+                newsletterId = {letterId.newsletterId}
                 title = {letterId.title}
                 letterType = {letterId.letterType}
                 writtenTime = {letterId.writtenTime}

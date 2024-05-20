@@ -61,17 +61,24 @@ export const ThreeItemBtn = styled.button`
   font-size : 2rem;
   font-family : "BMHANNAPROOTF";
   cursor : pointer;
+  height : 7rem;
   .item-box {
     display : grid;
-    grid-template-columns: 1.5fr 1fr 5fr 1fr 1.5fr;
+    grid-template-columns: 1.3fr 0.3fr 5fr 0.3fr 1.8fr;
     text-align : left;
+    white-space:nowrap;
+    .letter-title {
+      max-width : 38rem;
+      overflow: hidden;
+      text-overflow: ellipsis;  
+    }
   }
   &:hover {
     color : #91d1fa;
   }
-`
-// GridItemBtn : 2가지 항목만 들어가는 Letter Item
-export const TwoItemBtn = styled.button`
+  `
+  // GridItemBtn : 2가지 항목만 들어가는 Letter Item
+  export const TwoItemBtn = styled.button`
   background-color : #ffffff;
   border : none;
   border-bottom : 0.2rem solid rgba(0,0,0,0.1);
@@ -79,6 +86,7 @@ export const TwoItemBtn = styled.button`
   font-size : 2rem;
   font-family : "BMHANNAPROOTF";
   cursor : pointer;
+  white-space:nowrap;
   .item-box {
     height : 7rem;
     display : grid;
@@ -86,6 +94,12 @@ export const TwoItemBtn = styled.button`
     align-items : center;
     grid-template-columns: 5fr 0.5fr 1.8fr;
     text-align : left;
+
+    .letter-title {
+      max-width : 38rem;
+      overflow: hidden;
+      text-overflow: ellipsis;  
+    }
   }
   &:hover {
     color : #91d1fa;

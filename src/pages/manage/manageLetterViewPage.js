@@ -4,12 +4,17 @@ import * as ml from "../../styles/manage/manageLetterStyle"
 import closeIcon from "../../assets/imgs/close.png"
 import RecentLetter from "../../components/manage/letter/recentLetter";
 import LetterCalender from "../../components/manage/letter/letterCalender";
-import { useNavigate } from "react-router-dom";
-import { useSelector } from "react-redux";
+import { useLocation, useNavigate } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+import { useEffect } from "react";
+import axios from "axios";
+import { SetLetterInfo } from "../../redux/actions/letterAction";
 
 // Letter 상세 보기 페이지
 const ManageLetterView = () => {//변수 할당시켜서 사용
   const navigate = useNavigate();
+  const dispatch = useDispatch();
+  const location = useLocation();
 
   let letterInfoList = useSelector( (state)=>{ return state.letterInfo } );
 
@@ -19,6 +24,29 @@ const ManageLetterView = () => {//변수 할당시켜서 사용
   const moveToEdit = () => {
     navigate(`/manager/letter/edit/${letterInfoList.newsletterId}`);
   }
+
+  useEffect(()=> {
+    const storedToken = localStorage.getItem('accessToken');
+    const letterId = Number(location.pathname.match(/\d+$/)[0]);
+
+    // 전체 글 조회 API 호출
+    axios.get(`/api/admin/newsletter/${letterId}`, {
+      headers : {
+        Authorization : `Bearer ${storedToken}`
+      }
+    })
+    .then(response => {
+      // console.log(response.data.result);
+      const letterInfoArray = response.data.result;
+      dispatch(SetLetterInfo(letterInfoArray));
+    })
+    .catch(error => {
+      console.error(error);
+      const errorCode = error.response.data.errorCode;
+      // console.log(errorCode);
+
+    });
+  },[])
 
 
   return (

@@ -3,13 +3,15 @@ import * as mm from "../../styles/manage/manageMainStyle"
 import * as ml from "../../styles/manage/manageLetterStyle"
 import { useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import { useSelector } from "react-redux";
 import axios from "axios";
 import { updateLetterInfo } from "../../redux/actions/letterAction";
 
 const ManageLetterEdit = () => {
   const navigate = useNavigate();
   const [isEdit, setIsEdit] = useState(false);
+  const [titleErrorMessage, setTitleErrorMessage] = useState('');
+  const [dateErrorMessage, setDateErrorMessage] = useState('');
 
   let letterInfoList = useSelector( (state)=>{ return state.letterInfo } );
   
@@ -19,24 +21,23 @@ const ManageLetterEdit = () => {
     { value: "EMPLOYEE_LETTER", name: "EMPLOY" },
   ];
 
-  const [letterId, setLetterId] = useState(letterInfoList.newsletterId)  // 레터 ID
-  const [letterTitle, setLetterTitle] = useState(letterInfoList.title)  // 레터 제목
-  const [letterCategory, setLetterCategory] = useState(LETTER_OPTIONS[0].value); // 레터 종류 
-  const [letterDate, setLetterDate] = useState(letterInfoList.writtenTime) // 레터 날짜 
-  const [letterContent, setLetterContent] = useState(letterInfoList.content) // 레터 내용
+  const [letterId, setLetterId] = useState(letterInfoList.newsletterId)  // 행사 ID
+  const [letterTitle, setLetterTitle] = useState(letterInfoList.title)  // 행사 제목
+  const [letterCategory, setLetterCategory] = useState(LETTER_OPTIONS[0].value); // 행사 종류 
+  const [letterStartDate, setLetterStartDate] = useState(letterInfoList.writtenTime) // 행사 시작 날짜 
+  const [letterEndDate, setLetterEndDate] = useState(letterInfoList.writtenTime) // 레터 종료 날짜 
+  const [letterContent, setLetterContent] = useState(letterInfoList.content) // 행사 내용
 
   
   // letterInfoList에 정보가 들어있다면 값 넣어서 수정 받기
   useEffect(() => {
     if (letterInfoList.length !== 0) {
       // letterInfoList에 정보 들어있음 = 수정 필요
-      console.log('letterInfoList에 정보 들어있음', letterInfoList);
       setIsEdit(true);
       setLetterId(letterInfoList.newsletterId); // 현재 뉴스레터ID 설정
       setLetterCategory(letterInfoList.letterType); // letterCategory 상태 변수 업데이트
     } else {
       // letterInfoList에 정보 없음 = 생성 필요
-      console.log('letterInfoList에 정보 비어있음', letterInfoList);
       setIsEdit(false);
       setLetterCategory(LETTER_OPTIONS[0].value); // letterCategory 상태 변수 초기화
     }
@@ -47,6 +48,26 @@ const ManageLetterEdit = () => {
   // console.log('letterCategory : ',letterCategory)
   // console.log('letterDate : ',letterDate)
   // console.log('letterContent : ',letterContent)
+
+  // 레터 유효성 검사
+  const handleLetterTitleChange = (e) => {
+    setLetterTitle(e.target.value);
+    if (!e.target.value) {
+      setTitleErrorMessage('제목은 필수 입력 항목입니다.');
+    } else {
+      setTitleErrorMessage('');
+    }
+  };
+
+  const handleLetterEndDateChange = (e) => {
+    setLetterEndDate(e.target.value);
+    if (new Date(e.target.value) < new Date(letterStartDate)) {
+      setDateErrorMessage('종료 날짜는 시작 날짜보다 이후여야 합니다.');
+    } else {
+      setDateErrorMessage('');
+    }
+  };
+  
 
   // 레터 생성 API 호출
   const createLetter = async (letterInfo) => {
@@ -99,13 +120,15 @@ const ManageLetterEdit = () => {
     e.preventDefault();
     var saveResult = window.confirm("레터를 저장하시겠습니까?");
     if (saveResult) {
-      if (isEdit) { // Letter 수정
+      // Letter 수정
+      if (isEdit) { 
         const UpdateLetterInfo = {
           newsletterId: letterId,
           title: letterTitle,
           content: letterContent,
         };
         try {
+          // API 호출
           await updateLetter(UpdateLetterInfo);
           alert('저장 완료')
           navigate('/manager/letter');
@@ -114,7 +137,8 @@ const ManageLetterEdit = () => {
           // 에러 처리 로직 추가
         }
       }
-      else { // Letter 생성
+      // Letter 생성
+      else { 
         const NewLetterInfo = {
           title: letterTitle,
           content: letterContent,
@@ -122,6 +146,7 @@ const ManageLetterEdit = () => {
         };
         console.log('NewwLetterInfo : ', NewLetterInfo)
         try {
+          // API 호출
           await createLetter(NewLetterInfo);
           alert('저장 완료')
           navigate('/manager/letter');
@@ -147,18 +172,20 @@ const ManageLetterEdit = () => {
       <HeaderManage/>
       <ml.LetterEditContainer>
         <div className="letter-header">
-          <input 
-            className="letter-title"
-            placeholder="레터 제목"
-            value={letterTitle}
-            onChange={(e) => setLetterTitle(e.target.value)}
-          />
+          <div className="error-box">
+            <input 
+              className="letter-title"
+              placeholder="행사 제목"
+              value={letterTitle}
+              onChange={handleLetterTitleChange}
+            />
+            {titleErrorMessage && <div className="error-message">{titleErrorMessage}</div>}
+          </div>
           <select 
             className="letter-select"
             value={letterCategory}
             onChange={(e) => {
               setLetterCategory(e.target.value); 
-              console.log('letterCategory : ',letterCategory);
             }}
             disabled={isEdit}
           >
@@ -171,16 +198,32 @@ const ManageLetterEdit = () => {
               </option>
             ))}
           </select>
-          <input 
-            className="letter-date"
-            type="date"  
-            name="letter-date"
-            value={letterDate}
-            onChange={(e) => setLetterDate(e.target.value)}
-          />
+          <div className="error-box">
+            <div className="date-box">
+              <input 
+                className="letter-date"
+                type="date"  
+                name="letter-date"
+                value={letterStartDate}
+                onChange={(e) => setLetterStartDate(e.target.value)}
+                required
+              />
+              <p>~</p>
+              <input 
+                className="letter-date"
+                type="date"  
+                name="letter-date"
+                value={letterEndDate}
+                onChange={handleLetterEndDateChange}
+                required
+              />
+            </div>
+            {dateErrorMessage && <div className="error-message">{dateErrorMessage}</div>}
+          </div>
         </div>
         <textarea 
           className="letter-body"
+          placeholder="행사 내용을 작성해주세요 :)"
           value={letterContent}
           onChange={(e) => setLetterContent(e.target.value)}
         />

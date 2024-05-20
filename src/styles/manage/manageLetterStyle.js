@@ -159,11 +159,32 @@ export const LetterEditContainer = styled.form`
 
   .letter-header {
     display : flex;
-    align-items : center;
+    align-items : start;
     justify-content: space-between;
     text-align : center;
     width : 80vw;  
-    height : 6rem;    
+    height : 7rem;
+    margin : 1rem 0 0 0;    
+
+    // 유효성 검사 
+    .error-box {
+      display : flex;
+      flex-direction : column;
+      align-items : start;
+      justify-content: center;
+
+      .error-message {
+        font-size : 1.4rem;
+        text-align : left;
+        margin : 0 0 0 2.2rem;
+        color : red;
+        font-family : "WantedSans_Medium";
+      }
+
+      .date-box {
+        display : flex;
+      }
+    }
 
     // 레터 제목 작성 input (text)
     .letter-title {
@@ -190,13 +211,13 @@ export const LetterEditContainer = styled.form`
       outline : none;
       padding : 0 2rem;
       color : #838383;
-      margin : 0 13rem 0 0;
+      margin : 0 5rem 0 0;
       cursor : pointer;
       &:hover{color:#91D1FA;}
     }
     // 레터 날짜 선택 - input(date)
     .letter-date {
-      width : 25rem;
+      width : 20rem;
       height : 5rem;
       border : none;
       padding : 0.5rem 2rem;

@@ -69,13 +69,6 @@ const ManageLetterView = () => {//변수 할당시켜서 사용
             {letterInfoList.content}
           </p>
         </div>
-        {letterInfoList.sendStatus ? 
-          <></>
-          :
-          <div className="letter-btn">
-            <button onClick={moveToEdit}>수정</button>
-          </div>
-        }
       </ml.LetterViewkContainer>
     </mm.ManageContainer>
   )

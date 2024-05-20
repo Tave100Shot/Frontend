@@ -12,27 +12,35 @@ const ManageLetterEdit = () => {
   const [isEdit, setIsEdit] = useState(false);
 
   let letterInfoList = useSelector( (state)=>{ return state.letterInfo } );
+  
+  // 레터 종류 선택
+  const LETTER_OPTIONS = [
+    { value: "DEV_LETTER", name: "DEVELOP" },
+    { value: "EMPLOYEE_LETTER", name: "EMPLOY" },
+  ];
 
   const [letterId, setLetterId] = useState(letterInfoList.newsletterId)  // 레터 ID
   const [letterTitle, setLetterTitle] = useState(letterInfoList.title)  // 레터 제목
-  const [letterCategory, setLetterCategory] = useState(letterInfoList.letterType) // 레터 종류
+  const [letterCategory, setLetterCategory] = useState(LETTER_OPTIONS[0].value); // 레터 종류 
   const [letterDate, setLetterDate] = useState(letterInfoList.writtenTime) // 레터 날짜 
   const [letterContent, setLetterContent] = useState(letterInfoList.content) // 레터 내용
 
+  
   // letterInfoList에 정보가 들어있다면 값 넣어서 수정 받기
   useEffect(() => {
-    if (letterInfoList.length != 0) {
+    if (letterInfoList.length !== 0) {
       // letterInfoList에 정보 들어있음 = 수정 필요
       console.log('letterInfoList에 정보 들어있음', letterInfoList);
-      setIsEdit(true);  
+      setIsEdit(true);
       setLetterId(letterInfoList.newsletterId); // 현재 뉴스레터ID 설정
-      
+      setLetterCategory(letterInfoList.letterType); // letterCategory 상태 변수 업데이트
     } else {
       // letterInfoList에 정보 없음 = 생성 필요
       console.log('letterInfoList에 정보 비어있음', letterInfoList);
       setIsEdit(false);
+      setLetterCategory(LETTER_OPTIONS[0].value); // letterCategory 상태 변수 초기화
     }
-  }, [])
+  }, [letterInfoList]);
 
   // 레터 내용 변경 함수
   // console.log('letterTitle : ',letterTitle)
@@ -105,7 +113,6 @@ const ManageLetterEdit = () => {
           alert('저장 실패')
           // 에러 처리 로직 추가
         }
-
       }
       else { // Letter 생성
         const NewLetterInfo = {
@@ -113,6 +120,7 @@ const ManageLetterEdit = () => {
           content: letterContent,
           letterType: letterCategory,
         };
+        console.log('NewwLetterInfo : ', NewLetterInfo)
         try {
           await createLetter(NewLetterInfo);
           alert('저장 완료')
@@ -134,12 +142,6 @@ const ManageLetterEdit = () => {
     } 
   }
 
-  // 레터 종류 선택
-  const LETTER_OPTIONS = [
-    { value: "DEV_LETTER", name: "DEVELOP" },
-    { value: "EMPLOYEE_LETTER", name: "EMPLOY" },
-  ];
-
   return (
     <mm.ManageContainer>
       <HeaderManage/>
@@ -154,7 +156,10 @@ const ManageLetterEdit = () => {
           <select 
             className="letter-select"
             value={letterCategory}
-            onChange={(e) => setLetterCategory(e.target.value)}
+            onChange={(e) => {
+              setLetterCategory(e.target.value); 
+              console.log('letterCategory : ',letterCategory);
+            }}
             disabled={isEdit}
           >
             {LETTER_OPTIONS.map((option) => (

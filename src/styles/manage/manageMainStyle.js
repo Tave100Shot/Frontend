@@ -50,6 +50,11 @@ export const ManageSmallList = styled.div`
   grid-template-row: repeat(6, 1fr);
   overflow-y : scroll;
   // border-bottom : 0.2rem solid rgba(0,0,0,0.1);
+  -ms-overflow-style: none; /* IE and Edge */
+  scrollbar-width: none; /* Firefox */
+  &::-webkit-scrollbar {
+    display: none; /* Chrome, Safari, Opera*/
+  }
 `
 
 // ThreeItemBtn : 3가지 항목만 들어가는 Letter Item

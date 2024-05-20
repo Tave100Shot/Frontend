@@ -2,12 +2,9 @@ import * as mm from "../../../styles/manage/manageMainStyle"
 import * as ml from "../../../styles/manage/manageLetterStyle"
 import AllLetterItem from "./allLetterItem";
 import { useDispatch, useSelector } from "react-redux";
-import InfiniteScroll from 'react-infinite-scroller';
 import axios from "axios";
 import { SetDevLetter } from "../../../redux/actions/letterAction";
-import { useEffect, useState } from "react";
-
-
+import { useEffect, useState, useRef } from "react";
 
 const DevLetterList = () => {
   const dispatch = useDispatch();
@@ -16,54 +13,60 @@ const DevLetterList = () => {
   const storedToken = localStorage.getItem('accessToken');
   const [page, setPage] = useState(0);
   const [isLoading, setIsLoading] = useState(false);
+  const [hasMoreData, setHasMoreData] = useState(true);
+  const observerRef = useRef(null);
+
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      (entries) => {
+        if (entries[0].isIntersecting && !isLoading && hasMoreData) {
+          setPage((prevPage) => prevPage + 1);
+          onLoadMore();
+        }
+      },
+      { threshold: 1 }
+    );
+
+    if (observerRef.current) {
+      observer.observe(observerRef.current);
+    }
+
+    return () => {
+      if (observerRef.current) {
+        observer.unobserve(observerRef.current);
+      }
+    };
+  }, [isLoading, hasMoreData]);
 
   const onLoadMore = () => {
+    setIsLoading(true);
 
     // DEV-Letter 글 조회 추가 API 호출
-    axios.get('/api/admin/newsletter?inputCategory=DEV_LETTER', {
+    axios.get(`/api/admin/newsletter?inputCategory=DEV_LETTER&page=${page}`, {
       headers : {
         Authorization : `Bearer ${storedToken}`
       }
     })
     .then(response => {
-      console.log(response.data.result.newsletterResponses);
-      const devLetterArray = response.data.result.newsletterResponses;
+      // console.log(response.data.result.newsletterResponses);
+      const newDevLetterArray = response.data.result.newsletterResponses;
+      console.log('newDevLetterArray : ', newDevLetterArray);
 
       // Redux State 내에 결과값 저장
-      dispatch(SetDevLetter(devLetterArray));
+      dispatch(SetDevLetter([...devLetterArray, ...newDevLetterArray]));
+      setIsLoading(false);
 
+      // 더 이상 데이터가 없으면 hasMoreData를 false로 설정
+      if (newDevLetterArray.length === 0) {
+        setHasMoreData(false);
+      }
     })
     .catch(error => {
       console.error(error);
       const errorCode = error.response.data.errorCode;
-      // console.log(errorCode);
+      setIsLoading(false);
     });
   };
-  /*
-  const handleObserver = (entries: IntersectionObserverEntry[]) => {
-    const target = entries[0];
-    if (target.isIntersecting && !isLoading) {
-      setPage((prevPage) => prevPage + 1);
-    }
-  };
-  /*
-  handleObserver: 교차점이 발생했을 때 실행되는 콜백 함수.
-  entries: 교차점 정보를 담는 배열
-  isIntersecting: 교차점(intersection)이 발생한 요소의 상태
-  교차점이 발생하면 page 1 증가
-  
-  useEffect(() => {
-    const observer = new IntersectionObserver(handleObserver, {
-      threshold: 0, //  Intersection Observer의 옵션, 0일 때는 교차점이 한 번만 발생해도 실행, 1은 모든 영역이 교차해야 콜백 함수가 실행.
-    });
-    // 최하단 요소를 관찰 대상으로 지정함
-    const observerTarget = document.getElementById("observer");
-    // 관찰 시작
-    if (observerTarget) {
-      observer.observe(observerTarget);
-    }
-  }, []);
-  */
   
   return (
     <ml.HalfLetterContainer>
@@ -75,17 +78,18 @@ const DevLetterList = () => {
           .map((letterId) => {
             return (
               <AllLetterItem
+                key={letterId.id}
                 newsletterId = {letterId.newsletterId}
                 title = {letterId.title}
                 writtenTime = {letterId.writtenTime}
               />
             )
           })}
-          {isLoading && <p>Loading</p>}
-          <div id="observer" style={{height : "1rem"}}></div>
+        {isLoading && <p>Loading</p>}
+        <div ref={observerRef} style={{height : "6rem"}}></div>
       </mm.ManageSmallList>
     </ml.HalfLetterContainer>
   )
-
 }
+
 export default DevLetterList;

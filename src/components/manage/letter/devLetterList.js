@@ -5,6 +5,7 @@ import { useDispatch, useSelector } from "react-redux";
 import InfiniteScroll from 'react-infinite-scroller';
 import axios from "axios";
 import { SetDevLetter } from "../../../redux/actions/letterAction";
+import { useEffect, useState } from "react";
 
 
 
@@ -13,6 +14,8 @@ const DevLetterList = () => {
   
   let devLetterArray = useSelector( (state)=>{ return state.devLetterList } );
   const storedToken = localStorage.getItem('accessToken');
+  const [page, setPage] = useState(0);
+  const [isLoading, setIsLoading] = useState(false);
 
   const onLoadMore = () => {
 
@@ -36,6 +39,31 @@ const DevLetterList = () => {
       // console.log(errorCode);
     });
   };
+  /*
+  const handleObserver = (entries: IntersectionObserverEntry[]) => {
+    const target = entries[0];
+    if (target.isIntersecting && !isLoading) {
+      setPage((prevPage) => prevPage + 1);
+    }
+  };
+  /*
+  handleObserver: 교차점이 발생했을 때 실행되는 콜백 함수.
+  entries: 교차점 정보를 담는 배열
+  isIntersecting: 교차점(intersection)이 발생한 요소의 상태
+  교차점이 발생하면 page 1 증가
+  
+  useEffect(() => {
+    const observer = new IntersectionObserver(handleObserver, {
+      threshold: 0, //  Intersection Observer의 옵션, 0일 때는 교차점이 한 번만 발생해도 실행, 1은 모든 영역이 교차해야 콜백 함수가 실행.
+    });
+    // 최하단 요소를 관찰 대상으로 지정함
+    const observerTarget = document.getElementById("observer");
+    // 관찰 시작
+    if (observerTarget) {
+      observer.observe(observerTarget);
+    }
+  }, []);
+  */
   
   return (
     <ml.HalfLetterContainer>
@@ -53,6 +81,8 @@ const DevLetterList = () => {
               />
             )
           })}
+          {isLoading && <p>Loading</p>}
+          <div id="observer" style={{height : "1rem"}}></div>
       </mm.ManageSmallList>
     </ml.HalfLetterContainer>
   )

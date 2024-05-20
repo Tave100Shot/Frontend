@@ -3,8 +3,19 @@ import * as ml from "../../../styles/manage/manageLetterStyle"
 import { useEffect, useState } from "react"
 import { useNavigate } from "react-router-dom"
 
-const RecentLetterItem = () => {
+const RecentLetterItem = ({title, letterType, writtenTime}) => {
   const navigate = useNavigate();
+  const [letterCategory, setLetterCategory] = useState(letterType);
+  useEffect(() => {
+    if(letterType === 'EMPLOYEE_LETTER') {
+      setLetterCategory('EMPLOY');
+    }
+    else if(letterType === 'DEV_LETTER') {
+      setLetterCategory('DEV');
+    }
+
+  }, [letterType])
+
   const moveToPost = () => {
     navigate('/manager/letter/view/:letterId')
   }
@@ -15,11 +26,11 @@ const RecentLetterItem = () => {
         className="item-box"
         onClick={moveToPost}
       >
-        <p>DEV</p>
+        <p>{letterCategory}</p>
         <p>|</p>
-        <p>레터 제목</p>
+        <p className="letter-title">{title}</p>
         <p>|</p>
-        <p>2024.05.07</p>
+        <p>{writtenTime}</p>
       </div>
     </mm.ThreeItemBtn>
   )

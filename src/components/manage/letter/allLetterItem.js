@@ -42,7 +42,7 @@ const AllLetterItem = ({newsletterId, title, writtenTime}) => {
         className="item-box"
         onClick={moveToPost}
       >
-        <p>{title}</p>
+        <p className="letter-title">{title}</p>
         <p>|</p>
         <p>{writtenTime}</p>
       </div>

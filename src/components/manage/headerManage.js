@@ -12,20 +12,6 @@ const HeaderManage = () => {
     // Letter 조회 및 캘린더 조회로 이동
     const moveToLetter = () => {
         navigate('/manager/letter');
-        const apiUrl = `/api/admin/newsletter?inputCategory=ALL&page=0`;
-    
-        axios.get(apiUrl,{
-            headers : {
-              Authorization : `Bearer ${storedToken}`
-            }})
-        .then(response => {
-            // console.log(response);
-        })
-        .catch(error => {
-            console.error(error);
-            const errorCode = error.response.data.errorCode;
-            console.log(errorCode);
-        });
     }
     const moveToManageMain = () => {navigate('/manager')}
 

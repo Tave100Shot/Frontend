@@ -10,6 +10,9 @@ export const INITIAL_STATE = {
   solutionList : [
 
   ],
+  recentLetterList : [
+
+  ],
   devLetterList : [
 
   ],
@@ -88,6 +91,11 @@ export const Reducer = (state = INITIAL_STATE, action) => {
         byMeProblemList: action.content
       };
     // Letter
+    case 'SET_RECENT': 
+      return {
+        ...state,
+        recentLetterList: action.content
+      };
     case 'SET_DEV': 
       return {
         ...state,
@@ -98,7 +106,12 @@ export const Reducer = (state = INITIAL_STATE, action) => {
         ...state,
         employLetterList: action.content
       };
-    case 'SET_LETTERINFO': 
+    case 'SET_LETTER_INFO': 
+      return {
+        ...state,
+        letterInfo: action.content
+      };
+    case 'UPDATE_LETTER_INFO': 
       return {
         ...state,
         letterInfo: action.content

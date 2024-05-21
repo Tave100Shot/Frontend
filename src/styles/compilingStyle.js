@@ -152,7 +152,7 @@ export const MiddleLine = styled.div`
   width: 1px;
   min-height: 100%;
   background-color: ${props => props.theme.colors.colorAccent};
-  color:  #FAF9C4;
+  color:  ${props => props.theme.colors.colorAccent};
 `
 
 export const QIOEContainer = styled.div`

@@ -215,6 +215,7 @@ export const QSearchContainer = styled.div`
   font-size : 1.5rem;
   color: ${props => props.theme.colors.colorBg};
   background-color: ${props => props.theme.colors.colorAccent};
+  cursor: pointer;
   } 
 
 `

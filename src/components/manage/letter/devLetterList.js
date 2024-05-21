@@ -90,8 +90,8 @@ const DevLetterList = () => {
               />
             )
           })}
-        {isLoading && <p>Loading</p>}
-        <div ref={observerRef} style={{height : "6rem"}}></div>
+        {isLoading && <p className="loading"></p>}
+        <div ref={observerRef} style={{height : "1rem"}}></div>
       </mm.ManageSmallList>
     </ml.HalfLetterContainer>
   )

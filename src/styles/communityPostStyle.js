@@ -691,7 +691,6 @@ export const PostImage = styled.div`
 export const WriteWrapContainer = styled.div`
   display: flex;
   flex-direction: column;
-  padding-top: 1rem;
   @media (min-width: 1000px) {
     flex-direction: row;
   }
@@ -701,13 +700,17 @@ export const WriteWrapContainer = styled.div`
 export const AuthorContainer = styled.div`
   display: flex;
   justify-content: flex-start;
+  //background: red;
+  align-items: center; 
+  width: 50vw;
+  margin-top: 1rem;
 
   & > div {
-    width: 100px;
+    font-family : "Poppins";
+    width: 120px;
     padding: 2.5rem;
     font-weight: 700;
-    font-family: 'Poppins';
-    font-size: 1.5rem;
+    font-size: 2rem;
     white-space: nowrap;
     border: 0.3rem solid #;
     align-items: center; 
@@ -720,10 +723,7 @@ export const AuthorContainer = styled.div`
     font-size: 1.5rem;
     background: ${props => props.theme.colors.colorAccent};
     color: ${props => props.theme.colors.colorBg};
-    margin: 1.5rem;
-    margin-right: 5em;
     padding: 1rem;
-    position: relative;
     outline: none;
     &::placeholder {
       color: ${props => props.theme.colors.colorBg};
@@ -736,10 +736,8 @@ export const AuthorContainer = styled.div`
       font-size: 1.5rem;
       background: ${props => props.theme.colors.colorAccent};
       color: ${props => props.theme.colors.colorBg};
-      margin: 1.5rem;
-      margin-right: 5em;
       padding: 1rem;
-      position: relative;
+      align-items: center; 
       outline: none;
       &::placeholder {
         color: ${props => props.theme.colors.colorBg};
@@ -749,16 +747,18 @@ export const AuthorContainer = styled.div`
 export const TitleContainer = styled.div`
   display: flex;
   justify-content: flex-start;
+  //background: orange;
+  align-items: center; 
 
   & > div {
     padding: 2.5rem;
     font-weight: 700;
-    font-family: 'Poppins';
-    font-size: 1.5rem;
+    font-family : "Poppins";
+    font-size: 2rem;
     white-space: nowrap;
     align-items: center; 
     border: 0.3rem solid #;
-    width: 100px;
+    width: 120px;
   }
 
   & > input {
@@ -766,16 +766,13 @@ export const TitleContainer = styled.div`
     height: 5rem;
     border-radius: 1rem;
     border: 0.3rem solid ${props => props.theme.colors.colorAccent};
-    background: ${props => props.theme.colors.colorAccent};
+    background: ${props => props.theme.colors.colorBg};
     font-size: 1.5rem;
-    color: ${props => props.theme.colors.colorBg};
-    margin: 1.5rem;
+    color: ${props => props.theme.colors.colorMain};
+    margin: 1.5rem 0 1.5rem 0;
     padding: 1rem;
     position: relative;
     outline: none;
-    &::placeholder {
-      color: ${props => props.theme.colors.colorBg};
-    }
   }
   }
 `
@@ -783,27 +780,28 @@ export const TitleContainer = styled.div`
 export const ContentContainer = styled.div`
   display: flex;
   justify-content: flex-start;
+  //background: green;
 
   & > div {
     padding: 2.5rem;
     font-weight: 700;
-    font-family: 'Poppins';
-    font-size: 1.5rem;
+    font-family : "Poppins";
+    font-size: 2rem;
     white-space: nowrap;
     border: 0.3rem solid #;
-    width: 100px;
+    width: 120px;
   }
 
   & > textarea {
     font-size: 1.5rem;
     font-family: 'Poppins';
-    min-width: 80em;
+    width: 70vw;
     height: 30rem;
     border-radius: 1rem;
     background-color: ${props => props.theme.colors.colorBg};
     border: 0.3rem solid ${props => props.theme.colors.colorAccent};
     color: ${props => props.theme.colors.colorMain};
-    margin: 1.5rem;
+    margin: 1.5rem 0 1.5rem 0;
     padding: 1rem;
     position: relative;
     outline: none;
@@ -814,19 +812,21 @@ export const ContentContainer = styled.div`
 export const FileContainer = styled.div`
   display: flex;
   justify-content: flex-start;
+  //background: skyblue;
 
   & > div {
-    padding: 25px 10px 20px 20px;
+    width: 120px;
+    padding: 2.5rem;
     font-weight: 700;
-    font-family: 'Poppins';
-    font-size: 1.5rem;
+    font-family : "Poppins";
+    font-size: 2rem;
     white-space: nowrap;
     border: 0.3rem solid #;
     justify-content: center;
     width: 100px;
   }
   & > label {
-    width: 15em;
+    width: 13vw;
     height: 5rem;
     flex-shrink: 0;
     border-radius: 1rem;
@@ -835,6 +835,7 @@ export const FileContainer = styled.div`
     color: ${props => props.theme.colors.colorBg};
     margin: 1.5rem;
     padding: 1rem;
+    margin: 2rem;
     position: relative;
     font-size: 1.5rem;
     cursor: pointer;
@@ -853,6 +854,8 @@ export const FileContainer = styled.div`
 
 export const FilesContainer = styled.div`
   display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
   padding: 2.5rem;
   font-weight: 700;
   font-family: 'Poppins';
@@ -860,13 +863,15 @@ export const FilesContainer = styled.div`
   white-space: nowrap;
   border: 0.3rem solid #;
   width: 100%;
-  padding: 0 0 0 10rem;
+  padding: 0 0 0 11rem;
+  //background:red;
 `
 
 export const SelectedFileContainer = styled.div`
   min-width: 16em;
-  height: 4rem;
+  height: 5rem;
   margin: 1rem;
+  margin-bottom: 2rem;
   border: 0.3rem solid ${props => props.theme.colors.colorAccent};
   border-radius: 1rem;
   background: ${props => props.theme.colors.colorBg};
@@ -881,6 +886,7 @@ export const SelectedFileContainer = styled.div`
   }
 
   & > div {
+    //background: green;
     width: 12em;
     height: 2rem;
     text-align: center;
@@ -902,14 +908,13 @@ export const DeleteFileIcon = styled(TiDelete)`
 
 export const ButtonContainer = styled.div`
   display: flex;
-  gap : 1rem;
-  position: fixed;
-  bottom: 4rem;
-  right: 8rem;
+  gap : 2rem;
+  //background: red;
+  justify-content: flex-end;
 `
 
 export const CancelButton = styled.button`
-  width: 7rem;
+  width: 8rem;
   height: 5rem;
   justify-content: center;
   align-items: center;
@@ -919,9 +924,9 @@ export const CancelButton = styled.button`
   border: 0.3rem solid #FA9DAD;
   color: #FA9DAD;
   font-family: 'Poppins';
-  font-size: 1.5rem;
+  font-size: 1.8rem;
   font-style: normal;
-  font-weight: 500;
+  font-weight: 600;
   line-height: normal;
   cursor: pointer;
   &:active {
@@ -941,9 +946,9 @@ export const UploadButton = styled.button`
   border: 0.3rem solid ${props => props.theme.colors.colorAccent};
   color: ${props => props.theme.colors.colorAccent};
   font-family: 'Poppins';
-  font-size: 1.5rem;
+  font-size: 1.8rem;
   font-style: normal;
-  font-weight: 500;
+  font-weight: 600;
   line-height: normal;
   cursor: pointer;
   

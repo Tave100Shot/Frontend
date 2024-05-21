@@ -570,6 +570,7 @@ export const HeaderBulletin = styled.div`
   background-color: ${props => props.theme.colors.colorAccent};
   border-top-left-radius: 1.3rem;
   border-top-right-radius: 1.3rem;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
   align-items: center;
   font-family: 'Poppins_SemiBold';
 
@@ -590,6 +591,7 @@ export const BulletinBox = styled.div`
   border-bottom-left-radius: 1.3rem;
   border-bottom-right-radius: 1.3rem;
   border: 0.3rem solid ${props => props.theme.colors.colorAccent};
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
   position: relative;
   font-family: 'Poppins';
   `;

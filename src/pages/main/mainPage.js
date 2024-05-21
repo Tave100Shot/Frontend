@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import {  useLocation, useNavigate } from "react-router-dom";
-import { SetModal, SetTodayQuestion, SetToken } from "../../redux/actions/mainAction";
+import { SetModal, SetToken } from "../../redux/actions/mainAction";
 import { useDispatch, useSelector } from "react-redux";
 import Header from "../../components/common/header";
 import TaveAnimation from "../../components/main/taveAnimation";

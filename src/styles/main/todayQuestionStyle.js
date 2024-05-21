@@ -174,12 +174,19 @@ font-weight: 600;
     color: #FF1700;
     margin-left: 4rem;
   }
+  h1 {
+    display: flex;
+    justify-content: center;
+    font-size: 1rem;
+    //font-weight: 600;
+    color: #FF1700;
+  }
   h2 {
+    display: flex;
+    justify-content: center;
     font-size: 1.5rem;
-    font-weight: 500;
+    font-weight: 600;
     color: #0075FF;
-    margin: 0 0 0 13rem;
-    //background-color: pink;
   }
   h3 {
     color: ${props => props.theme.colors.colorBg};
@@ -332,6 +339,6 @@ margin: 1rem 3rem 1rem 3rem;
     color: #0075FF;
     //background-color: green;
     padding: 1rem;
-    
+    font-weight: 300;
   }
 `

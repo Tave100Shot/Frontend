@@ -2,9 +2,9 @@ import React, { useState, useRef } from 'react';
 import * as t from "../../styles/main/todayQuestionStyle";
 import newsImage from '../../assets/imgs/today.png';
 import { LuCheck } from "react-icons/lu";
+import axios from "axios";
 
 const TodayQuestion = () => {
-
   const [showInformation, setShowInformation] = useState(true);
   const [isClicked, setIsClicked] = useState({
     DEV: false,
@@ -43,13 +43,23 @@ const TodayQuestion = () => {
   };
 
   const handleNameChange = (e) => {
-    setName(e.target.value);
+    const updateName = e.target.value;
+    setName(updateName);
     setValidationMessage(prevMessage => ({ ...prevMessage, name: '' }));
+    setSaveInfo(prevInfo => ({
+      ...prevInfo,
+      userName: updateName
+    }))
   };
 
   const handleEmailChange = (e) => {
-    setEmail(e.target.value);
+    const updateEmail = e.target.value;
+    setEmail(updateEmail);
     setValidationMessage(prevMessage => ({ ...prevMessage, email: '' }));
+    setSaveInfo(prevInfo => ({
+      ...prevInfo,
+      userEmail: updateEmail
+    }))
   };
 
   const validateEmail = (email) => {
@@ -57,35 +67,159 @@ const TodayQuestion = () => {
     return re.test(String(email).toLowerCase());
   }
 
-  const handleLetterSubmit = () => {
+  // [정보 수정] 버튼
+  const handleModifyInfo = async () => {
     let message = { letter: '' };
     let isValid = true;
 
     if (!isClicked.DEV && !isClicked.EMPLOY) {
       message.letter = '최소 하나 이상의 뉴스레터를 눌러주세요 :)';
       isValid = false;
-    }
-    if (isValid) {
-      let selectedLetters = [];
-      if (isClicked.DEV) selectedLetters.push('DEV');
-      if (isClicked.EMPLOY) selectedLetters.push('EMPLOY');
-      let letterType = selectedLetters.join(', ') || 'None';
-      setSaveInfo({
-        letterType: letterType,
-      })
-      setIsSubmitted(true);
-      setHeaderMessage('레터를 받아볼 회원님의 정보를 입력해주세요.');
-    }
-    if (!isValid) {
       setValidationMessage(message);
       return;
     }
+
+    if (isValid) {
+      let selectedLetters = [];
+      if (isClicked.DEV) selectedLetters.push('DEV_LETTER');
+      if (isClicked.EMPLOY) selectedLetters.push('EMPLOYEE_LETTER');
+      let letterType;
+      if (selectedLetters.length === 2) {
+        letterType = 'ALL';
+      } else {
+        letterType = selectedLetters[0];
+      }
+
+      setSaveInfo({
+        letterType: letterType,
+      });
+      setIsSubmitted(true);
+      setHeaderMessage('레터를 받아볼 회원님의 정보를 입력해주세요.');
+
+      try {
+        const response = await axios.post('/api/subscription', {
+          letterTypes: [letterType]
+        }, {
+          headers: {
+            'Content-Type': 'application/json',
+            Authorization: `Bearer ${localStorage.getItem('accessToken')}`,
+          }
+        });
+        console.log('정보수정 레터', response);
+      } catch (error) {
+        console.error('정보수정 레터에러', error.response);
+      }
+
+      // 회원 이름, 이메일 정보 띄우기
+      try {
+        const response = await axios.get('/api/member/info',
+          {
+            headers: {
+              'Content-Type': 'application/json',
+              Authorization: `Bearer ${localStorage.getItem('accessToken')}`,
+            }
+          }
+        );
+        if (response.data.result.bojName === null && response.data.result.gitEmail === null) {
+          alert('수정할 정보가 존재하지 않아요!')
+          setIsSubmitted(false);
+        } else {
+          setName(response.data.result.bojName === null ? '' : response.data.result.bojName);
+          setEmail(response.data.result.gitEmail === null ? '' : response.data.result.gitEmail);
+          console.log(response.data.result.bojName);
+          console.log(response.data.result.gitEmail);
+        }
+
+      } catch (error) {
+        console.error('회원get:', error);
+      }
+
+    }
   };
 
-  const handleNameEmailSubmit = () => {
-    let message = { name: '', email: '' };
+  // [레터 선택] 버튼
+    const handleLetterSubmit = async () => {
+    let message = { letter: '' };
     let isValid = true;
 
+    if (!isClicked.DEV && !isClicked.EMPLOY) {
+      message.letter = '최소 하나 이상의 뉴스레터를 눌러주세요 :)';
+      isValid = false;
+      setValidationMessage(message);
+      return;
+    }
+
+    if (isValid) {
+      let selectedLetters = [];
+      if (isClicked.DEV) selectedLetters.push('DEV_LETTER');
+      if (isClicked.EMPLOY) selectedLetters.push('EMPLOYEE_LETTER');
+      let letterType;
+      if (selectedLetters.length === 2) {
+        letterType = 'ALL';
+      } else {
+        letterType = selectedLetters[0];
+      }
+
+      setSaveInfo({
+        letterType: letterType,
+      });
+      setIsSubmitted(true);
+      setHeaderMessage('레터를 받아볼 회원님의 정보를 입력해주세요.');
+
+      // 회원 이름, 이메일 정보 띄우기
+      try {
+        const response = await axios.get('/api/member/info',
+          {
+            headers: {
+              'Content-Type': 'application/json',
+              Authorization: `Bearer ${localStorage.getItem('accessToken')}`,
+            }
+          }
+        );
+        setName(response.data.result.bojName === null ? '' : response.data.result.bojName);
+        setEmail(response.data.result.gitEmail === null ? '' : response.data.result.gitEmail);
+        setSaveInfo(prevInfo => ({
+          ...prevInfo,
+          userName: response.data.result.bojName,
+          userEmail: response.data.result.gitEmail,
+        }))
+        console.log('get', saveInfo.userName);
+        console.log('get', saveInfo.userEmail);
+      } catch (error) {
+        console.error('회원get:', error);
+      }
+
+      try {
+        const response = await axios.post('/api/subscription', {
+          letterTypes: [letterType]
+        }, {
+          headers: {
+            'Content-Type': 'application/json',
+            Authorization: `Bearer ${localStorage.getItem('accessToken')}`,
+          }
+        });
+        console.log('레터', response);
+      } catch (error) {
+        console.error('레터 에러', error.response);
+        if (error.response.data.errorCode === "LETTER_4040") {
+          alert('이미 구독 중입니다. \n정보를 수정하려면 [정보 수정] 버튼을 클릭하세요!');
+          setIsSubmitted(false);
+        }
+        if (error.response.data.errorCode === "EAMIL4041") {
+          alert('이메일 인증이 완료되지 않았어요!');
+          console.log(saveInfo.userName);
+          console.log(saveInfo.userEmail);
+          setIsConfirmed(true);
+        }
+      }
+      
+    }
+  };
+
+  // [확인] 버튼
+  const handleNameEmailSubmit = async () => {
+    let message = { name: '', email: '' };
+    let isValid = true;
 
     if (isValid) {
       if (name === '') {
@@ -104,19 +238,34 @@ const TodayQuestion = () => {
       }
       if (isValid) {
         setSaveInfo({
-          ...saveInfo,
+          letterType: saveInfo.letterType,
           userName: name,
           userEmail: email,
-        })
-
-        // [확인] 버튼 눌렀을 때 input 수정 불가
+        });
         setIsConfirmed(true);
         setIsSubmitted(true);
+        console.log(saveInfo);
+        try {
+          const response = await axios.post('/api/member', {
+            gitEmail: email,
+            bojName: name,
+          }, {
+            headers: {
+              'Content-Type': 'application/json',
+              Authorization: `Bearer ${localStorage.getItem('accessToken')}`,
+            }
+          });
+          console.log(response);
+          // [확인] 버튼 눌렀을 때 input 수정 불가
+
+        } catch (error) {
+          console.error(error);
+          console.error(error.response.status);
+          console.error(error.response.data);
+        }
       } else {
         setValidationMessage(message);
       }
-
-
     }
   };
 
@@ -130,11 +279,12 @@ const TodayQuestion = () => {
   }
 
   // [뒤로 가기 - 이메일인증] 버튼 눌렀을 때
-  const handleBackEmail = () => {
+  const handleBackEmail = async () => {
     if (isSubmitted) {
       setIsConfirmed(false);
       setValidationMessage({ name: '', email: '' });
     }
+
   }
 
   // [뒤로 가기 - (최종)확인] 버튼 눌렀을 때
@@ -146,14 +296,57 @@ const TodayQuestion = () => {
   }
 
   // [이메일 인증] 버튼 눌렀을 때
-  const handleVerify = () => {
+  const handleVerify = async () => {
     alert('인증 메일을 보내드렸어요! \n메일함을 확인하신 후 인증을 완료해주세요.');
     setClickEmailButton(true);
+    try {
+      const response = await axios.post('/api/email/send-verification', {
+        bojName: name, //'cucubab',
+        gitEmail: email // '27sojeong@gmail.com',
+      }, {
+        headers: {
+          'Content-Type': 'application/json',
+          Authorization: `Bearer ${localStorage.getItem('accessToken')}`,
+        }
+      });
+      console.log('이메일인증', response);
+    } catch (error) {
+      console.error('이메일인증', error.response.status);
+      console.error('이메일인증', error.response.data);
+      if (error.response.data.errorCode === "EAMIL4043") {
+        alert('이미 인증이 완료된 이메일이에요!');
+        setfinalSubmitted(true);
+      }
+    }
+    //setfinalSubmitted(true);
   }
 
-  // [확인하러 가기] 버튼 눌렀을 때
-  const handleFinalSubmit = () => {
-    setfinalSubmitted(true);
+  // 최종 [확인] 구독 버튼 눌렀을 때
+  const handleFinalSubmit = async () => {
+    try {
+      const response = await axios.post('/api/subscription', {
+        letterTypes: [saveInfo.letterType]
+      }, {
+        headers: {
+          'Content-Type': 'application/json',
+          Authorization: `Bearer ${localStorage.getItem('accessToken')}`,
+        }
+      });
+      console.log('레터', response);
+    } catch (error) {
+      console.error('레터에러', error);
+      console.error('레터 에러wha', error.response);
+      if (error.response.data.errorCode === "LETTER_4040") {
+        // 여기서는 ALERT 띄우지 않음.
+        setfinalSubmitted(true);
+      }
+      if (error.response.data.errorCode === "EAMIL4041") {
+        alert('이메일 인증이 완료되지 않았어요!');
+      }
+      if (error.response.data.errorCode === "EAMIL4042") {
+        alert('유효하지 않은 이메일 토큰이에요!');
+      }
+    }
   }
 
 
@@ -227,7 +420,7 @@ const TodayQuestion = () => {
                               <t.LetterButtonContainer>
                                 <t.StyledButton isClicked={isClicked.DEV} onClick={() => letterChooseClick('DEV')}>DEV</t.StyledButton>
                                 <t.StyledButton isClicked={isClicked.EMPLOY} onClick={() => letterChooseClick('EMPLOY')}>EMPLOY</t.StyledButton>
-                                {validationMessage.letter && <p>{validationMessage.letter}</p>}
+                                {validationMessage.letter && <h1>{validationMessage.letter}</h1>}
                                 {!validationMessage.letter && <h3>.</h3>}
                               </t.LetterButtonContainer>
                             </>
@@ -269,7 +462,10 @@ const TodayQuestion = () => {
                     </t.applyForm>)}
                   {!isSubmitted ? (
                     <>
-                      <t.DefaultButton onClick={handleLetterSubmit}>구독 신청</t.DefaultButton>
+                      <t.ClickButtonContainer>
+                        <t.BackButton onClick={handleModifyInfo}>정보 수정</t.BackButton>
+                        <t.DefaultButton onClick={handleLetterSubmit}>레터 선택</t.DefaultButton>
+                      </t.ClickButtonContainer>
                     </>
                   ) : (
                     <>

@@ -564,7 +564,7 @@ export const ModalContent = styled.div`
 
 export const HeaderBulletin = styled.div`
   display: grid;
-  grid-template-columns: 1fr 2.5fr 1.5fr 1fr 1fr 1.5fr;
+  grid-template-columns: 1fr 2.5fr 1.5fr 1fr 1fr 1fr 1.5fr;
   padding: 11px;
   font-weight: bold;
   background-color: ${props => props.theme.colors.colorAccent};
@@ -602,7 +602,7 @@ export const BulletinPageContainer = styled.div`
 
 export const StyledViewPost = styled.div`
   display: grid;
-  grid-template-columns: 1fr 2.5fr 1.5fr 1fr 1fr 1.5fr;
+  grid-template-columns: 1fr 2.5fr 1.5fr 1fr 1fr 1fr 1.5fr;
   align-items: center;
   padding: 15px;
   cursor: pointer;

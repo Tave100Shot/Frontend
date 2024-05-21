@@ -59,13 +59,13 @@ export const LevelBox = styled.div`
   height: 25rem;
   flex-shrink: 0;
   border-radius: 3rem;
-  border: 0.1rem solid ${props => props.theme.colors.levelboxBorder};
+  //border: 0.1rem solid ${props => props.theme.colors.levelboxBorder};
   background: ${props => props.theme.colors.levelbox};
   position: relative;
   display: flex;
-  justify-content: center; /* 가로 중앙 정렬 */
+  justify-content: center;
   align-items: center;
-  box-shadow: 0 4px 5px rgba(0, 0, 0, 0.1); /* 그림자 추가 */
+  box-shadow: 0 4px 5px rgba(0, 0, 0, 0.1);
   transition: background 0.3s ease;
   &:hover {
     background : ${props => props.theme.colors.colorAccentHover};
@@ -83,7 +83,7 @@ export const Typography = styled.div`
 
 export const LevelTypography = styled.div`
   color: ${props => props.theme.colors.colorMain};
-  width: 30vw;
+  width: 380px;
   font-family: 'Audiowide';
   font-size: 3.7rem;
   font-style: normal;

@@ -20,6 +20,7 @@ export const SearchBarContainer = styled.form`
   width : 70vw;
   height : 8rem; 
   align-items : center;
+  margin-right: 10px;
 
   button {
     width : 10em;
@@ -43,7 +44,7 @@ export const SearchBarContainer = styled.form`
 export const SearchInputBox = styled.div`
   background-color : ${props => props.theme.colors.colorAccent};
   display : flex;
-  width : 125rem;
+  width : 60vw;
   height : 5rem;
   border-radius : 1.3rem;
   padding : 1rem 0 1rem 2rem;
@@ -563,13 +564,14 @@ export const ModalContent = styled.div`
 
 export const HeaderBulletin = styled.div`
   display: grid;
-  grid-template-columns: 1fr 3fr 1.5fr 1fr 1fr 1fr;
+  grid-template-columns: 1fr 2.5fr 1.5fr 1fr 1fr 1.5fr;
   padding: 11px;
   font-weight: bold;
   background-color: ${props => props.theme.colors.colorAccent};
   border-top-left-radius: 1.3rem;
   border-top-right-radius: 1.3rem;
   align-items: center;
+  font-family: 'Poppins_SemiBold';
 
   p {
     font-size: 1.5em;
@@ -589,6 +591,7 @@ export const BulletinBox = styled.div`
   border-bottom-right-radius: 1.3rem;
   border: 0.3rem solid ${props => props.theme.colors.colorAccent};
   position: relative;
+  font-family: 'Poppins';
   `;
 
 export const BulletinPageContainer = styled.div`
@@ -599,10 +602,11 @@ export const BulletinPageContainer = styled.div`
 
 export const StyledViewPost = styled.div`
   display: grid;
-  grid-template-columns: 1fr 3fr 1.5fr 1fr 1fr 1fr;
+  grid-template-columns: 1fr 2.5fr 1.5fr 1fr 1fr 1.5fr;
   align-items: center;
   padding: 15px;
   cursor: pointer;
+  font-family: 'Poppins';
   
   &:hover {
     background-color: ${props => props.theme.colors.colorAccentHover};

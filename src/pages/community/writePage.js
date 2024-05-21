@@ -9,6 +9,8 @@ const WritePage = () => {
   const navigate = useNavigate();
   const [formData, setFormData] = useState({ title: "", content: "" });
   const [attachmentFiles, setAttachmentFiles] = useState([]);
+  const [isSubmitted, setIsSubmitted] = useState(false);
+  const bojTier = localStorage.getItem('bojTier');
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
@@ -18,8 +20,19 @@ const WritePage = () => {
   const handleFileChange = (e) => {
     const files = e.target.files;
     const newFiles = [...attachmentFiles, ...files];
-    setAttachmentFiles(newFiles);
+    if (attachmentFiles.length > 10 || newFiles.length > 10) {
+      alert('최대 파일 첨부는 10개까지에요!');
+    } else {
+      setAttachmentFiles(newFiles);
+    }
   };
+
+  const shortFileName = (name, maxLength=20) => {
+    if (name.length <= maxLength) {
+      return name;
+    }
+    return name.substring(0, maxLength) + '...';
+  }
 
   const handleFileRemove = (indexToRemove) => {
     setAttachmentFiles(attachmentFiles.filter((_, index) => index !== indexToRemove));
@@ -32,17 +45,35 @@ const WritePage = () => {
     submitFormData.append('content', formData.content);
     attachmentFiles.forEach(file => submitFormData.append('attachmentFile', file));
 
-    try {
-      const response = await axios.post('/api/post', submitFormData, {
-        headers: {
-          'Content-Type': 'multipart/form-data',
-          Authorization: `Bearer ${localStorage.getItem('accessToken')}`,
-        },
-      });
-      console.log(response.data);
-      navigate("/community/bronze");
-    } catch (error) {
-      console.error(error);
+    if (!formData.title) {
+      alert('제목을 작성해주세요!');
+      setIsSubmitted(false);
+    } else if (!formData.content) {
+      alert('내용을 작성해주세요!');
+      setIsSubmitted(false);
+    } else if (attachmentFiles.length > 10){
+      alert('파일은 최대 10개까지 첨부 가능해요!')
+    } else {
+      setIsSubmitted(true);
+    }
+
+    if (isSubmitted){
+      try {
+        const response = await axios.post('/api/post', submitFormData, {
+          headers: {
+            'Content-Type': 'multipart/form-data',
+            Authorization: `Bearer ${localStorage.getItem('accessToken')}`,
+          },
+          params: {
+            postTier: 'BronzeSilver',
+          }
+        });
+        alert('작성 완료!')
+        console.log(response.data);
+        navigate("/community/bronze");
+      } catch (error) {
+        console.error(error);
+      }
     }
   };
 
@@ -51,7 +82,7 @@ const WritePage = () => {
       <Header click={() => navigate('/')} />
       <MainContainer>
         <FirstContainer>
-          <Typography>WRITE</Typography>
+          <Typography>BRONZE & SILVER WRITE</Typography>
           <HorizontalLine />
           <form onSubmit={onSubmit} encType="multipart/form-data">
             <c.WriteWrapContainer>
@@ -59,32 +90,40 @@ const WritePage = () => {
                 <div>글쓴이</div>
                 <p>{localStorage.getItem('gitLoginId')}</p>
               </c.AuthorContainer>
+              <c.AuthorContainer>
+                <div>티어</div>
+                <p>{bojTier}</p>
+              </c.AuthorContainer>
+            </c.WriteWrapContainer>
+
               <c.TitleContainer>
                 <div>제목</div>
                 <input
                   id="title"
                   type="text"
+                  maxLength={30}
                   name="title"
                   value={formData.title}
                   onChange={handleInputChange}
-                  placeholder="Write Title" />
+                  placeholder="제목은 30자까지 입력 가능해요!" />
               </c.TitleContainer>
-            </c.WriteWrapContainer>
             <c.ContentContainer>
-              <div>&nbsp;내용&nbsp;&nbsp;</div>
+              <div>내용</div>
               <textarea
                 id="content"
                 name="content"
+                maxLength={1000}
                 value={formData.content}
                 onChange={handleInputChange}
-                placeholder="Write Your Problems" />
+                placeholder="내용은 1000자까지 입력 가능해요!" />
             </c.ContentContainer>
             <c.FileContainer>
-              <div>파일 첨부</div>
-              <label htmlFor="attachmentFile">File Upload</label>
+              <div>파일</div>
+              <label htmlFor="attachmentFile">파일 첨부하기</label>
               <input
                 id="attachmentFile"
                 type="file"
+                maxLength={10}
                 name="attachmentFile"
                 accept="*"
                 multiple
@@ -93,14 +132,14 @@ const WritePage = () => {
             <c.FilesContainer>
               {attachmentFiles.map((file, index) => (
                 <c.SelectedFileContainer key={index}>
-                  <div>{file.name}</div>
+                  <div>{shortFileName(file.name)}</div>
                   <c.DeleteFileIcon onClick={() => handleFileRemove(index)} />
                 </c.SelectedFileContainer>
               ))}
             </c.FilesContainer>
             <c.ButtonContainer>
               <c.CancelButton type="button" onClick={() => navigate("/community/bronze")}>취소</c.CancelButton>
-              <c.UploadButton type="submit">업로드</c.UploadButton>
+              <c.UploadButton type="submit">등록</c.UploadButton>
             </c.ButtonContainer>
           </form>
         </FirstContainer>

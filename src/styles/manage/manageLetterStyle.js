@@ -66,7 +66,7 @@ export const HalfLetterContainer = styled.div`
 `
 
 // Letter 상세 보기 박스
-export const LetterViewkContainer = styled.div`
+export const LetterViewContainer = styled.div`
   margin : 5rem 0 0 0;
   width : 87vw;
   height : 55rem;

@@ -38,6 +38,7 @@ const ManageLetterView = () => {//변수 할당시켜서 사용
     .then(response => {
       // console.log(response.data.result);
       const letterInfoArray = response.data.result;
+      console.log(letterInfoArray.content)
       dispatch(SetLetterInfo(letterInfoArray));
     })
     .catch(error => {
@@ -56,7 +57,7 @@ const ManageLetterView = () => {//변수 할당시켜서 사용
   return (
     <mm.ManageContainer>
       <HeaderManage/>
-      <ml.LetterViewkContainer>
+      <ml.LetterViewContainer>
         <div className="letter-header">
           <div className="letter-info">
             <p>{letterInfoList.letterType}</p>
@@ -69,11 +70,9 @@ const ManageLetterView = () => {//변수 할당시켜서 사용
           </div>
         </div>
         <div className="letter-body">
-          <p>
-            {letterInfoList.content}
-          </p>
+          <div dangerouslySetInnerHTML={{ __html: letterInfoList.content }} />  
         </div>
-      </ml.LetterViewkContainer>
+      </ml.LetterViewContainer>
     </mm.ManageContainer>
   )
 }

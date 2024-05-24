@@ -211,17 +211,17 @@ export const LetterEditContainer = styled.form`
       outline : none;
       padding : 0 2rem;
       color : #838383;
-      margin : 0 5rem 0 0;
+      margin : 0 2rem 0 0;
       cursor : pointer;
       &:hover{color:#91D1FA;}
     }
     // 레터 날짜 선택 - input(date)
     .letter-date {
-      width : 20rem;
+      width : 17rem;
       height : 5rem;
       border : none;
       padding : 0.5rem 2rem;
-      font-size : 2rem;
+      font-size : 1.8rem;
       color : #838383;
       font-family : "BMHANNAPROOTF";
       outline : none;

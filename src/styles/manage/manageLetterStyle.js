@@ -183,6 +183,7 @@ export const LetterEditContainer = styled.form`
 
       .date-box {
         display : flex;
+        color : #838383;
       }
     }
 
@@ -226,7 +227,7 @@ export const LetterEditContainer = styled.form`
       font-family : "BMHANNAPROOTF";
       outline : none;
       border-radius : 1rem;
-      margin : 0 2rem 0 0;
+      margin : 0 0.5rem;
       cursor : pointer;
     }
   }

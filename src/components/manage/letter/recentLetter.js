@@ -1,7 +1,6 @@
 import { useNavigate } from "react-router-dom";
 import * as ml from "../../../styles/manage/manageLetterStyle";
 import * as mm from "../../../styles/manage/manageMainStyle"
-import PaginationButton from "../paginationButton";
 import RecentLetterItem from "./recentLetterItem";
 import axios from "axios";
 import { SetDevLetter, SetEmployLetter, SetRecentLetter } from "../../../redux/actions/letterAction";
@@ -33,13 +32,19 @@ const RecentLetter = () => {
         dispatch(SetRecentLetter(recentLetterArray));
     })
     .catch(error => {
-        const errorCode = error.response.data.errorCode;
-        // console.log(errorCode);
-        if(errorCode ==='JWT_4010') {
-          alert('로그인 유지 시간이 만료되었습니다. 다시 로그인 해주세요 :)')
-        } else {
-          alert('문제가 발생했습니다. 다시 로그인 부탁드립니다 :)')
-        }
+      const errorCode = error.response.data.errorCode;
+      // console.log(errorCode);
+      if(errorCode ==='JWT_4001') {
+        alert('JWT Token이 올바르지 않습니다.. 다시 로그인 해주세요 :)')
+      } 
+      else if(errorCode ==='JWT_4010') {
+        alert('로그인 유지 시간이 만료되었습니다. 다시 로그인 해주세요 :)')
+      }
+      else if(errorCode ==='SERVER_500') {
+        alert('알 수 없는 서버 에러입니다.')
+      } else {
+        alert('문제가 발생했습니다. 다시 로그인 부탁드립니다 :)')
+      }
     });
   }, []);
   

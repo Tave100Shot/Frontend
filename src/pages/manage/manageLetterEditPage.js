@@ -135,10 +135,16 @@ const ManageLetterEdit = () => {
         } catch (error) {
           const errorCode = error.response.data.errorCode;
           // console.log(errorCode);
-          if(errorCode ==='JWT_4010') {
-            alert('로그인 유지 시간이 만료되었습니다. 다시 로그인 해주세요 :)');
+          if(errorCode ==='JWT_4001') {
+            alert('JWT Token이 올바르지 않습니다.. 다시 로그인 해주세요 :)')
+          } 
+          else if(errorCode ==='JWT_4010') {
+            alert('로그인 유지 시간이 만료되었습니다. 다시 로그인 해주세요 :)')
+          }
+          else if(errorCode ==='SERVER_500') {
+            alert('알 수 없는 서버 에러입니다.')
           } else {
-            alert('저장 실패하였습니다.');
+            alert('문제가 발생했습니다. 다시 로그인 부탁드립니다 :)')
           }
         }
       }
@@ -158,10 +164,16 @@ const ManageLetterEdit = () => {
         } catch (error) {
           const errorCode = error.response.data.errorCode;
           // console.log(errorCode);
-          if(errorCode ==='JWT_4010') {
-            alert('로그인 유지 시간이 만료되었습니다. 다시 로그인 해주세요 :)');
+          if(errorCode ==='JWT_4001') {
+            alert('JWT Token이 올바르지 않습니다.. 다시 로그인 해주세요 :)')
+          } 
+          else if(errorCode ==='JWT_4010') {
+            alert('로그인 유지 시간이 만료되었습니다. 다시 로그인 해주세요 :)')
+          }
+          else if(errorCode ==='SERVER_500') {
+            alert('알 수 없는 서버 에러입니다.')
           } else {
-            alert('저장 실패하였습니다.');
+            alert('문제가 발생했습니다. 다시 로그인 부탁드립니다 :)')
           }
         }
 

@@ -59,7 +59,7 @@ export const LevelBox = styled.div`
   height: 25rem;
   flex-shrink: 0;
   border-radius: 3rem;
-  border: 0.1rem solid ${props => props.theme.colors.levelboxBorder};
+  //border: 0.1rem solid ${props => props.theme.colors.levelboxBorder};
   background: ${props => props.theme.colors.levelbox};
   position: relative;
   display: flex;

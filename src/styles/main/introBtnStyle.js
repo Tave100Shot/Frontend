@@ -83,6 +83,7 @@ export const IntroPageBox = styled.div`
         font-size : 1.5rem;
         font-family : 'WantedSans_SemiBold';
         letter-spacing : 0.05rem;
+        cursor: pointer;
 
     }
     img {
@@ -96,6 +97,7 @@ export const IntroPageBox = styled.div`
 export const ModalCloseBtn = styled(IoIosCloseCircle)`
     font-size : 2rem;
     color : ${props => props.theme.colors.colorShadow};
+    cursor: pointer;
 `
 export const CheckIcon = styled(IoIosCheckmarkCircle)`
     font-size : 2.3rem;

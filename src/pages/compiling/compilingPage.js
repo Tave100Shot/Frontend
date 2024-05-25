@@ -4,15 +4,12 @@ import Header from "../../components/common/header";
 import * as c from "../../styles/compilingStyle";
 import axios from "axios";
 import AceEditor from "react-ace";
-import "ace-builds/src-noconflict/mode-java";
 import "ace-builds/src-noconflict/theme-tomorrow";
+import "ace-builds/src-noconflict/theme-monokai";
 import "ace-builds/src-noconflict/ext-language_tools";
+import "ace-builds/src-noconflict/mode-java";
 
-function onChange(newValue) {
-  console.log("change", newValue);
-}
-
-const CompilingPage = ({ theme }) => {
+const CompilingPage = ({theme}) => {
   const navigate = useNavigate();
 
   const moveToMain = () => {
@@ -23,12 +20,13 @@ const CompilingPage = ({ theme }) => {
   const [infoContainerVisible, setInfoContainerVisible] = useState(false);
   const [problemTitle, setProblemTitle] = useState('');
   const [problemInfo, setProblemInfo] = useState(null);
+  const [isValid, setIsValid] = useState(false);
 
   const handleSearchClick = async () => {
-    if (questionNumber < 1000 && questionNumber > 31226) {
-      alert('문제 번호는 1000번부터 31226번까지 존재합니다.');
+    if (parseInt(questionNumber, 10) < 1000 || parseInt(questionNumber, 10) > 31226) {
+      alert('문제 번호는 1000번부터 31226번까지 있어요!');
       return;
-    }
+    } 
     try {
       const response = await axios.get(`/api/compile/problems/${questionNumber}`);
       console.log('서버 응답:', response.data);
@@ -44,18 +42,21 @@ const CompilingPage = ({ theme }) => {
         alert("해당 문제의 정보를 찾을 수 없습니다.");
         return;
       }
+        setIsValid(true);
         setProblemInfo(fetchedProblemInfo);
         setProblemTitle(`백준 ${questionNumber}번 - ${fetchedProblemInfo.Title}`);
         setInfoContainerVisible(true);
       } else {
-        if (response.data.errorCode === "PROBLEM_5002") {
-          alert("문제 정보 변환 중 오류가 발생했습니다.");
-          return;
-        }
-        console.error('서버 응답 오류:', response.data.message);
+
       }
     } catch (error) {
-      console.error('get 요청 오류:', error);
+      if (error.response.data.errorCode === "PROBLEM_5002") {
+        alert("문제 정보 변환 중 오류가 발생했어요!");
+        return;
+      }
+      if (error.response.data.errorCode === "PROBLEM_4040") {
+        alert("문제 번호는 1000번부터 31226번까지 존재해요!");
+      }
     }
   };
   useEffect(() => {
@@ -90,14 +91,17 @@ const CompilingPage = ({ theme }) => {
   };
 
   const handleGoToBaekjoon = () => {
-    console.log("백준 풀러 가기 버튼 클릭");
-    const problemUrl = problemInfo && problemInfo.problemUrl;
-    window.open(problemUrl, '_blank');
+    if(isValid) {
+      const problemUrl = problemInfo && problemInfo.problemUrl;
+      window.open(problemUrl, '_blank');
+    } else {
+      alert('문제 번호를 확인해주세요!');
+    }
+
   }
   
   const handleMoveToSolution = () => {
     navigate(`/result-solution?problemId=${questionNumber}`);
-    console.log("솔루션 이동 버튼 클릭");
   };
 
   return (
@@ -110,6 +114,7 @@ const CompilingPage = ({ theme }) => {
               type="text"
               placeholder="Enter the Question Number !"
               value={questionNumber}
+              maxLength={10}
               onChange={(e) => setQuestionNumber(e.target.value)}
               onKeyPress={handleKeyPress}
             />
@@ -142,14 +147,13 @@ const CompilingPage = ({ theme }) => {
             </c.EContainer>
           </c.InfoContainer>
         </c.QIOEContainer>
-        <c.MiddleLine>l</c.MiddleLine>
+        <c.MiddleLine>.</c.MiddleLine>
         <c.CompileContainer>
           <p>코드 입력</p>
           <c.CodeEditor>
             <AceEditor
-              mode="java"
+              mode='java'
               theme={theme.colors.compiler}
-              onChange={onChange}
               name="UNIQUE_ID_OF_DIV"
               editorProps={{ $blockScrolling: true }}
               placeholder={`team_member = input(“팀원 이름을 입력하시오 : “)

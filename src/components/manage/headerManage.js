@@ -11,7 +11,7 @@ const HeaderManage = () => {
     const dispatch = useDispatch();
 
     const moveToMain = () => navigate('/');
-    
+    const moveToMember = () => navigate('/manager/member')
     // Letter 조회 및 캘린더 조회로 이동
     const moveToLetter = () => {
         dispatch(SetDevLetter([]));
@@ -31,7 +31,7 @@ const HeaderManage = () => {
         <h.MenuWrapper className="menu">
             <button
                 className={location.pathname === "/manager/member" ? "active" : ""}
-
+                onClick={moveToMember}
             >MEMBER</button>
             <button
                 className={location.pathname === "/manager/letter" ? "active" : ""}

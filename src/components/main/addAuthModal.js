@@ -192,7 +192,9 @@ const AddAuthModal = ({isOpen, onRequestClose}) => {
               <m.SlideTextBox className='lastStepContainer'>
                 <h2 className='lastStep'>추가 인증 절차 완료</h2> 
                 <p className='lastStep'>
-                  Github Repository의 Description에 적은 <span>백준 이름</span>과 백준 소개글에 적은 <span>깃허브 아이디</span>가 <span>일치</span>하면, 추가 인증이 <span>완료</span>됩니다 :)
+                  Github Repository의 Description에 적은 <span>백준 이름</span>과 
+                  <br/>백준 소개글에 적은 <span>깃허브 아이디</span>가 <span>일치</span>하면,
+                  <br/>추가 인증이 <span>완료</span>됩니다 :)
                 </p>
                 <br/>
                 <p>

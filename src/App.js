@@ -155,11 +155,11 @@ function App() {
           ) : (
             <Route path='/community/post/:postId/edit' element={<PostEditPage/>}/>
             )}
-          <Route path='/manage' element={<ManageMain/>}/>
-          <Route path='/manage/letter' element={<ManageLetter/>}/>
-          <Route path='/manage/letter/all' element={<ManageAllLetter/>}/>
-          <Route path='/manage/letter/view/:letterId' element={<ManageLetterView/>}/>
-          <Route path='/manage/letter/edit/:letterId?' element={<ManageLetterEdit/>}/>
+          <Route path='/manager' element={<ManageMain/>}/>
+          <Route path='/manager/letter' element={<ManageLetter/>}/>
+          <Route path='/manager/letter/all' element={<ManageAllLetter/>}/>
+          <Route path='/manager/letter/view/:letterId' element={<ManageLetterView/>}/>
+          <Route path='/manager/letter/edit/:letterId?' element={<ManageLetterEdit/>}/>
         </Routes>
       </ThemeProvider>
     </BrowserRouter>

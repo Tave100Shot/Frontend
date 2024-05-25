@@ -66,7 +66,7 @@ export const HalfLetterContainer = styled.div`
 `
 
 // Letter 상세 보기 박스
-export const LetterViewkContainer = styled.div`
+export const LetterViewContainer = styled.div`
   margin : 5rem 0 0 0;
   width : 87vw;
   height : 55rem;
@@ -111,15 +111,34 @@ export const LetterViewkContainer = styled.div`
   .letter-body {
     margin : 1.6rem 0 0 0;
     padding : 0 2rem;
-    height : 43rem;
+    height : 38rem;
     font-family : "WantedSans_Medium";
     font-size : 1.7rem;
     letter-spacing : 0.3rem;
     line-height : 3rem;
     overflow-y: scroll;
-
   }
+  .letter-btn {
+    height : 5rem;
+    display : flex;
+    align-items : center;
+    justify-content: end;
 
+    button {
+      margin : 0 2rem;
+      &:nth-child(2){margin : 0;}
+      border : none;
+      font-size : 1.8rem;
+      font-family : "BMHANNAPROOTF";
+      text-align : center;
+      border-radius : 1rem;
+      padding : 0 3rem;
+      cursor : pointer;
+      background-color : #F5F5F5;
+      &:hover{background-color : #CCCCCC;}
+
+    }
+  }
 `
 
 // Letter 작성 박스
@@ -140,11 +159,33 @@ export const LetterEditContainer = styled.form`
 
   .letter-header {
     display : flex;
-    align-items : center;
+    align-items : start;
     justify-content: space-between;
     text-align : center;
     width : 80vw;  
-    height : 6rem;    
+    height : 7rem;
+    margin : 1rem 0 0 0;    
+
+    // 유효성 검사 
+    .error-box {
+      display : flex;
+      flex-direction : column;
+      align-items : start;
+      justify-content: center;
+
+      .error-message {
+        font-size : 1.4rem;
+        text-align : left;
+        margin : 0 0 0 2.2rem;
+        color : red;
+        font-family : "WantedSans_Medium";
+      }
+
+      .date-box {
+        display : flex;
+        color : #838383;
+      }
+    }
 
     // 레터 제목 작성 input (text)
     .letter-title {
@@ -171,22 +212,22 @@ export const LetterEditContainer = styled.form`
       outline : none;
       padding : 0 2rem;
       color : #838383;
-      margin : 0 13rem 0 0;
+      margin : 0 2rem 0 0;
       cursor : pointer;
       &:hover{color:#91D1FA;}
     }
     // 레터 날짜 선택 - input(date)
     .letter-date {
-      width : 25rem;
+      width : 17rem;
       height : 5rem;
       border : none;
       padding : 0.5rem 2rem;
-      font-size : 2rem;
+      font-size : 1.8rem;
       color : #838383;
       font-family : "BMHANNAPROOTF";
       outline : none;
       border-radius : 1rem;
-      margin : 0 2rem 0 0;
+      margin : 0 0.5rem;
       cursor : pointer;
     }
   }

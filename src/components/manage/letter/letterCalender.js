@@ -4,17 +4,23 @@ import * as mc from "../../../styles/manage/manageLetterCalanderStyle";
 import React, { useState, useEffect } from 'react'
 import dayjs from 'dayjs';
 import {GoChevronLeft, GoChevronRight} from 'react-icons/go'
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from "react-router-dom";
+import { SetLetterInfo } from "../../../redux/actions/letterAction";
 
 const LetterCalender = () => {
   const navigate = useNavigate();
+  const dispatch = useDispatch();
+
   const [arr, setArr] = useState([]);
   const [selectedDay, setSelectedDay] = useState('2024-05-15') // 첫 렌더링되는 달
 
   // Letter 작성 페이지 이동
   const moveToLetterPost = () => {
-    navigate('/manage/letter/edit');
+    // letterInfo를 빈 배열로 초기화함으로써, 새로 작성하는 레터임을 인지
+    dispatch(SetLetterInfo([]));
+    navigate('/manager/letter/edit');
+
   }
 
   const initArr = (firstDay, daysInMonth) => {

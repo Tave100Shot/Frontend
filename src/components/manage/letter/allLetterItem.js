@@ -2,11 +2,48 @@ import * as mm from "../../../styles/manage/manageMainStyle"
 import * as ml from "../../../styles/manage/manageLetterStyle"
 import { useEffect, useState } from "react"
 import { useNavigate } from "react-router-dom"
+import axios from "axios"
+import { useDispatch } from "react-redux"
+import { SetLetterInfo } from "../../../redux/actions/letterAction"
 
-const AllLetterItem = () => {
+const AllLetterItem = ({newsletterId, title, writtenTime}) => {
   const navigate = useNavigate();
+  const dispatch = useDispatch();
+
   const moveToPost = () => {
-    navigate('/manage/letter/view/:letterId')
+
+    const storedToken = localStorage.getItem('accessToken');
+
+    // 전체 글 조회 API 호출
+    axios.get(`/api/admin/newsletter/${newsletterId}`, {
+      headers : {
+        Authorization : `Bearer ${storedToken}`
+      }
+    })
+    .then(response => {
+      // console.log(response.data.result);
+      const letterInfoArray = response.data.result;
+      dispatch(SetLetterInfo(letterInfoArray));
+    
+      navigate(`/manager/letter/view/${newsletterId}`)
+    })
+    .catch(error => {
+      const errorCode = error.response.data.errorCode;
+      // console.log(errorCode);
+      if(errorCode ==='JWT_4001') {
+        alert('JWT Token이 올바르지 않습니다.. 다시 로그인 해주세요 :)')
+      } 
+      else if(errorCode ==='JWT_4010') {
+        alert('로그인 유지 시간이 만료되었습니다. 다시 로그인 해주세요 :)')
+      }
+      else if(errorCode ==='SERVER_500') {
+        alert('알 수 없는 서버 에러입니다.')
+      } else {
+        alert('문제가 발생했습니다. 다시 로그인 부탁드립니다 :)')
+      }
+
+    });
+
   }
 
   return (
@@ -15,9 +52,9 @@ const AllLetterItem = () => {
         className="item-box"
         onClick={moveToPost}
       >
-        <p>레터 제목</p>
+        <p className="letter-title">{title}</p>
         <p>|</p>
-        <p>2024.05.07</p>
+        <p>{writtenTime}</p>
       </div>
     </mm.TwoItemBtn>
   )

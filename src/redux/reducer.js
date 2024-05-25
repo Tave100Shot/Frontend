@@ -10,13 +10,18 @@ export const INITIAL_STATE = {
   solutionList : [
 
   ],
-  userRightNum : '',
-  userWrongNum : '',
-  userRank : '',
-  userRivalNum : '',
-  byMeProblemList : [
+  recentLetterList : [
 
-  ]
+  ],
+  devLetterList : [
+
+  ],
+  employLetterList : [
+
+  ],
+  letterInfo : [
+
+  ],
 };
 
 export const Reducer = (state = INITIAL_STATE, action) => {
@@ -85,7 +90,32 @@ export const Reducer = (state = INITIAL_STATE, action) => {
         ...state,
         byMeProblemList: action.content
       };
-    // Community
+    // Letter
+    case 'SET_RECENT': 
+      return {
+        ...state,
+        recentLetterList: action.content
+      };
+    case 'SET_DEV': 
+      return {
+        ...state,
+        devLetterList: action.content
+      };
+    case 'SET_EMPLOY': 
+      return {
+        ...state,
+        employLetterList: action.content
+      };
+    case 'SET_LETTER_INFO': 
+      return {
+        ...state,
+        letterInfo: action.content
+      };
+    case 'UPDATE_LETTER_INFO': 
+      return {
+        ...state,
+        letterInfo: action.content
+      };
 
     // Compiling 
 

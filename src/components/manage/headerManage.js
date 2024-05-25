@@ -1,14 +1,24 @@
 import { useLocation, useNavigate } from 'react-router-dom';
 import mainLogo from '../../assets/imgs/100shot_icon.png';
 import * as h from "../../styles/headerStyle";
+import axios from 'axios';
+import { useDispatch } from 'react-redux';
+import { SetDevLetter, SetEmployLetter } from '../../redux/actions/letterAction';
 
 const HeaderManage = () => {
     const location = useLocation();
     const navigate = useNavigate();
+    const dispatch = useDispatch();
 
     const moveToMain = () => navigate('/');
-    const moveToLetter = () => navigate('/manage/letter')
-    const moveToManageMain = () => navigate('/manage')
+    
+    // Letter 조회 및 캘린더 조회로 이동
+    const moveToLetter = () => {
+        dispatch(SetDevLetter([]));
+        dispatch(SetEmployLetter([]));
+        navigate('/manager/letter');
+    }
+    const moveToManageMain = () => {navigate('/manager')}
 
     return (
         <h.HeaderWrapper>
@@ -20,11 +30,11 @@ const HeaderManage = () => {
         </h.LogoWrapper>
         <h.MenuWrapper className="menu">
             <button
-                className={location.pathname === "/manage/member" ? "active" : ""}
+                className={location.pathname === "/manager/member" ? "active" : ""}
 
             >MEMBER</button>
             <button
-                className={location.pathname === "/manage/letter" ? "active" : ""}
+                className={location.pathname === "/manager/letter" ? "active" : ""}
                 onClick={moveToLetter}
             >LETTER</button>
             <button 

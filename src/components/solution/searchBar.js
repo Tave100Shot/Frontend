@@ -64,8 +64,33 @@ const SearchBar = () => {
         console.error(error);
         const errorCode = error.response.data.errorCode;
         console.log(errorCode);
-        if(errorCode === 'PROBLEM_4002') {
+        if(errorCode === 'PROBLEM_4001') {
           alert("존재하지 않는 문제입니다.");
+          dispatch(SetSolution([]));
+          navigate('/search-solution');
+        }
+        else if(errorCode === 'PROBLEM_4002') {
+          alert("솔루션이 존재하지 않습니다.");
+          dispatch(SetSolution([]));
+          navigate('/search-solution');
+        }
+        else if(errorCode === 'SOLVED_5001') {
+          alert("Solved API 서버에서 내부 오류가 발생했습니다. \n 이는 서버 측의 문제로, 일시적인 오류일 수 있으므로 잠시 후 다시 시도해 보시기 바랍니다.");
+          dispatch(SetSolution([]));
+          navigate('/search-solution');
+        }
+        else if(errorCode === 'SOLVED_4001') {
+          alert("잘못된 요청입니다.\n 전송된 요청의 형식, 값, 파라미터 등이 Solved API의 요구 사항을 충족하지 못했습니다.");
+          dispatch(SetSolution([]));
+          navigate('/search-solution');
+        }
+        else if(errorCode === 'SOLVED_4041') {
+          alert("Solved API에서 해당 사용자를 찾을 수 없습니다.");
+          dispatch(SetSolution([]));
+          navigate('/search-solution');
+        }
+        else {
+          alert("에러가 발생했습니다. \n 잠시 후 다시 시도해보세요 :)");
           dispatch(SetSolution([]));
           navigate('/search-solution');
         }

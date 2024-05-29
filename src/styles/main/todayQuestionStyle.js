@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import { LuCheck } from "react-icons/lu";
 
 export const todayQuestionsWrapper = styled.div`
   display: flex;
@@ -81,6 +82,10 @@ margin: 2rem 0 2rem 0;
 export const letterInfoContainter = styled.div`
 //background-color: tomato;
 `
+export const styledLuCheck = styled(LuCheck)`
+font-size: 1.9rem;
+font-weight: 700;
+`
 export const devLetterContainer = styled.div`
 width : 50vw;
 height : flex;
@@ -95,7 +100,8 @@ h1 {
 
 p {
 //background-color: pink;
-font-size: 1.8rem;
+font-size: 1.7rem;
+font-weight: 600;
 }
 `
 
@@ -111,7 +117,8 @@ h1 {
 }
 
 p {
-  font-size: 1.8rem;
+  font-size: 1.7rem;
+  font-weight: 600;
 }
 `
 

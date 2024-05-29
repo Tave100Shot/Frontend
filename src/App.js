@@ -27,6 +27,7 @@ import MobilePage from "./pages/main/mobilePage";
 import GlobalStyle from "./styles/globalStyle";
 import ManageMain from "./pages/manage/manageMainPage";
 import ManageLetter from "./pages/manage/manageLetterPage";
+import ManageMember from "./pages/manage/manageMemberPage";
 import ManageAllLetter from "./pages/manage/manageAllLetterPage";
 import ManageLetterView from "./pages/manage/manageLetterViewPage";
 import ManageLetterEdit from "./pages/manage/manageLetterEditPage";
@@ -160,6 +161,7 @@ function App() {
           <Route path='/manager/letter/all' element={<ManageAllLetter/>}/>
           <Route path='/manager/letter/view/:letterId' element={<ManageLetterView/>}/>
           <Route path='/manager/letter/edit/:letterId?' element={<ManageLetterEdit/>}/>
+          <Route path='/manager/member' element={<ManageMember/>}/>
         </Routes>
       </ThemeProvider>
     </BrowserRouter>

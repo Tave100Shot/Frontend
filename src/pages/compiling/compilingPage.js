@@ -156,8 +156,7 @@ const CompilingPage = ({theme}) => {
               theme={theme.colors.compiler}
               name="UNIQUE_ID_OF_DIV"
               editorProps={{ $blockScrolling: true }}
-              placeholder={`team_member = input(“팀원 이름을 입력하시오 : “)
-            \n print(f”안녕하세요 {team_member}님 백발백준 사이트입니다”)`}
+              placeholder={`백발백준 COMPILER 에 코드를 입력해보세요!`}
               fontSize={16}
               style={{ width: '100%', height: '100%' }}
             />

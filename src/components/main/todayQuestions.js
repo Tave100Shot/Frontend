@@ -1,7 +1,6 @@
 import React, { useState, useRef } from 'react';
 import * as t from "../../styles/main/todayQuestionStyle";
 import newsImage from '../../assets/imgs/today.png';
-import { LuCheck } from "react-icons/lu";
 import axios from "axios";
 
 const TodayQuestion = () => {
@@ -368,15 +367,15 @@ const TodayQuestion = () => {
             <t.letterInfoContainter>
               <t.devLetterContainer>
                 <h1>DEV LETTER</h1>
-                <p><LuCheck /> 현재 주목받고 있는 기술</p>
-                <p><LuCheck /> ~~~~</p>
-                <p><LuCheck /> 매 달 <t.highlight>10일</t.highlight>에 메일함으로 보내드려요!</p>
+                <p><t.styledLuCheck /> 개발 관련 <t.highlight>행사</t.highlight>들을 공유하는 뉴스레터</p>
+                <p><t.styledLuCheck /> 개발자들의 <t.highlight>성장 노하우</t.highlight>들도 드립니다 :)</p>
+                <p><t.styledLuCheck /> 매주 <t.highlight>월요일 오전 8시</t.highlight>에 메일함으로 보내드려요!</p>
               </t.devLetterContainer>
               <t.employLetterContainer>
                 <h1>EMPLOY LETTER</h1>
-                <p><LuCheck /> 최근 올라온 <t.highlight>취업 공고</t.highlight>들을 모아드려요.</p>
-                <p><LuCheck /> ~~~~</p>
-                <p><LuCheck /> 매 달 <t.highlight>15일</t.highlight>에 메일함으로 보내드려요!</p>
+                <p><t.styledLuCheck /> 개발 분야의 <t.highlight>채용 관련 정보</t.highlight>들을 공유하는 뉴스레터</p>
+                <p><t.styledLuCheck /> <t.highlight>채용에 관한 팁</t.highlight>들도 드립니다 :)</p>
+                <p><t.styledLuCheck /> <t.highlight>매주 월요일 오전 8시</t.highlight>에 메일함으로 보내드려요!</p>
               </t.employLetterContainer>
             </t.letterInfoContainter>
             <t.applyContainer>

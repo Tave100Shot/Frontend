@@ -39,7 +39,7 @@ const CompilingPage = ({theme}) => {
       fetchedProblemInfo["Input Description"] === "N/A" ||
       fetchedProblemInfo["Output Description"] === "N/A"
       ) {
-        alert("해당 문제의 정보를 찾을 수 없습니다.");
+        alert("요청한 문제 번호를 찾을 수 없습니다.");
         return;
       }
         setIsValid(true);
@@ -54,8 +54,14 @@ const CompilingPage = ({theme}) => {
         alert("문제 정보 변환 중 오류가 발생했어요!");
         return;
       }
-      if (error.response.data.errorCode === "PROBLEM_4040") {
-        alert("문제 번호는 1000번부터 31226번까지 존재해요!");
+      else if (error.response.data.errorCode === "PROBLEM_4040") {
+        alert("요청한 문제 번호를 찾을 수 없습니다.");
+      }
+      else if (error.response.data.errorCode === "JWT_4010") {
+        alert("Jwt Token의 유효 기간이 만료되었습니다. 다시 로그인 해주세요!");
+      } 
+      else {
+        alert("알 수 없는 서버 에러입니다.");
       }
     }
   };

@@ -102,6 +102,7 @@ p {
 //background-color: pink;
 font-size: 1.7rem;
 font-weight: 600;
+line-height: 1.8;
 }
 `
 
@@ -119,6 +120,7 @@ h1 {
 p {
   font-size: 1.7rem;
   font-weight: 600;
+  line-height: 1.8;
 }
 `
 

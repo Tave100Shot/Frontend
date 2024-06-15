@@ -3,10 +3,11 @@ import axios from 'axios';
 import * as h from "../../styles/headerStyle";
 import * as t from "../../styles/main/todayQuestionStyle";
 import mainLogo from '../../assets/imgs/100shot_icon.png';
-import { useLocation } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 
 const VerifyEmail = () => {
     const location = useLocation();
+    const navigate = useNavigate();
     const [status, setStatus] = useState({
         message: '이메일 인증 중',
         details: '잠시 기다려주세요'
@@ -20,11 +21,11 @@ const VerifyEmail = () => {
             verifyEmailToken(token);
         } else {
             setStatus({
-                message: 'Invalid verification link',
-                details: 'The verification link is not valid.'
+                message: '이메일 인증 실패',
+                details: '유효하지 않은 인증 링크입니다.'
             });
         }
-    }, [location]);
+    }, []);
 
     const getStatusMessage = (code) => {
         switch (code) {
@@ -34,19 +35,11 @@ const VerifyEmail = () => {
                     details: '원래 페이지로 돌아가주세요!'
                 };
             case '401':
-                return {
-                    message: '이메일 인증 실패',
-                    details: ''
-                };
             case '403':
-                return {
-                    message: '이메일 인증 실패',
-                    details: ''
-                };
             case '404':
                 return {
                     message: '이메일 인증 실패',
-                    details: ''
+                    details: '잠시 후 다시 시도해주세요!'
                 };
             default:
                 return {
@@ -58,14 +51,22 @@ const VerifyEmail = () => {
 
     const verifyEmailToken = async (token) => {
         try {
-            const response = await axios.get(`/api/email/verify?token=${token}`);
-            console.log(response);
-            setStatus(getStatusMessage(response.data.code));
+            const response = await axios.get(`/api/email/verify`, {
+                headers: {
+                    Authorization: `Bearer ${token}`
+                }
+            });
+            const statusMessage = getStatusMessage(response.data.code);
+            setStatus(statusMessage);
+
+            if (response.data.code === '200') {
+                    navigate('/email/verify', {replace:true});
+            }
         } catch (error) {
             console.error(error);
             setStatus({
                 message: '이메일 인증 실패',
-                details: '!'
+                details: '잠시 후 다시 시도해주세요!'
             });
         }
     };

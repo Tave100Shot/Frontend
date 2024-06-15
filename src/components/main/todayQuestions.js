@@ -147,6 +147,9 @@ const TodayQuestion = () => {
         else if (error.response.data.errorCode === "EAMIL5001") {
           alert('템플릿 변환에 실패했습니다.');
         }
+        else if (error.response.data.errorCode === "JWT_4010") {
+          alert('로그인 유효 기간이 지났습니다. 다시 로그인 해주세요 :)');
+        }
         else {
           alert('알 수 없는 서버 에러입니다.')
         }
@@ -214,6 +217,9 @@ const TodayQuestion = () => {
         else if (error.response.data.errorCode === "EAMIL5001") {
           alert('템플릿 변환에 실패했습니다.');
         }
+        else if (error.response.data.errorCode === "JWT_4010") {
+          alert('로그인 유효 기간이 지났습니다. 다시 로그인 해주세요 :)');
+        }
         else {
           alert('알 수 없는 서버 에러입니다.')
         }
@@ -274,10 +280,15 @@ const TodayQuestion = () => {
           userName: response.data.result.bojName,
           userEmail: response.data.result.gitEmail,
         }))
-        console.log('get', saveInfo.userName);
-        console.log('get', saveInfo.userEmail);
+        console.log(response);
+        if (response.data.code === '200'){
+          alert('이미 구독 완료되었습니다!');
+          setIsSubmitted(false);
+        }
+        //console.log('get', saveInfo.userName);
+        //console.log('get', saveInfo.userEmail);
       } catch (error) {
-        //console.error('회원get:', error);
+        console.log('회원get:', error);
         if (error.response.data.errorCode === "LETTER_4040") {
           alert('이미 구독 중입니다. \n정보를 수정하려면 [정보 수정] 버튼을 클릭하세요!');
           setIsSubmitted(false);
@@ -317,6 +328,9 @@ const TodayQuestion = () => {
         }
         else if (error.response.data.errorCode === "EAMIL5001") {
           alert('템플릿 변환에 실패했습니다.');
+        }
+        else if (error.response.data.errorCode === "JWT_4010") {
+          alert('로그인 유효 기간이 지났습니다. 다시 로그인 해주세요 :)');
         }
         else {
           alert('알 수 없는 서버 에러입니다.')
@@ -376,6 +390,9 @@ const TodayQuestion = () => {
         }
         else if (error.response.data.errorCode === "EAMIL5001") {
           alert('템플릿 변환에 실패했습니다.');
+        }
+        else if (error.response.data.errorCode === "JWT_4010") {
+          alert('로그인 유효 기간이 지났습니다. 다시 로그인 해주세요 :)');
         }
         else {
           alert('알 수 없는 서버 에러입니다.')
@@ -470,6 +487,9 @@ const TodayQuestion = () => {
           }
           else if (error.response.data.errorCode === "EAMIL5001") {
             alert('템플릿 변환에 실패했습니다.');
+          }
+          else if (error.response.data.errorCode === "JWT_4010") {
+            alert('로그인 유효 기간이 지났습니다. 다시 로그인 해주세요 :)');
           }
           else {
             alert('알 수 없는 서버 에러입니다.')
@@ -568,6 +588,9 @@ const TodayQuestion = () => {
       else if (error.response.data.errorCode === "EAMIL5001") {
         alert('템플릿 변환에 실패했습니다.');
       }
+      else if (error.response.data.errorCode === "JWT_4010") {
+        alert('로그인 유효 기간이 지났습니다. 다시 로그인 해주세요 :)');
+      }
       else {
         alert('알 수 없는 서버 에러입니다.')
       }
@@ -586,9 +609,12 @@ const TodayQuestion = () => {
           Authorization: `Bearer ${localStorage.getItem('accessToken')}`,
         }
       });
-      console.log('레터', response);
+      if (response.data.code === '200'){
+        setfinalSubmitted(true);
+      }
+      //console.log('최종 레터', response);
     } catch (error) {
-      console.error('레터 에러wha', error.response);
+      console.log('레터 에러wha', error.response);
       if (error.response.data.errorCode === "LETTER_4040") {
         setfinalSubmitted(true);
       }
@@ -630,6 +656,9 @@ const TodayQuestion = () => {
       }
       else if (error.response.data.errorCode === "EAMIL5001") {
         alert('템플릿 변환에 실패했습니다.');
+      }
+      else if (error.response.data.errorCode === "JWT_4010") {
+        alert('로그인 유효 기간이 지났습니다. 다시 로그인 해주세요 :)');
       }
       else {
         alert('알 수 없는 서버 에러입니다.')

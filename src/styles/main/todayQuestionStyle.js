@@ -25,6 +25,7 @@ export const titleBox = styled.div`
   font-weight: bold;
   color: ${props => props.theme.colors.colorMain};
 `
+
 export const informationBox = styled.div`
 font-size: 2rem;
 font-weight: 500;
@@ -350,4 +351,27 @@ margin: 1rem 3rem 1rem 3rem;
     padding: 1rem;
     font-weight: 300;
   }
+`
+
+export const emailVerifyBox = styled.div`
+  display : flex;
+  flex-direction: column;
+  width : 90vw;
+  height : flex;
+  align-items: center;
+  justify-content: center;
+  background-color: ${props => props.theme.colors.colorBg};
+  box-shadow: 0px 5px 10px ${props => props.theme.colors.colorShadow};;
+  border-radius: 20px;
+
+  h1 {
+    font-size: 4rem;
+    font-weight: bold;
+    color: ${props => props.theme.colors.colorMain};
+  }
+    p {
+      font-size: 3rem;
+      font-weight: bold;
+      color: ${props => props.theme.colors.colorMain};
+    }
 `

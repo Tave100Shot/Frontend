@@ -1,4 +1,4 @@
-import React, { useState, useRef } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 import * as t from "../../styles/main/todayQuestionStyle";
 import newsImage from '../../assets/imgs/today.png';
 import axios from "axios";
@@ -22,6 +22,7 @@ const TodayQuestion = () => {
     userName: '',
     userEmail: '',
   })
+  const [loginStat, setLoginStat] = useState(false);
   const [isSubmitted, setIsSubmitted] = useState(false);
   const [isConfirmed, setIsConfirmed] = useState(false);
   const [clickEmailButton, setClickEmailButton] = useState(false);
@@ -220,18 +221,24 @@ const TodayQuestion = () => {
 
     }
   };
+  useEffect(() => {
+    const accessToken = localStorage.getItem('accessToken');
+    if (accessToken) {
+      setLoginStat(true);
+    } else {
+      setLoginStat(false);
+    }
+  }, []);
 
   // [레터 선택] 버튼
     const handleLetterSubmit = async () => {
-    let message = { letter: '' };
-    let isValid = true;
+      if (!loginStat) {
+        alert('로그인 후에 구독해주세요!')
+        setIsSubmitted(false);
+        return;
+      }
 
-    if (!isClicked.DEV && !isClicked.EMPLOY) {
-      message.letter = '최소 하나 이상의 뉴스레터를 눌러주세요 :)';
-      isValid = false;
-      setValidationMessage(message);
-      return;
-    }
+    let isValid = true;
 
     if (isValid) {
       let selectedLetters = [];

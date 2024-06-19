@@ -35,7 +35,7 @@ const PostDetailPage = ({comment}) => {
       }
     };
     fetchPostDetails();
-  }, [postId]);
+  }, [postId, storedToken]);
 
   const moveToMain = () => {
     navigate('/');
@@ -50,7 +50,7 @@ const PostDetailPage = ({comment}) => {
   };
 
   if (loading) {
-    return <p>로딩 중...</p>;
+    return <p>잠시만 기다려주세요!</p>;
   }
 
   /* 게시물 삭제 */
@@ -84,7 +84,8 @@ const PostDetailPage = ({comment}) => {
 };
 
   /* 댓글 추가 */
-  const handleAddComment = async () => {
+  const handleAddComment = async (event) => {
+    event.preventDefault();
     try {
       if (inputValue.trim() === '') {
         setInputError(true);
@@ -92,7 +93,6 @@ const PostDetailPage = ({comment}) => {
       }
       const response = await axios.post(`/api/post/${postId}/comments`, {
         comment: inputValue,
-        parentCommentId: null,
       },
         {
           headers: {
@@ -105,33 +105,32 @@ const PostDetailPage = ({comment}) => {
 
       const updatedPostDetails = { ...postDetails };
       if (updatedPostDetails.postResponses && updatedPostDetails.postResponses[0]) {
-        if (!updatedPostDetails.postResponses[0].commentListResponse) {
+        /* if (!updatedPostDetails.postResponses[0].commentListResponse) {
           updatedPostDetails.postResponses[0].commentListResponse = {
             commentResponses: [],
           };
-        }
+        } */
         updatedPostDetails.postResponses[0].commentListResponse.commentResponses.push(response.data.comment);
         updatedPostDetails.postResponses[0].commentCount += 1;
-
         setPostDetails(updatedPostDetails);
-        setInputValue('');
+        /* setInputValue('');
+        setInputError(false); */
         console.error('새댓 정보:', updatedPostDetails);
+      return updatedPostDetails;
 
       }
-      setInputValue('');
-      setInputError(false);
-      window.location.reload();
-
     } catch (error) {
       console.error('새댓 오류:', error);
+    } finally {
+      window.location.reload();
+
     }
   };
 
   const handleEnterKeyPress = (e) => {
     if (e.key === 'Enter') {
       e.preventDefault();
-      handleAddComment();
-      setInputValue('');
+      handleAddComment(e);
     }
   };
 
@@ -163,6 +162,7 @@ const PostDetailPage = ({comment}) => {
           editedCommentContent;
         setPostDetails(updatedPostDetails);
       }
+      return updatedPostDetails;
 
     } catch (error) {
       console.error('댓글 수정 오류:', error);
@@ -245,7 +245,7 @@ const PostDetailPage = ({comment}) => {
                   </c.PostDetailContainer>
                 </>
               ) : (
-                <p>로딩 중...</p>
+                <p>잠시만 기다려주세요!</p>
               )}
             </div>
             <c.ViewCommentContianer>
@@ -257,7 +257,7 @@ const PostDetailPage = ({comment}) => {
           </c.DetailBulletinBox>
           <c.CommentWriteBox>
             <input placeholder="댓글 작성 후 ENTER"
-              onKeyDown={(e) => e.key === 'Enter' && handleEnterKeyPress(e)}
+              onKeyDown={handleEnterKeyPress}
               onChange={(e) => setInputValue(e.target.value)}
               className={inputError ? 'error' : ''}
             />
@@ -283,7 +283,8 @@ const PostDetailPage = ({comment}) => {
                     <c.ParentComment>
                       <c.CommentProfile>
                         <c.CommentProfileId >
-                          <c.CommentProfileIcon />
+                        {<img src={comment.writerProfileImgUrl} alt="Profile" style={{ width: '30px', height: '30px', borderRadius: '30px', border: '1px solid #fff' }} />}
+
                           <p>{comment.gitLoginId}</p>
                         </c.CommentProfileId>
                       </c.CommentProfile>
@@ -294,7 +295,7 @@ const PostDetailPage = ({comment}) => {
                           onChange={(e) => setEditedCommentContent(e.target.value)}
                           onKeyDown={(e) => e.key === 'Enter' && handleApplyEdit(comment.commentId)}
                         />
-                        <button onClick={() => handleApplyEdit(comment.commentId)}>수정 적용</button>
+                        <button onClick={() => handleApplyEdit(comment.commentId)}>수정하기</button>
                       </c.CommentEditContainer>
                     </c.ParentComment>
                   </>

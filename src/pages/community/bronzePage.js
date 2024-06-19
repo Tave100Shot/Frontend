@@ -66,7 +66,7 @@ const BronzePage = () => {
             params: {
               postTier: "BronzeSilver",
               page: currentPage,
-              size: 10,
+              size: 1,
             }
           });
           totalPage = response.data.result.totalPage;

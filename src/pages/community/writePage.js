@@ -95,7 +95,6 @@ const WritePage = () => {
                 <p>{bojTier}</p>
               </c.AuthorContainer>
             </c.WriteWrapContainer>
-
               <c.TitleContainer>
                 <div>제목</div>
                 <input

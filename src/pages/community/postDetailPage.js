@@ -15,6 +15,7 @@ const PostDetailPage = ({comment}) => {
   const [isEditingComment, setIsEditingComment] = useState(null);
   const [inputValue, setInputValue] = useState('');
   const [inputError, setInputError] = useState(false);
+  const [originCommentContent, setOriginCommentContent] = useState('');
   const [editedCommentContent, setEditedCommentContent] = useState('');
   const [isModalOpen, setIsModalOpen] = useState(false);
 
@@ -105,24 +106,23 @@ const PostDetailPage = ({comment}) => {
 
       const updatedPostDetails = { ...postDetails };
       if (updatedPostDetails.postResponses && updatedPostDetails.postResponses[0]) {
-        /* if (!updatedPostDetails.postResponses[0].commentListResponse) {
+        if (!updatedPostDetails.postResponses[0].commentListResponse) {
           updatedPostDetails.postResponses[0].commentListResponse = {
             commentResponses: [],
           };
-        } */
+        }
         updatedPostDetails.postResponses[0].commentListResponse.commentResponses.push(response.data.comment);
         updatedPostDetails.postResponses[0].commentCount += 1;
+        console.log(updatedPostDetails);
         setPostDetails(updatedPostDetails);
-        /* setInputValue('');
-        setInputError(false); */
+        setInputValue('');
+        setInputError(false);
         console.error('새댓 정보:', updatedPostDetails);
-      return updatedPostDetails;
-
       }
     } catch (error) {
       console.error('새댓 오류:', error);
     } finally {
-      window.location.reload();
+      //window.location.reload();
 
     }
   };
@@ -134,7 +134,7 @@ const PostDetailPage = ({comment}) => {
     }
   };
 
-  /* 댓글 수정 */
+  /* 댓글 수정하기 버튼 */
   const handleApplyEdit = async (commentId) => {
     const comment = postDetails.commentListResponse.commentResponses.find((comment) => comment.commentId === commentId);
 
@@ -166,13 +166,23 @@ const PostDetailPage = ({comment}) => {
 
     } catch (error) {
       console.error('댓글 수정 오류:', error);
+      if (error.response && error.response.data.errorCode === 'JWT_4010') {
+        alert("로그인 유효 기간이 지났습니다. 다시 로그인 해주세요 :)");
+        navigate('/community');
+      }
     } finally {
-      window.location.reload();
+      //window.location.reload();
     }
   } else {
     alert("타인의 댓글은 수정할 수 없습니다.");
   }
 };
+
+  /* 댓글 수정 취소 버튼 */
+  const handleCancelEdit = () => {
+    setEditedCommentContent(originCommentContent);
+    setIsEditingComment(null);
+  };
 
   /* 댓글 삭제 */
   const handleDeleteComment = async (commentId) => {
@@ -185,7 +195,7 @@ const PostDetailPage = ({comment}) => {
           Authorization: `Bearer ${storedToken}`,
         },
       });
-      window.location.reload();
+      //window.location.reload();
 
       /* 삭제된 댓글을 제외하고 업데이트 */
       const updatedPostDetails = { ...postDetails };
@@ -284,7 +294,6 @@ const PostDetailPage = ({comment}) => {
                       <c.CommentProfile>
                         <c.CommentProfileId >
                         {<img src={comment.writerProfileImgUrl} alt="Profile" style={{ width: '30px', height: '30px', borderRadius: '30px', border: '1px solid #fff' }} />}
-
                           <p>{comment.gitLoginId}</p>
                         </c.CommentProfileId>
                       </c.CommentProfile>
@@ -295,13 +304,14 @@ const PostDetailPage = ({comment}) => {
                           onChange={(e) => setEditedCommentContent(e.target.value)}
                           onKeyDown={(e) => e.key === 'Enter' && handleApplyEdit(comment.commentId)}
                         />
-                        <button onClick={() => handleApplyEdit(comment.commentId)}>수정하기</button>
+                        <button onClick={() => handleApplyEdit(comment.commentId)}>수정</button>
+                        <button onClick={handleCancelEdit}>취소</button>
                       </c.CommentEditContainer>
                     </c.ParentComment>
                   </>
                 )}
                 <c.CommentViewIconContainer>
-                  <c.CommentViewEdit onClick={() => setIsEditingComment(comment.commentId)} />
+                  <c.CommentViewEdit onClick={() => { setIsEditingComment(comment.commentId); setOriginCommentContent(comment.content); setEditedCommentContent(comment.content); }} />
                   <c.CommentViewDelete onClick={() => handleDeleteComment(comment.commentId)} />
                 </c.CommentViewIconContainer>
               </c.ParentCommentView>

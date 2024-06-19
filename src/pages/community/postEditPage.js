@@ -10,6 +10,8 @@ const PostEditPage = () => {
   const { state } = useLocation();
   const { postDetails = {} } = state || {};
   const { postId, title, content, imageUrls, writer } = postDetails;
+  const bojTier = localStorage.getItem('bojTier');
+
 
   const [editData, setEditData] = useState({
     title: title,
@@ -45,7 +47,7 @@ const PostEditPage = () => {
       <Header click={() => navigate('/')} />
       <MainContainer>
         <FirstContainer>
-          <Typography>POST EDIT</Typography>
+          <Typography>COMMUNITY EDIT</Typography>
           <HorizontalLine />
           <form onSubmit={handleEditSubmit} encType="multipart/form-data">
             <c.WriteWrapContainer>
@@ -53,6 +55,11 @@ const PostEditPage = () => {
                 <div>글쓴이</div>
                 <input id="writer" type="text" readOnly value={writer} />
               </c.AuthorContainer>
+              <c.AuthorContainer>
+                <div>티어</div>
+                <p>{bojTier}</p>
+              </c.AuthorContainer>
+            </c.WriteWrapContainer>
               <c.TitleContainer>
                 <div>제목</div>
                 <input
@@ -64,7 +71,6 @@ const PostEditPage = () => {
                   placeholder="Write Title"
                 />
               </c.TitleContainer>
-            </c.WriteWrapContainer>
             <c.ContentContainer>
               <div>내용</div>
               <textarea
@@ -83,7 +89,7 @@ const PostEditPage = () => {
             </c.FileContainer>
             <c.ButtonContainer>
               <c.CancelButton type="button" onClick={() => navigate(`/community/post/${postId}`)}>취소</c.CancelButton>
-              <c.UploadButton type="submit">수정 완료</c.UploadButton>
+              <c.UploadButton type="submit">수정</c.UploadButton>
             </c.ButtonContainer>
           </form>
         </FirstContainer>

@@ -451,9 +451,14 @@ export const CommentViewDelete = styled(FiTrash)`
 `
 
 export const CommentEditContainer = styled.div`
+  //background-color: green;
+  display: flex;
+  width: 70%;
+  align-items: center;
+
   & > input {
     width: 40em;
-    min-height: 5rem;
+    height: 5rem;
     border-radius: 1rem;
     border: 0.3rem solid ${props => props.theme.colors.colorAccent};
     font-family: 'Poppins';
@@ -463,20 +468,21 @@ export const CommentEditContainer = styled.div`
     font-size: 1.5rem;
     outline: none;
     padding: 0.5rem;
-    margin-left: 1em;
+    margin: 0 1em 0 1em;
 }
 
-  & > button {
-    min-height: 5rem;
+  & button {
+    width: 7rem;
+    height: 5rem;
     font-family: 'Poppins';
     font-style: normal;
-    font-weight: 700;
+    font-weight: bold;
     line-height: normal;
     font-size: 1.5rem;
     border-radius: 1rem;
     border: 0.3rem solid ${props => props.theme.colors.colorAccent};
     padding: 1rem;
-    margin: 1rem;
+    margin-right: 1rem;
     background-color:${props => props.theme.colors.colorAccent};
     color: #fff;
     cursor: pointer;

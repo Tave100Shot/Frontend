@@ -70,6 +70,18 @@ const PostDetailPage = ({comment}) => {
         alert("로그인 유효 기간이 지났습니다. 다시 로그인 해주세요 :)");
         navigate('/community');
       }
+      else if (error.response && error.response.data.errorCode === 'POST_4040') {
+        alert("해당 게시글이 존재하지 않아요!");
+      }
+      else if (error.response && error.response.data.errorCode === 'USER_4040') {
+        alert("사용자 토큰이 잘못되었습니다. 다시 로그인 해주세요!");
+      }
+      else if (error.response && error.response.data.errorCode === 'USER_4010') {
+        alert("다시 로그인 해주세요!");
+      }
+      else if (error.response && error.response.data.errorCode === 'USER_4041') {
+        alert("회원가입을 해주세요!");
+      }
       console.error(error);
     } 
   } else {
@@ -90,11 +102,11 @@ const PostDetailPage = ({comment}) => {
   /* 댓글 추가 */
   const handleAddComment = async (event) => {
     event.preventDefault();
+    if (inputValue.trim() === '') {
+      alert("댓글을 작성해주세요!");
+      return
+    }
     try {
-      if (inputValue.trim() === '') {
-        setInputError(true);
-        return;
-      }
       const response = await axios.post(`/api/post/${postId}/comments`, {
         comment: inputValue,
       },
@@ -129,6 +141,15 @@ const PostDetailPage = ({comment}) => {
       } 
       else if (error.response && error.response.data.errorCode === 'POST_4040') {
         alert("해당 게시글이 존재하지 않아요!");
+      }
+      else if (error.response && error.response.data.errorCode === 'USER_4040') {
+        alert("사용자 토큰이 잘못되었습니다. 다시 로그인 해주세요!");
+      }
+      else if (error.response && error.response.data.errorCode === 'USER_4010') {
+        alert("다시 로그인 해주세요!");
+      }
+      else if (error.response && error.response.data.errorCode === 'USER_4041') {
+        alert("회원가입을 해주세요!");
       }
       console.error('새댓 오류:', error);
     } finally {
@@ -180,7 +201,16 @@ const PostDetailPage = ({comment}) => {
         navigate('/community');
       }
       else if (error.response && error.response.data.errorCode === 'POST_4040') {
-        alert("해당 게시글이 존재하지 않아요!");
+        alert("해당 댓글이 존재하지 않아요!");
+      }
+      else if (error.response && error.response.data.errorCode === 'USER_4040') {
+        alert("사용자 토큰이 잘못되었습니다. 다시 로그인 해주세요!");
+      }
+      else if (error.response && error.response.data.errorCode === 'USER_4010') {
+        alert("다시 로그인 해주세요!");
+      }
+      else if (error.response && error.response.data.errorCode === 'USER_4041') {
+        alert("회원가입을 해주세요!");
       }
     } finally {
       window.location.reload();
@@ -207,8 +237,6 @@ const PostDetailPage = ({comment}) => {
           Authorization: `Bearer ${storedToken}`,
         },
       });
-      window.location.reload();
-
       /* 삭제된 댓글을 제외하고 업데이트 */
       const updatedPostDetails = { ...postDetails };
       const commentIndex = updatedPostDetails.postResponses[0].commentListResponse.commentResponses.findIndex(
@@ -226,7 +254,7 @@ const PostDetailPage = ({comment}) => {
         navigate('/community');
       }
       else if (error.response && error.response.data.errorCode === 'POST_4040') {
-        alert("해당 게시글이 존재하지 않아요!");
+        alert("해당 댓글이 존재하지 않아요!");
       }
       else if (error.response && error.response.data.errorCode === 'USER_4040') {
         alert("사용자 토큰이 잘못되었습니다. 다시 로그인 해주세요!");
@@ -237,10 +265,10 @@ const PostDetailPage = ({comment}) => {
       else if (error.response && error.response.data.errorCode === 'USER_4041') {
         alert("회원가입을 해주세요!");
       }
-      else {
-        alert('알 수 없는 서버 오류에요!')
-      }
-      console.error('댓글 삭제 오류:', error);
+      
+    }
+    finally {
+      window.location.reload();
     }
   } else {
     alert("타인의 댓글은 삭제할 수 없습니다.");

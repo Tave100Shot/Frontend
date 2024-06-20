@@ -86,6 +86,18 @@ const WritePlatinumPage = () => {
         alert("해당 게시글에 작성 권한이 없어요!");
         navigate('/community/platinum');
       }
+      else if (error.response && error.response.data.errorCode === 'USER_4040') {
+        alert("사용자 토큰이 잘못되었습니다. 다시 로그인 해주세요!");
+      }
+      else if (error.response && error.response.data.errorCode === 'USER_4010') {
+        alert("다시 로그인 해주세요!");
+      }
+      else if (error.response && error.response.data.errorCode === 'USER_4041') {
+        alert("회원가입을 해주세요!");
+      }
+      else {
+        alert('알 수 없는 서버 오류에요!')
+      }
       console.error(error);
     }
   }

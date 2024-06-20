@@ -59,7 +59,25 @@ const PostEditPage = () => {
       });
       navigate(`/community/post/${postId}`);
     } catch (error) {
-      
+      if (error.response && error.response.data.errorCode === 'JWT_4010') {
+        alert("로그인 유효 기간이 지났습니다. 다시 로그인 해주세요 :)");
+        navigate('/community');
+      }
+      else if (error.response && error.response.data.errorCode === 'POST_4040') {
+        alert("해당 게시글이 존재하지 않아요!");
+      }
+      else if (error.response && error.response.data.errorCode === 'USER_4040') {
+        alert("사용자 토큰이 잘못되었습니다. 다시 로그인 해주세요!");
+      }
+      else if (error.response && error.response.data.errorCode === 'USER_4010') {
+        alert("다시 로그인 해주세요!");
+      }
+      else if (error.response && error.response.data.errorCode === 'USER_4041') {
+        alert("회원가입을 해주세요!");
+      }
+      else {
+        alert('알 수 없는 서버 오류에요!')
+      }
       console.error("게시물 수정 실패:", error);
     }
   };

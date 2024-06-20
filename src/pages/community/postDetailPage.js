@@ -83,7 +83,6 @@ const PostDetailPage = ({comment}) => {
   if (gitLoginId === postDetails.writer) {
     navigate(`/community/post/${postId}/edit`, { state: { postDetails } });
   } else {
-  
     alert("타인의 게시글은 수정할 수 없습니다.");
   }
 };
@@ -127,6 +126,9 @@ const PostDetailPage = ({comment}) => {
       if (error.response && error.response.data.errorCode === 'JWT_4010') {
         alert("로그인 유효 기간이 지났습니다. 다시 로그인 해주세요 :)");
         navigate('/community');
+      } 
+      else if (error.response && error.response.data.errorCode === 'POST_4040') {
+        alert("해당 게시글이 존재하지 않아요!");
       }
       console.error('새댓 오류:', error);
     } finally {
@@ -177,6 +179,9 @@ const PostDetailPage = ({comment}) => {
         alert("로그인 유효 기간이 지났습니다. 다시 로그인 해주세요 :)");
         navigate('/community');
       }
+      else if (error.response && error.response.data.errorCode === 'POST_4040') {
+        alert("해당 게시글이 존재하지 않아요!");
+      }
     } finally {
       window.location.reload();
     }
@@ -219,6 +224,21 @@ const PostDetailPage = ({comment}) => {
       if (error.response && error.response.data.errorCode === 'JWT_4010') {
         alert("로그인 유효 기간이 지났습니다. 다시 로그인 해주세요 :)");
         navigate('/community');
+      }
+      else if (error.response && error.response.data.errorCode === 'POST_4040') {
+        alert("해당 게시글이 존재하지 않아요!");
+      }
+      else if (error.response && error.response.data.errorCode === 'USER_4040') {
+        alert("사용자 토큰이 잘못되었습니다. 다시 로그인 해주세요!");
+      }
+      else if (error.response && error.response.data.errorCode === 'USER_4010') {
+        alert("다시 로그인 해주세요!");
+      }
+      else if (error.response && error.response.data.errorCode === 'USER_4041') {
+        alert("회원가입을 해주세요!");
+      }
+      else {
+        alert('알 수 없는 서버 오류에요!')
       }
       console.error('댓글 삭제 오류:', error);
     }

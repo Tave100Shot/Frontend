@@ -367,6 +367,7 @@ export const CommentViewIconContainer = styled.div`
   grid-gap: 1.5em;
   grid-template-columns: repeat(2, 1fr);
   margin-top: 1.5rem;
+  margin-left: 1rem;
   align-items: center;
   justify-content: center;
 `
@@ -416,6 +417,7 @@ export const CommentProfileIcon = styled(IoPersonCircleOutline)`
 
 export const ParentCommentView = styled.div`
   position: relative;
+  gap:1rem;
   height: flex;
   border-radius: 1rem;
   border: 0.3rem solid ${props => props.theme.colors.colorAccent};
@@ -440,24 +442,24 @@ export const CommentViewEdit = styled(LuPencil)`
   cursor : pointer;
   font-size : 2rem;
   color : ${props => props.theme.colors.colorAccent};
-  margin: auto;
+  //margin: auto;
 `
 
 export const CommentViewDelete = styled(FiTrash)`
   cursor: pointer;
   font-size: 2rem;
   color: ${props => props.theme.colors.colorAccent};
-  margin: auto;
+  //margin: auto;
 `
 
 export const CommentEditContainer = styled.div`
   //background-color: green;
   display: flex;
-  width: 70%;
+  width: 60%;
   align-items: center;
 
   & > input {
-    width: 40em;
+    width: 100%;
     height: 5rem;
     border-radius: 1rem;
     border: 0.3rem solid ${props => props.theme.colors.colorAccent};
@@ -467,18 +469,18 @@ export const CommentEditContainer = styled.div`
     line-height: normal;
     font-size: 1.5rem;
     outline: none;
-    padding: 0.5rem;
+    padding: 1rem;
     margin: 0 1em 0 1em;
 }
 
   & button {
-    width: 7rem;
+    width: 70px;
     height: 5rem;
     font-family: 'Poppins';
     font-style: normal;
     font-weight: bold;
     line-height: normal;
-    font-size: 1.5rem;
+    font-size: 15px;
     border-radius: 1rem;
     border: 0.3rem solid ${props => props.theme.colors.colorAccent};
     padding: 1rem;

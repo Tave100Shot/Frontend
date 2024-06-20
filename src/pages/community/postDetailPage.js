@@ -130,7 +130,7 @@ const PostDetailPage = ({comment}) => {
       }
       console.error('새댓 오류:', error);
     } finally {
-      //window.location.reload();
+      window.location.reload();
     }
   };
 

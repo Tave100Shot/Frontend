@@ -72,6 +72,16 @@ const WriteGoldPage = () => {
       console.log(response.data);
       navigate("/community/gold");
     } catch (error) {
+      if (error.response && error.response.data.errorCode === 'JWT_4010') {
+        alert("로그인 유효 기간이 지났습니다. 다시 로그인 해주세요 :)");
+        navigate('/community');
+      }
+      else if (error.response && error.response.data.errorCode === 'S4001') {
+        alert("사진 개수가 너무 많아요!");
+      }
+      else if (error.response && (error.response.data.errorCode === 'S5001' || error.response.data.errorCode === 'S5002' || error.response.data.errorCode === 'S5003')) {
+        alert("사진 업로드 에러가 발생했어요!");
+      }
       console.error(error);
     }
   }

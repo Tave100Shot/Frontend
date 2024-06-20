@@ -121,9 +121,9 @@ function App() {
             <Route path='/community/platinum' element={<PlatinumPage/>}/>
             )}
           {isMobile ? (
-            <Route path='/community/diamond' element={<MobilePage />} />
+            <Route path='/community/high' element={<MobilePage />} />
           ) : (
-            <Route path='/community/diamond' element={<DiamondPage/>}/>
+            <Route path='/community/high' element={<DiamondPage/>}/>
             )}
           {isMobile ? (
             <Route path='/community/write' element={<MobilePage />} />

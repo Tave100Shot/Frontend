@@ -82,6 +82,10 @@ const WritePlatinumPage = () => {
       else if (error.response && (error.response.data.errorCode === 'S5001' || error.response.data.errorCode === 'S5002' || error.response.data.errorCode === 'S5003')) {
         alert("사진 업로드 에러가 발생했어요!");
       }
+      else if (error.response && error.response.data.errorCode === 'POST_4030') {
+        alert("해당 게시글에 작성 권한이 없어요!");
+        navigate('/community/platinum');
+      }
       console.error(error);
     }
   }

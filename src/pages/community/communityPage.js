@@ -46,7 +46,7 @@ const CommunityPage = () => {
               <Description>
               다이아, 루비, 마스터 회원들의 채널방
               </Description>
-              <EnterButton onClick={() => handleEnterClick('DIAMOND')}>ENTER</EnterButton>
+              <EnterButton onClick={() => handleEnterClick('HIGH')}>ENTER</EnterButton>
               </LevelBox>
           </GridContainer>
         </FirstContainer>

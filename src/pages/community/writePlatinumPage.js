@@ -69,7 +69,7 @@ const WritePlatinumPage = () => {
         }
       });
       alert('작성 완료!')
-      console.log(response.data);
+      //console.log(response.data);
       navigate("/community/platinum");
     } catch (error) {
       if (error.response && error.response.data.errorCode === 'JWT_4010') {
@@ -99,7 +99,7 @@ const WritePlatinumPage = () => {
         alert('알 수 없는 서버 오류에요!')
         navigate('/community');
       }
-      console.error(error);
+      //console.error(error);
     }
   }
   };

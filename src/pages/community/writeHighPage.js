@@ -69,7 +69,7 @@ const WriteHighPage = () => {
           }
         });
         alert('작성 완료!')
-        console.log(response.data);
+        //console.log(response.data);
         navigate("/community/high");
       } catch (error) {
         if (error.response && error.response.data.errorCode === 'JWT_4010') {
@@ -100,7 +100,7 @@ const WriteHighPage = () => {
         navigate('/community');
 
         }
-        console.error(error);
+        //console.error(error);
       }
     }
   };

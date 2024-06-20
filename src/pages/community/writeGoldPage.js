@@ -69,7 +69,7 @@ const WriteGoldPage = () => {
         }
       });
       alert('작성 완료!')
-      console.log(response.data);
+      //console.log(response.data);
       navigate("/community/gold");
     } catch (error) {
       if (error.response && error.response.data.errorCode === 'JWT_4010') {
@@ -100,7 +100,7 @@ const WriteGoldPage = () => {
         navigate('/community');
 
       }
-      console.error(error);
+      //console.error(error);
     }
   }
   };

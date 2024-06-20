@@ -66,26 +66,40 @@ const HighPage = () => {
             params: {
               postTier: "High",
               page: currentPage,
-              size: 10,
+              size: 1,
             }
           });
           totalPage = response.data.result.totalPage;
-          console.log(totalPage);
+          //console.log(totalPage);
           if (response.data.result.postResponses.length === 0) {
             break; 
           }
-          console.log(response);
+          //console.log(response);
           setPosts(prevPosts => [...prevPosts, ...response.data.result.postResponses]);
         }
       } catch (error) {
         if (error.response && error.response.data.errorCode === 'JWT_4010') {
           alert("로그인 유효 기간이 지났습니다. 다시 로그인 해주세요 :)");
           navigate('/');
-        } else if (error.response && error.response.data.errorCode === "POST_4030") {
+        } 
+        else if (error.response && error.response.data.errorCode === "POST_4030") {
           alert('Beginner 회원은 접근할 수 없습니다.');
           navigate('/'); 
-        } else {
-          console.error(error.response);
+        } 
+        else if (error.response && error.response.data.errorCode === 'POST_4040') {
+          alert("해당 게시글이 존재하지 않아요!");
+        }
+        else if (error.response && error.response.data.errorCode === 'USER_4040') {
+          alert("사용자 토큰이 잘못되었습니다. 다시 로그인 해주세요!");
+        }
+        else if (error.response && error.response.data.errorCode === 'USER_4010') {
+          alert("다시 로그인 해주세요!");
+        }
+        else if (error.response && error.response.data.errorCode === 'USER_4041') {
+          alert("회원가입을 해주세요!");
+        }
+        else {
+          alert('알 수 없는 서버 오류에요!')
         }
       }
     };

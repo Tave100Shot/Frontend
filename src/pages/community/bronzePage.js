@@ -70,11 +70,11 @@ const BronzePage = () => {
             }
           });
           totalPage = response.data.result.totalPage;
-          console.log(totalPage);
+          //console.log(totalPage);
           if (response.data.result.postResponses.length === 0) {
             break; 
           }
-          console.log(response);
+          //console.log(response);
           setPosts(prevPosts => [...prevPosts, ...response.data.result.postResponses]);
         }
       } catch (error) {

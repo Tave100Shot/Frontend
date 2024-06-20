@@ -79,7 +79,7 @@ const PostEditPage = () => {
         alert('알 수 없는 서버 오류에요!')
         navigate('/community');
       }
-      console.error("게시물 수정 실패:", error);
+      //console.error("게시물 수정 실패:", error);
     }
   };
 

@@ -28,10 +28,10 @@ const PostDetailPage = ({comment}) => {
           },
         });
         setPostDetails(response.data.result);
-        console.log(response.data.result);
+        //console.log(response.data.result);
         setLoading(false);
       } catch (error) {
-        console.error(error);
+        //console.error(error);
         setLoading(false);
       }
     };
@@ -82,7 +82,7 @@ const PostDetailPage = ({comment}) => {
       else if (error.response && error.response.data.errorCode === 'USER_4041') {
         alert("회원가입을 해주세요!");
       }
-      console.error(error);
+      //console.error(error);
     } 
   } else {
    alert("타인의 게시글은 삭제할 수 없습니다.");
@@ -117,7 +117,7 @@ const PostDetailPage = ({comment}) => {
           },
         }
       );
-      console.log('새댓:', response.data);
+      //console.log('새댓:', response.data);
 
       const updatedPostDetails = { ...postDetails };
       if (updatedPostDetails.postResponses && updatedPostDetails.postResponses[0]) {
@@ -128,11 +128,11 @@ const PostDetailPage = ({comment}) => {
         }
         updatedPostDetails.postResponses[0].commentListResponse.commentResponses.push(response.data.comment);
         updatedPostDetails.postResponses[0].commentCount += 1;
-        console.log(updatedPostDetails);
+        //console.log(updatedPostDetails);
         setPostDetails(updatedPostDetails);
         setInputValue('');
         setInputError(false);
-        console.error('새댓 정보:', updatedPostDetails);
+        //console.error('새댓 정보:', updatedPostDetails);
       }
     } catch (error) {
       if (error.response && error.response.data.errorCode === 'JWT_4010') {
@@ -151,7 +151,7 @@ const PostDetailPage = ({comment}) => {
       else if (error.response && error.response.data.errorCode === 'USER_4041') {
         alert("회원가입을 해주세요!");
       }
-      console.error('새댓 오류:', error);
+      //console.error('새댓 오류:', error);
     } finally {
       window.location.reload();
     }
@@ -195,7 +195,7 @@ const PostDetailPage = ({comment}) => {
       return updatedPostDetails;
 
     } catch (error) {
-      console.error('댓글 수정 오류:', error);
+      //console.error('댓글 수정 오류:', error);
       if (error.response && error.response.data.errorCode === 'JWT_4010') {
         alert("로그인 유효 기간이 지났습니다. 다시 로그인 해주세요 :)");
         navigate('/community');

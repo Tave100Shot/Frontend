@@ -96,7 +96,9 @@ const WriteGoldPage = () => {
         alert("회원가입을 해주세요!");
       }
       else {
-        alert('알 수 없는 서버 오류에요!')
+        alert('알 수 없는 서버 오류에요!');
+        navigate('/community');
+
       }
       console.error(error);
     }

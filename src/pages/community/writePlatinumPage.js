@@ -97,6 +97,7 @@ const WritePlatinumPage = () => {
       }
       else {
         alert('알 수 없는 서버 오류에요!')
+        navigate('/community');
       }
       console.error(error);
     }

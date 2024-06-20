@@ -488,10 +488,10 @@ export const CommentEditContainer = styled.div`
     background-color:${props => props.theme.colors.colorAccent};
     color: #fff;
     cursor: pointer;
-    &:active {
+    /* &:active {
       transform: translateY(2px);
       box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
-    }
+    } */
 }
 `
 export const ButtonWrapper = styled.div`

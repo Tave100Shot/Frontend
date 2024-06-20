@@ -833,6 +833,15 @@ export const FileContainer = styled.div`
     justify-content: center;
     width: 100px;
   }
+  & p {
+    font-weight: 700;
+    font-family : "Poppins";
+    font-size: 2rem;
+    display: flex;
+    height: 5rem;
+    align-items : center;
+    margin-top: 2rem;
+  }
   & > label {
     width: 13vw;
     height: 5rem;

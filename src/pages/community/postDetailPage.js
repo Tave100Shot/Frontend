@@ -66,6 +66,10 @@ const PostDetailPage = ({comment}) => {
       });
       navigate('/community/bronze');
     } catch (error) {
+      if (error.response && error.response.data.errorCode === 'JWT_4010') {
+        alert("로그인 유효 기간이 지났습니다. 다시 로그인 해주세요 :)");
+        navigate('/community');
+      }
       console.error(error);
     } 
   } else {
@@ -120,10 +124,13 @@ const PostDetailPage = ({comment}) => {
         console.error('새댓 정보:', updatedPostDetails);
       }
     } catch (error) {
+      if (error.response && error.response.data.errorCode === 'JWT_4010') {
+        alert("로그인 유효 기간이 지났습니다. 다시 로그인 해주세요 :)");
+        navigate('/community');
+      }
       console.error('새댓 오류:', error);
     } finally {
       //window.location.reload();
-
     }
   };
 
@@ -171,7 +178,7 @@ const PostDetailPage = ({comment}) => {
         navigate('/community');
       }
     } finally {
-      //window.location.reload();
+      window.location.reload();
     }
   } else {
     alert("타인의 댓글은 수정할 수 없습니다.");
@@ -195,7 +202,7 @@ const PostDetailPage = ({comment}) => {
           Authorization: `Bearer ${storedToken}`,
         },
       });
-      //window.location.reload();
+      window.location.reload();
 
       /* 삭제된 댓글을 제외하고 업데이트 */
       const updatedPostDetails = { ...postDetails };
@@ -209,6 +216,10 @@ const PostDetailPage = ({comment}) => {
         setPostDetails(updatedPostDetails);
       }
     } catch (error) {
+      if (error.response && error.response.data.errorCode === 'JWT_4010') {
+        alert("로그인 유효 기간이 지났습니다. 다시 로그인 해주세요 :)");
+        navigate('/community');
+      }
       console.error('댓글 삭제 오류:', error);
     }
   } else {

@@ -72,6 +72,10 @@ const WritePage = () => {
         console.log(response.data);
         navigate("/community/bronze");
       } catch (error) {
+        if (error.response && error.response.data.errorCode === 'JWT_4010') {
+          alert("로그인 유효 기간이 지났습니다. 다시 로그인 해주세요 :)");
+          navigate('/community');
+        }
         console.error(error);
       }
     }

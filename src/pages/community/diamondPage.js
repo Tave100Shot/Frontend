@@ -18,13 +18,6 @@ const HighPage = () => {
   const [currentPage, setCurrentPage] = useState(1);
   const postsPerPage = 7;
 
-  useEffect(() => {
-    if (bojTier?.toUpperCase() === 'BEGINNER') {
-      alert('Beginner 회원은 접근할 수 없습니다.');
-      navigate('/'); 
-    }
-  }, [bojTier, navigate]);
-
   const moveToMain = () => {
     navigate('/');
   }
@@ -42,6 +35,7 @@ const HighPage = () => {
           <p>{post.postId}</p>
           <p>{post.title}</p>
           <p>{post.writer}</p>
+          <p>{post.writerTier}</p>
           <p>{post.view}</p>
           <p>{post.commentCount}</p>
           <p>{post.writtenTime}</p>
@@ -63,29 +57,56 @@ const HighPage = () => {
   useEffect(() => {
     const fetchPosts = async () => {
       try {
-        for (let currentPage = 0; currentPage < 100; currentPage++) {
-        const response = await axios.get('/api/post', {
-          headers: {
-            Authorization: `Bearer ${storedToken}`,
-          },
-          params: {
-            postTier: "High",
-            page: currentPage,
+        let totalPage = 1;
+        for (let currentPage = 0; currentPage < totalPage; currentPage++) {
+          const response = await axios.get('/api/post', {
+            headers: {
+              Authorization: `Bearer ${storedToken}`,
+            },
+            params: {
+              postTier: "High",
+              page: currentPage,
+              size: 1,
+            }
+          });
+          totalPage = response.data.result.totalPage;
+          //console.log(totalPage);
+          if (response.data.result.postResponses.length === 0) {
+            break; 
           }
-        });
-        setPosts(prevPosts => [...prevPosts, ...response.data.result.postResponses]);
+          //console.log(response);
+          setPosts(prevPosts => [...prevPosts, ...response.data.result.postResponses]);
         }
       } catch (error) {
         if (error.response && error.response.data.errorCode === 'JWT_4010') {
           alert("로그인 유효 기간이 지났습니다. 다시 로그인 해주세요 :)");
           navigate('/');
-        } else {
-          console.error(error);
+        } 
+        else if (error.response && error.response.data.errorCode === "POST_4030") {
+          alert('Beginner 회원은 접근할 수 없습니다.');
+          navigate('/'); 
+        } 
+        else if (error.response && error.response.data.errorCode === 'POST_4040') {
+          alert("해당 게시글이 존재하지 않아요!");
+        }
+        else if (error.response && error.response.data.errorCode === 'USER_4040') {
+          alert("사용자 토큰이 잘못되었습니다. 다시 로그인 해주세요!");
+        }
+        else if (error.response && error.response.data.errorCode === 'USER_4010') {
+          alert("다시 로그인 해주세요!");
+        }
+        else if (error.response && error.response.data.errorCode === 'USER_4041') {
+          alert("회원가입을 해주세요!");
+        }
+        else {
+          alert('알 수 없는 서버 오류에요!')
         }
       }
     };
     fetchPosts();
-  }, []);
+  }, [storedToken, navigate]);
+  
+  
 
   const indexOfLastPost = currentPage * postsPerPage;
   const indexOfFirstPost = indexOfLastPost - postsPerPage;
@@ -161,6 +182,7 @@ const HighPage = () => {
             <p>글번호</p>
             <p>제목</p>
             <p>글쓴이</p>
+            <p>티어</p>
             <p>조회수</p>
             <p>댓글수</p>
             <p>작성일</p>

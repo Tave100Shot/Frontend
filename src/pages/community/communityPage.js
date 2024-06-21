@@ -1,4 +1,4 @@
-import { FirstContainer, MainContainer, GridContainer, LevelBox, Typography, LevelTypography, Description, HorizontalLine, EnterButton, TypographyDcp  } from '../../styles/communityStyle';
+import { FirstContainer, MainContainer, GridContainer, LevelBox, Typography, LevelTypography, BronzeDescription, Description, HorizontalLine, EnterButton, TypographyDcp  } from '../../styles/communityStyle';
 import Header from "../../components/common/header";
 import {useNavigate} from 'react-router-dom';
 
@@ -46,7 +46,7 @@ const CommunityPage = () => {
               <Description>
               다이아, 루비, 마스터 회원들의 채널방
               </Description>
-              <EnterButton onClick={() => handleEnterClick('DIAMOND')}>ENTER</EnterButton>
+              <EnterButton onClick={() => handleEnterClick('HIGH')}>ENTER</EnterButton>
               </LevelBox>
           </GridContainer>
         </FirstContainer>

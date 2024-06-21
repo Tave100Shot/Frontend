@@ -15,6 +15,7 @@ const PostDetailPage = ({comment}) => {
   const [isEditingComment, setIsEditingComment] = useState(null);
   const [inputValue, setInputValue] = useState('');
   const [inputError, setInputError] = useState(false);
+  const [originCommentContent, setOriginCommentContent] = useState('');
   const [editedCommentContent, setEditedCommentContent] = useState('');
   const [isModalOpen, setIsModalOpen] = useState(false);
 
@@ -27,15 +28,15 @@ const PostDetailPage = ({comment}) => {
           },
         });
         setPostDetails(response.data.result);
-        console.log(response.data.result);
+        //console.log(response.data.result);
         setLoading(false);
       } catch (error) {
-        console.error(error);
+        //console.error(error);
         setLoading(false);
       }
     };
     fetchPostDetails();
-  }, [postId]);
+  }, [postId, storedToken]);
 
   const moveToMain = () => {
     navigate('/');
@@ -50,7 +51,7 @@ const PostDetailPage = ({comment}) => {
   };
 
   if (loading) {
-    return <p>로딩 중...</p>;
+    return <p>잠시만 기다려주세요!</p>;
   }
 
   /* 게시물 삭제 */
@@ -65,7 +66,23 @@ const PostDetailPage = ({comment}) => {
       });
       navigate('/community/bronze');
     } catch (error) {
-      console.error(error);
+      if (error.response && error.response.data.errorCode === 'JWT_4010') {
+        alert("로그인 유효 기간이 지났습니다. 다시 로그인 해주세요 :)");
+        navigate('/community');
+      }
+      else if (error.response && error.response.data.errorCode === 'POST_4040') {
+        alert("해당 게시글이 존재하지 않아요!");
+      }
+      else if (error.response && error.response.data.errorCode === 'USER_4040') {
+        alert("사용자 토큰이 잘못되었습니다. 다시 로그인 해주세요!");
+      }
+      else if (error.response && error.response.data.errorCode === 'USER_4010') {
+        alert("다시 로그인 해주세요!");
+      }
+      else if (error.response && error.response.data.errorCode === 'USER_4041') {
+        alert("회원가입을 해주세요!");
+      }
+      //console.error(error);
     } 
   } else {
    alert("타인의 게시글은 삭제할 수 없습니다.");
@@ -78,21 +95,20 @@ const PostDetailPage = ({comment}) => {
   if (gitLoginId === postDetails.writer) {
     navigate(`/community/post/${postId}/edit`, { state: { postDetails } });
   } else {
-  
     alert("타인의 게시글은 수정할 수 없습니다.");
   }
 };
 
   /* 댓글 추가 */
-  const handleAddComment = async () => {
+  const handleAddComment = async (event) => {
+    event.preventDefault();
+    if (inputValue.trim() === '') {
+      alert("댓글을 작성해주세요!");
+      return
+    }
     try {
-      if (inputValue.trim() === '') {
-        setInputError(true);
-        return;
-      }
       const response = await axios.post(`/api/post/${postId}/comments`, {
         comment: inputValue,
-        parentCommentId: null,
       },
         {
           headers: {
@@ -101,7 +117,7 @@ const PostDetailPage = ({comment}) => {
           },
         }
       );
-      console.log('새댓:', response.data);
+      //console.log('새댓:', response.data);
 
       const updatedPostDetails = { ...postDetails };
       if (updatedPostDetails.postResponses && updatedPostDetails.postResponses[0]) {
@@ -112,30 +128,43 @@ const PostDetailPage = ({comment}) => {
         }
         updatedPostDetails.postResponses[0].commentListResponse.commentResponses.push(response.data.comment);
         updatedPostDetails.postResponses[0].commentCount += 1;
-
+        //console.log(updatedPostDetails);
         setPostDetails(updatedPostDetails);
         setInputValue('');
-        console.error('새댓 정보:', updatedPostDetails);
-
+        setInputError(false);
+        //console.error('새댓 정보:', updatedPostDetails);
       }
-      setInputValue('');
-      setInputError(false);
-      window.location.reload();
-
     } catch (error) {
-      console.error('새댓 오류:', error);
+      if (error.response && error.response.data.errorCode === 'JWT_4010') {
+        alert("로그인 유효 기간이 지났습니다. 다시 로그인 해주세요 :)");
+        navigate('/community');
+      } 
+      else if (error.response && error.response.data.errorCode === 'POST_4040') {
+        alert("해당 게시글이 존재하지 않아요!");
+      }
+      else if (error.response && error.response.data.errorCode === 'USER_4040') {
+        alert("사용자 토큰이 잘못되었습니다. 다시 로그인 해주세요!");
+      }
+      else if (error.response && error.response.data.errorCode === 'USER_4010') {
+        alert("다시 로그인 해주세요!");
+      }
+      else if (error.response && error.response.data.errorCode === 'USER_4041') {
+        alert("회원가입을 해주세요!");
+      }
+      //console.error('새댓 오류:', error);
+    } finally {
+      window.location.reload();
     }
   };
 
   const handleEnterKeyPress = (e) => {
     if (e.key === 'Enter') {
       e.preventDefault();
-      handleAddComment();
-      setInputValue('');
+      handleAddComment(e);
     }
   };
 
-  /* 댓글 수정 */
+  /* 댓글 수정하기 버튼 */
   const handleApplyEdit = async (commentId) => {
     const comment = postDetails.commentListResponse.commentResponses.find((comment) => comment.commentId === commentId);
 
@@ -163,9 +192,26 @@ const PostDetailPage = ({comment}) => {
           editedCommentContent;
         setPostDetails(updatedPostDetails);
       }
+      return updatedPostDetails;
 
     } catch (error) {
-      console.error('댓글 수정 오류:', error);
+      //console.error('댓글 수정 오류:', error);
+      if (error.response && error.response.data.errorCode === 'JWT_4010') {
+        alert("로그인 유효 기간이 지났습니다. 다시 로그인 해주세요 :)");
+        navigate('/community');
+      }
+      else if (error.response && error.response.data.errorCode === 'POST_4040') {
+        alert("해당 댓글이 존재하지 않아요!");
+      }
+      else if (error.response && error.response.data.errorCode === 'USER_4040') {
+        alert("사용자 토큰이 잘못되었습니다. 다시 로그인 해주세요!");
+      }
+      else if (error.response && error.response.data.errorCode === 'USER_4010') {
+        alert("다시 로그인 해주세요!");
+      }
+      else if (error.response && error.response.data.errorCode === 'USER_4041') {
+        alert("회원가입을 해주세요!");
+      }
     } finally {
       window.location.reload();
     }
@@ -173,6 +219,12 @@ const PostDetailPage = ({comment}) => {
     alert("타인의 댓글은 수정할 수 없습니다.");
   }
 };
+
+  /* 댓글 수정 취소 버튼 */
+  const handleCancelEdit = () => {
+    setEditedCommentContent(originCommentContent);
+    setIsEditingComment(null);
+  };
 
   /* 댓글 삭제 */
   const handleDeleteComment = async (commentId) => {
@@ -185,8 +237,6 @@ const PostDetailPage = ({comment}) => {
           Authorization: `Bearer ${storedToken}`,
         },
       });
-      window.location.reload();
-
       /* 삭제된 댓글을 제외하고 업데이트 */
       const updatedPostDetails = { ...postDetails };
       const commentIndex = updatedPostDetails.postResponses[0].commentListResponse.commentResponses.findIndex(
@@ -199,7 +249,26 @@ const PostDetailPage = ({comment}) => {
         setPostDetails(updatedPostDetails);
       }
     } catch (error) {
-      console.error('댓글 삭제 오류:', error);
+      if (error.response && error.response.data.errorCode === 'JWT_4010') {
+        alert("로그인 유효 기간이 지났습니다. 다시 로그인 해주세요 :)");
+        navigate('/community');
+      }
+      else if (error.response && error.response.data.errorCode === 'POST_4040') {
+        alert("해당 댓글이 존재하지 않아요!");
+      }
+      else if (error.response && error.response.data.errorCode === 'USER_4040') {
+        alert("사용자 토큰이 잘못되었습니다. 다시 로그인 해주세요!");
+      }
+      else if (error.response && error.response.data.errorCode === 'USER_4010') {
+        alert("다시 로그인 해주세요!");
+      }
+      else if (error.response && error.response.data.errorCode === 'USER_4041') {
+        alert("회원가입을 해주세요!");
+      }
+      
+    }
+    finally {
+      window.location.reload();
     }
   } else {
     alert("타인의 댓글은 삭제할 수 없습니다.");
@@ -245,7 +314,7 @@ const PostDetailPage = ({comment}) => {
                   </c.PostDetailContainer>
                 </>
               ) : (
-                <p>로딩 중...</p>
+                <p>잠시만 기다려주세요!</p>
               )}
             </div>
             <c.ViewCommentContianer>
@@ -257,7 +326,7 @@ const PostDetailPage = ({comment}) => {
           </c.DetailBulletinBox>
           <c.CommentWriteBox>
             <input placeholder="댓글 작성 후 ENTER"
-              onKeyDown={(e) => e.key === 'Enter' && handleEnterKeyPress(e)}
+              onKeyDown={handleEnterKeyPress}
               onChange={(e) => setInputValue(e.target.value)}
               className={inputError ? 'error' : ''}
             />
@@ -283,7 +352,7 @@ const PostDetailPage = ({comment}) => {
                     <c.ParentComment>
                       <c.CommentProfile>
                         <c.CommentProfileId >
-                          <c.CommentProfileIcon />
+                        {<img src={comment.writerProfileImgUrl} alt="Profile" style={{ width: '30px', height: '30px', borderRadius: '30px', border: '1px solid #fff' }} />}
                           <p>{comment.gitLoginId}</p>
                         </c.CommentProfileId>
                       </c.CommentProfile>
@@ -294,13 +363,14 @@ const PostDetailPage = ({comment}) => {
                           onChange={(e) => setEditedCommentContent(e.target.value)}
                           onKeyDown={(e) => e.key === 'Enter' && handleApplyEdit(comment.commentId)}
                         />
-                        <button onClick={() => handleApplyEdit(comment.commentId)}>수정 적용</button>
+                        <button onClick={() => handleApplyEdit(comment.commentId)}>수정</button>
+                        <button onClick={handleCancelEdit}>취소</button>
                       </c.CommentEditContainer>
                     </c.ParentComment>
                   </>
                 )}
                 <c.CommentViewIconContainer>
-                  <c.CommentViewEdit onClick={() => setIsEditingComment(comment.commentId)} />
+                  <c.CommentViewEdit onClick={() => { setIsEditingComment(comment.commentId); setOriginCommentContent(comment.content); setEditedCommentContent(comment.content); }} />
                   <c.CommentViewDelete onClick={() => handleDeleteComment(comment.commentId)} />
                 </c.CommentViewIconContainer>
               </c.ParentCommentView>

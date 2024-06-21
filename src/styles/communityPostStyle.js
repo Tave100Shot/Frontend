@@ -20,6 +20,7 @@ export const SearchBarContainer = styled.form`
   width : 70vw;
   height : 8rem; 
   align-items : center;
+  margin-right: 10px;
 
   button {
     width : 10em;
@@ -43,7 +44,7 @@ export const SearchBarContainer = styled.form`
 export const SearchInputBox = styled.div`
   background-color : ${props => props.theme.colors.colorAccent};
   display : flex;
-  width : 125rem;
+  width : 60vw;
   height : 5rem;
   border-radius : 1.3rem;
   padding : 1rem 0 1rem 2rem;
@@ -366,6 +367,7 @@ export const CommentViewIconContainer = styled.div`
   grid-gap: 1.5em;
   grid-template-columns: repeat(2, 1fr);
   margin-top: 1.5rem;
+  margin-left: 1rem;
   align-items: center;
   justify-content: center;
 `
@@ -415,6 +417,7 @@ export const CommentProfileIcon = styled(IoPersonCircleOutline)`
 
 export const ParentCommentView = styled.div`
   position: relative;
+  gap:1rem;
   height: flex;
   border-radius: 1rem;
   border: 0.3rem solid ${props => props.theme.colors.colorAccent};
@@ -439,20 +442,25 @@ export const CommentViewEdit = styled(LuPencil)`
   cursor : pointer;
   font-size : 2rem;
   color : ${props => props.theme.colors.colorAccent};
-  margin: auto;
+  //margin: auto;
 `
 
 export const CommentViewDelete = styled(FiTrash)`
   cursor: pointer;
   font-size: 2rem;
   color: ${props => props.theme.colors.colorAccent};
-  margin: auto;
+  //margin: auto;
 `
 
 export const CommentEditContainer = styled.div`
+  //background-color: green;
+  display: flex;
+  width: 60%;
+  align-items: center;
+
   & > input {
-    width: 40em;
-    min-height: 5rem;
+    width: 100%;
+    height: 5rem;
     border-radius: 1rem;
     border: 0.3rem solid ${props => props.theme.colors.colorAccent};
     font-family: 'Poppins';
@@ -461,28 +469,29 @@ export const CommentEditContainer = styled.div`
     line-height: normal;
     font-size: 1.5rem;
     outline: none;
-    padding: 0.5rem;
-    margin-left: 1em;
+    padding: 1rem;
+    margin: 0 1em 0 1em;
 }
 
-  & > button {
-    min-height: 5rem;
+  & button {
+    width: 70px;
+    height: 5rem;
     font-family: 'Poppins';
     font-style: normal;
-    font-weight: 700;
+    font-weight: bold;
     line-height: normal;
-    font-size: 1.5rem;
+    font-size: 15px;
     border-radius: 1rem;
     border: 0.3rem solid ${props => props.theme.colors.colorAccent};
     padding: 1rem;
-    margin: 1rem;
+    margin-right: 1rem;
     background-color:${props => props.theme.colors.colorAccent};
     color: #fff;
     cursor: pointer;
-    &:active {
+    /* &:active {
       transform: translateY(2px);
       box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
-    }
+    } */
 }
 `
 export const ButtonWrapper = styled.div`
@@ -563,13 +572,15 @@ export const ModalContent = styled.div`
 
 export const HeaderBulletin = styled.div`
   display: grid;
-  grid-template-columns: 1fr 3fr 1.5fr 1fr 1fr 1fr;
+  grid-template-columns: 1fr 2.5fr 1.5fr 1fr 1fr 1fr 1.5fr;
   padding: 11px;
   font-weight: bold;
   background-color: ${props => props.theme.colors.colorAccent};
   border-top-left-radius: 1.3rem;
   border-top-right-radius: 1.3rem;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
   align-items: center;
+  font-family: 'Poppins_SemiBold';
 
   p {
     font-size: 1.5em;
@@ -588,7 +599,9 @@ export const BulletinBox = styled.div`
   border-bottom-left-radius: 1.3rem;
   border-bottom-right-radius: 1.3rem;
   border: 0.3rem solid ${props => props.theme.colors.colorAccent};
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
   position: relative;
+  font-family: 'Poppins';
   `;
 
 export const BulletinPageContainer = styled.div`
@@ -599,10 +612,11 @@ export const BulletinPageContainer = styled.div`
 
 export const StyledViewPost = styled.div`
   display: grid;
-  grid-template-columns: 1fr 3fr 1.5fr 1fr 1fr 1fr;
+  grid-template-columns: 1fr 2.5fr 1.5fr 1fr 1fr 1fr 1.5fr;
   align-items: center;
   padding: 15px;
   cursor: pointer;
+  font-family: 'Poppins';
   
   &:hover {
     background-color: ${props => props.theme.colors.colorAccentHover};
@@ -687,7 +701,6 @@ export const PostImage = styled.div`
 export const WriteWrapContainer = styled.div`
   display: flex;
   flex-direction: column;
-  padding-top: 1rem;
   @media (min-width: 1000px) {
     flex-direction: row;
   }
@@ -697,13 +710,17 @@ export const WriteWrapContainer = styled.div`
 export const AuthorContainer = styled.div`
   display: flex;
   justify-content: flex-start;
+  //background: red;
+  align-items: center; 
+  width: 50vw;
+  margin-top: 1rem;
 
   & > div {
-    width: 100px;
+    font-family : "Poppins";
+    width: 120px;
     padding: 2.5rem;
     font-weight: 700;
-    font-family: 'Poppins';
-    font-size: 1.5rem;
+    font-size: 2rem;
     white-space: nowrap;
     border: 0.3rem solid #;
     align-items: center; 
@@ -716,10 +733,7 @@ export const AuthorContainer = styled.div`
     font-size: 1.5rem;
     background: ${props => props.theme.colors.colorAccent};
     color: ${props => props.theme.colors.colorBg};
-    margin: 1.5rem;
-    margin-right: 5em;
     padding: 1rem;
-    position: relative;
     outline: none;
     &::placeholder {
       color: ${props => props.theme.colors.colorBg};
@@ -732,10 +746,8 @@ export const AuthorContainer = styled.div`
       font-size: 1.5rem;
       background: ${props => props.theme.colors.colorAccent};
       color: ${props => props.theme.colors.colorBg};
-      margin: 1.5rem;
-      margin-right: 5em;
       padding: 1rem;
-      position: relative;
+      align-items: center; 
       outline: none;
       &::placeholder {
         color: ${props => props.theme.colors.colorBg};
@@ -745,16 +757,18 @@ export const AuthorContainer = styled.div`
 export const TitleContainer = styled.div`
   display: flex;
   justify-content: flex-start;
+  //background: orange;
+  align-items: center; 
 
   & > div {
     padding: 2.5rem;
     font-weight: 700;
-    font-family: 'Poppins';
-    font-size: 1.5rem;
+    font-family : "Poppins";
+    font-size: 2rem;
     white-space: nowrap;
     align-items: center; 
     border: 0.3rem solid #;
-    width: 100px;
+    width: 120px;
   }
 
   & > input {
@@ -762,16 +776,13 @@ export const TitleContainer = styled.div`
     height: 5rem;
     border-radius: 1rem;
     border: 0.3rem solid ${props => props.theme.colors.colorAccent};
-    background: ${props => props.theme.colors.colorAccent};
+    background: ${props => props.theme.colors.colorBg};
     font-size: 1.5rem;
-    color: ${props => props.theme.colors.colorBg};
-    margin: 1.5rem;
+    color: ${props => props.theme.colors.colorMain};
+    margin: 1.5rem 0 1.5rem 0;
     padding: 1rem;
     position: relative;
     outline: none;
-    &::placeholder {
-      color: ${props => props.theme.colors.colorBg};
-    }
   }
   }
 `
@@ -779,27 +790,28 @@ export const TitleContainer = styled.div`
 export const ContentContainer = styled.div`
   display: flex;
   justify-content: flex-start;
+  //background: green;
 
   & > div {
     padding: 2.5rem;
     font-weight: 700;
-    font-family: 'Poppins';
-    font-size: 1.5rem;
+    font-family : "Poppins";
+    font-size: 2rem;
     white-space: nowrap;
     border: 0.3rem solid #;
-    width: 100px;
+    width: 120px;
   }
 
   & > textarea {
     font-size: 1.5rem;
     font-family: 'Poppins';
-    min-width: 80em;
+    width: 70vw;
     height: 30rem;
     border-radius: 1rem;
     background-color: ${props => props.theme.colors.colorBg};
     border: 0.3rem solid ${props => props.theme.colors.colorAccent};
     color: ${props => props.theme.colors.colorMain};
-    margin: 1.5rem;
+    margin: 1.5rem 0 1.5rem 0;
     padding: 1rem;
     position: relative;
     outline: none;
@@ -810,19 +822,30 @@ export const ContentContainer = styled.div`
 export const FileContainer = styled.div`
   display: flex;
   justify-content: flex-start;
+  //background: skyblue;
 
   & > div {
-    padding: 25px 10px 20px 20px;
+    width: 120px;
+    padding: 2.5rem;
     font-weight: 700;
-    font-family: 'Poppins';
-    font-size: 1.5rem;
+    font-family : "Poppins";
+    font-size: 2rem;
     white-space: nowrap;
     border: 0.3rem solid #;
     justify-content: center;
     width: 100px;
   }
+  & p {
+    font-weight: 700;
+    font-family : "Poppins";
+    font-size: 2rem;
+    display: flex;
+    height: 5rem;
+    align-items : center;
+    margin-top: 2rem;
+  }
   & > label {
-    width: 15em;
+    width: 13vw;
     height: 5rem;
     flex-shrink: 0;
     border-radius: 1rem;
@@ -831,6 +854,7 @@ export const FileContainer = styled.div`
     color: ${props => props.theme.colors.colorBg};
     margin: 1.5rem;
     padding: 1rem;
+    margin: 2rem;
     position: relative;
     font-size: 1.5rem;
     cursor: pointer;
@@ -849,6 +873,8 @@ export const FileContainer = styled.div`
 
 export const FilesContainer = styled.div`
   display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
   padding: 2.5rem;
   font-weight: 700;
   font-family: 'Poppins';
@@ -856,13 +882,15 @@ export const FilesContainer = styled.div`
   white-space: nowrap;
   border: 0.3rem solid #;
   width: 100%;
-  padding: 0 0 0 10rem;
+  padding: 0 0 0 11rem;
+  //background:red;
 `
 
 export const SelectedFileContainer = styled.div`
   min-width: 16em;
-  height: 4rem;
+  height: 5rem;
   margin: 1rem;
+  margin-bottom: 2rem;
   border: 0.3rem solid ${props => props.theme.colors.colorAccent};
   border-radius: 1rem;
   background: ${props => props.theme.colors.colorBg};
@@ -877,6 +905,7 @@ export const SelectedFileContainer = styled.div`
   }
 
   & > div {
+    //background: green;
     width: 12em;
     height: 2rem;
     text-align: center;
@@ -898,14 +927,13 @@ export const DeleteFileIcon = styled(TiDelete)`
 
 export const ButtonContainer = styled.div`
   display: flex;
-  gap : 1rem;
-  position: fixed;
-  bottom: 4rem;
-  right: 8rem;
+  gap : 2rem;
+  //background: red;
+  justify-content: flex-end;
 `
 
 export const CancelButton = styled.button`
-  width: 7rem;
+  width: 8rem;
   height: 5rem;
   justify-content: center;
   align-items: center;
@@ -915,9 +943,9 @@ export const CancelButton = styled.button`
   border: 0.3rem solid #FA9DAD;
   color: #FA9DAD;
   font-family: 'Poppins';
-  font-size: 1.5rem;
+  font-size: 1.8rem;
   font-style: normal;
-  font-weight: 500;
+  font-weight: 600;
   line-height: normal;
   cursor: pointer;
   &:active {
@@ -937,9 +965,9 @@ export const UploadButton = styled.button`
   border: 0.3rem solid ${props => props.theme.colors.colorAccent};
   color: ${props => props.theme.colors.colorAccent};
   font-family: 'Poppins';
-  font-size: 1.5rem;
+  font-size: 1.8rem;
   font-style: normal;
-  font-weight: 500;
+  font-weight: 600;
   line-height: normal;
   cursor: pointer;
   

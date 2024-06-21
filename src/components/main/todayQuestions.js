@@ -1,4 +1,4 @@
-import React, { useState, useRef } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 import * as t from "../../styles/main/todayQuestionStyle";
 import newsImage from '../../assets/imgs/today.png';
 import axios from "axios";
@@ -22,6 +22,7 @@ const TodayQuestion = () => {
     userName: '',
     userEmail: '',
   })
+  const [loginStat, setLoginStat] = useState(false);
   const [isSubmitted, setIsSubmitted] = useState(false);
   const [isConfirmed, setIsConfirmed] = useState(false);
   const [clickEmailButton, setClickEmailButton] = useState(false);
@@ -88,7 +89,6 @@ const TodayQuestion = () => {
       } else {
         letterType = selectedLetters[0];
       }
-
       setSaveInfo({
         letterType: letterType,
       });
@@ -106,7 +106,53 @@ const TodayQuestion = () => {
         });
         console.log('정보수정 레터', response);
       } catch (error) {
-        console.error('정보수정 레터에러', error.response);
+        //console.error('정보수정 레터에러', error.response);
+        if (error.response.data.errorCode === "LETTER_4040") {
+          alert('이미 구독 중입니다. \n정보를 수정하려면 [정보 수정] 버튼을 클릭하세요!');
+          setIsSubmitted(false);
+        }
+        else if (error.response.data.errorCode === "LETTER_4041") {
+          alert('뉴스레터 타입이 잘못됐습니다.')
+        }
+        else if (error.response.data.errorCode === "LETTER_4042") {
+          alert('뉴스레터를 찾을 수 없습니다.')
+        }
+        else if (error.response.data.errorCode === "LETTER_4043") {
+          alert('이메일 혹은 닉네임이 등록되어 있지 않습니다.')
+        }
+        else if (error.response.data.errorCode === "LETTER_4044") {
+          alert('gitEmail과 bojName은 null일 수 없습니다.')
+        }
+        else if (error.response.data.errorCode === "EAMIL4040") {
+          alert('유효하지 않은 인증 링크입니다.');
+        }
+        else if (error.response.data.errorCode === "EAMIL4041") {
+          alert('인증되지 않은 이메일입니다.');
+        }
+        else if (error.response.data.errorCode === "EAMIL4042") {
+          alert('유효하지 않은 이메일 토큰입니다.');
+        }
+        else if (error.response.data.errorCode === "EAMIL4043") {
+          alert('이메일 인증이 이미 완료됐습니다.');
+        }
+        else if (error.response.data.errorCode === "EAMIL4044") {
+          alert('이메일을 찾을 수 없습니다.');
+        }
+        else if (error.response.data.errorCode === "EAMIL4010") {
+          alert('메일 토큰 유효기간이 만료됐습니다.');
+        }
+        else if (error.response.data.errorCode === "EAMIL5000") {
+          alert('메일 전송에 실패했습니다."');
+        }
+        else if (error.response.data.errorCode === "EAMIL5001") {
+          alert('템플릿 변환에 실패했습니다.');
+        }
+        else if (error.response.data.errorCode === "JWT_4010") {
+          alert('로그인 유효 기간이 지났습니다. 다시 로그인 해주세요 :)');
+        }
+        else {
+          alert('알 수 없는 서버 에러입니다.')
+        }
       }
 
       // 회원 이름, 이메일 정보 띄우기
@@ -130,23 +176,75 @@ const TodayQuestion = () => {
         }
 
       } catch (error) {
-        console.error('회원get:', error);
+        //console.error('회원get:', error);
+        if (error.response.data.errorCode === "LETTER_4040") {
+          alert('이미 구독 중입니다. \n정보를 수정하려면 [정보 수정] 버튼을 클릭하세요!');
+          setIsSubmitted(false);
+        }
+        else if (error.response.data.errorCode === "LETTER_4041") {
+          alert('뉴스레터 타입이 잘못됐습니다.')
+        }
+        else if (error.response.data.errorCode === "LETTER_4042") {
+          alert('뉴스레터를 찾을 수 없습니다.')
+        }
+        else if (error.response.data.errorCode === "LETTER_4043") {
+          alert('이메일 혹은 닉네임이 등록되어 있지 않습니다.')
+        }
+        else if (error.response.data.errorCode === "LETTER_4044") {
+          alert('gitEmail과 bojName은 null일 수 없습니다.')
+        }
+        else if (error.response.data.errorCode === "EAMIL4040") {
+          alert('유효하지 않은 인증 링크입니다.');
+        }
+        else if (error.response.data.errorCode === "EAMIL4041") {
+          alert('인증되지 않은 이메일입니다.');
+        }
+        else if (error.response.data.errorCode === "EAMIL4042") {
+          alert('유효하지 않은 이메일 토큰입니다.');
+        }
+        else if (error.response.data.errorCode === "EAMIL4043") {
+          alert('이메일 인증이 이미 완료됐습니다.');
+        }
+        else if (error.response.data.errorCode === "EAMIL4044") {
+          alert('이메일을 찾을 수 없습니다.');
+        }
+        else if (error.response.data.errorCode === "EAMIL4010") {
+          alert('메일 토큰 유효기간이 만료됐습니다.');
+        }
+        else if (error.response.data.errorCode === "EAMIL5000") {
+          alert('메일 전송에 실패했습니다."');
+        }
+        else if (error.response.data.errorCode === "EAMIL5001") {
+          alert('템플릿 변환에 실패했습니다.');
+        }
+        else if (error.response.data.errorCode === "JWT_4010") {
+          alert('로그인 유효 기간이 지났습니다. 다시 로그인 해주세요 :)');
+        }
+        else {
+          alert('알 수 없는 서버 에러입니다.')
+        }
       }
 
     }
   };
+  useEffect(() => {
+    const accessToken = localStorage.getItem('accessToken');
+    if (accessToken) {
+      setLoginStat(true);
+    } else {
+      setLoginStat(false);
+    }
+  }, []);
 
   // [레터 선택] 버튼
     const handleLetterSubmit = async () => {
-    let message = { letter: '' };
-    let isValid = true;
+      if (!loginStat) {
+        alert('로그인 후에 구독해주세요!')
+        setIsSubmitted(false);
+        return;
+      }
 
-    if (!isClicked.DEV && !isClicked.EMPLOY) {
-      message.letter = '최소 하나 이상의 뉴스레터를 눌러주세요 :)';
-      isValid = false;
-      setValidationMessage(message);
-      return;
-    }
+    let isValid = true;
 
     if (isValid) {
       let selectedLetters = [];
@@ -182,10 +280,61 @@ const TodayQuestion = () => {
           userName: response.data.result.bojName,
           userEmail: response.data.result.gitEmail,
         }))
-        console.log('get', saveInfo.userName);
-        console.log('get', saveInfo.userEmail);
+        console.log(response);
+        if (response.data.code === '200'){
+          alert('이미 구독 완료되었습니다!');
+          setIsSubmitted(false);
+        }
+        //console.log('get', saveInfo.userName);
+        //console.log('get', saveInfo.userEmail);
       } catch (error) {
-        console.error('회원get:', error);
+        console.log('회원get:', error);
+        if (error.response.data.errorCode === "LETTER_4040") {
+          alert('이미 구독 중입니다. \n정보를 수정하려면 [정보 수정] 버튼을 클릭하세요!');
+          setIsSubmitted(false);
+        }
+        else if (error.response.data.errorCode === "LETTER_4041") {
+          alert('뉴스레터 타입이 잘못됐습니다.')
+        }
+        else if (error.response.data.errorCode === "LETTER_4042") {
+          alert('뉴스레터를 찾을 수 없습니다.')
+        }
+        else if (error.response.data.errorCode === "LETTER_4043") {
+          alert('이메일 혹은 닉네임이 등록되어 있지 않습니다.')
+        }
+        else if (error.response.data.errorCode === "LETTER_4044") {
+          alert('gitEmail과 bojName은 null일 수 없습니다.')
+        }
+        else if (error.response.data.errorCode === "EAMIL4040") {
+          alert('유효하지 않은 인증 링크입니다.');
+        }
+        else if (error.response.data.errorCode === "EAMIL4041") {
+          alert('인증되지 않은 이메일입니다.');
+        }
+        else if (error.response.data.errorCode === "EAMIL4042") {
+          alert('유효하지 않은 이메일 토큰입니다.');
+        }
+        else if (error.response.data.errorCode === "EAMIL4043") {
+          alert('이메일 인증이 이미 완료됐습니다.');
+        }
+        else if (error.response.data.errorCode === "EAMIL4044") {
+          alert('이메일을 찾을 수 없습니다.');
+        }
+        else if (error.response.data.errorCode === "EAMIL4010") {
+          alert('메일 토큰 유효기간이 만료됐습니다.');
+        }
+        else if (error.response.data.errorCode === "EAMIL5000") {
+          alert('메일 전송에 실패했습니다."');
+        }
+        else if (error.response.data.errorCode === "EAMIL5001") {
+          alert('템플릿 변환에 실패했습니다.');
+        }
+        else if (error.response.data.errorCode === "JWT_4010") {
+          alert('로그인 유효 기간이 지났습니다. 다시 로그인 해주세요 :)');
+        }
+        else {
+          alert('알 수 없는 서버 에러입니다.')
+        }
       }
 
       try {
@@ -197,21 +346,61 @@ const TodayQuestion = () => {
             Authorization: `Bearer ${localStorage.getItem('accessToken')}`,
           }
         });
-        console.log('레터', response);
+        //console.log('레터', response);
       } catch (error) {
-        console.error('레터 에러', error.response);
+        //console.error('레터 에러', error.response);
         if (error.response.data.errorCode === "LETTER_4040") {
           alert('이미 구독 중입니다. \n정보를 수정하려면 [정보 수정] 버튼을 클릭하세요!');
           setIsSubmitted(false);
         }
-        if (error.response.data.errorCode === "EAMIL4041") {
-          alert('이메일 인증이 완료되지 않았어요!');
-          console.log(saveInfo.userName);
-          console.log(saveInfo.userEmail);
+        else if (error.response.data.errorCode === "LETTER_4041") {
+          alert('뉴스레터 타입이 잘못됐습니다.')
+        }
+        else if (error.response.data.errorCode === "LETTER_4042") {
+          alert('뉴스레터를 찾을 수 없습니다.')
+        }
+        else if (error.response.data.errorCode === "LETTER_4043") {
+          alert('이메일 혹은 닉네임이 등록되어 있지 않습니다.')
+        }
+        else if (error.response.data.errorCode === "LETTER_4044") {
+          alert('gitEmail과 bojName은 null일 수 없습니다.')
+        }
+        else if (error.response.data.errorCode === "EAMIL4040") {
+          alert('유효하지 않은 인증 링크입니다.');
           setIsConfirmed(true);
         }
+        else if (error.response.data.errorCode === "EAMIL4041") {
+          alert('인증되지 않은 이메일입니다.');
+          setIsConfirmed(true);
+        }
+        else if (error.response.data.errorCode === "EAMIL4042") {
+          alert('유효하지 않은 이메일 토큰입니다.');
+        }
+        else if (error.response.data.errorCode === "EAMIL4043") {
+          alert('이메일 인증이 이미 완료됐습니다.');
+        }
+        else if (error.response.data.errorCode === "EAMIL4044") {
+          alert('이메일을 찾을 수 없습니다.');
+        }
+        else if (error.response.data.errorCode === "EAMIL4010") {
+          alert('메일 토큰 유효기간이 만료됐습니다.');
+        }
+        else if (error.response.data.errorCode === "EAMIL5000") {
+          alert('메일 전송에 실패했습니다."');
+        }
+        else if (error.response.data.errorCode === "EAMIL5001") {
+          alert('템플릿 변환에 실패했습니다.');
+        }
+        else if (error.response.data.errorCode === "JWT_4010") {
+          alert('로그인 유효 기간이 지났습니다. 다시 로그인 해주세요 :)');
+        }
+        else {
+          alert('알 수 없는 서버 에러입니다.')
+        }
+
       }
-      
+        //console.log(saveInfo.userName);
+        //console.log(saveInfo.userEmail);
     }
   };
 
@@ -258,9 +447,53 @@ const TodayQuestion = () => {
           // [확인] 버튼 눌렀을 때 input 수정 불가
 
         } catch (error) {
-          console.error(error);
-          console.error(error.response.status);
-          console.error(error.response.data);
+          //console.error(error);
+          if (error.response.data.errorCode === "LETTER_4040") {
+            alert('이미 구독 중입니다. \n정보를 수정하려면 [정보 수정] 버튼을 클릭하세요!');
+            setIsSubmitted(false);
+          }
+          else if (error.response.data.errorCode === "LETTER_4041") {
+            alert('뉴스레터 타입이 잘못됐습니다.')
+          }
+          else if (error.response.data.errorCode === "LETTER_4042") {
+            alert('뉴스레터를 찾을 수 없습니다.')
+          }
+          else if (error.response.data.errorCode === "LETTER_4043") {
+            alert('이메일 혹은 닉네임이 등록되어 있지 않습니다.')
+          }
+          else if (error.response.data.errorCode === "LETTER_4044") {
+            alert('gitEmail과 bojName은 null일 수 없습니다.')
+          }
+          else if (error.response.data.errorCode === "EAMIL4040") {
+            alert('유효하지 않은 인증 링크입니다.');
+          }
+          else if (error.response.data.errorCode === "EAMIL4041") {
+            alert('인증되지 않은 이메일입니다.');
+          }
+          else if (error.response.data.errorCode === "EAMIL4042") {
+            alert('유효하지 않은 이메일 토큰입니다.');
+          }
+          else if (error.response.data.errorCode === "EAMIL4043") {
+            alert('이메일 인증이 이미 완료됐습니다.');
+          }
+          else if (error.response.data.errorCode === "EAMIL4044") {
+            alert('이메일을 찾을 수 없습니다.');
+          }
+          else if (error.response.data.errorCode === "EAMIL4010") {
+            alert('메일 토큰 유효기간이 만료됐습니다.');
+          }
+          else if (error.response.data.errorCode === "EAMIL5000") {
+            alert('메일 전송에 실패했습니다."');
+          }
+          else if (error.response.data.errorCode === "EAMIL5001") {
+            alert('템플릿 변환에 실패했습니다.');
+          }
+          else if (error.response.data.errorCode === "JWT_4010") {
+            alert('로그인 유효 기간이 지났습니다. 다시 로그인 해주세요 :)');
+          }
+          else {
+            alert('알 수 없는 서버 에러입니다.')
+          }
         }
       } else {
         setValidationMessage(message);
@@ -310,11 +543,56 @@ const TodayQuestion = () => {
       });
       console.log('이메일인증', response);
     } catch (error) {
-      console.error('이메일인증', error.response.status);
-      console.error('이메일인증', error.response.data);
-      if (error.response.data.errorCode === "EAMIL4043") {
-        alert('이미 인증이 완료된 이메일이에요!');
+      //console.error('이메일인증', error.response.status);
+      //console.error('이메일인증', error.response.data);
+      if (error.response.data.errorCode === "LETTER_4040") {
+        alert('이미 구독 중입니다. \n정보를 수정하려면 [정보 수정] 버튼을 클릭하세요!');
+        setIsSubmitted(false);
+      }
+      else if (error.response.data.errorCode === "LETTER_4041") {
+        alert('뉴스레터 타입이 잘못됐습니다.')
+      }
+      else if (error.response.data.errorCode === "LETTER_4042") {
+        alert('뉴스레터를 찾을 수 없습니다.')
+      }
+      else if (error.response.data.errorCode === "LETTER_4043") {
+        alert('이메일 혹은 닉네임이 등록되어 있지 않습니다.')
+      }
+      else if (error.response.data.errorCode === "LETTER_4044") {
+        alert('gitEmail과 bojName은 null일 수 없습니다.')
+      }
+      else if (error.response.data.errorCode === "EAMIL4040") {
+        alert('유효하지 않은 인증 링크입니다.');
+        setIsConfirmed(true);
+      }
+      else if (error.response.data.errorCode === "EAMIL4041") {
+        alert('인증되지 않은 이메일입니다.');
+        setIsConfirmed(true);
+      }
+      else if (error.response.data.errorCode === "EAMIL4042") {
+        alert('유효하지 않은 이메일 토큰입니다.');
+      }
+      else if (error.response.data.errorCode === "EAMIL4043") {
+        alert('이메일 인증이 이미 완료됐습니다.');
         setfinalSubmitted(true);
+      }
+      else if (error.response.data.errorCode === "EAMIL4044") {
+        alert('이메일을 찾을 수 없습니다.');
+      }
+      else if (error.response.data.errorCode === "EAMIL4010") {
+        alert('메일 토큰 유효기간이 만료됐습니다.');
+      }
+      else if (error.response.data.errorCode === "EAMIL5000") {
+        alert('메일 전송에 실패했습니다."');
+      }
+      else if (error.response.data.errorCode === "EAMIL5001") {
+        alert('템플릿 변환에 실패했습니다.');
+      }
+      else if (error.response.data.errorCode === "JWT_4010") {
+        alert('로그인 유효 기간이 지났습니다. 다시 로그인 해주세요 :)');
+      }
+      else {
+        alert('알 수 없는 서버 에러입니다.')
       }
     }
     //setfinalSubmitted(true);
@@ -331,19 +609,59 @@ const TodayQuestion = () => {
           Authorization: `Bearer ${localStorage.getItem('accessToken')}`,
         }
       });
-      console.log('레터', response);
-    } catch (error) {
-      console.error('레터에러', error);
-      console.error('레터 에러wha', error.response);
-      if (error.response.data.errorCode === "LETTER_4040") {
-        // 여기서는 ALERT 띄우지 않음.
+      if (response.data.code === '200'){
         setfinalSubmitted(true);
       }
-      if (error.response.data.errorCode === "EAMIL4041") {
-        alert('이메일 인증이 완료되지 않았어요!');
+      //console.log('최종 레터', response);
+    } catch (error) {
+      console.log('레터 에러wha', error.response);
+      if (error.response.data.errorCode === "LETTER_4040") {
+        setfinalSubmitted(true);
       }
-      if (error.response.data.errorCode === "EAMIL4042") {
-        alert('유효하지 않은 이메일 토큰이에요!');
+      else if (error.response.data.errorCode === "LETTER_4041") {
+        alert('뉴스레터 타입이 잘못됐습니다.')
+      }
+      else if (error.response.data.errorCode === "LETTER_4042") {
+        alert('뉴스레터를 찾을 수 없습니다.')
+      }
+      else if (error.response.data.errorCode === "LETTER_4043") {
+        alert('이메일 혹은 닉네임이 등록되어 있지 않습니다.')
+      }
+      else if (error.response.data.errorCode === "LETTER_4044") {
+        alert('gitEmail과 bojName은 null일 수 없습니다.')
+      }
+      else if (error.response.data.errorCode === "EAMIL4040") {
+        alert('유효하지 않은 인증 링크입니다.');
+        setIsConfirmed(true);
+      }
+      else if (error.response.data.errorCode === "EAMIL4041") {
+        alert('인증되지 않은 이메일입니다.');
+        setIsConfirmed(true);
+      }
+      else if (error.response.data.errorCode === "EAMIL4042") {
+        alert('유효하지 않은 이메일 토큰입니다.');
+      }
+      else if (error.response.data.errorCode === "EAMIL4043") {
+        alert('이메일 인증이 이미 완료됐습니다.');
+        setfinalSubmitted(true);
+      }
+      else if (error.response.data.errorCode === "EAMIL4044") {
+        alert('이메일을 찾을 수 없습니다.');
+      }
+      else if (error.response.data.errorCode === "EAMIL4010") {
+        alert('메일 토큰 유효기간이 만료됐습니다.');
+      }
+      else if (error.response.data.errorCode === "EAMIL5000") {
+        alert('메일 전송에 실패했습니다."');
+      }
+      else if (error.response.data.errorCode === "EAMIL5001") {
+        alert('템플릿 변환에 실패했습니다.');
+      }
+      else if (error.response.data.errorCode === "JWT_4010") {
+        alert('로그인 유효 기간이 지났습니다. 다시 로그인 해주세요 :)');
+      }
+      else {
+        alert('알 수 없는 서버 에러입니다.')
       }
     }
   }

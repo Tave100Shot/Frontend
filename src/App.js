@@ -31,6 +31,7 @@ import ManageMember from "./pages/manage/manageMemberPage";
 import ManageAllLetter from "./pages/manage/manageAllLetterPage";
 import ManageLetterView from "./pages/manage/manageLetterViewPage";
 import ManageLetterEdit from "./pages/manage/manageLetterEditPage";
+import VerifyEmail from "./components/main/verifyEmail";
 
 function App() {
   Modal.setAppElement('#root');
@@ -162,6 +163,7 @@ function App() {
           <Route path='/manager/letter/view/:letterId' element={<ManageLetterView/>}/>
           <Route path='/manager/letter/edit/:letterId?' element={<ManageLetterEdit/>}/>
           <Route path='/manager/member' element={<ManageMember/>}/>
+          <Route path='/email/verify' element={<VerifyEmail />} />
         </Routes>
       </ThemeProvider>
     </BrowserRouter>

@@ -16,7 +16,7 @@ const VerifyEmail = () => {
     useEffect(() => {
         const params = new URLSearchParams(location.search);
         const token = params.get('token');
-
+    
         if (token) {
             verifyEmailToken(token);
         } else {
@@ -25,7 +25,7 @@ const VerifyEmail = () => {
                 details: '유효하지 않은 인증 링크입니다.'
             });
         }
-    }, []);
+    }, [location.search, verifyEmailToken]);
 
     const getStatusMessage = (code) => {
         switch (code) {

@@ -32,7 +32,7 @@ const IntroButton = () => {
                     </i.TextContainer>
                     <i.IntroPageBox>
                         <button onClick={moveToIntroPage}>이야기 보러가기</button>
-                        <img src={ModalImage}/>
+                        <img src={ModalImage} alt="백발백준 아이콘"/>
                     </i.IntroPageBox>
                 </i.IntroModalBox>
                 :

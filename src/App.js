@@ -1,4 +1,4 @@
-import { BrowserRouter, Route, Routes, useNavigate } from "react-router-dom";
+import { BrowserRouter, Route, Routes } from "react-router-dom";
 import { ThemeProvider } from "styled-components";
 import { useState, useEffect } from "react";
 import { darkTheme, lightTheme } from "./styles/theme";
@@ -59,8 +59,7 @@ function App() {
 
   useEffect(() => {
     dispatch(SetTheme(themeMode));
-    // console.log(themeMode)
-  }, [theme]);
+  }, [dispatch, themeMode]);
 
   return (
     <BrowserRouter> 

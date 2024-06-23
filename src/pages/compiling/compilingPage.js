@@ -119,6 +119,7 @@ const CompilingPage = ({theme}) => {
 
     const newQuestion = {
       number : questionNumber,
+      language : 'ALL LANGUAGE',
       questionString : makeQuestionString(questionNumber),
     };
     dispatch(SetSearch(newQuestion));

@@ -15,7 +15,6 @@ const SearchBar = () => {
 
   const [questionNumber, setQuestionNumber] = useState("");
   const [questionLanguage, setQuestionLanguage] = useState("LANGUAGE");
-  const [solutionArray, setSolutionArray] = useState([]);
   const [showOptions, setShowOptions] = useState(false);
   
 
@@ -100,7 +99,7 @@ const SearchBar = () => {
   return (
       <s.SearchBarContainer action="/result-solution" method="">
           <s.SearchInputBox>
-            {themeMode == 'lightTheme' ? 
+            {themeMode === 'lightTheme' ? 
               <img src={search_white} alt="돋보기 그림"/> : 
               <img src={search_black} alt="돋보기 그림"/>
             }

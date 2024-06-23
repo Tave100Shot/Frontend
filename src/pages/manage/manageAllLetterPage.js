@@ -4,7 +4,6 @@ import * as ml from "../../styles/manage/manageLetterStyle"
 import DevLetterList from "../../components/manage/letter/devLetterList";
 import EmployLetterList from "../../components/manage/letter/employLetterList";
 import { useEffect } from "react";
-import { useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import axios from "axios";
 import { SetDevLetter, SetEmployLetter } from "../../redux/actions/letterAction";
@@ -73,7 +72,7 @@ const ManageAllLetter = () => {
         alert('문제가 발생했습니다. 다시 로그인 부탁드립니다 :)')
       }
     });
-  }, [])
+  })
 
   return (
     <mm.ManageContainer>

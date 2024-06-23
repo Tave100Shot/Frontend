@@ -5,7 +5,6 @@ import { useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import axios from "axios";
-import { updateLetterInfo } from "../../redux/actions/letterAction";
 
 const ManageLetterEdit = () => {
   const navigate = useNavigate();
@@ -41,7 +40,7 @@ const ManageLetterEdit = () => {
       setIsEdit(false);
       setLetterCategory(LETTER_OPTIONS[0].value); // letterCategory 상태 변수 초기화
     }
-  }, [letterInfoList]);
+  }, [letterInfoList, LETTER_OPTIONS]);
 
   // 레터 내용 변경 함수
   // console.log('letterTitle : ',letterTitle)

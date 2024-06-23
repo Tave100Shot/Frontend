@@ -5,8 +5,6 @@ import { useDispatch } from "react-redux";
 import { useEffect } from "react";
 
 const ManageMain = () => {
-    const navigate = useNavigate();
-    const dispatch = useDispatch();
     const location = useLocation();
 
     // 로그인 이후 params 받아오기
@@ -18,8 +16,7 @@ const ManageMain = () => {
         localStorage.setItem('secondAuthStatus', searchParams.get('secondAuth'));
         }
     
-        const accessToken = localStorage.getItem('accessToken')
-    }, []);
+    });
 
 
     return (

@@ -55,7 +55,7 @@ const MainPage = ({click}) => {
     if (accessToken) {
       navigate('/');
     }
-  }, []);
+  });
 
   // console.log(memberId)
   // console.log(gitLoginId)

@@ -59,7 +59,7 @@ const WriteHighPage = () => {
 
     if (isSubmitted){
       try {
-        const response = await axios.post('/api/post', submitFormData, {
+        await axios.post('/api/post', submitFormData, {
           headers: {
             'Content-Type': 'multipart/form-data',
             Authorization: `Bearer ${localStorage.getItem('accessToken')}`,

@@ -1,8 +1,6 @@
-import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect, useState } from "react";
-import { SetSearch, SetSolution } from "../../redux/actions/solutionAction";
 import Header from "../../components/common/header";
 import SearchBar from "../../components/solution/searchBar";
 import SolutionItem from "../../components/solution/solutionItem";
@@ -11,7 +9,6 @@ import * as s from "../../styles/solution/solutionStyle";
 
 const SolutionPage = () => {
   const navigate = useNavigate();
-  const dispatch = useDispatch();
 
   let solutionQuestion = useSelector( (state)=>{ return state.solutionQuestion } );
   let solutionArray = useSelector( (state)=>{ return state.solutionList } );

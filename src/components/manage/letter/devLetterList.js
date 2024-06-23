@@ -4,7 +4,7 @@ import AllLetterItem from "./allLetterItem";
 import { useDispatch, useSelector } from "react-redux";
 import axios from "axios";
 import { SetDevLetter } from "../../../redux/actions/letterAction";
-import { useEffect, useState, useRef } from "react";
+import { useEffect, useState, useRef, useCallback } from "react";
 
 const DevLetterList = () => {
   const dispatch = useDispatch();
@@ -16,31 +16,7 @@ const DevLetterList = () => {
   const [hasMoreData, setHasMoreData] = useState(true);
   const observerRef = useRef(null);
 
-  useEffect(() => {
-    const observer = new IntersectionObserver(
-        (entries) => {
-            if (entries[0].isIntersecting && !isLoading && hasMoreData) {
-                setPage((prevPage) => prevPage + 1);
-                onLoadMore();
-            }
-        },
-        { threshold: 1 }
-    );
-
-    const currentObserverRef = observerRef.current;
-    if (currentObserverRef) {
-        observer.observe(currentObserverRef);
-    }
-
-    return () => {
-        if (currentObserverRef) {
-            observer.unobserve(currentObserverRef);
-        }
-    };
-}, [isLoading, hasMoreData, onLoadMore]);
-
-
-  const onLoadMore = () => {
+  const onLoadMore = useCallback(() => {
     setIsLoading(true);
 
     // DEV-Letter 글 조회 추가 API 호출
@@ -50,7 +26,6 @@ const DevLetterList = () => {
       }
     })
     .then(response => {
-      // console.log(response.data.result.newsletterResponses);
       const newDevLetterArray = response.data.result.newsletterResponses;
       console.log('newDevLetterArray : ', newDevLetterArray);
 
@@ -79,7 +54,30 @@ const DevLetterList = () => {
       }
       setIsLoading(false);
     });
-  };
+  }, [devLetterArray, page, storedToken, dispatch]);
+
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+        (entries) => {
+            if (entries[0].isIntersecting && !isLoading && hasMoreData) {
+                setPage((prevPage) => prevPage + 1);
+                onLoadMore();
+            }
+        },
+        { threshold: 1 }
+    );
+
+    const currentObserverRef = observerRef.current;
+    if (currentObserverRef) {
+        observer.observe(currentObserverRef);
+    }
+
+    return () => {
+        if (currentObserverRef) {
+            observer.unobserve(currentObserverRef);
+        }
+    };
+  }, [isLoading, hasMoreData, onLoadMore]);
   
   return (
     <ml.HalfLetterContainer>

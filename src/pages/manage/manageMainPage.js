@@ -1,7 +1,6 @@
-import { useLocation, useNavigate } from "react-router-dom";
+import { useLocation } from "react-router-dom";
 import HeaderManage from "../../components/manage/headerManage";
 import * as m from "../../styles/manage/manageMainStyle"
-import { useDispatch } from "react-redux";
 import { useEffect } from "react";
 
 const ManageMain = () => {

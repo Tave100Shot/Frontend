@@ -1,10 +1,9 @@
 import * as ml from "../../../styles/manage/manageLetterStyle";
-import * as mm from "../../../styles/manage/manageMainStyle";
 import * as mc from "../../../styles/manage/manageLetterCalanderStyle";
 import React, { useState, useEffect } from 'react'
 import dayjs from 'dayjs';
 import {GoChevronLeft, GoChevronRight} from 'react-icons/go'
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import { useNavigate } from "react-router-dom";
 import { SetLetterInfo } from "../../../redux/actions/letterAction";
 
@@ -23,27 +22,23 @@ const LetterCalender = () => {
 
   }
 
-  const initArr = (firstDay, daysInMonth) => {
-      return Array.from({length: firstDay+ daysInMonth},
-          (v,i) => i<firstDay
-          ? null //현재 인덱스(i)가 firstDay보다 작으면 해당 요소를 null로 설정
-          : dayjs(selectedDay)
-              .startOf('month')
-              .set('date', i-firstDay+1)
-              .format('YYYY-MM-DD') 
-              //dayjs를 사용하여 현재 월의 첫번째 날을 기준으로 'i-firstDay+1'일자의 날짜를 계산하고, 그 날짜를 'YYYY-MM-DD'형식으로 포맷되어 배열에 저장됨
-      );
+  const initArr = (firstDay, daysInMonth, selectedDay) => {
+    return Array.from({ length: firstDay + daysInMonth }, (v, i) =>
+        i < firstDay
+            ? null
+            : dayjs(selectedDay)
+                  .startOf('month')
+                  .set('date', i - firstDay + 1)
+                  .format('YYYY-MM-DD')
+    );
+};
 
-  }
-  
+useEffect(() => {
+    const firstDay = dayjs(selectedDay).startOf('month').day();
+    const daysInMonth = dayjs(selectedDay).daysInMonth();
+    setArr(initArr(firstDay, daysInMonth, selectedDay));
+}, [selectedDay]);
 
-  useEffect(()=>{
-      const firstDay = dayjs(selectedDay).startOf('month').day(); 
-      //해당 월의 첫번째 날이 무슨 요일인지 일요일(0)부터 토요일(6)까지의 값을 반환
-      const daysInMonth = dayjs(selectedDay).daysInMonth(); //해당 월의 총 일 수 반환 
-      setArr(initArr(firstDay, daysInMonth));
-
-  },[selectedDay])
 
 
 

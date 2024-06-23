@@ -4,7 +4,7 @@ import AllLetterItem from "./allLetterItem";
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect, useRef, useState } from "react";
 import axios from "axios";
-import { SetDevLetter, SetEmployLetter } from "../../../redux/actions/letterAction";
+import { SetEmployLetter } from "../../../redux/actions/letterAction";
 
 const EmployLetterList = () => {
   const dispatch = useDispatch();
@@ -18,25 +18,27 @@ const EmployLetterList = () => {
 
   useEffect(() => {
     const observer = new IntersectionObserver(
-      (entries) => {
-        if (entries[0].isIntersecting && !isLoading && hasMoreData) {
-          setPage((prevPage) => prevPage + 1);
-          onLoadMore();
-        }
-      },
-      { threshold: 1 }
+        (entries) => {
+            if (entries[0].isIntersecting && !isLoading && hasMoreData) {
+                setPage((prevPage) => prevPage + 1);
+                onLoadMore();
+            }
+        },
+        { threshold: 1 }
     );
 
-    if (observerRef.current) {
-      observer.observe(observerRef.current);
+    const currentObserverRef = observerRef.current;
+    if (currentObserverRef) {
+        observer.observe(currentObserverRef);
     }
 
     return () => {
-      if (observerRef.current) {
-        observer.unobserve(observerRef.current);
-      }
+        if (currentObserverRef) {
+            observer.unobserve(currentObserverRef);
+        }
     };
-  }, [isLoading, hasMoreData]);
+  }, [isLoading, hasMoreData, onLoadMore]);
+
 
   const onLoadMore = () => {
     setIsLoading(true);

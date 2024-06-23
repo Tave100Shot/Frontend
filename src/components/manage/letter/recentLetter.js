@@ -3,7 +3,7 @@ import * as ml from "../../../styles/manage/manageLetterStyle";
 import * as mm from "../../../styles/manage/manageMainStyle"
 import RecentLetterItem from "./recentLetterItem";
 import axios from "axios";
-import { SetDevLetter, SetEmployLetter, SetRecentLetter } from "../../../redux/actions/letterAction";
+import {  SetRecentLetter } from "../../../redux/actions/letterAction";
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect } from "react";
 
@@ -46,7 +46,7 @@ const RecentLetter = () => {
         alert('문제가 발생했습니다. 다시 로그인 부탁드립니다 :)')
       }
     });
-  }, []);
+  }, [dispatch]);
   
   return (
     <ml.HalfLetterContainer>

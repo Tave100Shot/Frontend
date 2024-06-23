@@ -8,28 +8,27 @@ const MemberHeader = () => {
 
   useEffect(() => {
     const fetchPosts = async () => {
-        try {
-          const response = await axios.get('/api/admin/members', {
-            headers: {
-              Authorization: `Bearer ${storedToken}`,
-            },
-            params : {
-    
-              page : 0
-            }
-          });
-          console.log('멤버조회', response);
-          setMembers(response.data.result.memberSingleResponses);
-        } catch (error) {
-          if (error.response && error.response.data.errorCode === 'JWT_4010') {
-            alert("로그인 유효 기간이 지났습니다. 다시 로그인 해주세요 :)");
-          } else {
-            console.error(error);
-          }
+      try {
+        const response = await axios.get('/api/admin/members', {
+          headers: {
+            Authorization: `Bearer ${storedToken}`,
+          },
+          params: {
+            page: 0,
+          },
+        });
+        console.log('멤버조회', response);
+        setMembers(response.data.result.memberSingleResponses);
+      } catch (error) {
+        if (error.response && error.response.data.errorCode === 'JWT_4010') {
+          alert("로그인 유효 기간이 지났습니다. 다시 로그인 해주세요 :)");
+        } else {
+          console.error(error);
         }
+      }
     };
     fetchPosts();
-  }, []);
+  }, [storedToken]);
 
   const renderMembers = () => {
     return (

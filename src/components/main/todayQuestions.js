@@ -241,7 +241,14 @@ const TodayQuestion = () => {
       }
 
     let isValid = true;
+    let message = { letter: '' };
 
+    if (!isClicked.DEV && !isClicked.EMPLOY) {
+      message.letter = '최소 하나 이상의 뉴스레터를 눌러주세요 :)';
+      isValid = false;
+      setValidationMessage(message);
+      return;
+    }
     if (isValid) {
       let selectedLetters = [];
       if (isClicked.DEV) selectedLetters.push('DEV_LETTER');

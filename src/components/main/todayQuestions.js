@@ -104,14 +104,13 @@ const TodayQuestion = () => {
             Authorization: `Bearer ${localStorage.getItem('accessToken')}`,
           }
         });
-        console.log('정보수정 레터', response);
+        //console.log('정보수정 레터', response);
       } catch (error) {
         //console.error('정보수정 레터에러', error.response);
         if (error.response.data.errorCode === "LETTER_4040") {
-          alert('이미 구독 중입니다. \n정보를 수정하려면 [정보 수정] 버튼을 클릭하세요!');
-          setIsSubmitted(false);
+          //console.log('정보수정버튼클릭');
         }
-        else if (error.response.data.errorCode === "LETTER_4041") {
+        if (error.response.data.errorCode === "LETTER_4041") {
           alert('뉴스레터 타입이 잘못됐습니다.')
         }
         else if (error.response.data.errorCode === "LETTER_4042") {
@@ -150,9 +149,6 @@ const TodayQuestion = () => {
         else if (error.response.data.errorCode === "JWT_4010") {
           alert('로그인 유효 기간이 지났습니다. 다시 로그인 해주세요 :)');
         }
-        else {
-          alert('알 수 없는 서버 에러입니다.')
-        }
       }
 
       // 회원 이름, 이메일 정보 띄우기
@@ -171,8 +167,8 @@ const TodayQuestion = () => {
         } else {
           setName(response.data.result.bojName === null ? '' : response.data.result.bojName);
           setEmail(response.data.result.gitEmail === null ? '' : response.data.result.gitEmail);
-          console.log(response.data.result.bojName);
-          console.log(response.data.result.gitEmail);
+          //console.log(response.data.result.bojName);
+          //console.log(response.data.result.gitEmail);
         }
 
       } catch (error) {
@@ -280,15 +276,15 @@ const TodayQuestion = () => {
           userName: response.data.result.bojName,
           userEmail: response.data.result.gitEmail,
         }))
-        console.log(response);
-        if (response.data.code === '200'){
+        //console.log('회원 이름, 이메일 정보', response);
+        /* if (response.data.code === '200'){
           alert('이미 구독 완료되었습니다!');
           setIsSubmitted(false);
-        }
+        } */
         //console.log('get', saveInfo.userName);
         //console.log('get', saveInfo.userEmail);
       } catch (error) {
-        console.log('회원get:', error);
+        //console.log('회원get:', error);
         if (error.response.data.errorCode === "LETTER_4040") {
           alert('이미 구독 중입니다. \n정보를 수정하려면 [정보 수정] 버튼을 클릭하세요!');
           setIsSubmitted(false);
@@ -432,7 +428,7 @@ const TodayQuestion = () => {
         });
         setIsConfirmed(true);
         setIsSubmitted(true);
-        console.log(saveInfo);
+        //console.log(saveInfo);
         try {
           const response = await axios.post('/api/member', {
             gitEmail: email,
@@ -443,7 +439,7 @@ const TodayQuestion = () => {
               Authorization: `Bearer ${localStorage.getItem('accessToken')}`,
             }
           });
-          console.log(response);
+          //console.log(response);
           // [확인] 버튼 눌렀을 때 input 수정 불가
 
         } catch (error) {
@@ -541,7 +537,7 @@ const TodayQuestion = () => {
           Authorization: `Bearer ${localStorage.getItem('accessToken')}`,
         }
       });
-      console.log('이메일인증', response);
+      //console.log('이메일인증', response);
     } catch (error) {
       //console.error('이메일인증', error.response.status);
       //console.error('이메일인증', error.response.data);
@@ -614,7 +610,7 @@ const TodayQuestion = () => {
       }
       //console.log('최종 레터', response);
     } catch (error) {
-      console.log('레터 에러wha', error.response);
+      //console.log('레터 에러', error.response);
       if (error.response.data.errorCode === "LETTER_4040") {
         setfinalSubmitted(true);
       }

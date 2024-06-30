@@ -2,9 +2,9 @@ import * as mm from "../../../styles/manage/manageMainStyle"
 import * as ml from "../../../styles/manage/manageLetterStyle"
 import AllLetterItem from "./allLetterItem";
 import { useDispatch, useSelector } from "react-redux";
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useRef, useState, useCallback } from "react";
 import axios from "axios";
-import { SetDevLetter, SetEmployLetter } from "../../../redux/actions/letterAction";
+import { SetEmployLetter } from "../../../redux/actions/letterAction";
 
 const EmployLetterList = () => {
   const dispatch = useDispatch();
@@ -16,41 +16,17 @@ const EmployLetterList = () => {
   const [hasMoreData, setHasMoreData] = useState(true);
   const observerRef = useRef(null);
 
-  useEffect(() => {
-    const observer = new IntersectionObserver(
-      (entries) => {
-        if (entries[0].isIntersecting && !isLoading && hasMoreData) {
-          setPage((prevPage) => prevPage + 1);
-          onLoadMore();
-        }
-      },
-      { threshold: 1 }
-    );
-
-    if (observerRef.current) {
-      observer.observe(observerRef.current);
-    }
-
-    return () => {
-      if (observerRef.current) {
-        observer.unobserve(observerRef.current);
-      }
-    };
-  }, [isLoading, hasMoreData]);
-
-  const onLoadMore = () => {
+  const onLoadMore = useCallback(() => {
     setIsLoading(true);
 
-    // DEV-Letter 글 조회 추가 API 호출
+    // EMPLOYEE-Letter 글 조회 추가 API 호출
     axios.get(`/api/admin/newsletter?inputCategory=EMPLOYEE_LETTER&page=${page}`, {
       headers : {
         Authorization : `Bearer ${storedToken}`
       }
     })
     .then(response => {
-      // console.log(response.data.result.newsletterResponses);
       const newEmployLetterArray = response.data.result.newsletterResponses;
-      // console.log('newDevLetterArray : ', newDevLetterArray);
 
       // Redux State 내에 결과값 저장
       dispatch(SetEmployLetter([...employLetterArray, ...newEmployLetterArray]));
@@ -63,7 +39,6 @@ const EmployLetterList = () => {
     })
     .catch(error => {
       const errorCode = error.response.data.errorCode;
-      // console.log(errorCode);
       if(errorCode ==='JWT_4001') {
         alert('JWT Token이 올바르지 않습니다.. 다시 로그인 해주세요 :)')
       } 
@@ -77,8 +52,30 @@ const EmployLetterList = () => {
       }
       setIsLoading(false);
     });
-  };
+  }, [employLetterArray, page, storedToken, dispatch]);
 
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+        (entries) => {
+            if (entries[0].isIntersecting && !isLoading && hasMoreData) {
+                setPage((prevPage) => prevPage + 1);
+                onLoadMore();
+            }
+        },
+        { threshold: 1 }
+    );
+
+    const currentObserverRef = observerRef.current;
+    if (currentObserverRef) {
+        observer.observe(currentObserverRef);
+    }
+
+    return () => {
+        if (currentObserverRef) {
+            observer.unobserve(currentObserverRef);
+        }
+    };
+  }, [isLoading, hasMoreData, onLoadMore]);
 
   return (
     <ml.HalfLetterContainer>
@@ -102,6 +99,6 @@ const EmployLetterList = () => {
       </mm.ManageSmallList>
     </ml.HalfLetterContainer>
   )
-
 }
+
 export default EmployLetterList;

@@ -46,11 +46,11 @@ const AddAuthModal = ({isOpen, onRequestClose}) => {
     arrows:true,
 		prevArrow:
       <m.PrevBtn>
-        <img src={leftBtn}/>
+        <img src={leftBtn} alt='이전으로 이동'/>
       </m.PrevBtn>,
 		nextArrow: 
       <m.NextBtn>
-        <img src={rightBtn}/>
+        <img src={rightBtn} alt='앞으로 이동'/>
       </m.NextBtn>,
   };
 

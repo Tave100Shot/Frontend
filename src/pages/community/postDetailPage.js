@@ -306,7 +306,7 @@ const PostDetailPage = ({comment}) => {
                         <img
                           key={index}
                           src={image.imageUrl}
-                          alt={`Image ${image.imageId}`}
+                          alt=""
                           style={{ width: '40%', height: '40%' }}
                         />
                       ))}

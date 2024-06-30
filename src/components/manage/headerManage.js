@@ -1,7 +1,6 @@
 import { useLocation, useNavigate } from 'react-router-dom';
 import mainLogo from '../../assets/imgs/100shot_icon.png';
 import * as h from "../../styles/headerStyle";
-import axios from 'axios';
 import { useDispatch } from 'react-redux';
 import { SetDevLetter, SetEmployLetter } from '../../redux/actions/letterAction';
 

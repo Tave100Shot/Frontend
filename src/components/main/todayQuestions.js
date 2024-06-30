@@ -341,7 +341,7 @@ const TodayQuestion = () => {
       }
 
       try {
-        const response = await axios.post('/api/subscription', {
+        await axios.post('/api/subscription', {
           letterTypes: [letterType]
         }, {
           headers: {

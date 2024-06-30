@@ -1,4 +1,3 @@
-import { useNavigate } from "react-router-dom";
 import * as mem from "../../../styles/manage/manageMemberStyle";
 // import * as ml from "../../../styles/manage/manageLetterStyle";
 // import * as mm from "../../../styles/manage/manageMainStyle"

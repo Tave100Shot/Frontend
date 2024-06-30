@@ -16,7 +16,29 @@ const VerifyEmail = () => {
     useEffect(() => {
         const params = new URLSearchParams(location.search);
         const token = params.get('token');
-
+    
+        const verifyEmailToken = async (token) => {
+            try {
+                const response = await axios.get(`/api/email/verify`, {
+                    headers: {
+                        Authorization: `Bearer ${token}`
+                    }
+                });
+                const statusMessage = getStatusMessage(response.data.code);
+                setStatus(statusMessage);
+    
+                if (response.data.code === '200') {
+                    navigate('/email/verify', { replace: true });
+                }
+            } catch (error) {
+                console.error(error);
+                setStatus({
+                    message: '이메일 인증 실패',
+                    details: '잠시 후 다시 시도해주세요!'
+                });
+            }
+        };
+    
         if (token) {
             verifyEmailToken(token);
         } else {
@@ -25,7 +47,8 @@ const VerifyEmail = () => {
                 details: '유효하지 않은 인증 링크입니다.'
             });
         }
-    }, []);
+    }, [location.search, navigate]);
+    
 
     const getStatusMessage = (code) => {
         switch (code) {
@@ -48,29 +71,6 @@ const VerifyEmail = () => {
                 };
         }
     };
-
-    const verifyEmailToken = async (token) => {
-        try {
-            const response = await axios.get(`/api/email/verify`, {
-                headers: {
-                    Authorization: `Bearer ${token}`
-                }
-            });
-            const statusMessage = getStatusMessage(response.data.code);
-            setStatus(statusMessage);
-
-            if (response.data.code === '200') {
-                    navigate('/email/verify', {replace:true});
-            }
-        } catch (error) {
-            console.error(error);
-            setStatus({
-                message: '이메일 인증 실패',
-                details: '잠시 후 다시 시도해주세요!'
-            });
-        }
-    };
-
     return (
         <>
             <h.HeaderWrapper>

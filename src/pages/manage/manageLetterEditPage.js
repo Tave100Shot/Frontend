@@ -2,10 +2,9 @@ import HeaderManage from "../../components/manage/headerManage";
 import * as mm from "../../styles/manage/manageMainStyle"
 import * as ml from "../../styles/manage/manageLetterStyle"
 import { useNavigate } from "react-router-dom";
-import { useEffect, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { useSelector } from "react-redux";
 import axios from "axios";
-import { updateLetterInfo } from "../../redux/actions/letterAction";
 
 const ManageLetterEdit = () => {
   const navigate = useNavigate();
@@ -16,10 +15,10 @@ const ManageLetterEdit = () => {
   let letterInfoList = useSelector( (state)=>{ return state.letterInfo } );
   
   // 레터 종류 선택
-  const LETTER_OPTIONS = [
+  const LETTER_OPTIONS = useMemo(() => [
     { value: "DEV_LETTER", name: "DEVELOP" },
     { value: "EMPLOYEE_LETTER", name: "EMPLOY" },
-  ];
+  ], []);
 
   const [letterId, setLetterId] = useState(letterInfoList.newsletterId)  // 행사 ID
   const [letterTitle, setLetterTitle] = useState(letterInfoList.title)  // 행사 제목
@@ -41,7 +40,7 @@ const ManageLetterEdit = () => {
       setIsEdit(false);
       setLetterCategory(LETTER_OPTIONS[0].value); // letterCategory 상태 변수 초기화
     }
-  }, [letterInfoList]);
+  }, [letterInfoList, LETTER_OPTIONS]);
 
   // 레터 내용 변경 함수
   // console.log('letterTitle : ',letterTitle)

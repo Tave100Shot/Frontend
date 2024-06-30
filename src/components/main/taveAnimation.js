@@ -1,22 +1,8 @@
-import { useNavigate } from "react-router-dom";
-import { SetModal } from "../../redux/actions/mainAction";
-import { useDispatch } from "react-redux";
 import * as t from "../../styles/main/taveAnimationStyle"
 
 const TaveAnimation = () => {
-  const navigate = useNavigate();
-  const dispatch = useDispatch();
 
-  const moveToSolution = () => {
-    navigate('/search-solution')
-  }
-  // const moveToRecommend = () => {
-  //   navigate('/recommend')
-  // }
   
-  const openModal = () => {
-    dispatch(SetModal(true)); 
-  }
 
 
   return (

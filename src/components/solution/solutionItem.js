@@ -36,7 +36,7 @@ const SolutionItem = ({title, link, snippet, blog, createdDate}) => {
 
   useEffect(() => {
     SetBlog(blog)
-  }, [title]);
+  }, [title, blog]);
 
   return (
     <s.SolutionItemBox onClick={GoToLink}>

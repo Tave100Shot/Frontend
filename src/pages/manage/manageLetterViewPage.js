@@ -2,8 +2,6 @@ import HeaderManage from "../../components/manage/headerManage";
 import * as mm from "../../styles/manage/manageMainStyle"
 import * as ml from "../../styles/manage/manageLetterStyle"
 import closeIcon from "../../assets/imgs/close.png"
-import RecentLetter from "../../components/manage/letter/recentLetter";
-import LetterCalender from "../../components/manage/letter/letterCalender";
 import { useLocation, useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect } from "react";
@@ -21,9 +19,6 @@ const ManageLetterView = () => {//변수 할당시켜서 사용
   const moveToBack = () => {
     navigate(-1); // 바로 이전 페이지로 이동, '/main' 등 직접 지정도 당연히 가능
   };
-  const moveToEdit = () => {
-    navigate(`/manager/letter/edit/${letterInfoList.newsletterId}`);
-  }
 
   useEffect(()=> {
     const storedToken = localStorage.getItem('accessToken');
@@ -57,7 +52,7 @@ const ManageLetterView = () => {//변수 할당시켜서 사용
       }
 
     });
-  },[])
+  })
 
 
   return (

@@ -96,7 +96,7 @@ const TodayQuestion = () => {
       setHeaderMessage('레터를 받아볼 회원님의 정보를 입력해주세요.');
 
       try {
-        const response = await axios.post('/api/subscription', {
+        await axios.post('/api/subscription', {
           letterTypes: [letterType]
         }, {
           headers: {
@@ -437,7 +437,7 @@ const TodayQuestion = () => {
         setIsSubmitted(true);
         //console.log(saveInfo);
         try {
-          const response = await axios.post('/api/member', {
+          await axios.post('/api/member', {
             gitEmail: email,
             bojName: name,
           }, {
@@ -535,7 +535,7 @@ const TodayQuestion = () => {
     alert('인증 메일을 보내드렸어요! \n메일함을 확인하신 후 인증을 완료해주세요.');
     setClickEmailButton(true);
     try {
-      const response = await axios.post('/api/email/send-verification', {
+    await axios.post('/api/email/send-verification', {
         bojName: name, //'cucubab',
         gitEmail: email // '27sojeong@gmail.com',
       }, {
